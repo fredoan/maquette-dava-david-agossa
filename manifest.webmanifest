@@ -1,0 +1,20 @@
+{
+  "name": "Dava David Agossa",
+  "short_name": "Dava David",
+  "description": "Portfolio officiel de Dava David Agossa, gardien de but professionnel.",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#3d0000",
+  "theme_color": "#3d0000",
+  "lang": "fr",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
