@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /firebase-config.js
+Disallow: /engagement.js
+
+Sitemap: https://www.davadavidagossa.com/sitemap.xml
