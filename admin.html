@@ -6,6 +6,7 @@
 <title>Administration — Dava David Agossa</title>
 <meta name="robots" content="noindex,nofollow"/>
 <meta name="theme-color" content="#3d0000"/>
+<link rel="icon" type="image/png" href="favicon.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Lato:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
@@ -13,164 +14,226 @@
 :root{
   --fond:#3d0000;--fond-2:#4a0505;--fond-3:#560a0a;--fond-4:#2b0000;--fond-5:#1a0000;
   --or:#b8922e;--or-clair:#d4af5a;--or-vif:#e8c869;--or-fonce:#8a6a1f;
-  --texte:#f7f2e9;--texte-2:#e6dccb;--texte-3:#b8a691;
-  --border-or:rgba(212,175,90,.24);--border-or-fort:rgba(212,175,90,.5);
-  --damier:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%23d4af5a'%3E%3Crect width='20' height='20'/%3E%3Crect x='40' width='20' height='20'/%3E%3Crect x='20' y='20' width='20' height='20'/%3E%3Crect x='60' y='20' width='20' height='20'/%3E%3Crect y='40' width='20' height='20'/%3E%3Crect x='40' y='40' width='20' height='20'/%3E%3Crect x='20' y='60' width='20' height='20'/%3E%3Crect x='60' y='60' width='20' height='20'/%3E%3C/g%3E%3C/svg%3E");
-  --f-display:'Cinzel',Georgia,serif;--f-serif:'Cormorant Garamond',Georgia,serif;
-  --f-sans:'Lato',system-ui,sans-serif;--f-mono:'JetBrains Mono',monospace;
+  --rouge:#8b0000;--texte:#f7f2e9;--texte-2:#e6dccb;--texte-3:#b8a691;
+  --border:rgba(212,175,90,.24);--border-fort:rgba(212,175,90,.5);
+  --f-d:'Cinzel',Georgia,serif;--f-s:'Cormorant Garamond',Georgia,serif;
+  --f-b:'Lato',system-ui,sans-serif;--f-m:'JetBrains Mono',monospace;
   --ease:cubic-bezier(.4,0,.2,1);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{background-color:var(--fond);background-image:radial-gradient(ellipse 120% 80% at 50% -10%,#610c0c 0%,var(--fond) 45%,var(--fond-4) 100%);background-attachment:fixed;color:var(--texte-2);font-family:var(--f-sans);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh}
-body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.05;background-image:var(--damier);background-size:80px 80px}
-body>*{position:relative;z-index:2}
+body{background:var(--fond);background-image:radial-gradient(ellipse 120% 80% at 50% -10%,#610c0c 0%,var(--fond) 45%,var(--fond-4) 100%);background-attachment:fixed;color:var(--texte-2);font-family:var(--f-b);line-height:1.7;-webkit-font-smoothing:antialiased;min-height:100vh}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 input,select,textarea{font-family:inherit}
 ::selection{background:var(--or-clair);color:var(--fond-5)}
-::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:var(--fond-5)}::-webkit-scrollbar-thumb{background:var(--or-fonce);border-radius:4px}
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:var(--fond-5)}
+::-webkit-scrollbar-thumb{background:var(--or-fonce);border-radius:4px}
 :focus-visible{outline:2px solid var(--or-vif);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 
 /* LOGIN */
 #loginScreen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
-.login-box{width:100%;max-width:440px;background:linear-gradient(180deg,rgba(86,10,10,.55),rgba(26,0,0,.85));border:1px solid var(--border-or-fort);border-radius:8px;padding:40px 32px;box-shadow:0 30px 80px rgba(0,0,0,.6);position:relative;overflow:hidden}
+.login-box{width:100%;max-width:440px;background:linear-gradient(180deg,rgba(86,10,10,.55),rgba(26,0,0,.85));border:1px solid var(--border-fort);border-radius:8px;padding:40px 32px;box-shadow:0 30px 80px rgba(0,0,0,.6);position:relative;overflow:hidden}
 .login-box::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--or-fonce),var(--or-vif),var(--or-fonce))}
-.login-logo{font-family:var(--f-display);font-size:1.8rem;font-weight:900;text-align:center;background:linear-gradient(120deg,#fff 30%,var(--or-vif) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:.06em}
-.login-sub{text-align:center;font-family:var(--f-mono);font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--texte-3);margin:.5rem 0 2rem;padding-bottom:1.4rem;border-bottom:1px solid var(--border-or)}
+.login-logo{font-family:var(--f-d);font-size:1.8rem;font-weight:900;text-align:center;background:linear-gradient(120deg,#fff 30%,var(--or-vif) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:.06em}
+.login-sub{text-align:center;font-family:var(--f-m);font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--texte-3);margin:.5rem 0 2rem;padding-bottom:1.4rem;border-bottom:1px solid var(--border)}
 .login-field{margin-bottom:1.2rem}
-.login-field label{display:block;font-family:var(--f-display);font-size:.66rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--or-clair);margin-bottom:.5rem}
-.login-field input{width:100%;padding:.9rem 1.1rem;background:rgba(26,0,0,.6);border:1px solid var(--border-or);border-radius:4px;color:var(--texte);font-size:.92rem;outline:none;transition:all .3s}
+.login-field label{display:block;font-family:var(--f-d);font-size:.66rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--or-clair);margin-bottom:.5rem}
+.login-field input{width:100%;padding:.9rem 1.1rem;background:rgba(26,0,0,.6);border:1px solid var(--border);border-radius:4px;color:var(--texte);font-size:.92rem;outline:none;transition:all .3s}
 .login-field input:focus{border-color:var(--or-clair);box-shadow:0 0 0 3px rgba(212,175,90,.15)}
-.login-btn{width:100%;padding:1rem;background:var(--or-clair);color:var(--fond-5);border-radius:4px;font-family:var(--f-display);font-size:.76rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;transition:all .3s;margin-top:.8rem}
+.login-btn{width:100%;padding:1rem;background:var(--or-clair);color:var(--fond-5);border-radius:4px;font-family:var(--f-d);font-size:.76rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;transition:all .3s;margin-top:.8rem;cursor:pointer}
 .login-btn:hover{background:var(--or-vif);transform:translateY(-2px);box-shadow:0 10px 30px rgba(212,175,90,.45)}
+.login-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
 .login-error{display:none;text-align:center;color:#ff9c9c;background:rgba(185,28,28,.15);border-left:3px solid #ef4444;padding:.7rem 1rem;border-radius:3px;font-size:.8rem;margin-top:1rem}
 
-/* ADMIN */
+/* LAYOUT */
 #adminScreen{display:none;min-height:100vh}
-.admin-top{background:rgba(26,0,0,.93);backdrop-filter:blur(20px);padding:1rem clamp(16px,3vw,32px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border-or);box-shadow:0 4px 30px rgba(0,0,0,.5)}
-.admin-brand{font-family:var(--f-display);font-size:clamp(1rem,2.4vw,1.3rem);font-weight:700;letter-spacing:.06em;background:linear-gradient(120deg,#fff 30%,var(--or-vif) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.admin-top{background:rgba(26,0,0,.93);backdrop-filter:blur(20px);padding:1rem clamp(16px,3vw,32px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border);box-shadow:0 4px 30px rgba(0,0,0,.5)}
+.admin-brand{font-family:var(--f-d);font-size:clamp(1rem,2.4vw,1.3rem);font-weight:700;letter-spacing:.06em;background:linear-gradient(120deg,#fff 30%,var(--or-vif) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
 .admin-brand span{-webkit-text-fill-color:var(--or-clair);color:var(--or-clair)}
 .admin-top-right{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
-.link-btn{padding:.55rem 1rem;border:1px solid var(--border-or);color:var(--texte-2);border-radius:3px;font-family:var(--f-display);font-size:.66rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;transition:all .3s}
+.link-btn{padding:.55rem 1rem;border:1px solid var(--border);color:var(--texte-2);border-radius:3px;font-family:var(--f-d);font-size:.66rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;transition:all .3s;cursor:pointer}
 .link-btn:hover{color:var(--or-clair);border-color:var(--or-clair);background:rgba(212,175,90,.08)}
-.logout-btn{padding:.55rem 1.1rem;border:1.5px solid var(--border-or);background:transparent;color:var(--texte-2);border-radius:3px;font-family:var(--f-display);font-size:.66rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;transition:all .3s}
+.logout-btn{padding:.55rem 1.1rem;border:1.5px solid var(--border);background:transparent;color:var(--texte-2);border-radius:3px;font-family:var(--f-d);font-size:.66rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;transition:all .3s;cursor:pointer}
 .logout-btn:hover{border-color:#ef4444;color:#ff9c9c;background:rgba(185,28,28,.12)}
 
-.admin-body{max-width:1400px;margin:0 auto;padding:clamp(16px,3vw,32px);display:grid;grid-template-columns:1fr 380px;gap:clamp(16px,3vw,32px);align-items:start}
-@media(max-width:1100px){.admin-body{grid-template-columns:1fr}}
+.admin-layout{display:grid;grid-template-columns:240px 1fr;min-height:calc(100vh - 70px)}
+@media(max-width:900px){.admin-layout{grid-template-columns:1fr}}
 
-.card{background:linear-gradient(180deg,rgba(86,10,10,.35),rgba(26,0,0,.6));border:1px solid var(--border-or);border-radius:8px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.35);margin-bottom:1.5rem}
-.card-header{padding:1.1rem 1.5rem;border-bottom:1px solid var(--border-or);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.6rem;background:rgba(26,0,0,.4)}
-.card-header h2{font-family:var(--f-display);font-size:1.1rem;font-weight:700;color:var(--or-clair);letter-spacing:.04em}
-.card-badge{padding:.25rem .75rem;background:var(--or-clair);color:var(--fond-5);font-family:var(--f-mono);font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;border-radius:2px}
+.admin-sidebar{background:rgba(26,0,0,.6);border-right:1px solid var(--border);padding:1.2rem .8rem;position:sticky;top:70px;height:calc(100vh - 70px);overflow-y:auto}
+@media(max-width:900px){.admin-sidebar{position:static;height:auto;border-right:none;border-bottom:1px solid var(--border);padding:.6rem;overflow-x:auto;white-space:nowrap}}
+.admin-tabs{display:flex;flex-direction:column;gap:.3rem}
+@media(max-width:900px){.admin-tabs{flex-direction:row;flex-wrap:nowrap}}
+.admin-tab{display:flex;align-items:center;gap:.6rem;padding:.7rem 1rem;border-radius:4px;font-family:var(--f-d);font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--texte-3);transition:all .25s;text-align:left;white-space:nowrap}
+.admin-tab:hover{color:var(--or-clair);background:rgba(212,175,90,.06)}
+.admin-tab.active{background:var(--or-clair);color:var(--fond-5)}
+
+.admin-main{padding:clamp(20px,3vw,40px)}
+.tab-pane{display:none}
+.tab-pane.active{display:block;animation:fadeIn .3s}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+.card{background:linear-gradient(180deg,rgba(86,10,10,.35),rgba(26,0,0,.6));border:1px solid var(--border);border-radius:8px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.35);margin-bottom:1.5rem}
+.card-header{padding:1.1rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.6rem;background:rgba(26,0,0,.4)}
+.card-header h2{font-family:var(--f-d);font-size:1.1rem;font-weight:700;color:var(--or-clair);letter-spacing:.04em}
 .card-body{padding:1.5rem}
 @media(max-width:680px){.card-body{padding:1.1rem}}
 
-.tabs{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.5rem;border-bottom:1px solid var(--border-or);padding-bottom:.8rem}
-.tab-btn{padding:.6rem 1.1rem;border:1px solid var(--border-or);background:rgba(26,0,0,.5);color:var(--texte-3);font-family:var(--f-display);font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border-radius:3px;transition:all .2s}
-.tab-btn:hover{color:var(--or-clair)}
-.tab-btn.active{background:var(--or-clair);color:var(--fond-5);border-color:var(--or-clair)}
-
 .form-group{margin-bottom:1.1rem}
-.form-group label{display:block;font-family:var(--f-display);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--or-clair);margin-bottom:.5rem}
-.form-group input,.form-group select,.form-group textarea{width:100%;padding:.85rem 1rem;background:rgba(26,0,0,.6);border:1px solid var(--border-or);border-radius:4px;color:var(--texte);font-size:.9rem;outline:none;transition:all .3s;resize:vertical}
+.form-group label{display:block;font-family:var(--f-d);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--or-clair);margin-bottom:.5rem}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:.85rem 1rem;background:rgba(26,0,0,.6);border:1px solid var(--border);border-radius:4px;color:var(--texte);font-size:.9rem;outline:none;transition:all .3s;resize:vertical}
 .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--or-clair);box-shadow:0 0 0 3px rgba(212,175,90,.12);background:rgba(26,0,0,.85)}
 .form-group select option{background:var(--fond-4);color:var(--texte)}
+.form-group small{display:block;margin-top:.4rem;font-size:.72rem;color:var(--texte-3);font-style:italic}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-@media(max-width:680px){.form-row{grid-template-columns:1fr}}
+.form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}
+@media(max-width:680px){.form-row,.form-row-3{grid-template-columns:1fr}}
 
 .actions{display:flex;gap:.8rem;margin-top:1.5rem;flex-wrap:wrap}
-.btn-save{padding:.9rem 1.8rem;background:var(--or-clair);color:var(--fond-5);border-radius:4px;font-family:var(--f-display);font-weight:700;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;transition:all .3s;box-shadow:0 4px 20px rgba(212,175,90,.3);flex:1}
+.btn-save{padding:.9rem 1.8rem;background:var(--or-clair);color:var(--fond-5);border-radius:4px;font-family:var(--f-d);font-weight:700;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;transition:all .3s;box-shadow:0 4px 20px rgba(212,175,90,.3);flex:0 1 auto;cursor:pointer}
 .btn-save:hover:not(:disabled){background:var(--or-vif);transform:translateY(-2px);box-shadow:0 10px 30px rgba(212,175,90,.45)}
 .btn-save:disabled{opacity:.5;cursor:not-allowed}
-.btn-reset{padding:.9rem 1.4rem;background:transparent;color:#ff9c9c;border:1.5px solid rgba(185,28,28,.4);border-radius:4px;font-family:var(--f-display);font-weight:700;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;transition:all .3s}
+.btn-reset{padding:.9rem 1.4rem;background:transparent;color:#ff9c9c;border:1.5px solid rgba(185,28,28,.4);border-radius:4px;font-family:var(--f-d);font-weight:700;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;transition:all .3s;cursor:pointer}
 .btn-reset:hover{background:rgba(185,28,28,.15);border-color:#ef4444}
+.btn-ghost{padding:.6rem 1.2rem;background:rgba(26,0,0,.5);color:var(--texte-2);border:1px solid var(--border);border-radius:4px;font-family:var(--f-d);font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;transition:all .3s;cursor:pointer}
+.btn-ghost:hover{border-color:var(--or-clair);color:var(--or-clair)}
 
-.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-bottom:1rem}
-.stat-box{background:rgba(26,0,0,.5);border:1px solid var(--border-or);padding:1.1rem .8rem;text-align:center;border-radius:6px;transition:all .3s}
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.8rem;margin-bottom:1rem}
+.stat-box{background:rgba(26,0,0,.5);border:1px solid var(--border);padding:1.1rem .8rem;text-align:center;border-radius:6px;transition:all .3s}
 .stat-box:hover{border-color:var(--or-clair);background:rgba(86,10,10,.55)}
-.stat-num{font-family:var(--f-display);font-size:clamp(1.4rem,3vw,1.9rem);font-weight:700;color:var(--or-clair);display:block;line-height:1;text-shadow:0 0 20px rgba(212,175,90,.35)}
-.stat-lbl{font-family:var(--f-mono);font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--texte-3);font-weight:700;display:block;margin-top:.5rem}
+.stat-num{font-family:var(--f-d);font-size:clamp(1.4rem,3vw,1.9rem);font-weight:700;color:var(--or-clair);display:block;line-height:1;text-shadow:0 0 20px rgba(212,175,90,.35)}
+.stat-lbl{font-family:var(--f-m);font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--texte-3);font-weight:700;display:block;margin-top:.5rem}
 
-.art-list{display:flex;flex-direction:column;gap:.7rem}
-.art-item{padding:.9rem 1rem;border:1px solid var(--border-or);background:rgba(26,0,0,.5);border-radius:6px;display:flex;align-items:center;gap:.85rem;transition:all .25s}
-.art-item:hover{border-color:var(--or-clair);background:rgba(86,10,10,.55);transform:translateX(2px)}
-.art-thumb{width:48px;height:48px;flex-shrink:0;background:var(--fond-3);border:1px solid var(--border-or);border-radius:4px;display:flex;align-items:center;justify-content:center;overflow:hidden;font-size:1.3rem}
-.art-thumb img{width:100%;height:100%;object-fit:cover}
-.art-info{flex:1;min-width:0}
-.art-title{font-family:var(--f-display);font-size:.82rem;font-weight:700;color:var(--texte);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:.3rem}
-.art-meta{display:flex;gap:.6rem;flex-wrap:wrap;font-family:var(--f-mono);font-size:.6rem;color:var(--texte-3);align-items:center}
-.art-btns{display:flex;gap:.3rem;flex-shrink:0;flex-wrap:wrap}
-.mini-btn{padding:.35rem .6rem;border:1px solid var(--border-or);background:rgba(26,0,0,.5);font-family:var(--f-display);font-size:.6rem;font-weight:700;color:var(--texte-2);letter-spacing:.06em;text-transform:uppercase;border-radius:3px;transition:all .2s}
+.item-list{display:flex;flex-direction:column;gap:.7rem}
+.item-row{padding:.9rem 1rem;border:1px solid var(--border);background:rgba(26,0,0,.5);border-radius:6px;display:flex;align-items:center;gap:.85rem;transition:all .25s}
+.item-row:hover{border-color:var(--or-clair);background:rgba(86,10,10,.55);transform:translateX(2px)}
+.item-thumb{width:48px;height:48px;flex-shrink:0;background:var(--fond-3);border:1px solid var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;overflow:hidden;font-size:1.3rem}
+.item-thumb img{width:100%;height:100%;object-fit:cover}
+.item-info{flex:1;min-width:0}
+.item-title{font-family:var(--f-d);font-size:.82rem;font-weight:700;color:var(--texte);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:.3rem}
+.item-meta{display:flex;gap:.6rem;flex-wrap:wrap;font-family:var(--f-m);font-size:.6rem;color:var(--texte-3);align-items:center}
+.item-actions{display:flex;gap:.3rem;flex-shrink:0;flex-wrap:wrap}
+.mini-btn{padding:.35rem .6rem;border:1px solid var(--border);background:rgba(26,0,0,.5);font-family:var(--f-d);font-size:.6rem;font-weight:700;color:var(--texte-2);letter-spacing:.06em;text-transform:uppercase;border-radius:3px;transition:all .2s;cursor:pointer}
 .mini-btn:hover{background:var(--or-clair);color:var(--fond-5);border-color:var(--or-clair)}
 .mini-btn.del:hover{background:#ef4444;border-color:#ef4444;color:#fff}
+.mini-btn.pub:hover{background:#22c55e;border-color:#22c55e;color:#fff}
 
-.photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:6px;margin-top:1rem}
-.photo-item{aspect-ratio:1;border:1px solid var(--border-or);border-radius:4px;overflow:hidden;background:var(--fond-3);display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-size:.55rem;color:var(--texte-3);text-align:center;padding:4px;position:relative}
-.photo-item img{width:100%;height:100%;object-fit:cover}
-.photo-item .num{position:absolute;top:2px;left:4px;font-weight:700;color:var(--or-clair)}
+.badge{display:inline-flex;align-items:center;gap:.3rem;padding:.15rem .55rem;border-radius:10px;font-family:var(--f-m);font-size:.55rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.badge-pub{background:rgba(34,197,94,.15);color:#86efac;border:1px solid rgba(34,197,94,.3)}
+.badge-draft{background:rgba(245,158,11,.15);color:#fcd34d;border:1px solid rgba(245,158,11,.3)}
 
 .empty{text-align:center;color:var(--texte-3);font-size:.85rem;padding:1.5rem;font-style:italic}
 .spinner{display:inline-block;width:14px;height:14px;border:2px solid currentColor;border-top-color:transparent;border-radius:50%;animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-#toast{position:fixed;bottom:2rem;right:2rem;z-index:9999;padding:1rem 1.4rem;min-width:260px;max-width:calc(100vw - 4rem);background:#22c55e;color:#fff;font-family:var(--f-display);font-size:.78rem;font-weight:700;letter-spacing:.04em;border-radius:6px;box-shadow:0 12px 40px rgba(0,0,0,.5);transform:translateY(80px);opacity:0;transition:all .4s}
-#toast.show{transform:translateY(0);opacity:1}
-#toast.error{background:#ef4444}
-@media(max-width:640px){#toast{bottom:1rem;right:1rem;left:1rem;min-width:0}}
+.photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:6px;margin-top:1rem}
+.photo-item{aspect-ratio:1;border:1px solid var(--border);border-radius:4px;overflow:hidden;background:var(--fond-3);display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--f-m);font-size:.55rem;color:var(--texte-3);text-align:center;padding:4px;position:relative}
+.photo-item .num{position:absolute;top:2px;left:4px;font-weight:700;color:var(--or-clair);background:rgba(0,0,0,.6);padding:1px 4px;border-radius:2px;font-size:.5rem}
+.photo-item .cat{position:absolute;bottom:2px;right:4px;font-size:.45rem;color:var(--or-clair);background:rgba(0,0,0,.6);padding:1px 4px;border-radius:2px}
+
+#toastContainer{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:.6rem;max-width:calc(100vw - 48px);pointer-events:none}
+.toast{padding:.9rem 1.3rem;border-radius:6px;font-family:var(--f-d);font-size:.78rem;font-weight:700;letter-spacing:.02em;color:#fff;box-shadow:0 12px 40px rgba(0,0,0,.5);animation:slideIn .35s;pointer-events:auto;min-width:220px;border-left:4px solid}
+.toast.success{background:#14532d;border-color:#22c55e}
+.toast.error{background:#7f1d1d;border-color:#ef4444}
+.toast.info{background:#1e3a8a;border-color:#3b82f6}
+@keyframes slideIn{from{transform:translateX(100%);opacity:0}to{transform:none;opacity:1}}
+@media(max-width:640px){#toastContainer{bottom:1rem;right:1rem;left:1rem}}
+
+.divider{height:1px;background:var(--border);margin:1.5rem 0}
+.alert{background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.3);border-radius:6px;padding:1rem 1.2rem;font-size:.85rem;color:#93c5fd;margin-bottom:1.2rem;display:flex;gap:.8rem;align-items:flex-start}
+.alert.warn{background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.3);color:#fcd34d}
 </style>
 </head>
 <body>
 
-<!-- LOGIN -->
+<!-- ============ LOGIN ============ -->
 <div id="loginScreen">
   <div class="login-box">
     <div class="login-logo">DAVA DAVID</div>
-    <p class="login-sub">Administration</p>
-    <div class="login-field">
-      <label>Email</label>
-      <input type="email" id="loginEmail" placeholder="admin@davadavidagossa.com" autocomplete="username"/>
-    </div>
-    <div class="login-field">
-      <label>Mot de passe</label>
-      <input type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter') doLogin()"/>
-    </div>
-    <button class="login-btn" onclick="doLogin()">🔐 Se connecter</button>
-    <p class="login-error" id="loginError"></p>
+    <p class="login-sub">Administration sécurisée</p>
+    <form id="loginForm">
+      <div class="login-field">
+        <label>Email</label>
+        <input type="email" id="loginEmail" placeholder="admin@davadavidagossa.com" required autocomplete="username"/>
+      </div>
+      <div class="login-field">
+        <label>Mot de passe</label>
+        <input type="password" id="loginPass" placeholder="••••••••" required autocomplete="current-password"/>
+      </div>
+      <button type="submit" class="login-btn" id="loginBtn">🔐 Se connecter</button>
+      <p class="login-error" id="loginError"></p>
+    </form>
   </div>
 </div>
 
-<!-- ADMIN -->
+<!-- ============ ADMIN ============ -->
 <div id="adminScreen">
-  <div class="admin-top">
+  <header class="admin-top">
     <div class="admin-brand">DAVA DAVID <span>— ADMIN</span></div>
     <div class="admin-top-right">
-      <a href="index.html" target="_blank" class="link-btn">🌐 Voir le site</a>
-      <button class="logout-btn" onclick="doLogout()">🚪 Déconnexion</button>
+      <a href="index.html" target="_blank" rel="noopener" class="link-btn">🌐 Voir le site</a>
+      <button class="logout-btn" id="logoutBtn">🚪 Déconnexion</button>
     </div>
-  </div>
+  </header>
 
-  <div class="admin-body">
-    <div>
-      <div class="tabs">
-        <button class="tab-btn active" data-tab="articles" onclick="switchTab('articles',this)">📰 Articles</button>
-        <button class="tab-btn" data-tab="videos" onclick="switchTab('videos',this)">🎬 Vidéos</button>
-        <button class="tab-btn" data-tab="photos" onclick="switchTab('photos',this)">🖼️ Photos</button>
-        <button class="tab-btn" data-tab="profil" onclick="switchTab('profil',this)">👤 Profil</button>
-        <button class="tab-btn" data-tab="engagement" onclick="switchTab('engagement',this)">💬 Engagement</button>
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <nav class="admin-tabs">
+        <button class="admin-tab active" data-tab="dashboard">📊 Dashboard</button>
+        <button class="admin-tab" data-tab="articles">📰 Articles</button>
+        <button class="admin-tab" data-tab="videos">🎬 Vidéos</button>
+        <button class="admin-tab" data-tab="photos">🖼️ Photos</button>
+        <button class="admin-tab" data-tab="events">📅 Événements</button>
+        <button class="admin-tab" data-tab="sponsors">🤝 Sponsors</button>
+        <button class="admin-tab" data-tab="horsTerrain">🎓 Hors terrain</button>
+        <button class="admin-tab" data-tab="profil">👤 Profil</button>
+        <button class="admin-tab" data-tab="stats">📊 Statistiques</button>
+        <button class="admin-tab" data-tab="moderation">💬 Modération</button>
+        <button class="admin-tab" data-tab="config">⚙️ Config</button>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+
+      <!-- ============ DASHBOARD ============ -->
+      <div class="tab-pane active" id="tab-dashboard">
+        <div class="alert">💡 <span><strong>Bienvenue !</strong> Toutes les collections Firestore sont créées automatiquement. Les 30 photos seront initialisées à la première connexion.</span></div>
+        <div class="card">
+          <div class="card-header"><h2>📊 Vue d'ensemble</h2><button class="btn-ghost" onclick="refreshDashboard()">🔄 Rafraîchir</button></div>
+          <div class="card-body">
+            <div class="stats-row">
+              <div class="stat-box"><span class="stat-num" id="dashArticles">—</span><span class="stat-lbl">Articles</span></div>
+              <div class="stat-box"><span class="stat-num" id="dashVideos">—</span><span class="stat-lbl">Vidéos</span></div>
+              <div class="stat-box"><span class="stat-num" id="dashPhotos">—</span><span class="stat-lbl">Photos</span></div>
+              <div class="stat-box"><span class="stat-num" id="dashEvents">—</span><span class="stat-lbl">Événements</span></div>
+              <div class="stat-box"><span class="stat-num" id="dashSponsors">—</span><span class="stat-lbl">Sponsors</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><h2>🕐 Derniers articles</h2></div>
+          <div class="card-body"><div class="item-list" id="dashRecent"><div class="empty">Chargement...</div></div></div>
+        </div>
       </div>
 
-      <!-- ARTICLES -->
-      <div id="tab-articles" class="tab-content">
+      <!-- ============ ARTICLES ============ -->
+      <div class="tab-pane" id="tab-articles">
         <div class="card">
-          <div class="card-header"><h2>✏️ Ajouter / modifier un article</h2><span class="card-badge" id="artMode">CRÉATION</span></div>
+          <div class="card-header"><h2 id="artFormTitle">✏️ Nouvel article</h2></div>
           <div class="card-body">
-            <form id="formArticle" onsubmit="saveArticle(event)">
+            <form id="articleForm">
               <input type="hidden" id="artId"/>
-              <div class="form-group">
-                <label>Titre *</label>
-                <input type="text" id="artTitre" required placeholder="Ex: Première titularisation avec Bourges FC"/>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Titre *</label>
+                  <input type="text" id="artTitre" required placeholder="Ex: Première titularisation avec Bourges FC"/>
+                </div>
+                <div class="form-group">
+                  <label>Slug (URL)</label>
+                  <input type="text" id="artSlug" placeholder="auto-généré si vide"/>
+                  <small>→ /article.html?id=...</small>
+                </div>
               </div>
               <div class="form-row">
                 <div class="form-group">
@@ -183,33 +246,53 @@ input,select,textarea{font-family:inherit}
                   </select>
                 </div>
                 <div class="form-group">
-                  <label>Image URL (optionnel)</label>
-                  <input type="url" id="artImg" placeholder="https://..."/>
+                  <label>Statut</label>
+                  <select id="artPublie">
+                    <option value="true">✅ Publié</option>
+                    <option value="false">📝 Brouillon</option>
+                  </select>
                 </div>
               </div>
               <div class="form-group">
-                <label>Contenu *</label>
-                <textarea id="artContent" rows="6" required placeholder="Rédigez votre article ici..."></textarea>
+                <label>Image principale (URL)</label>
+                <input type="url" id="artImage" placeholder="https://..."/>
               </div>
+              <div class="form-group">
+                <label>Résumé (extrait)</label>
+                <textarea id="artResume" rows="2" placeholder="Résumé affiché dans les listes"></textarea>
+              </div>
+              <div class="form-group">
+                <label>Contenu *</label>
+                <textarea id="artContenu" rows="8" required placeholder="Rédigez votre article ici..."></textarea>
+              </div>
+              <div class="divider"></div>
+              <p style="font-family:var(--f-d);font-size:.75rem;color:var(--or-clair);margin-bottom:1rem;text-transform:uppercase;letter-spacing:.14em">SEO</p>
+              <div class="form-row">
+                <div class="form-group"><label>Titre SEO</label><input type="text" id="artSeoTitre" placeholder="Titre pour Google"/></div>
+                <div class="form-group"><label>Mots-clés</label><input type="text" id="artKeywords" placeholder="dava, agossa, bourges..."/></div>
+              </div>
+              <div class="form-group"><label>Description SEO</label><textarea id="artSeoDesc" rows="2" placeholder="Description meta (160 car.)"></textarea></div>
               <div class="actions">
-                <button type="submit" class="btn-save" id="artBtnSave">💾 Publier</button>
-                <button type="button" class="btn-reset" onclick="resetArticleForm()">🗑️ Effacer</button>
+                <button type="submit" class="btn-save" id="artBtnSave">💾 Enregistrer</button>
+                <button type="button" class="btn-reset" onclick="resetForm('article')">🗑️ Effacer</button>
               </div>
             </form>
           </div>
         </div>
         <div class="card">
-          <div class="card-header"><h2>📋 Articles publiés</h2><button class="mini-btn" onclick="loadArticles()">🔄 Actualiser</button></div>
-          <div class="card-body"><div class="art-list" id="listArticles"><div class="empty">Chargement…</div></div></div>
+          <div class="card-header"><h2>📋 Articles</h2><button class="btn-ghost" onclick="loadArticles()">🔄 Actualiser</button></div>
+          <div class="card-body"><div class="item-list" id="listArticles"><div class="empty">Chargement...</div></div></div>
         </div>
       </div>
 
-      <!-- VIDEOS -->
-      <div id="tab-videos" class="tab-content" style="display:none">
+      <!-- ============ VIDEOS ============ -->
+      <div class="tab-pane" id="tab-videos">
+        <div class="alert">💡 <span><strong>Vidéos</strong> : collez un lien YouTube, Drive ou .mp4. La vignette YouTube est générée automatiquement.</span></div>
         <div class="card">
-          <div class="card-header"><h2>🎬 Ajouter une vidéo</h2></div>
+          <div class="card-header"><h2 id="vidFormTitle">🎬 Nouvelle vidéo</h2></div>
           <div class="card-body">
-            <form id="formVideo" onsubmit="saveVideo(event)">
+            <form id="videoForm">
+              <input type="hidden" id="vidId"/>
               <div class="form-group">
                 <label>Titre *</label>
                 <input type="text" id="vidTitre" required placeholder="Ex: Highlights 2026/27"/>
@@ -221,422 +304,1217 @@ input,select,textarea{font-family:inherit}
                     <option value="Arrêts & réflexes">🧤 Arrêts & réflexes</option>
                     <option value="Jeu aérien">🦅 Jeu aérien & sorties</option>
                     <option value="Jeu au pied">🦶 Jeu au pied & relance</option>
+                    <option value="Highlights">⭐ Highlights</option>
+                    <option value="Match">⚽ Match</option>
                   </select>
                 </div>
                 <div class="form-group">
-                  <label>Lien YouTube ou Drive *</label>
-                  <input type="url" id="vidUrl" required placeholder="https://www.youtube.com/watch?v=..."/>
+                  <label>Statut</label>
+                  <select id="vidPublie">
+                    <option value="true">✅ Publié</option>
+                    <option value="false">📝 Brouillon</option>
+                  </select>
                 </div>
               </div>
-              <div class="actions"><button type="submit" class="btn-save">💾 Ajouter</button></div>
+              <div class="form-group">
+                <label>Lien vidéo (YouTube, Drive, .mp4) *</label>
+                <input type="url" id="vidUrl" required placeholder="https://www.youtube.com/watch?v=..." oninput="detectPlatform('vid')"/>
+                <small id="vidPlatformHint">Plateforme détectée : —</small>
+              </div>
+              <div class="form-group">
+                <label>Description</label>
+                <textarea id="vidDesc" rows="2"></textarea>
+              </div>
+              <div class="form-group">
+                <label>Vignette personnalisée (optionnel)</label>
+                <input type="url" id="vidVignette" placeholder="Laisser vide = auto YouTube"/>
+              </div>
+              <div class="actions">
+                <button type="submit" class="btn-save" id="vidBtnSave">💾 Enregistrer</button>
+                <button type="button" class="btn-reset" onclick="resetForm('video')">🗑️ Effacer</button>
+              </div>
             </form>
           </div>
         </div>
         <div class="card">
-          <div class="card-header"><h2>📋 Vidéos</h2><button class="mini-btn" onclick="loadVideos()">🔄 Actualiser</button></div>
-          <div class="card-body"><div class="art-list" id="listVideos"><div class="empty">Chargement…</div></div></div>
+          <div class="card-header"><h2>📋 Vidéos</h2><button class="btn-ghost" onclick="loadVideos()">🔄 Actualiser</button></div>
+          <div class="card-body"><div class="item-list" id="listVideos"><div class="empty">Chargement...</div></div></div>
         </div>
       </div>
 
-      <!-- PHOTOS -->
-      <div id="tab-photos" class="tab-content" style="display:none">
+      <!-- ============ PHOTOS ============ -->
+      <div class="tab-pane" id="tab-photos">
+        <div class="alert">📸 <span><strong>30 photos</strong> : ph1.jpeg à ph30.jpeg réparties en 3 catégories de 10. Initialisées automatiquement à la première connexion.</span></div>
         <div class="card">
-          <div class="card-header"><h2>🖼️ Initialiser les 30 photos</h2></div>
+          <div class="card-header"><h2>🖼️ Galerie</h2><button class="btn-ghost" onclick="initPhotos(true)">🚀 (Re)générer les 30</button></div>
           <div class="card-body">
-            <p style="font-size:.85rem;margin-bottom:1rem;color:var(--texte-3)">
-              Génère automatiquement <strong>ph1.jpeg à ph30.jpeg</strong> en 3 catégories (10 chacune) : <em>Portrait, Match, Sélection</em>. Les documents seront créés dans Firestore sans action manuelle.
-            </p>
-            <button class="btn-save" onclick="initPhotos()" id="btnInitPhotos">🚀 Générer les 30 photos</button>
-            <div class="photo-grid" id="photoPreview"></div>
+            <div class="photo-grid" id="photoGrid"><div class="empty">Chargement...</div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><h2>➕ Ajouter une photo externe (URL)</h2></div>
+          <div class="card-body">
+            <form id="photoForm">
+              <div class="form-row">
+                <div class="form-group"><label>Titre *</label><input type="text" id="phTitre" required placeholder="Ex: Portrait 2026"/></div>
+                <div class="form-group">
+                  <label>Catégorie *</label>
+                  <select id="phCat">
+                    <option value="Sélection Bénin">Sélection Bénin</option>
+                    <option value="Match & Clubs">Match & Clubs</option>
+                    <option value="Ses photos">Ses photos</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group"><label>URL image *</label><input type="url" id="phUrl" required placeholder="https://..."/></div>
+              <div class="form-group"><label>Texte alternatif (SEO)</label><input type="text" id="phAlt" placeholder="Description pour Google"/></div>
+              <div class="actions"><button type="submit" class="btn-save">💾 Ajouter</button></div>
+            </form>
           </div>
         </div>
       </div>
 
-      <!-- PROFIL -->
-      <div id="tab-profil" class="tab-content" style="display:none">
+      <!-- ============ EVENTS ============ -->
+      <div class="tab-pane" id="tab-events">
+        <div class="card">
+          <div class="card-header"><h2 id="evFormTitle">📅 Nouvel événement</h2></div>
+          <div class="card-body">
+            <form id="eventForm">
+              <input type="hidden" id="evId"/>
+              <div class="form-row">
+                <div class="form-group"><label>Titre *</label><input type="text" id="evTitre" required/></div>
+                <div class="form-group"><label>Date *</label><input type="date" id="evDate" required/></div>
+              </div>
+              <div class="form-row">
+                <div class="form-group"><label>Lieu</label><input type="text" id="evLieu" placeholder="Bourges, France"/></div>
+                <div class="form-group"><label>Statut</label>
+                  <select id="evPublie"><option value="true">✅ Publié</option><option value="false">📝 Brouillon</option></select>
+                </div>
+              </div>
+              <div class="form-group"><label>Description</label><textarea id="evDesc" rows="3"></textarea></div>
+              <div class="form-group"><label>Image (URL)</label><input type="url" id="evImage"/></div>
+              <div class="actions">
+                <button type="submit" class="btn-save" id="evBtnSave">💾 Enregistrer</button>
+                <button type="button" class="btn-reset" onclick="resetForm('event')">🗑️ Effacer</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><h2>📋 Événements</h2><button class="btn-ghost" onclick="loadEvents()">🔄 Actualiser</button></div>
+          <div class="card-body"><div class="item-list" id="listEvents"><div class="empty">Chargement...</div></div></div>
+        </div>
+      </div>
+
+      <!-- ============ SPONSORS ============ -->
+      <div class="tab-pane" id="tab-sponsors">
+        <div class="card">
+          <div class="card-header"><h2 id="spFormTitle">🤝 Nouveau sponsor</h2></div>
+          <div class="card-body">
+            <form id="sponsorForm">
+              <input type="hidden" id="spId"/>
+              <div class="form-row">
+                <div class="form-group"><label>Nom *</label><input type="text" id="spNom" required/></div>
+                <div class="form-group"><label>Site web</label><input type="url" id="spUrl"/></div>
+              </div>
+              <div class="form-group"><label>Logo (URL)</label><input type="url" id="spLogo"/></div>
+              <div class="form-group"><label>Description</label><textarea id="spDesc" rows="2"></textarea></div>
+              <div class="form-row">
+                <div class="form-group"><label>Ordre</label><input type="number" id="spOrdre" value="100"/></div>
+                <div class="form-group"><label>Actif</label>
+                  <select id="spActif"><option value="true">✅ Oui</option><option value="false">🚫 Non</option></select>
+                </div>
+              </div>
+              <div class="actions">
+                <button type="submit" class="btn-save" id="spBtnSave">💾 Enregistrer</button>
+                <button type="button" class="btn-reset" onclick="resetForm('sponsor')">🗑️ Effacer</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><h2>📋 Sponsors</h2><button class="btn-ghost" onclick="loadSponsors()">🔄 Actualiser</button></div>
+          <div class="card-body"><div class="item-list" id="listSponsors"><div class="empty">Chargement...</div></div></div>
+        </div>
+      </div>
+
+      <!-- ============ HORS TERRAIN ============ -->
+      <div class="tab-pane" id="tab-horsTerrain">
+        <div class="card">
+          <div class="card-header"><h2 id="htFormTitle">🎓 Nouvelle entrée</h2></div>
+          <div class="card-body">
+            <form id="horsTerrainForm">
+              <input type="hidden" id="htId"/>
+              <div class="form-row">
+                <div class="form-group"><label>Catégorie *</label>
+                  <select id="htCat" required>
+                    <option value="formation">Formation / Diplôme</option>
+                    <option value="experience">Expérience</option>
+                    <option value="projet">Projet / Vision</option>
+                  </select>
+                </div>
+                <div class="form-group"><label>Ordre</label><input type="number" id="htOrdre" value="100"/></div>
+              </div>
+              <div class="form-group"><label>Titre *</label><input type="text" id="htTitre" required placeholder="Ex: Bachelor Management"/></div>
+              <div class="form-group"><label>Sous-titre (école, période)</label><input type="text" id="htSous" placeholder="Ex: Bac+3 · 2024-2026"/></div>
+              <div class="form-group"><label>Description</label><textarea id="htDesc" rows="2"></textarea></div>
+              <div class="actions">
+                <button type="submit" class="btn-save" id="htBtnSave">💾 Enregistrer</button>
+                <button type="button" class="btn-reset" onclick="resetForm('horsTerrain')">🗑️ Effacer</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><h2>📋 Entrées</h2><button class="btn-ghost" onclick="loadHorsTerrain()">🔄 Actualiser</button></div>
+          <div class="card-body"><div class="item-list" id="listHorsTerrain"><div class="empty">Chargement...</div></div></div>
+        </div>
+      </div>
+
+      <!-- ============ PROFIL ============ -->
+      <div class="tab-pane" id="tab-profil">
+        <div class="alert warn">⚠️ <span>Le profil est stocké dans <code>profil/principal</code>. Remplissez tous les champs visibles sur l'accueil.</span></div>
         <div class="card">
           <div class="card-header"><h2>👤 Profil du joueur</h2></div>
           <div class="card-body">
-            <form id="formProfil" onsubmit="saveProfil(event)">
+            <form id="profilForm">
               <div class="form-row">
                 <div class="form-group"><label>Nom complet</label><input type="text" id="pNom" placeholder="Dava David AGOSSA"/></div>
                 <div class="form-group"><label>Club actuel</label><input type="text" id="pClub" placeholder="Bourges FC"/></div>
               </div>
-              <div class="form-row">
+              <div class="form-row-3">
                 <div class="form-group"><label>Niveau</label><input type="text" id="pNiveau" placeholder="National 1"/></div>
                 <div class="form-group"><label>Âge</label><input type="text" id="pAge" placeholder="23"/></div>
+                <div class="form-group"><label>Pied fort</label><input type="text" id="pPied" placeholder="Droitier"/></div>
               </div>
-              <div class="form-row">
+              <div class="form-row-3">
                 <div class="form-group"><label>Taille</label><input type="text" id="pTaille" placeholder="1,87 m"/></div>
                 <div class="form-group"><label>Poids</label><input type="text" id="pPoids" placeholder="75 kg"/></div>
+                <div class="form-group"><label>Sélections</label><input type="text" id="pSel" placeholder="29"/></div>
+              </div>
+              <div class="form-group"><label>Bio courte (accueil)</label><textarea id="pBio" rows="3"></textarea></div>
+              <div class="divider"></div>
+              <p style="font-family:var(--f-d);font-size:.75rem;color:var(--or-clair);margin-bottom:1rem;text-transform:uppercase;letter-spacing:.14em">Contact</p>
+              <div class="form-row">
+                <div class="form-group"><label>Email</label><input type="email" id="pEmail"/></div>
+                <div class="form-group"><label>WhatsApp</label><input type="text" id="pWhatsapp"/></div>
               </div>
               <div class="form-row">
-                <div class="form-group"><label>Pied fort</label><input type="text" id="pPied" placeholder="Droitier"/></div>
-                <div class="form-group"><label>Sélections</label><input type="text" id="pSelections" placeholder="29 (U20 + U23)"/></div>
+                <div class="form-group"><label>Téléphone</label><input type="text" id="pTel"/></div>
+                <div class="form-group"><label>Instagram</label><input type="text" id="pInsta"/></div>
               </div>
-              <div class="form-group"><label>Bio courte (accueil)</label><textarea id="pBio" rows="3" placeholder="Gardien de but béninois..."></textarea></div>
               <div class="actions"><button type="submit" class="btn-save">💾 Enregistrer le profil</button></div>
             </form>
           </div>
         </div>
       </div>
 
-      <!-- ENGAGEMENT -->
-      <div id="tab-engagement" class="tab-content" style="display:none">
+      <!-- ============ STATISTIQUES ============ -->
+      <div class="tab-pane" id="tab-stats">
         <div class="card">
-          <div class="card-header"><h2>💬 Modération des commentaires</h2><button class="mini-btn" onclick="loadEngagement()">🔄 Actualiser</button></div>
-          <div class="card-body"><div class="art-list" id="listEngagement"><div class="empty">Chargement…</div></div></div>
+          <div class="card-header"><h2 id="stFormTitle">📊 Nouvelle saison</h2></div>
+          <div class="card-body">
+            <form id="statsForm">
+              <input type="hidden" id="stId"/>
+              <div class="form-row-3">
+                <div class="form-group"><label>Saison *</label><input type="text" id="stSaison" required placeholder="2025-26"/></div>
+                <div class="form-group"><label>Club</label><input type="text" id="stClub" placeholder="Bourges FC"/></div>
+                <div class="form-group"><label>Niveau</label><input type="text" id="stNiveau" placeholder="National 1"/></div>
+              </div>
+              <div class="form-row-3">
+                <div class="form-group"><label>Matchs</label><input type="number" id="stMatchs"/></div>
+                <div class="form-group"><label>Titularisations</label><input type="number" id="stTitul"/></div>
+                <div class="form-group"><label>Minutes</label><input type="number" id="stMinutes"/></div>
+              </div>
+              <div class="form-row-3">
+                <div class="form-group"><label>Buts encaissés</label><input type="number" id="stButs"/></div>
+                <div class="form-group"><label>Clean sheets</label><input type="number" id="stClean"/></div>
+                <div class="form-group"><label>Penalties arrêtés</label><input type="number" id="stPen"/></div>
+              </div>
+              <div class="form-row-3">
+                <div class="form-group"><label>Cartons</label><input type="number" id="stCartons"/></div>
+                <div class="form-group"><label>Coupe de France</label><input type="number" id="stCoupe"/></div>
+                <div class="form-group"><label>Équipe réserve</label><input type="number" id="stReserve"/></div>
+              </div>
+              <div class="actions">
+                <button type="submit" class="btn-save" id="stBtnSave">💾 Enregistrer</button>
+                <button type="button" class="btn-reset" onclick="resetForm('stats')">🗑️ Effacer</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><h2>📋 Saisons</h2><button class="btn-ghost" onclick="loadStats()">🔄 Actualiser</button></div>
+          <div class="card-body"><div class="item-list" id="listStats"><div class="empty">Chargement...</div></div></div>
         </div>
       </div>
-    </div>
 
-    <!-- COLONNE DROITE -->
-    <div>
-      <div class="card">
-        <div class="card-header"><h2>📊 Statistiques</h2></div>
-        <div class="card-body">
-          <div class="stats-row">
-            <div class="stat-box"><span class="stat-num" id="stArt">—</span><span class="stat-lbl">Articles</span></div>
-            <div class="stat-box"><span class="stat-num" id="stVid">—</span><span class="stat-lbl">Vidéos</span></div>
-            <div class="stat-box"><span class="stat-num" id="stPho">—</span><span class="stat-lbl">Photos</span></div>
+      <!-- ============ MODERATION ============ -->
+      <div class="tab-pane" id="tab-moderation">
+        <div class="alert">💬 <span><strong>Modération</strong> : tous les engagements (vues, likes, commentaires). Cliquez sur 👁️ pour voir et supprimer les commentaires.</span></div>
+        <div class="card">
+          <div class="card-header"><h2>💬 Engagements</h2><button class="btn-ghost" onclick="loadEngagement()">🔄 Actualiser</button></div>
+          <div class="card-body"><div class="item-list" id="listEngagement"><div class="empty">Chargement...</div></div></div>
+        </div>
+      </div>
+
+      <!-- ============ CONFIG ============ -->
+      <div class="tab-pane" id="tab-config">
+        <div class="alert">⚙️ <span><strong>Configuration</strong> : ces valeurs sont utilisées partout sur le site.</span></div>
+        <div class="card">
+          <div class="card-header"><h2>⚙️ Paramètres généraux</h2></div>
+          <div class="card-body">
+            <form id="configForm">
+              <div class="form-row">
+                <div class="form-group"><label>Email admin</label><input type="email" id="cfgEmail" value="admin@davadavidagossa.com"/></div>
+                <div class="form-group"><label>WhatsApp du site</label><input type="text" id="cfgWhatsapp" value="2290157312131"/></div>
+              </div>
+              <div class="form-group"><label>URL canonique</label><input type="url" id="cfgCanonical" value="https://www.davadavidagossa.com/"/></div>
+              <div class="form-group"><label>Footer crédits (Novasavoir)</label><input type="text" id="cfgDev" value="Novasavoir" readonly/></div>
+              <div class="actions"><button type="submit" class="btn-save">💾 Enregistrer</button></div>
+            </form>
           </div>
         </div>
       </div>
-    </div>
+
+    </main>
   </div>
 </div>
 
-<div id="toast">✅ Action réussie</div>
+<div id="toastContainer"></div>
 
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged }
-    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-  import { getFirestore, collection, addDoc, getDocs, deleteDoc, updateDoc, doc, getDoc, setDoc, query, orderBy, Timestamp }
-    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { auth, db } from './firebase-config.js';
+import { signInWithEmailAndPassword, signOut, onAuthStateChanged }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { collection, addDoc, updateDoc, deleteDoc, doc, getDoc, getDocs, setDoc, query, orderBy, Timestamp }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyBQYA9dreQmIgRqsysk3K_ctyNGTaeAPA4",
-    authDomain: "dava-david-agossa.firebaseapp.com",
-    projectId: "dava-david-agossa",
-    storageBucket: "dava-david-agossa.firebasestorage.app",
-    messagingSenderId: "410030285009",
-    appId: "1:410030285009:web:318819647379b6f74fa5f0"
-  };
+/* ============================================================
+   HELPERS
+   ============================================================ */
+function toast(msg, type = 'success') {
+  const c = document.getElementById('toastContainer');
+  const el = document.createElement('div');
+  el.className = 'toast ' + type;
+  el.textContent = msg;
+  c.appendChild(el);
+  setTimeout(() => { el.style.opacity = '0'; setTimeout(() => el.remove(), 400); }, 3200);
+}
 
-  const app  = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db   = getFirestore(app);
+function slugify(s) {
+  return String(s || '').toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+}
 
-  let editingArticleId = null;
+function esc(s) {
+  return String(s || '').replace(/[&<>"']/g, c => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  }[c]));
+}
 
-  /* ---------- AUTH ---------- */
-  window.doLogin = () => {
-    const email = document.getElementById('loginEmail').value.trim();
-    const pass  = document.getElementById('loginPass').value;
-    const errEl = document.getElementById('loginError');
-    errEl.style.display = 'none';
-    signInWithEmailAndPassword(auth, email, pass)
-      .catch(err => {
-        errEl.textContent = '❌ ' + err.message;
-        errEl.style.display = 'block';
-      });
-  };
+function fmtDate(ts) {
+  if (!ts) return '—';
+  const d = ts.toDate ? ts.toDate() : new Date(ts);
+  return d.toLocaleDateString('fr-FR');
+}
 
-  window.doLogout = () => signOut(auth);
+function ytThumb(url) {
+  if (!url) return '';
+  const m = url.match(/(?:embed\/|watch\?v=|youtu\.be\/|shorts\/)([^?&/]+)/);
+  return m ? `https://img.youtube.com/vi/${m[1]}/hqdefault.jpg` : '';
+}
 
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      document.getElementById('loginScreen').style.display = 'none';
-      document.getElementById('adminScreen').style.display = 'block';
-      loadAll();
-    } else {
-      document.getElementById('loginScreen').style.display = 'flex';
-      document.getElementById('adminScreen').style.display = 'none';
-    }
+function detectPlatform(prefix) {
+  const input = document.getElementById(prefix + 'Url');
+  const hint = document.getElementById(prefix + 'PlatformHint');
+  if (!input || !hint) return;
+  const url = input.value.toLowerCase();
+  let name = 'Inconnu';
+  if (url.includes('youtube.com') || url.includes('youtu.be')) name = '▶️ YouTube';
+  else if (url.includes('drive.google.com')) name = '📁 Google Drive';
+  else if (url.match(/\.(mp4|webm|mov)(\?|$)/)) name = '🎥 Vidéo directe';
+  else if (url.includes('vimeo.com')) name = '🎬 Vimeo';
+  else if (url.includes('dailymotion.com')) name = '🎥 Dailymotion';
+  hint.textContent = 'Plateforme détectée : ' + (url ? name : '—');
+}
+
+/* ============================================================
+   AUTH
+   ============================================================ */
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = document.getElementById('loginEmail').value.trim();
+  const pass = document.getElementById('loginPass').value;
+  const btn = document.getElementById('loginBtn');
+  const err = document.getElementById('loginError');
+  err.style.display = 'none';
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Connexion...';
+  try {
+    await signInWithEmailAndPassword(auth, email, pass);
+  } catch (ex) {
+    let msg = 'Identifiants incorrects.';
+    if (ex.code === 'auth/too-many-requests') msg = 'Trop de tentatives. Réessayez plus tard.';
+    if (ex.code === 'auth/user-not-found') msg = 'Aucun compte avec cet email.';
+    if (ex.code === 'auth/wrong-password') msg = 'Mot de passe incorrect.';
+    err.textContent = '❌ ' + msg;
+    err.style.display = 'block';
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '🔐 Se connecter';
+  }
+});
+
+document.getElementById('logoutBtn').addEventListener('click', async () => {
+  await signOut(auth);
+});
+
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminScreen').style.display = 'block';
+    await maybeInitPhotos();
+    await refreshDashboard();
+    await loadAll();
+  } else {
+    document.getElementById('loginScreen').style.display = 'flex';
+    document.getElementById('adminScreen').style.display = 'none';
+  }
+});
+
+/* ============================================================
+   TABS
+   ============================================================ */
+document.querySelectorAll('.admin-tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const name = btn.dataset.tab;
+    document.querySelectorAll('.admin-tab').forEach(b => b.classList.toggle('active', b === btn));
+    document.querySelectorAll('.tab-pane').forEach(p => p.classList.toggle('active', p.id === 'tab-' + name));
+    if (name === 'dashboard') refreshDashboard();
+    if (name === 'moderation') loadEngagement();
   });
+});
 
-  /* ---------- TABS ---------- */
-  window.switchTab = (name, btn) => {
-    document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
-    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-    document.getElementById('tab-' + name).style.display = 'block';
-    if (btn) btn.classList.add('active');
-  };
+/* ============================================================
+   DASHBOARD
+   ============================================================ */
+async function refreshDashboard() {
+  try {
+    const [arts, vids, photos, evs, sps] = await Promise.all([
+      getDocs(collection(db, 'articles')),
+      getDocs(collection(db, 'videos')),
+      getDocs(collection(db, 'galerie')),
+      getDocs(collection(db, 'evenements')),
+      getDocs(collection(db, 'sponsors')),
+    ]);
+    document.getElementById('dashArticles').textContent = arts.size;
+    document.getElementById('dashVideos').textContent = vids.size;
+    document.getElementById('dashPhotos').textContent = photos.size;
+    document.getElementById('dashEvents').textContent = evs.size;
+    document.getElementById('dashSponsors').textContent = sps.size;
 
-  /* ---------- TOAST ---------- */
-  function toast(msg, isError = false) {
-    const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.className = isError ? 'show error' : 'show';
-    setTimeout(() => t.className = '', 3200);
+    const recent = arts.docs
+      .map(d => ({ id: d.id, ...d.data() }))
+      .sort((a, b) => {
+        const ta = a.date?.toDate?.()?.getTime() || 0;
+        const tb = b.date?.toDate?.()?.getTime() || 0;
+        return tb - ta;
+      }).slice(0, 5);
+
+    const box = document.getElementById('dashRecent');
+    if (!recent.length) { box.innerHTML = '<div class="empty">Aucun article pour le moment.</div>'; return; }
+    box.innerHTML = recent.map(a => `
+      <div class="item-row">
+        <div class="item-thumb">${a.imageUrl ? `<img src="${esc(a.imageUrl)}" onerror="this.style.display='none'"/>` : '📰'}</div>
+        <div class="item-info">
+          <div class="item-title">${esc(a.titre || 'Sans titre')}</div>
+          <div class="item-meta"><span>📅 ${fmtDate(a.date)}</span><span>${esc(a.categorie || '')}</span></div>
+        </div>
+      </div>
+    `).join('');
+  } catch (e) {
+    console.warn(e);
   }
+}
 
-  /* ---------- LOAD ALL ---------- */
-  function loadAll() {
-    loadArticles();
-    loadVideos();
-    loadPhotos();
-    loadProfil();
-    loadEngagement();
-  }
+async function loadAll() {
+  await Promise.all([
+    loadArticles(), loadVideos(), loadPhotos(),
+    loadEvents(), loadSponsors(), loadHorsTerrain(),
+    loadProfil(), loadStats()
+  ]);
+}
 
-  /* ---------- ARTICLES ---------- */
-  async function loadArticles() {
-    const list = document.getElementById('listArticles');
-    list.innerHTML = '<div class="empty">Chargement…</div>';
-    try {
-      const snap = await getDocs(query(collection(db, "articles"), orderBy("date", "desc")));
-      document.getElementById('stArt').textContent = snap.size;
-      if (snap.empty) { list.innerHTML = '<div class="empty">Aucun article pour le moment.</div>'; return; }
-      list.innerHTML = '';
-      snap.forEach(d => {
-        const a = d.data();
-        const date = a.date?.toDate ? a.date.toDate().toLocaleDateString('fr-FR') : '';
-        list.innerHTML += `
-          <div class="art-item">
-            <div class="art-thumb">${a.imageUrl ? `<img src="${a.imageUrl}" alt="">` : '📰'}</div>
-            <div class="art-info">
-              <div class="art-title">${a.titre || 'Sans titre'}</div>
-              <div class="art-meta"><span>📅 ${date}</span><span>${a.categorie || ''}</span></div>
-            </div>
-            <div class="art-btns">
-              <button class="mini-btn" onclick="editArticle('${d.id}')">✏️</button>
-              <button class="mini-btn del" onclick="delDoc('articles','${d.id}')">🗑️</button>
-            </div>
-          </div>`;
+/* ============================================================
+   ARTICLES
+   ============================================================ */
+let editingArticle = null;
+
+async function loadArticles() {
+  const box = document.getElementById('listArticles');
+  box.innerHTML = '<div class="empty">Chargement...</div>';
+  try {
+    const snap = await getDocs(collection(db, 'articles'));
+    const docs = snap.docs.map(d => ({ id: d.id, ...d.data() }))
+      .sort((a, b) => {
+        const ta = a.date?.toDate?.()?.getTime() || 0;
+        const tb = b.date?.toDate?.()?.getTime() || 0;
+        return tb - ta;
       });
-    } catch (e) { list.innerHTML = '<div class="empty">Erreur : ' + e.message + '</div>'; }
-  }
+    if (!docs.length) { box.innerHTML = '<div class="empty">Aucun article pour le moment.</div>'; return; }
+    box.innerHTML = docs.map(a => `
+      <div class="item-row">
+        <div class="item-thumb">${a.imageUrl ? `<img src="${esc(a.imageUrl)}" onerror="this.style.display='none'"/>` : '📰'}</div>
+        <div class="item-info">
+          <div class="item-title">${esc(a.titre || 'Sans titre')}</div>
+          <div class="item-meta">
+            <span>📅 ${fmtDate(a.date)}</span>
+            <span>${esc(a.categorie || '')}</span>
+            <span class="badge ${a.publie ? 'badge-pub' : 'badge-draft'}">${a.publie ? '✅ Publié' : '📝 Brouillon'}</span>
+          </div>
+        </div>
+        <div class="item-actions">
+          <button class="mini-btn" onclick="editArticle('${a.id}')">✏️</button>
+          <button class="mini-btn pub" onclick="toggleArticlePublish('${a.id}', ${!!a.publie})">${a.publie ? '📝' : '✅'}</button>
+          <button class="mini-btn del" onclick="deleteArticle('${a.id}')">🗑️</button>
+        </div>
+      </div>
+    `).join('');
+  } catch (e) { box.innerHTML = '<div class="empty">Erreur : ' + esc(e.message) + '</div>'; }
+}
 
-  window.editArticle = async (id) => {
-    const d = await getDoc(doc(db, "articles", id));
+document.getElementById('articleForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById('artBtnSave');
+  btn.disabled = true;
+  const orig = btn.innerHTML;
+  btn.innerHTML = '<span class="spinner"></span> Enregistrement...';
+  const data = {
+    titre: document.getElementById('artTitre').value.trim(),
+    slug: document.getElementById('artSlug').value.trim() || slugify(document.getElementById('artTitre').value),
+    categorie: document.getElementById('artCat').value,
+    publie: document.getElementById('artPublie').value === 'true',
+    imageUrl: document.getElementById('artImage').value.trim(),
+    resume: document.getElementById('artResume').value.trim(),
+    contenu: document.getElementById('artContenu').value.trim(),
+    seoTitre: document.getElementById('artSeoTitre').value.trim(),
+    keywords: document.getElementById('artKeywords').value.trim(),
+    seoDescription: document.getElementById('artSeoDesc').value.trim(),
+    updatedAt: Timestamp.now()
+  };
+  try {
+    if (editingArticle) {
+      await updateDoc(doc(db, 'articles', editingArticle), data);
+      toast('✅ Article mis à jour');
+    } else {
+      data.date = Timestamp.now();
+      await addDoc(collection(db, 'articles'), data);
+      toast('✅ Article publié');
+    }
+    resetForm('article');
+    await loadArticles();
+    await refreshDashboard();
+  } catch (ex) { toast('❌ ' + ex.message, 'error'); }
+  finally { btn.disabled = false; btn.innerHTML = orig; }
+});
+
+window.editArticle = async (id) => {
+  try {
+    const d = await getDoc(doc(db, 'articles', id));
     if (!d.exists()) return;
     const a = d.data();
-    editingArticleId = id;
+    editingArticle = id;
     document.getElementById('artId').value = id;
     document.getElementById('artTitre').value = a.titre || '';
+    document.getElementById('artSlug').value = a.slug || '';
     document.getElementById('artCat').value = a.categorie || 'Match';
-    document.getElementById('artImg').value = a.imageUrl || '';
-    document.getElementById('artContent').value = a.contenu || '';
-    document.getElementById('artMode').textContent = 'MODIFICATION';
-    document.getElementById('artBtnSave').textContent = '💾 Mettre à jour';
-    window.scrollTo({top:0, behavior:'smooth'});
-  };
+    document.getElementById('artPublie').value = a.publie ? 'true' : 'false';
+    document.getElementById('artImage').value = a.imageUrl || '';
+    document.getElementById('artResume').value = a.resume || '';
+    document.getElementById('artContenu').value = a.contenu || '';
+    document.getElementById('artSeoTitre').value = a.seoTitre || '';
+    document.getElementById('artKeywords').value = a.keywords || '';
+    document.getElementById('artSeoDesc').value = a.seoDescription || '';
+    document.getElementById('artFormTitle').textContent = '✏️ Modifier l\'article';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    toast('✏️ Mode modification', 'info');
+  } catch (e) { toast('❌ ' + e.message, 'error'); }
+};
 
-  window.saveArticle = async (e) => {
-    e.preventDefault();
-    const btn = document.getElementById('artBtnSave');
-    btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Enregistrement…';
-    const data = {
-      titre: document.getElementById('artTitre').value.trim(),
-      categorie: document.getElementById('artCat').value,
-      imageUrl: document.getElementById('artImg').value.trim(),
-      contenu: document.getElementById('artContent').value.trim(),
+window.deleteArticle = async (id) => {
+  if (!confirm('Supprimer définitivement cet article ?')) return;
+  try { await deleteDoc(doc(db, 'articles', id)); toast('🗑️ Supprimé'); await loadArticles(); await refreshDashboard(); }
+  catch (e) { toast('❌ ' + e.message, 'error'); }
+};
+
+window.toggleArticlePublish = async (id, current) => {
+  try { await updateDoc(doc(db, 'articles', id), { publie: !current }); toast(!current ? '✅ Publié' : '📝 Repassé en brouillon'); await loadArticles(); }
+  catch (e) { toast('❌ ' + e.message, 'error'); }
+};
+
+/* ============================================================
+   VIDEOS
+   ============================================================ */
+let editingVideo = null;
+
+async function loadVideos() {
+  const box = document.getElementById('listVideos');
+  box.innerHTML = '<div class="empty">Chargement...</div>';
+  try {
+    const snap = await getDocs(collection(db, 'videos'));
+    const docs = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    if (!docs.length) { box.innerHTML = '<div class="empty">Aucune vidéo pour le moment. (Ajoutez-en quand vous aurez les vidéos du joueur.)</div>'; return; }
+    box.innerHTML = docs.map(v => {
+      const thumb = v.vignetteUrl || ytThumb(v.url) || '';
+      return `
+      <div class="item-row">
+        <div class="item-thumb">${thumb ? `<img src="${esc(thumb)}" onerror="this.style.display='none'"/>` : '🎬'}</div>
+        <div class="item-info">
+          <div class="item-title">${esc(v.titre || 'Sans titre')}</div>
+          <div class="item-meta">
+            <span>${esc(v.categorie || '')}</span>
+            <span class="badge ${v.publie !== false ? 'badge-pub' : 'badge-draft'}">${v.publie !== false ? '✅ Publié' : '📝 Brouillon'}</span>
+          </div>
+        </div>
+        <div class="item-actions">
+          <button class="mini-btn" onclick="editVideo('${v.id}')">✏️</button>
+          <button class="mini-btn del" onclick="deleteVideo('${v.id}')">🗑️</button>
+        </div>
+      </div>
+    `}).join('');
+  } catch (e) { box.innerHTML = '<div class="empty">Erreur : ' + esc(e.message) + '</div>'; }
+}
+
+document.getElementById('videoForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById('vidBtnSave');
+  btn.disabled = true;
+  const orig = btn.innerHTML;
+  btn.innerHTML = '<span class="spinner"></span>';
+  const url = document.getElementById('vidUrl').value.trim();
+  const customVignette = document.getElementById('vidVignette').value.trim();
+  const data = {
+    titre: document.getElementById('vidTitre').value.trim(),
+    categorie: document.getElementById('vidCat').value,
+    url,
+    vignetteUrl: customVignette || ytThumb(url),
+    description: document.getElementById('vidDesc').value.trim(),
+    publie: document.getElementById('vidPublie').value === 'true',
+    updatedAt: Timestamp.now()
+  };
+  try {
+    if (editingVideo) {
+      await updateDoc(doc(db, 'videos', editingVideo), data);
+      toast('✅ Vidéo mise à jour');
+    } else {
+      data.date = Timestamp.now();
+      await addDoc(collection(db, 'videos'), data);
+      toast('✅ Vidéo ajoutée');
+    }
+    resetForm('video');
+    await loadVideos();
+    await refreshDashboard();
+  } catch (ex) { toast('❌ ' + ex.message, 'error'); }
+  finally { btn.disabled = false; btn.innerHTML = orig; }
+});
+
+window.editVideo = async (id) => {
+  const d = await getDoc(doc(db, 'videos', id));
+  if (!d.exists()) return;
+  const v = d.data();
+  editingVideo = id;
+  document.getElementById('vidId').value = id;
+  document.getElementById('vidTitre').value = v.titre || '';
+  document.getElementById('vidCat').value = v.categorie || 'Arrêts & réflexes';
+  document.getElementById('vidUrl').value = v.url || '';
+  document.getElementById('vidDesc').value = v.description || '';
+  document.getElementById('vidVignette').value = v.vignetteUrl || '';
+  document.getElementById('vidPublie').value = v.publie === false ? 'false' : 'true';
+  document.getElementById('vidFormTitle').textContent = '✏️ Modifier la vidéo';
+  detectPlatform('vid');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+window.deleteVideo = async (id) => {
+  if (!confirm('Supprimer cette vidéo ?')) return;
+  await deleteDoc(doc(db, 'videos', id));
+  toast('🗑️ Supprimée'); await loadVideos(); await refreshDashboard();
+};
+
+/* ============================================================
+   PHOTOS — AUTO-INIT 30
+   ============================================================ */
+async function maybeInitPhotos() {
+  try {
+    const snap = await getDocs(collection(db, 'galerie'));
+    if (snap.empty) {
+      await initPhotos(false);
+      toast('✨ 30 photos initialisées automatiquement');
+    } else {
+      await loadPhotos();
+    }
+  } catch (e) { console.warn(e); }
+}
+
+window.initPhotos = async (manual = false) => {
+  if (manual && !confirm('Générer/regénérer les 30 photos (ph1.jpeg à ph30.jpeg) ?')) return;
+  const cats = ['Sélection Bénin', 'Match & Clubs', 'Ses photos'];
+  const promises = [];
+  for (let i = 1; i <= 30; i++) {
+    const cat = cats[Math.floor((i - 1) / 10)];
+    const ref = doc(db, 'galerie', 'photo_' + i);
+    promises.push(setDoc(ref, {
+      numero: i,
+      fichier: 'ph' + i + '.jpeg',
+      categorie: cat,
+      titre: cat + ' — Photo ' + i,
+      alt: 'Dava David Agossa — ' + cat + ' ' + i,
+      isInitial: true,
+      date: Timestamp.now()
+    }, { merge: true }));
+  }
+  try {
+    await Promise.all(promises);
+    if (manual) toast('✅ 30 photos générées');
+    await loadPhotos();
+  } catch (e) { toast('❌ ' + e.message, 'error'); }
+};
+
+async function loadPhotos() {
+  const grid = document.getElementById('photoGrid');
+  grid.innerHTML = '<div class="empty">Chargement...</div>';
+  try {
+    const snap = await getDocs(collection(db, 'galerie'));
+    if (snap.empty) { grid.innerHTML = '<div class="empty">Aucune photo. Cliquez sur « Générer les 30 ».</div>'; return; }
+    const docs = snap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => (a.numero || 999) - (b.numero || 999));
+    grid.innerHTML = docs.map(p => {
+      if (p.isInitial) {
+        return `<div class="photo-item" title="${esc(p.fichier)}">
+          <span class="num">${p.numero}</span>
+          <span style="padding:.3rem;text-align:center">${esc(p.fichier)}</span>
+          <span class="cat">${esc(p.categorie)}</span>
+        </div>`;
+      }
+      return `<div class="photo-item" title="${esc(p.titre || '')}">
+        ${p.url ? `<img src="${esc(p.url)}" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none'"/>` : ''}
+        <span class="cat">${esc(p.categorie || '')}</span>
+        <button class="mini-btn del" style="position:absolute;top:2px;right:2px;padding:2px 4px;font-size:.5rem" onclick="deletePhoto('${p.id}')">✕</button>
+      </div>`;
+    }).join('');
+  } catch (e) { grid.innerHTML = '<div class="empty">Erreur : ' + esc(e.message) + '</div>'; }
+}
+
+document.getElementById('photoForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  try {
+    await addDoc(collection(db, 'galerie'), {
+      titre: document.getElementById('phTitre').value.trim(),
+      categorie: document.getElementById('phCat').value,
+      url: document.getElementById('phUrl').value.trim(),
+      alt: document.getElementById('phAlt').value.trim(),
+      isInitial: false,
+      date: Timestamp.now()
+    });
+    toast('✅ Photo ajoutée');
+    document.getElementById('photoForm').reset();
+    await loadPhotos(); await refreshDashboard();
+  } catch (ex) { toast('❌ ' + ex.message, 'error'); }
+});
+
+window.deletePhoto = async (id) => {
+  if (!confirm('Supprimer cette photo ?')) return;
+  await deleteDoc(doc(db, 'galerie', id));
+  toast('🗑️ Supprimée'); await loadPhotos(); await refreshDashboard();
+};
+
+/* ============================================================
+   EVENTS
+   ============================================================ */
+let editingEvent = null;
+
+async function loadEvents() {
+  const box = document.getElementById('listEvents');
+  box.innerHTML = '<div class="empty">Chargement...</div>';
+  try {
+    const snap = await getDocs(collection(db, 'evenements'));
+    const docs = snap.docs.map(d => ({ id: d.id, ...d.data() }))
+      .sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+    if (!docs.length) { box.innerHTML = '<div class="empty">Aucun événement.</div>'; return; }
+    const today = new Date().toISOString().slice(0, 10);
+    box.innerHTML = docs.map(ev => {
+      const futur = ev.date && ev.date >= today;
+      return `
+      <div class="item-row">
+        <div class="item-thumb">📅</div>
+        <div class="item-info">
+          <div class="item-title">${esc(ev.titre || 'Sans titre')}</div>
+          <div class="item-meta">
+            <span>📅 ${esc(ev.date || '')}</span>
+            <span>📍 ${esc(ev.lieu || '—')}</span>
+            <span class="badge ${futur ? 'badge-pub' : 'badge-draft'}">${futur ? '🗓️ À venir' : '⏳ Passé'}</span>
+          </div>
+        </div>
+        <div class="item-actions">
+          <button class="mini-btn" onclick="editEvent('${ev.id}')">✏️</button>
+          <button class="mini-btn del" onclick="deleteEvent('${ev.id}')">🗑️</button>
+        </div>
+      </div>`;
+    }).join('');
+  } catch (e) { box.innerHTML = '<div class="empty">Erreur : ' + esc(e.message) + '</div>'; }
+}
+
+document.getElementById('eventForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const data = {
+    titre: document.getElementById('evTitre').value.trim(),
+    date: document.getElementById('evDate').value,
+    lieu: document.getElementById('evLieu').value.trim(),
+    description: document.getElementById('evDesc').value.trim(),
+    imageUrl: document.getElementById('evImage').value.trim(),
+    publie: document.getElementById('evPublie').value === 'true',
+    updatedAt: Timestamp.now()
+  };
+  try {
+    if (editingEvent) {
+      await updateDoc(doc(db, 'evenements', editingEvent), data);
+      toast('✅ Événement mis à jour');
+    } else {
+      await addDoc(collection(db, 'evenements'), data);
+      toast('✅ Événement ajouté');
+    }
+    resetForm('event');
+    await loadEvents(); await refreshDashboard();
+  } catch (ex) { toast('❌ ' + ex.message, 'error'); }
+});
+
+window.editEvent = async (id) => {
+  const d = await getDoc(doc(db, 'evenements', id));
+  if (!d.exists()) return;
+  const v = d.data();
+  editingEvent = id;
+  document.getElementById('evId').value = id;
+  document.getElementById('evTitre').value = v.titre || '';
+  document.getElementById('evDate').value = v.date || '';
+  document.getElementById('evLieu').value = v.lieu || '';
+  document.getElementById('evDesc').value = v.description || '';
+  document.getElementById('evImage').value = v.imageUrl || '';
+  document.getElementById('evPublie').value = v.publie === false ? 'false' : 'true';
+  document.getElementById('evFormTitle').textContent = '✏️ Modifier l\'événement';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+window.deleteEvent = async (id) => {
+  if (!confirm('Supprimer cet événement ?')) return;
+  await deleteDoc(doc(db, 'evenements', id));
+  toast('🗑️ Supprimé'); await loadEvents(); await refreshDashboard();
+};
+
+/* ============================================================
+   SPONSORS
+   ============================================================ */
+let editingSponsor = null;
+
+async function loadSponsors() {
+  const box = document.getElementById('listSponsors');
+  box.innerHTML = '<div class="empty">Chargement...</div>';
+  try {
+    const snap = await getDocs(collection(db, 'sponsors'));
+    const docs = snap.docs.map(d => ({ id: d.id, ...d.data() }))
+      .sort((a, b) => (a.ordre || 999) - (b.ordre || 999));
+    if (!docs.length) { box.innerHTML = '<div class="empty">Aucun sponsor.</div>'; return; }
+    box.innerHTML = docs.map(s => `
+      <div class="item-row">
+        <div class="item-thumb">${s.logoUrl ? `<img src="${esc(s.logoUrl)}" onerror="this.style.display='none'"/>` : '🤝'}</div>
+        <div class="item-info">
+          <div class="item-title">${esc(s.nom || 'Sans nom')}</div>
+          <div class="item-meta">
+            <span class="badge ${s.actif !== false ? 'badge-pub' : 'badge-draft'}">${s.actif !== false ? '✅ Actif' : '🚫 Inactif'}</span>
+          </div>
+        </div>
+        <div class="item-actions">
+          <button class="mini-btn" onclick="editSponsor('${s.id}')">✏️</button>
+          <button class="mini-btn del" onclick="deleteSponsor('${s.id}')">🗑️</button>
+        </div>
+      </div>
+    `).join('');
+  } catch (e) { box.innerHTML = '<div class="empty">Erreur : ' + esc(e.message) + '</div>'; }
+}
+
+document.getElementById('sponsorForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const data = {
+    nom: document.getElementById('spNom').value.trim(),
+    url: document.getElementById('spUrl').value.trim(),
+    logoUrl: document.getElementById('spLogo').value.trim(),
+    description: document.getElementById('spDesc').value.trim(),
+    ordre: parseInt(document.getElementById('spOrdre').value, 10) || 100,
+    actif: document.getElementById('spActif').value === 'true',
+    updatedAt: Timestamp.now()
+  };
+  try {
+    if (editingSponsor) {
+      await updateDoc(doc(db, 'sponsors', editingSponsor), data);
+      toast('✅ Sponsor mis à jour');
+    } else {
+      await addDoc(collection(db, 'sponsors'), data);
+      toast('✅ Sponsor ajouté');
+    }
+    resetForm('sponsor');
+    await loadSponsors(); await refreshDashboard();
+  } catch (ex) { toast('❌ ' + ex.message, 'error'); }
+});
+
+window.editSponsor = async (id) => {
+  const d = await getDoc(doc(db, 'sponsors', id));
+  if (!d.exists()) return;
+  const s = d.data();
+  editingSponsor = id;
+  document.getElementById('spId').value = id;
+  document.getElementById('spNom').value = s.nom || '';
+  document.getElementById('spUrl').value = s.url || '';
+  document.getElementById('spLogo').value = s.logoUrl || '';
+  document.getElementById('spDesc').value = s.description || '';
+  document.getElementById('spOrdre').value = s.ordre || 100;
+  document.getElementById('spActif').value = s.actif === false ? 'false' : 'true';
+  document.getElementById('spFormTitle').textContent = '✏️ Modifier le sponsor';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+window.deleteSponsor = async (id) => {
+  if (!confirm('Supprimer ce sponsor ?')) return;
+  await deleteDoc(doc(db, 'sponsors', id));
+  toast('🗑️ Supprimé'); await loadSponsors(); await refreshDashboard();
+};
+
+/* ============================================================
+   HORS TERRAIN
+   ============================================================ */
+let editingHors = null;
+
+async function loadHorsTerrain() {
+  const box = document.getElementById('listHorsTerrain');
+  box.innerHTML = '<div class="empty">Chargement...</div>';
+  try {
+    const snap = await getDocs(collection(db, 'horsTerrain'));
+    const docs = snap.docs.map(d => ({ id: d.id, ...d.data() }))
+      .sort((a, b) => (a.ordre || 999) - (b.ordre || 999));
+    if (!docs.length) { box.innerHTML = '<div class="empty">Aucune entrée.</div>'; return; }
+    const labels = { formation: '🎓 Formation', experience: '💼 Expérience', projet: '🚀 Projet' };
+    box.innerHTML = docs.map(h => `
+      <div class="item-row">
+        <div class="item-thumb">${h.categorie === 'formation' ? '🎓' : h.categorie === 'experience' ? '💼' : '🚀'}</div>
+        <div class="item-info">
+          <div class="item-title">${esc(h.titre || 'Sans titre')}</div>
+          <div class="item-meta"><span>${labels[h.categorie] || h.categorie}</span><span>${esc(h.sousTitre || '')}</span></div>
+        </div>
+        <div class="item-actions">
+          <button class="mini-btn" onclick="editHors('${h.id}')">✏️</button>
+          <button class="mini-btn del" onclick="deleteHors('${h.id}')">🗑️</button>
+        </div>
+      </div>
+    `).join('');
+  } catch (e) { box.innerHTML = '<div class="empty">Erreur : ' + esc(e.message) + '</div>'; }
+}
+
+document.getElementById('horsTerrainForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const data = {
+    categorie: document.getElementById('htCat').value,
+    titre: document.getElementById('htTitre').value.trim(),
+    sousTitre: document.getElementById('htSous').value.trim(),
+    description: document.getElementById('htDesc').value.trim(),
+    ordre: parseInt(document.getElementById('htOrdre').value, 10) || 100,
+    updatedAt: Timestamp.now()
+  };
+  try {
+    if (editingHors) {
+      await updateDoc(doc(db, 'horsTerrain', editingHors), data);
+      toast('✅ Entrée mise à jour');
+    } else {
+      await addDoc(collection(db, 'horsTerrain'), data);
+      toast('✅ Entrée ajoutée');
+    }
+    resetForm('horsTerrain');
+    await loadHorsTerrain();
+  } catch (ex) { toast('❌ ' + ex.message, 'error'); }
+});
+
+window.editHors = async (id) => {
+  const d = await getDoc(doc(db, 'horsTerrain', id));
+  if (!d.exists()) return;
+  const h = d.data();
+  editingHors = id;
+  document.getElementById('htId').value = id;
+  document.getElementById('htCat').value = h.categorie || 'formation';
+  document.getElementById('htTitre').value = h.titre || '';
+  document.getElementById('htSous').value = h.sousTitre || '';
+  document.getElementById('htDesc').value = h.description || '';
+  document.getElementById('htOrdre').value = h.ordre || 100;
+  document.getElementById('htFormTitle').textContent = '✏️ Modifier l\'entrée';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+window.deleteHors = async (id) => {
+  if (!confirm('Supprimer cette entrée ?')) return;
+  await deleteDoc(doc(db, 'horsTerrain', id));
+  toast('🗑️ Supprimée'); await loadHorsTerrain();
+};
+
+/* ============================================================
+   PROFIL
+   ============================================================ */
+async function loadProfil() {
+  try {
+    const d = await getDoc(doc(db, 'profil', 'principal'));
+    if (!d.exists()) return;
+    const p = d.data();
+    ['nom','club','niveau','age','pied','taille','poids','sel','bio','email','whatsapp','tel','insta'].forEach(k => {
+      const map = { nom:'pNom', club:'pClub', niveau:'pNiveau', age:'pAge', pied:'pPied',
+                    taille:'pTaille', poids:'pPoids', sel:'pSel', bio:'pBio',
+                    email:'pEmail', whatsapp:'pWhatsapp', tel:'pTel', insta:'pInsta' };
+      const el = document.getElementById(map[k]);
+      if (el && p[k] !== undefined) el.value = p[k] || '';
+    });
+  } catch (e) { console.warn(e); }
+}
+
+document.getElementById('profilForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const data = {
+    nom: document.getElementById('pNom').value.trim(),
+    club: document.getElementById('pClub').value.trim(),
+    niveau: document.getElementById('pNiveau').value.trim(),
+    age: document.getElementById('pAge').value.trim(),
+    pied: document.getElementById('pPied').value.trim(),
+    taille: document.getElementById('pTaille').value.trim(),
+    poids: document.getElementById('pPoids').value.trim(),
+    selections: document.getElementById('pSel').value.trim(),
+    bio: document.getElementById('pBio').value.trim(),
+    email: document.getElementById('pEmail').value.trim(),
+    whatsapp: document.getElementById('pWhatsapp').value.trim(),
+    telephone: document.getElementById('pTel').value.trim(),
+    instagram: document.getElementById('pInsta').value.trim(),
+    updatedAt: Timestamp.now()
+  };
+  try {
+    await setDoc(doc(db, 'profil', 'principal'), data, { merge: true });
+    toast('✅ Profil enregistré');
+  } catch (ex) { toast('❌ ' + ex.message, 'error'); }
+});
+
+/* ============================================================
+   STATS
+   ============================================================ */
+let editingStats = null;
+
+async function loadStats() {
+  const box = document.getElementById('listStats');
+  box.innerHTML = '<div class="empty">Chargement...</div>';
+  try {
+    const snap = await getDocs(collection(db, 'statistiques'));
+    const docs = snap.docs.map(d => ({ id: d.id, ...d.data() }))
+      .sort((a, b) => (b.saison || '').localeCompare(a.saison || ''));
+    if (!docs.length) { box.innerHTML = '<div class="empty">Aucune saison.</div>'; return; }
+    box.innerHTML = docs.map(s => `
+      <div class="item-row">
+        <div class="item-thumb">📊</div>
+        <div class="item-info">
+          <div class="item-title">${esc(s.saison)} — ${esc(s.club || '—')}</div>
+          <div class="item-meta">
+            <span>⚽ ${s.matchs || 0} matchs</span>
+            <span>🧤 ${s.cleanSheets || 0} clean sheets</span>
+            <span>⏱️ ${s.minutes || 0} min</span>
+          </div>
+        </div>
+        <div class="item-actions">
+          <button class="mini-btn" onclick="editStats('${s.id}')">✏️</button>
+          <button class="mini-btn del" onclick="deleteStats('${s.id}')">🗑️</button>
+        </div>
+      </div>
+    `).join('');
+  } catch (e) { box.innerHTML = '<div class="empty">Erreur : ' + esc(e.message) + '</div>'; }
+}
+
+document.getElementById('statsForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const num = id => parseInt(document.getElementById(id).value, 10) || 0;
+  const data = {
+    saison: document.getElementById('stSaison').value.trim(),
+    club: document.getElementById('stClub').value.trim(),
+    niveau: document.getElementById('stNiveau').value.trim(),
+    matchs: num('stMatchs'),
+    titularisations: num('stTitul'),
+    minutes: num('stMinutes'),
+    butsEncaisses: num('stButs'),
+    cleanSheets: num('stClean'),
+    penaltiesArretes: num('stPen'),
+    cartons: num('stCartons'),
+    coupeDeFrance: num('stCoupe'),
+    equipeReserve: num('stReserve'),
+    updatedAt: Timestamp.now()
+  };
+  try {
+    if (editingStats) {
+      await updateDoc(doc(db, 'statistiques', editingStats), data);
+      toast('✅ Saison mise à jour');
+    } else {
+      await addDoc(collection(db, 'statistiques'), data);
+      toast('✅ Saison ajoutée');
+    }
+    resetForm('stats');
+    await loadStats();
+  } catch (ex) { toast('❌ ' + ex.message, 'error'); }
+});
+
+window.editStats = async (id) => {
+  const d = await getDoc(doc(db, 'statistiques', id));
+  if (!d.exists()) return;
+  const s = d.data();
+  editingStats = id;
+  document.getElementById('stId').value = id;
+  document.getElementById('stSaison').value = s.saison || '';
+  document.getElementById('stClub').value = s.club || '';
+  document.getElementById('stNiveau').value = s.niveau || '';
+  document.getElementById('stMatchs').value = s.matchs || 0;
+  document.getElementById('stTitul').value = s.titularisations || 0;
+  document.getElementById('stMinutes').value = s.minutes || 0;
+  document.getElementById('stButs').value = s.butsEncaisses || 0;
+  document.getElementById('stClean').value = s.cleanSheets || 0;
+  document.getElementById('stPen').value = s.penaltiesArretes || 0;
+  document.getElementById('stCartons').value = s.cartons || 0;
+  document.getElementById('stCoupe').value = s.coupeDeFrance || 0;
+  document.getElementById('stReserve').value = s.equipeReserve || 0;
+  document.getElementById('stFormTitle').textContent = '✏️ Modifier la saison';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+window.deleteStats = async (id) => {
+  if (!confirm('Supprimer cette saison ?')) return;
+  await deleteDoc(doc(db, 'statistiques', id));
+  toast('🗑️ Supprimée'); await loadStats();
+};
+
+/* ============================================================
+   MODERATION
+   ============================================================ */
+async function loadEngagement() {
+  const box = document.getElementById('listEngagement');
+  box.innerHTML = '<div class="empty">Chargement...</div>';
+  try {
+    const snap = await getDocs(collection(db, 'engagements'));
+    if (snap.empty) { box.innerHTML = '<div class="empty">Aucun engagement pour le moment. (Les likes/vues/commentaires apparaîtront ici.)</div>'; return; }
+    const items = await Promise.all(snap.docs.map(async d => {
+      const data = d.data();
+      const cs = await getDocs(collection(db, 'engagements', d.id, 'commentaires'));
+      return { id: d.id, ...data, nbReel: cs.size };
+    }));
+    box.innerHTML = items.map(e => `
+      <div class="item-row">
+        <div class="item-thumb">💬</div>
+        <div class="item-info">
+          <div class="item-title">${esc(e.type || '?')} — ${esc(e.itemId || '?')}</div>
+          <div class="item-meta">
+            <span>👁️ ${e.vues || 0}</span>
+            <span>❤️ ${e.likes || 0}</span>
+            <span>💬 ${e.nbReel}</span>
+          </div>
+        </div>
+        <div class="item-actions">
+          <button class="mini-btn" onclick="showComments('${e.id}')">👁️</button>
+        </div>
+      </div>
+    `).join('');
+  } catch (e) { box.innerHTML = '<div class="empty">Erreur : ' + esc(e.message) + '</div>'; }
+}
+
+window.showComments = async (engId) => {
+  try {
+    const snap = await getDocs(collection(db, 'engagements', engId, 'commentaires'));
+    if (snap.empty) { toast('Aucun commentaire à modérer', 'info'); return; }
+    const comments = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    const html = comments.map((c, i) =>
+      `#${i + 1} — ${c.auteur || 'Anonyme'}\n${c.texte}\n`
+    ).join('\n');
+    if (confirm('Commentaires :\n\n' + html + '\n\nCliquez sur OK puis choisissez le numéro à supprimer.')) {
+      const num = prompt('Numéro du commentaire à supprimer (1-' + comments.length + ') :');
+      const idx = parseInt(num, 10) - 1;
+      if (idx >= 0 && idx < comments.length) {
+        if (confirm('Supprimer ce commentaire ?')) {
+          const c = comments[idx];
+          await deleteDoc(doc(db, 'engagements', engId, 'commentaires', c.id));
+          await updateDoc(doc(db, 'engagements', engId), { nbCommentaires: Math.max(0, (comments.length - 1)) });
+          toast('🗑️ Commentaire supprimé');
+          await loadEngagement();
+        }
+      }
+    }
+  } catch (e) { toast('❌ ' + e.message, 'error'); }
+};
+
+/* ============================================================
+   CONFIG
+   ============================================================ */
+document.getElementById('configForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  try {
+    await setDoc(doc(db, 'config', 'site'), {
+      email: document.getElementById('cfgEmail').value.trim(),
+      whatsapp: document.getElementById('cfgWhatsapp').value.trim(),
+      canonical: document.getElementById('cfgCanonical').value.trim(),
       updatedAt: Timestamp.now()
-    };
-    try {
-      if (editingArticleId) {
-        await updateDoc(doc(db, "articles", editingArticleId), data);
-        toast("✅ Article mis à jour");
-      } else {
-        data.date = Timestamp.now();
-        data.publie = true;
-        await addDoc(collection(db, "articles"), data);
-        toast("✅ Article publié");
-      }
-      resetArticleForm();
-      loadArticles();
-    } catch (e) { toast("❌ " + e.message, true); }
-    finally { btn.disabled = false; btn.textContent = '💾 Publier'; }
-  };
+    }, { merge: true });
+    toast('✅ Config enregistrée');
+  } catch (ex) { toast('❌ ' + ex.message, 'error'); }
+});
 
-  window.resetArticleForm = () => {
-    document.getElementById('formArticle').reset();
+/* ============================================================
+   RESET FORMS
+   ============================================================ */
+window.resetForm = (type) => {
+  if (type === 'article') {
+    document.getElementById('articleForm').reset();
     document.getElementById('artId').value = '';
-    editingArticleId = null;
-    document.getElementById('artMode').textContent = 'CRÉATION';
-    document.getElementById('artBtnSave').textContent = '💾 Publier';
-  };
-
-  /* ---------- VIDEOS ---------- */
-  async function loadVideos() {
-    const list = document.getElementById('listVideos');
-    list.innerHTML = '<div class="empty">Chargement…</div>';
-    try {
-      const snap = await getDocs(query(collection(db, "videos"), orderBy("date", "desc")));
-      document.getElementById('stVid').textContent = snap.size;
-      if (snap.empty) { list.innerHTML = '<div class="empty">Aucune vidéo.</div>'; return; }
-      list.innerHTML = '';
-      snap.forEach(d => {
-        const v = d.data();
-        list.innerHTML += `
-          <div class="art-item">
-            <div class="art-thumb">🎬</div>
-            <div class="art-info">
-              <div class="art-title">${v.titre || 'Sans titre'}</div>
-              <div class="art-meta"><span>${v.categorie || ''}</span></div>
-            </div>
-            <div class="art-btns">
-              <button class="mini-btn del" onclick="delDoc('videos','${d.id}')">🗑️</button>
-            </div>
-          </div>`;
-      });
-    } catch (e) { list.innerHTML = '<div class="empty">Erreur : ' + e.message + '</div>'; }
+    editingArticle = null;
+    document.getElementById('artFormTitle').textContent = '✏️ Nouvel article';
   }
-
-  window.saveVideo = async (e) => {
-    e.preventDefault();
-    try {
-      await addDoc(collection(db, "videos"), {
-        titre: document.getElementById('vidTitre').value.trim(),
-        categorie: document.getElementById('vidCat').value,
-        url: document.getElementById('vidUrl').value.trim(),
-        date: Timestamp.now()
-      });
-      toast("✅ Vidéo ajoutée");
-      document.getElementById('formVideo').reset();
-      loadVideos();
-    } catch (e) { toast("❌ " + e.message, true); }
-  };
-
-  /* ---------- PHOTOS ---------- */
-  window.initPhotos = async () => {
-    if (!confirm("Générer les 30 photos (ph1.jpeg à ph30.jpeg) en 3 catégories ?")) return;
-    const btn = document.getElementById('btnInitPhotos');
-    btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Génération…';
-    const cats = ['Portrait', 'Match', 'Sélection'];
-    try {
-      const promises = [];
-      for (let i = 1; i <= 30; i++) {
-        const cat = cats[Math.floor((i - 1) / 10)];
-        const ref = doc(db, "galerie", `photo_${i}`);
-        promises.push(setDoc(ref, {
-          numero: i,
-          fichier: `ph${i}.jpeg`,
-          categorie: cat,
-          titre: `${cat} — Photo ${i}`,
-          date: Timestamp.now()
-        }));
-      }
-      await Promise.all(promises);
-      toast("✅ 30 photos générées");
-      loadPhotos();
-    } catch (e) { toast("❌ " + e.message, true); }
-    finally { btn.disabled = false; btn.textContent = '🚀 Générer les 30 photos'; }
-  };
-
-  async function loadPhotos() {
-    const grid = document.getElementById('photoPreview');
-    grid.innerHTML = '';
-    try {
-      const snap = await getDocs(collection(db, "galerie"));
-      document.getElementById('stPho').textContent = snap.size;
-      if (snap.empty) {
-        grid.innerHTML = '<div class="empty" style="grid-column:1/-1">Aucune photo générée.</div>';
-        return;
-      }
-      const sorted = snap.docs.map(d => ({id: d.id, ...d.data()})).sort((a,b) => a.numero - b.numero);
-      sorted.forEach(p => {
-        grid.innerHTML += `
-          <div class="photo-item" title="${p.titre}">
-            <span class="num">${p.numero}</span>
-            ${p.fichier}
-          </div>`;
-      });
-    } catch (e) { grid.innerHTML = '<div class="empty">Erreur : ' + e.message + '</div>'; }
+  if (type === 'video') {
+    document.getElementById('videoForm').reset();
+    document.getElementById('vidId').value = '';
+    editingVideo = null;
+    document.getElementById('vidFormTitle').textContent = '🎬 Nouvelle vidéo';
+    document.getElementById('vidPlatformHint').textContent = 'Plateforme détectée : —';
   }
-
-  /* ---------- PROFIL ---------- */
-  async function loadProfil() {
-    try {
-      const d = await getDoc(doc(db, "profil", "principal"));
-      if (!d.exists()) return;
-      const p = d.data();
-      document.getElementById('pNom').value = p.nom || '';
-      document.getElementById('pClub').value = p.club || '';
-      document.getElementById('pNiveau').value = p.niveau || '';
-      document.getElementById('pAge').value = p.age || '';
-      document.getElementById('pTaille').value = p.taille || '';
-      document.getElementById('pPoids').value = p.poids || '';
-      document.getElementById('pPied').value = p.pied || '';
-      document.getElementById('pSelections').value = p.selections || '';
-      document.getElementById('pBio').value = p.bio || '';
-    } catch (e) { console.warn(e); }
+  if (type === 'event') {
+    document.getElementById('eventForm').reset();
+    document.getElementById('evId').value = '';
+    editingEvent = null;
+    document.getElementById('evFormTitle').textContent = '📅 Nouvel événement';
   }
-
-  window.saveProfil = async (e) => {
-    e.preventDefault();
-    try {
-      await setDoc(doc(db, "profil", "principal"), {
-        nom: document.getElementById('pNom').value.trim(),
-        club: document.getElementById('pClub').value.trim(),
-        niveau: document.getElementById('pNiveau').value.trim(),
-        age: document.getElementById('pAge').value.trim(),
-        taille: document.getElementById('pTaille').value.trim(),
-        poids: document.getElementById('pPoids').value.trim(),
-        pied: document.getElementById('pPied').value.trim(),
-        selections: document.getElementById('pSelections').value.trim(),
-        bio: document.getElementById('pBio').value.trim(),
-        updatedAt: Timestamp.now()
-      }, { merge: true });
-      toast("✅ Profil enregistré");
-    } catch (e) { toast("❌ " + e.message, true); }
-  };
-
-  /* ---------- ENGAGEMENT (modération) ---------- */
-  async function loadEngagement() {
-    const list = document.getElementById('listEngagement');
-    list.innerHTML = '<div class="empty">Chargement…</div>';
-    try {
-      const snap = await getDocs(collection(db, "engagements"));
-      if (snap.empty) { list.innerHTML = '<div class="empty">Aucun engagement pour le moment.</div>'; return; }
-      list.innerHTML = '';
-      for (const d of snap.docs) {
-        const e = d.data();
-        const commentsSnap = await getDocs(collection(db, "engagements", d.id, "commentaires"));
-        const nb = commentsSnap.size;
-        list.innerHTML += `
-          <div class="art-item">
-            <div class="art-thumb">💬</div>
-            <div class="art-info">
-              <div class="art-title">${e.type || '?'} — ${e.itemId || '?'}</div>
-              <div class="art-meta">
-                <span>👁️ ${e.vues || 0}</span>
-                <span>❤️ ${e.likes || 0}</span>
-                <span>💬 ${nb}</span>
-              </div>
-            </div>
-            <div class="art-btns">
-              <button class="mini-btn" onclick="showComments('${d.id}')">👁️</button>
-            </div>
-          </div>`;
-      }
-    } catch (e) { list.innerHTML = '<div class="empty">Erreur : ' + e.message + '</div>'; }
+  if (type === 'sponsor') {
+    document.getElementById('sponsorForm').reset();
+    document.getElementById('spId').value = '';
+    editingSponsor = null;
+    document.getElementById('spFormTitle').textContent = '🤝 Nouveau sponsor';
+    document.getElementById('spOrdre').value = 100;
   }
+  if (type === 'horsTerrain') {
+    document.getElementById('horsTerrainForm').reset();
+    document.getElementById('htId').value = '';
+    editingHors = null;
+    document.getElementById('htFormTitle').textContent = '🎓 Nouvelle entrée';
+    document.getElementById('htOrdre').value = 100;
+  }
+  if (type === 'stats') {
+    document.getElementById('statsForm').reset();
+    document.getElementById('stId').value = '';
+    editingStats = null;
+    document.getElementById('stFormTitle').textContent = '📊 Nouvelle saison';
+  }
+};
 
-  window.showComments = async (engId) => {
-    try {
-      const snap = await getDocs(collection(db, "engagements", engId, "commentaires"));
-      if (snap.empty) { toast("Aucun commentaire", false); return; }
-      let html = '';
-      snap.forEach(c => {
-        const d = c.data();
-        html += `\n— ${d.auteur} : ${d.texte}`;
-      });
-      alert("Commentaires :\n" + html);
-    } catch (e) { toast("❌ " + e.message, true); }
-  };
-
-  /* ---------- DELETE ---------- */
-  window.delDoc = async (col, id) => {
-    if (!confirm("Supprimer définitivement ?")) return;
-    try {
-      await deleteDoc(doc(db, col, id));
-      toast("🗑️ Supprimé");
-      loadAll();
-    } catch (e) { toast("❌ " + e.message, true); }
-  };
+console.log('✅ admin.html chargé');
 </script>
 </body>
 </html>
