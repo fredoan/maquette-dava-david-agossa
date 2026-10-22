@@ -32,7 +32,7 @@ input,select,textarea{font-family:inherit}
 :focus-visible{outline:2px solid var(--or-vif);outline-offset:3px}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 
-/* LOGIN */
+/* ============ LOGIN ============ */
 #loginScreen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
 .login-box{width:100%;max-width:440px;background:linear-gradient(180deg,rgba(86,10,10,.55),rgba(26,0,0,.85));border:1px solid var(--border-fort);border-radius:8px;padding:40px 32px;box-shadow:0 30px 80px rgba(0,0,0,.6);position:relative;overflow:hidden}
 .login-box::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--or-fonce),var(--or-vif),var(--or-fonce))}
@@ -47,7 +47,7 @@ input,select,textarea{font-family:inherit}
 .login-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
 .login-error{display:none;text-align:center;color:#ff9c9c;background:rgba(185,28,28,.15);border-left:3px solid #ef4444;padding:.7rem 1rem;border-radius:3px;font-size:.8rem;margin-top:1rem}
 
-/* LAYOUT */
+/* ============ LAYOUT ============ */
 #adminScreen{display:none;min-height:100vh}
 .admin-top{background:rgba(26,0,0,.93);backdrop-filter:blur(20px);padding:1rem clamp(16px,3vw,32px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border);box-shadow:0 4px 30px rgba(0,0,0,.5)}
 .admin-brand{font-family:var(--f-d);font-size:clamp(1rem,2.4vw,1.3rem);font-weight:700;letter-spacing:.06em;background:linear-gradient(120deg,#fff 30%,var(--or-vif) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -74,12 +74,14 @@ input,select,textarea{font-family:inherit}
 .tab-pane.active{display:block;animation:fadeIn .3s}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
+/* ============ CARDS ============ */
 .card{background:linear-gradient(180deg,rgba(86,10,10,.35),rgba(26,0,0,.6));border:1px solid var(--border);border-radius:8px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.35);margin-bottom:1.5rem}
 .card-header{padding:1.1rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.6rem;background:rgba(26,0,0,.4)}
 .card-header h2{font-family:var(--f-d);font-size:1.1rem;font-weight:700;color:var(--or-clair);letter-spacing:.04em}
 .card-body{padding:1.5rem}
 @media(max-width:680px){.card-body{padding:1.1rem}}
 
+/* ============ FORMS ============ */
 .form-group{margin-bottom:1.1rem}
 .form-group label{display:block;font-family:var(--f-d);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--or-clair);margin-bottom:.5rem}
 .form-group input,.form-group select,.form-group textarea{width:100%;padding:.85rem 1rem;background:rgba(26,0,0,.6);border:1px solid var(--border);border-radius:4px;color:var(--texte);font-size:.9rem;outline:none;transition:all .3s;resize:vertical}
@@ -90,6 +92,33 @@ input,select,textarea{font-family:inherit}
 .form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}
 @media(max-width:680px){.form-row,.form-row-3{grid-template-columns:1fr}}
 
+/* ============ NOUVEAU : URL TOOLBAR ============ */
+.url-field{position:relative}
+.url-toolbar{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem;align-items:center}
+.url-toolbar-label{font-family:var(--f-m);font-size:.6rem;color:var(--texte-3);letter-spacing:.08em;text-transform:uppercase;margin-right:.3rem}
+.url-tool{display:inline-flex;align-items:center;gap:.35rem;padding:.4rem .7rem;border:1px solid var(--border);background:rgba(26,0,0,.6);color:var(--texte-2);border-radius:4px;font-family:var(--f-d);font-size:.6rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;transition:all .2s;cursor:pointer;text-decoration:none;line-height:1}
+.url-tool:hover{background:var(--or-clair);color:var(--fond-5);border-color:var(--or-clair);transform:translateY(-1px);box-shadow:0 4px 12px rgba(212,175,90,.25)}
+.url-tool.postimages:hover{background:#ff6b35;border-color:#ff6b35;color:#fff}
+.url-tool.imgbb:hover{background:#4cb7e4;border-color:#4cb7e4;color:#fff}
+.url-tool.cloudinary:hover{background:#3448c5;border-color:#3448c5;color:#fff}
+.url-tool.github:hover{background:#24292e;border-color:#24292e;color:#fff}
+.url-tool.youtube:hover{background:#ff0000;border-color:#ff0000;color:#fff}
+.url-tool.drive:hover{background:#1a73e8;border-color:#1a73e8;color:#fff}
+.url-tool.vimeo:hover{background:#1ab7ea;border-color:#1ab7ea;color:#fff}
+.url-tool.dailymotion:hover{background:#0066dc;border-color:#0066dc;color:#fff}
+.url-tool.preview:hover{background:#22c55e;border-color:#22c55e;color:#fff}
+.url-tool svg{width:12px;height:12px;fill:currentColor}
+
+.url-preview{margin-top:.6rem;padding:.6rem;background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:4px;display:none;align-items:center;gap:.8rem}
+.url-preview.show{display:flex}
+.url-preview img{width:80px;height:60px;object-fit:cover;border-radius:3px;border:1px solid var(--border);flex-shrink:0}
+.url-preview .preview-info{flex:1;min-width:0;font-size:.75rem;color:var(--texte-3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.url-preview .preview-info b{color:var(--or-clair);font-family:var(--f-m);font-size:.65rem;display:block;letter-spacing:.08em;text-transform:uppercase}
+.url-preview.error img{display:none}
+.url-preview.error::before{content:'⚠️';font-size:1.6rem;color:#f59e0b;flex-shrink:0}
+.url-preview.error .preview-info b{color:#fcd34d}
+
+/* ============ ACTIONS ============ */
 .actions{display:flex;gap:.8rem;margin-top:1.5rem;flex-wrap:wrap}
 .btn-save{padding:.9rem 1.8rem;background:var(--or-clair);color:var(--fond-5);border-radius:4px;font-family:var(--f-d);font-weight:700;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;transition:all .3s;box-shadow:0 4px 20px rgba(212,175,90,.3);flex:0 1 auto;cursor:pointer}
 .btn-save:hover:not(:disabled){background:var(--or-vif);transform:translateY(-2px);box-shadow:0 10px 30px rgba(212,175,90,.45)}
@@ -99,12 +128,14 @@ input,select,textarea{font-family:inherit}
 .btn-ghost{padding:.6rem 1.2rem;background:rgba(26,0,0,.5);color:var(--texte-2);border:1px solid var(--border);border-radius:4px;font-family:var(--f-d);font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;transition:all .3s;cursor:pointer}
 .btn-ghost:hover{border-color:var(--or-clair);color:var(--or-clair)}
 
+/* ============ DASHBOARD ============ */
 .stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.8rem;margin-bottom:1rem}
 .stat-box{background:rgba(26,0,0,.5);border:1px solid var(--border);padding:1.1rem .8rem;text-align:center;border-radius:6px;transition:all .3s}
 .stat-box:hover{border-color:var(--or-clair);background:rgba(86,10,10,.55)}
 .stat-num{font-family:var(--f-d);font-size:clamp(1.4rem,3vw,1.9rem);font-weight:700;color:var(--or-clair);display:block;line-height:1;text-shadow:0 0 20px rgba(212,175,90,.35)}
 .stat-lbl{font-family:var(--f-m);font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--texte-3);font-weight:700;display:block;margin-top:.5rem}
 
+/* ============ LISTS ============ */
 .item-list{display:flex;flex-direction:column;gap:.7rem}
 .item-row{padding:.9rem 1rem;border:1px solid var(--border);background:rgba(26,0,0,.5);border-radius:6px;display:flex;align-items:center;gap:.85rem;transition:all .25s}
 .item-row:hover{border-color:var(--or-clair);background:rgba(86,10,10,.55);transform:translateX(2px)}
@@ -127,11 +158,13 @@ input,select,textarea{font-family:inherit}
 .spinner{display:inline-block;width:14px;height:14px;border:2px solid currentColor;border-top-color:transparent;border-radius:50%;animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
+/* ============ PHOTO GRID ============ */
 .photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:6px;margin-top:1rem}
 .photo-item{aspect-ratio:1;border:1px solid var(--border);border-radius:4px;overflow:hidden;background:var(--fond-3);display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--f-m);font-size:.55rem;color:var(--texte-3);text-align:center;padding:4px;position:relative}
 .photo-item .num{position:absolute;top:2px;left:4px;font-weight:700;color:var(--or-clair);background:rgba(0,0,0,.6);padding:1px 4px;border-radius:2px;font-size:.5rem}
 .photo-item .cat{position:absolute;bottom:2px;right:4px;font-size:.45rem;color:var(--or-clair);background:rgba(0,0,0,.6);padding:1px 4px;border-radius:2px}
 
+/* ============ TOAST ============ */
 #toastContainer{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:.6rem;max-width:calc(100vw - 48px);pointer-events:none}
 .toast{padding:.9rem 1.3rem;border-radius:6px;font-family:var(--f-d);font-size:.78rem;font-weight:700;letter-spacing:.02em;color:#fff;box-shadow:0 12px 40px rgba(0,0,0,.5);animation:slideIn .35s;pointer-events:auto;min-width:220px;border-left:4px solid}
 .toast.success{background:#14532d;border-color:#22c55e}
@@ -198,7 +231,7 @@ input,select,textarea{font-family:inherit}
 
       <!-- ============ DASHBOARD ============ -->
       <div class="tab-pane active" id="tab-dashboard">
-        <div class="alert">💡 <span><strong>Bienvenue !</strong> Toutes les collections Firestore sont créées automatiquement. Les 30 photos seront initialisées à la première connexion.</span></div>
+        <div class="alert">💡 <span><strong>Bienvenue !</strong> Les 30 photos sont initialisées automatiquement à la première connexion.</span></div>
         <div class="card">
           <div class="card-header"><h2>📊 Vue d'ensemble</h2><button class="btn-ghost" onclick="refreshDashboard()">🔄 Rafraîchir</button></div>
           <div class="card-body">
@@ -232,7 +265,6 @@ input,select,textarea{font-family:inherit}
                 <div class="form-group">
                   <label>Slug (URL)</label>
                   <input type="text" id="artSlug" placeholder="auto-généré si vide"/>
-                  <small>→ /article.html?id=...</small>
                 </div>
               </div>
               <div class="form-row">
@@ -253,10 +285,23 @@ input,select,textarea{font-family:inherit}
                   </select>
                 </div>
               </div>
-              <div class="form-group">
-                <label>Image principale (URL)</label>
+
+              <!-- ⭐ IMAGE AVEC BOUTONS D'HÉBERGEMENT -->
+              <div class="form-group url-field">
+                <label>Image principale</label>
                 <input type="url" id="artImage" placeholder="https://..."/>
+                <div class="url-toolbar">
+                  <span class="url-toolbar-label">📸 Héberger une image :</span>
+                  <a class="url-tool postimages" href="https://postimages.org" target="_blank" rel="noopener">📤 PostImages</a>
+                  <a class="url-tool imgbb" href="https://imgbb.com" target="_blank" rel="noopener">🖼️ ImgBB</a>
+                  <a class="url-tool cloudinary" href="https://console.cloudinary.com" target="_blank" rel="noopener">☁️ Cloudinary</a>
+                  <a class="url-tool github" href="https://github.com" target="_blank" rel="noopener">💻 GitHub</a>
+                  <button type="button" class="url-tool preview" onclick="previewUrl('artImage','artImagePreview')">👁️ Aperçu</button>
+                </div>
+                <div class="url-preview" id="artImagePreview"></div>
+                <small>Collez le lien direct de l'image (finissant par .jpg, .jpeg, .png ou .webp).</small>
               </div>
+
               <div class="form-group">
                 <label>Résumé (extrait)</label>
                 <textarea id="artResume" rows="2" placeholder="Résumé affiché dans les listes"></textarea>
@@ -265,13 +310,15 @@ input,select,textarea{font-family:inherit}
                 <label>Contenu *</label>
                 <textarea id="artContenu" rows="8" required placeholder="Rédigez votre article ici..."></textarea>
               </div>
+
               <div class="divider"></div>
               <p style="font-family:var(--f-d);font-size:.75rem;color:var(--or-clair);margin-bottom:1rem;text-transform:uppercase;letter-spacing:.14em">SEO</p>
               <div class="form-row">
                 <div class="form-group"><label>Titre SEO</label><input type="text" id="artSeoTitre" placeholder="Titre pour Google"/></div>
                 <div class="form-group"><label>Mots-clés</label><input type="text" id="artKeywords" placeholder="dava, agossa, bourges..."/></div>
               </div>
-              <div class="form-group"><label>Description SEO</label><textarea id="artSeoDesc" rows="2" placeholder="Description meta (160 car.)"></textarea></div>
+              <div class="form-group"><label>Description SEO</label><textarea id="artSeoDesc" rows="2" placeholder="Description meta (160 caractères)"></textarea></div>
+
               <div class="actions">
                 <button type="submit" class="btn-save" id="artBtnSave">💾 Enregistrer</button>
                 <button type="button" class="btn-reset" onclick="resetForm('article')">🗑️ Effacer</button>
@@ -287,7 +334,7 @@ input,select,textarea{font-family:inherit}
 
       <!-- ============ VIDEOS ============ -->
       <div class="tab-pane" id="tab-videos">
-        <div class="alert">💡 <span><strong>Vidéos</strong> : collez un lien YouTube, Drive ou .mp4. La vignette YouTube est générée automatiquement.</span></div>
+        <div class="alert">💡 <span><strong>Vidéos</strong> : collez un lien YouTube, Drive ou .mp4. La vignette YouTube est détectée automatiquement.</span></div>
         <div class="card">
           <div class="card-header"><h2 id="vidFormTitle">🎬 Nouvelle vidéo</h2></div>
           <div class="card-body">
@@ -316,19 +363,45 @@ input,select,textarea{font-family:inherit}
                   </select>
                 </div>
               </div>
-              <div class="form-group">
+
+              <!-- ⭐ URL VIDÉO AVEC BOUTONS -->
+              <div class="form-group url-field">
                 <label>Lien vidéo (YouTube, Drive, .mp4) *</label>
-                <input type="url" id="vidUrl" required placeholder="https://www.youtube.com/watch?v=..." oninput="detectPlatform('vid')"/>
+                <input type="url" id="vidUrl" required placeholder="https://www.youtube.com/watch?v=..." oninput="onVideoUrlChange()"/>
+                <div class="url-toolbar">
+                  <span class="url-toolbar-label">🎬 Ouvrir la plateforme :</span>
+                  <a class="url-tool youtube" href="https://studio.youtube.com" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31.4 31.4 0 0 0 0 12a31.4 31.4 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.4 31.4 0 0 0 24 12a31.4 31.4 0 0 0-.5-5.8zM9.5 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+                    YouTube
+                  </a>
+                  <a class="url-tool drive" href="https://drive.google.com" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24"><path d="M8.6 3.4L0 17.3l3.4 5.9L12 9.3zM15.4 3.4h-6.8l8.5 14.7h6.9zM22.6 17.3h-6.9L12.3 23.2h6.8z"/></svg>
+                    Google Drive
+                  </a>
+                  <a class="url-tool vimeo" href="https://vimeo.com" target="_blank" rel="noopener">🎬 Vimeo</a>
+                  <a class="url-tool dailymotion" href="https://www.dailymotion.com" target="_blank" rel="noopener">🎥 Dailymotion</a>
+                  <button type="button" class="url-tool preview" onclick="onVideoUrlChange(true)">👁️ Aperçu</button>
+                </div>
+                <div class="url-preview" id="vidPreview"></div>
                 <small id="vidPlatformHint">Plateforme détectée : —</small>
               </div>
+
               <div class="form-group">
                 <label>Description</label>
-                <textarea id="vidDesc" rows="2"></textarea>
+                <textarea id="vidDesc" rows="2" placeholder="Description de la vidéo"></textarea>
               </div>
-              <div class="form-group">
+
+              <div class="form-group url-field">
                 <label>Vignette personnalisée (optionnel)</label>
-                <input type="url" id="vidVignette" placeholder="Laisser vide = auto YouTube"/>
+                <input type="url" id="vidVignette" placeholder="Laisser vide = vignette YouTube auto"/>
+                <div class="url-toolbar">
+                  <span class="url-toolbar-label">📸 Héberger une image :</span>
+                  <a class="url-tool postimages" href="https://postimages.org" target="_blank" rel="noopener">📤 PostImages</a>
+                  <a class="url-tool imgbb" href="https://imgbb.com" target="_blank" rel="noopener">🖼️ ImgBB</a>
+                  <a class="url-tool cloudinary" href="https://console.cloudinary.com" target="_blank" rel="noopener">☁️ Cloudinary</a>
+                </div>
               </div>
+
               <div class="actions">
                 <button type="submit" class="btn-save" id="vidBtnSave">💾 Enregistrer</button>
                 <button type="button" class="btn-reset" onclick="resetForm('video')">🗑️ Effacer</button>
@@ -344,7 +417,7 @@ input,select,textarea{font-family:inherit}
 
       <!-- ============ PHOTOS ============ -->
       <div class="tab-pane" id="tab-photos">
-        <div class="alert">📸 <span><strong>30 photos</strong> : ph1.jpeg à ph30.jpeg réparties en 3 catégories de 10. Initialisées automatiquement à la première connexion.</span></div>
+        <div class="alert">📸 <span><strong>30 photos</strong> : ph1.jpeg à ph30.jpeg, 3 catégories de 10. Initialisées automatiquement.</span></div>
         <div class="card">
           <div class="card-header"><h2>🖼️ Galerie</h2><button class="btn-ghost" onclick="initPhotos(true)">🚀 (Re)générer les 30</button></div>
           <div class="card-body">
@@ -352,7 +425,7 @@ input,select,textarea{font-family:inherit}
           </div>
         </div>
         <div class="card">
-          <div class="card-header"><h2>➕ Ajouter une photo externe (URL)</h2></div>
+          <div class="card-header"><h2>➕ Ajouter une photo externe</h2></div>
           <div class="card-body">
             <form id="photoForm">
               <div class="form-row">
@@ -366,8 +439,20 @@ input,select,textarea{font-family:inherit}
                   </select>
                 </div>
               </div>
-              <div class="form-group"><label>URL image *</label><input type="url" id="phUrl" required placeholder="https://..."/></div>
-              <div class="form-group"><label>Texte alternatif (SEO)</label><input type="text" id="phAlt" placeholder="Description pour Google"/></div>
+              <div class="form-group url-field">
+                <label>URL image *</label>
+                <input type="url" id="phUrl" required placeholder="https://..."/>
+                <div class="url-toolbar">
+                  <span class="url-toolbar-label">📸 Héberger une image :</span>
+                  <a class="url-tool postimages" href="https://postimages.org" target="_blank" rel="noopener">📤 PostImages</a>
+                  <a class="url-tool imgbb" href="https://imgbb.com" target="_blank" rel="noopener">🖼️ ImgBB</a>
+                  <a class="url-tool cloudinary" href="https://console.cloudinary.com" target="_blank" rel="noopener">☁️ Cloudinary</a>
+                  <a class="url-tool github" href="https://github.com" target="_blank" rel="noopener">💻 GitHub</a>
+                  <button type="button" class="url-tool preview" onclick="previewUrl('phUrl','phPreview')">👁️ Aperçu</button>
+                </div>
+                <div class="url-preview" id="phPreview"></div>
+              </div>
+              <div class="form-group"><label>Texte alternatif (SEO)</label><input type="text" id="phAlt" placeholder="Description pour Google et accessibilité"/></div>
               <div class="actions"><button type="submit" class="btn-save">💾 Ajouter</button></div>
             </form>
           </div>
@@ -392,7 +477,20 @@ input,select,textarea{font-family:inherit}
                 </div>
               </div>
               <div class="form-group"><label>Description</label><textarea id="evDesc" rows="3"></textarea></div>
-              <div class="form-group"><label>Image (URL)</label><input type="url" id="evImage"/></div>
+
+              <div class="form-group url-field">
+                <label>Image</label>
+                <input type="url" id="evImage" placeholder="https://..."/>
+                <div class="url-toolbar">
+                  <span class="url-toolbar-label">📸 Héberger une image :</span>
+                  <a class="url-tool postimages" href="https://postimages.org" target="_blank" rel="noopener">📤 PostImages</a>
+                  <a class="url-tool imgbb" href="https://imgbb.com" target="_blank" rel="noopener">🖼️ ImgBB</a>
+                  <a class="url-tool cloudinary" href="https://console.cloudinary.com" target="_blank" rel="noopener">☁️ Cloudinary</a>
+                  <button type="button" class="url-tool preview" onclick="previewUrl('evImage','evPreview')">👁️ Aperçu</button>
+                </div>
+                <div class="url-preview" id="evPreview"></div>
+              </div>
+
               <div class="actions">
                 <button type="submit" class="btn-save" id="evBtnSave">💾 Enregistrer</button>
                 <button type="button" class="btn-reset" onclick="resetForm('event')">🗑️ Effacer</button>
@@ -417,7 +515,18 @@ input,select,textarea{font-family:inherit}
                 <div class="form-group"><label>Nom *</label><input type="text" id="spNom" required/></div>
                 <div class="form-group"><label>Site web</label><input type="url" id="spUrl"/></div>
               </div>
-              <div class="form-group"><label>Logo (URL)</label><input type="url" id="spLogo"/></div>
+              <div class="form-group url-field">
+                <label>Logo</label>
+                <input type="url" id="spLogo" placeholder="https://..."/>
+                <div class="url-toolbar">
+                  <span class="url-toolbar-label">📸 Héberger un logo :</span>
+                  <a class="url-tool postimages" href="https://postimages.org" target="_blank" rel="noopener">📤 PostImages</a>
+                  <a class="url-tool imgbb" href="https://imgbb.com" target="_blank" rel="noopener">🖼️ ImgBB</a>
+                  <a class="url-tool cloudinary" href="https://console.cloudinary.com" target="_blank" rel="noopener">☁️ Cloudinary</a>
+                  <button type="button" class="url-tool preview" onclick="previewUrl('spLogo','spPreview')">👁️ Aperçu</button>
+                </div>
+                <div class="url-preview" id="spPreview"></div>
+              </div>
               <div class="form-group"><label>Description</label><textarea id="spDesc" rows="2"></textarea></div>
               <div class="form-row">
                 <div class="form-group"><label>Ordre</label><input type="number" id="spOrdre" value="100"/></div>
@@ -551,7 +660,7 @@ input,select,textarea{font-family:inherit}
 
       <!-- ============ MODERATION ============ -->
       <div class="tab-pane" id="tab-moderation">
-        <div class="alert">💬 <span><strong>Modération</strong> : tous les engagements (vues, likes, commentaires). Cliquez sur 👁️ pour voir et supprimer les commentaires.</span></div>
+        <div class="alert">💬 <span><strong>Modération</strong> : vues, likes et commentaires. Cliquez sur 👁️ pour modérer.</span></div>
         <div class="card">
           <div class="card-header"><h2>💬 Engagements</h2><button class="btn-ghost" onclick="loadEngagement()">🔄 Actualiser</button></div>
           <div class="card-body"><div class="item-list" id="listEngagement"><div class="empty">Chargement...</div></div></div>
@@ -620,25 +729,86 @@ function fmtDate(ts) {
   return d.toLocaleDateString('fr-FR');
 }
 
+/* ============================================================
+   ⭐ APERÇU URL (images)
+   ============================================================ */
+window.previewUrl = function(inputId, previewId) {
+  const input = document.getElementById(inputId);
+  const preview = document.getElementById(previewId);
+  if (!input || !preview) return;
+  const url = input.value.trim();
+  if (!url) {
+    preview.classList.remove('show', 'error');
+    preview.innerHTML = '';
+    return;
+  }
+  preview.classList.add('show');
+  preview.classList.remove('error');
+  preview.innerHTML = `
+    <img src="${esc(url)}" alt="Aperçu" onerror="this.parentElement.classList.add('error'); this.parentElement.querySelector('.preview-info b').textContent = 'Image introuvable'"/>
+    <div class="preview-info">
+      <b>✅ Aperçu de l'image</b>
+      <span title="${esc(url)}">${esc(url)}</span>
+    </div>
+  `;
+};
+
+/* ============================================================
+   ⭐ DÉTECTION VIDÉO + VIGNETTE AUTO
+   ============================================================ */
 function ytThumb(url) {
   if (!url) return '';
   const m = url.match(/(?:embed\/|watch\?v=|youtu\.be\/|shorts\/)([^?&/]+)/);
   return m ? `https://img.youtube.com/vi/${m[1]}/hqdefault.jpg` : '';
 }
 
-function detectPlatform(prefix) {
-  const input = document.getElementById(prefix + 'Url');
-  const hint = document.getElementById(prefix + 'PlatformHint');
+window.onVideoUrlChange = function(forceShow) {
+  const input = document.getElementById('vidUrl');
+  const hint = document.getElementById('vidPlatformHint');
+  const preview = document.getElementById('vidPreview');
   if (!input || !hint) return;
-  const url = input.value.toLowerCase();
+  const url = input.value.trim().toLowerCase();
   let name = 'Inconnu';
-  if (url.includes('youtube.com') || url.includes('youtu.be')) name = '▶️ YouTube';
-  else if (url.includes('drive.google.com')) name = '📁 Google Drive';
-  else if (url.match(/\.(mp4|webm|mov)(\?|$)/)) name = '🎥 Vidéo directe';
-  else if (url.includes('vimeo.com')) name = '🎬 Vimeo';
-  else if (url.includes('dailymotion.com')) name = '🎥 Dailymotion';
+  let thumb = '';
+  if (url.includes('youtube.com') || url.includes('youtu.be')) {
+    name = '▶️ YouTube';
+    thumb = ytThumb(input.value);
+  } else if (url.includes('drive.google.com')) {
+    name = '📁 Google Drive';
+    const m = input.value.match(/\/d\/([^/]+)/);
+    if (m) thumb = `https://drive.google.com/thumbnail?id=${m[1]}&sz=w400`;
+  } else if (url.includes('vimeo.com')) {
+    name = '🎬 Vimeo';
+  } else if (url.includes('dailymotion.com')) {
+    name = '🎥 Dailymotion';
+  } else if (url.match(/\.(mp4|webm|mov)(\?|$)/)) {
+    name = '🎥 Vidéo directe';
+  }
   hint.textContent = 'Plateforme détectée : ' + (url ? name : '—');
-}
+
+  if (!url) { preview.classList.remove('show', 'error'); preview.innerHTML = ''; return; }
+  if (forceShow || thumb) {
+    preview.classList.add('show');
+    if (thumb) {
+      preview.classList.remove('error');
+      preview.innerHTML = `
+        <img src="${esc(thumb)}" alt="Vignette" onerror="this.parentElement.classList.add('error'); this.parentElement.querySelector('.preview-info b').textContent = 'Vignette non disponible'"/>
+        <div class="preview-info">
+          <b>${name} — vignette détectée</b>
+          <span>${esc(input.value)}</span>
+        </div>
+      `;
+    } else {
+      preview.classList.remove('error');
+      preview.innerHTML = `
+        <div class="preview-info" style="text-align:center;padding:.6rem">
+          <b>${name}</b>
+          <span>Vignette non détectée automatiquement</span>
+        </div>
+      `;
+    }
+  }
+};
 
 /* ============================================================
    AUTH
@@ -838,6 +1008,7 @@ window.editArticle = async (id) => {
     document.getElementById('artKeywords').value = a.keywords || '';
     document.getElementById('artSeoDesc').value = a.seoDescription || '';
     document.getElementById('artFormTitle').textContent = '✏️ Modifier l\'article';
+    previewUrl('artImage', 'artImagePreview');
     window.scrollTo({ top: 0, behavior: 'smooth' });
     toast('✏️ Mode modification', 'info');
   } catch (e) { toast('❌ ' + e.message, 'error'); }
@@ -933,7 +1104,7 @@ window.editVideo = async (id) => {
   document.getElementById('vidVignette').value = v.vignetteUrl || '';
   document.getElementById('vidPublie').value = v.publie === false ? 'false' : 'true';
   document.getElementById('vidFormTitle').textContent = '✏️ Modifier la vidéo';
-  detectPlatform('vid');
+  onVideoUrlChange();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
@@ -1019,6 +1190,8 @@ document.getElementById('photoForm').addEventListener('submit', async (e) => {
     });
     toast('✅ Photo ajoutée');
     document.getElementById('photoForm').reset();
+    document.getElementById('phPreview').classList.remove('show', 'error');
+    document.getElementById('phPreview').innerHTML = '';
     await loadPhotos(); await refreshDashboard();
   } catch (ex) { toast('❌ ' + ex.message, 'error'); }
 });
@@ -1102,6 +1275,7 @@ window.editEvent = async (id) => {
   document.getElementById('evImage').value = v.imageUrl || '';
   document.getElementById('evPublie').value = v.publie === false ? 'false' : 'true';
   document.getElementById('evFormTitle').textContent = '✏️ Modifier l\'événement';
+  previewUrl('evImage', 'evPreview');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
@@ -1179,6 +1353,7 @@ window.editSponsor = async (id) => {
   document.getElementById('spOrdre').value = s.ordre || 100;
   document.getElementById('spActif').value = s.actif === false ? 'false' : 'true';
   document.getElementById('spFormTitle').textContent = '✏️ Modifier le sponsor';
+  previewUrl('spLogo', 'spPreview');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
@@ -1270,13 +1445,13 @@ async function loadProfil() {
     const d = await getDoc(doc(db, 'profil', 'principal'));
     if (!d.exists()) return;
     const p = d.data();
-    ['nom','club','niveau','age','pied','taille','poids','sel','bio','email','whatsapp','tel','insta'].forEach(k => {
-      const map = { nom:'pNom', club:'pClub', niveau:'pNiveau', age:'pAge', pied:'pPied',
-                    taille:'pTaille', poids:'pPoids', sel:'pSel', bio:'pBio',
-                    email:'pEmail', whatsapp:'pWhatsapp', tel:'pTel', insta:'pInsta' };
+    const map = { nom:'pNom', club:'pClub', niveau:'pNiveau', age:'pAge', pied:'pPied',
+                  taille:'pTaille', poids:'pPoids', selections:'pSel', bio:'pBio',
+                  email:'pEmail', whatsapp:'pWhatsapp', telephone:'pTel', instagram:'pInsta' };
+    for (const k in map) {
       const el = document.getElementById(map[k]);
       if (el && p[k] !== undefined) el.value = p[k] || '';
-    });
+    }
   } catch (e) { console.warn(e); }
 }
 
@@ -1404,7 +1579,7 @@ async function loadEngagement() {
   box.innerHTML = '<div class="empty">Chargement...</div>';
   try {
     const snap = await getDocs(collection(db, 'engagements'));
-    if (snap.empty) { box.innerHTML = '<div class="empty">Aucun engagement pour le moment. (Les likes/vues/commentaires apparaîtront ici.)</div>'; return; }
+    if (snap.empty) { box.innerHTML = '<div class="empty">Aucun engagement pour le moment.</div>'; return; }
     const items = await Promise.all(snap.docs.map(async d => {
       const data = d.data();
       const cs = await getDocs(collection(db, 'engagements', d.id, 'commentaires'));
@@ -1478,6 +1653,8 @@ window.resetForm = (type) => {
     document.getElementById('artId').value = '';
     editingArticle = null;
     document.getElementById('artFormTitle').textContent = '✏️ Nouvel article';
+    document.getElementById('artImagePreview').classList.remove('show', 'error');
+    document.getElementById('artImagePreview').innerHTML = '';
   }
   if (type === 'video') {
     document.getElementById('videoForm').reset();
@@ -1485,12 +1662,16 @@ window.resetForm = (type) => {
     editingVideo = null;
     document.getElementById('vidFormTitle').textContent = '🎬 Nouvelle vidéo';
     document.getElementById('vidPlatformHint').textContent = 'Plateforme détectée : —';
+    document.getElementById('vidPreview').classList.remove('show', 'error');
+    document.getElementById('vidPreview').innerHTML = '';
   }
   if (type === 'event') {
     document.getElementById('eventForm').reset();
     document.getElementById('evId').value = '';
     editingEvent = null;
     document.getElementById('evFormTitle').textContent = '📅 Nouvel événement';
+    document.getElementById('evPreview').classList.remove('show', 'error');
+    document.getElementById('evPreview').innerHTML = '';
   }
   if (type === 'sponsor') {
     document.getElementById('sponsorForm').reset();
@@ -1498,6 +1679,8 @@ window.resetForm = (type) => {
     editingSponsor = null;
     document.getElementById('spFormTitle').textContent = '🤝 Nouveau sponsor';
     document.getElementById('spOrdre').value = 100;
+    document.getElementById('spPreview').classList.remove('show', 'error');
+    document.getElementById('spPreview').innerHTML = '';
   }
   if (type === 'horsTerrain') {
     document.getElementById('horsTerrainForm').reset();
@@ -1514,7 +1697,7 @@ window.resetForm = (type) => {
   }
 };
 
-console.log('✅ admin.html chargé');
+console.log('✅ admin.html chargé — version complète avec boutons d\'hébergement');
 </script>
 </body>
 </html>
