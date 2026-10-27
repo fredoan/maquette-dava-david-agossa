@@ -81,13 +81,13 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 @media(max-width:820px){.stats-summary{grid-template-columns:repeat(2,1fr)}}
 
 .table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:8px;background:rgba(26,0,0,.5)}
-table{width:100%;border-collapse:collapse;min-width:720px}
+table{width:100%;border-collapse:collapse;min-width:1000px;}
 thead{background:rgba(86,10,10,.6)}
 th{padding:1rem .8rem;font-family:var(--f-d);font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--or-clair);text-align:left;border-bottom:1px solid var(--border);white-space:nowrap}
 td{padding:.85rem .8rem;font-size:.88rem;color:var(--texte-2);border-bottom:1px solid rgba(212,175,90,.1);white-space:nowrap}
 tbody tr:hover{background:rgba(86,10,10,.3)}
 tbody tr:last-child td{border-bottom:none}
-td.club{font-family:var(--f-d);font-weight:700;color:var(--texte)}
+td.club{font-family:var(--f-d);font-weight:700;color:var(--texte);display:flex;align-items:center;gap:.4rem;}
 td.num{font-family:var(--f-m);font-weight:700;color:var(--or-clair);text-align:center}
 th.center{text-align:center}
 
@@ -207,7 +207,7 @@ const CHAT_ANS = {
 function renderChat(){ const opts = document.getElementById('chatOptions'); opts.innerHTML = CHAT_OPTS[currentLang].map(o=>`<button class="chat-opt" data-k="${o.k}">${o.l}</button>`).join(''); opts.querySelectorAll('.chat-opt').forEach(b=>b.addEventListener('click', ()=> askChat(b.dataset.k))); }
 function addMsg(text, sender){ const body = document.getElementById('chatBody'); const div = document.createElement('div'); div.className = 'chat-msg ' + sender; div.textContent = text; body.appendChild(div); body.scrollTop = body.scrollHeight; }
 function askChat(key){ addMsg(CHAT_ANS[key][currentLang], 'bot'); }
-function setLang(lang){ currentLang = lang; localStorage.setItem('lang', lang); document.documentElement.lang = lang; document.querySelectorAll('[data-fr]').forEach(el=>{ const t = el.getAttribute('data-' + lang); if (t) el.textContent = t; }); document.querySelectorAll('.lang-toggle button').forEach(b=>b.classList.toggle('active', b.dataset.lang === lang)); renderChat(); }
+function setLang(lang){ currentLang = lang; localStorage.setItem('lang', lang); document.documentElement.lang = lang; document.querySelectorAll('[data-fr]').forEach(el=>{ const t = el.getAttribute('data-' + lang); if (t) el.textContent = t; }); document.querySelectorAll('.lang-toggle button').forEach(b=>b.classList.toggle('active', b.dataset.lang === lang)); renderChat(); renderSeasonTabs(); renderStatsTable(); }
 document.querySelectorAll('.lang-toggle button').forEach(b=>b.addEventListener('click', ()=> setLang(b.dataset.lang)));
 setLang(currentLang);
 document.getElementById('chatToggle').addEventListener('click', ()=>{ const p = document.getElementById('chatPanel'); p.classList.toggle('open'); if (p.classList.contains('open') && !document.getElementById('chatBody').children.length){ addMsg(currentLang === 'fr' ? "Bonjour 👋 Je suis l'assistant de Dava David Agossa." : "Hello 👋 I'm Dava David Agossa's assistant.", 'bot'); } });
@@ -215,18 +215,35 @@ document.getElementById('chatClose').addEventListener('click', ()=>{ document.ge
 </script>
 
 <script type="module">
-let db = null, fb = null;
-try {
-  const mod = await import('./firebase-config.js');
-  db = mod.db;
-  fb = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js");
-} catch(e){ console.warn('Firebase non chargé:', e); }
+import { db } from './firebase-config.js';
+import { collection, query, orderBy, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-let allStats = []; let currentSeason = 'all';
+const esc = (s) => String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+// Fonction pour traduire le nom du pays en drapeau
+function getFlag(clubName) {
+  if (!clubName) return '';
+  const c = clubName.toLowerCase();
+  if (c.includes('bourges') || c.includes('bordeaux') || c.includes('épinal') || c.includes('epinal') || c.includes('gueugnon') || c.includes('beaucaire') || c.includes('charité') || c.includes('charitoise')) return '🇫🇷';
+  if (c.includes('gendarmerie') || c.includes('pk12')) return '🇩🇯';
+  if (c.includes('parakou') || c.includes('bénin')) return '🇧🇯';
+  if (c.includes('tambacounda') || c.includes('sénégal')) return '🇸🇳';
+  return '🌍';
+}
+
+let allStats = []; 
+let currentSeason = 'all';
 
 function renderStatsTable(){
   const container = document.getElementById('tableContainer');
   const summary = document.getElementById('statsSummary');
+  
+  if (!allStats.length) {
+    summary.innerHTML = '';
+    container.innerHTML = `<div class="empty-stats"><h3>${currentLang==='fr'?'Statistiques à venir':'Statistics coming soon'}</h3><p>${currentLang==='fr'?'Les statistiques détaillées seront publiées prochainement.':'Detailed statistics will be published soon.'}</p></div>`;
+    return;
+  }
+
   let data = currentSeason === 'all' ? allStats : allStats.filter(s => s.saison === currentSeason);
   
   if (!data.length) {
@@ -248,21 +265,27 @@ function renderStatsTable(){
     <div class="sum-card"><span class="sum-num">${tot.penalties}</span><span class="sum-lbl">${labels.p}</span></div>
     <div class="sum-card"><span class="sum-num">${tot.minutes.toLocaleString('fr-FR')}</span><span class="sum-lbl">${labels.min}</span></div>`;
 
-  const headers = currentLang==='fr' ? ['Saison','Club','Niveau','Matchs','Titul.','Minutes','Buts enc.','Clean sheets','Penalties arr.','Cartons'] : ['Season','Club','Level','Matches','Starts','Minutes','Conceded','Clean sheets','Penalties saved','Cards'];
+  // Ajout des nouvelles colonnes (Championnat, Coupe, Réserve)
+  const headers = currentLang==='fr' 
+    ? ['Saison','Club','Niveau','Matchs','Titul.','Minutes','Buts enc.','Clean sheets','Penalties arr.','Championnat','Coupe de France','Équipe réserve','Cartons'] 
+    : ['Season','Club','Level','Matches','Starts','Minutes','Conceded','Clean sheets','Penalties saved','League','French Cup','Reserve team','Cards'];
 
   container.innerHTML = `<div class="table-wrap"><table><thead><tr>
     ${headers.map((h,i)=>`<th class="${i>=3?'center':''}">${h}</th>`).join('')}
     </tr></thead><tbody>
     ${data.map(s=>`<tr>
-      <td class="num">${s.saison||'—'}</td>
-      <td class="club">${s.club||'—'}</td>
-      <td>${s.niveau||'—'}</td>
+      <td class="num">${esc(s.saison)||'—'}</td>
+      <td class="club">${getFlag(s.club)} ${esc(s.club)||'—'}</td>
+      <td>${esc(s.niveau)||'—'}</td>
       <td class="num">${s.matchs??'—'}</td>
       <td class="num">${s.titularisations??'—'}</td>
       <td class="num">${s.minutes!=null?s.minutes.toLocaleString('fr-FR'):'—'}</td>
       <td class="num">${s.butsEncaisses??'—'}</td>
       <td class="num">${s.cleanSheets??'—'}</td>
       <td class="num">${s.penaltiesArretes??'—'}</td>
+      <td class="num">${s.championnat??'—'}</td>
+      <td class="num">${s.coupeDeFrance??'—'}</td>
+      <td class="num">${s.equipeReserve??'—'}</td>
       <td class="num">${s.cartons??'—'}</td>
     </tr>`).join('')}
     </tbody></table></div>`;
@@ -272,24 +295,20 @@ function renderSeasonTabs(){
   const tabs = document.getElementById('seasonTabs');
   if(!allStats.length){ tabs.innerHTML=''; return; }
   const allLabel = currentLang==='fr'?'Toutes les saisons':'All seasons';
-  tabs.innerHTML = `<button class="season-btn active" onclick="window.selectSeason('all')">${allLabel}</button>` +
-    allStats.map(s=>`<button class="season-btn" onclick="window.selectSeason('${s.saison}')">${s.saison}</button>`).join('');
+  tabs.innerHTML = `<button class="season-btn ${currentSeason === 'all' ? 'active' : ''}" onclick="window.selectSeason('all')">${allLabel}</button>` +
+    allStats.map(s=>`<button class="season-btn ${currentSeason === s.saison ? 'active' : ''}" onclick="window.selectSeason('${s.saison}')">${s.saison}</button>`).join('');
 }
 
 window.selectSeason = function(s){
   currentSeason = s;
-  document.querySelectorAll('.season-btn').forEach(b=>b.classList.toggle('active', b.textContent.includes(s) || (s==='all' && b.textContent.includes(currentLang==='fr'?'Toutes':'All'))));
+  renderSeasonTabs();
   renderStatsTable();
 };
 
 async function chargerStats(){
-  if (!db || !fb) {
-    document.getElementById('tableContainer').innerHTML = `<div class="empty-stats"><h3>${currentLang==='fr'?'Aucune donnée':'No data'}</h3><p>Les statistiques seront ajoutées prochainement.</p></div>`;
-    return;
-  }
   try {
-    const q = fb.query(fb.collection(db, 'statistiques'), fb.orderBy('saison', 'desc'));
-    const snap = await fb.getDocs(q);
+    const q = query(collection(db, 'statistiques'), orderBy('saison', 'desc'));
+    const snap = await getDocs(q);
     if (snap.empty) {
       document.getElementById('tableContainer').innerHTML = `<div class="empty-stats"><h3>${currentLang==='fr'?'Statistiques à venir':'Statistics coming soon'}</h3><p>${currentLang==='fr'?'Les statistiques détaillées seront publiées prochainement.':'Detailed statistics will be published soon.'}</p></div>`;
       return;
@@ -298,19 +317,12 @@ async function chargerStats(){
     renderSeasonTabs();
     renderStatsTable();
   } catch(e) {
-    console.warn(e);
+    console.warn("Erreur stats:", e);
     document.getElementById('tableContainer').innerHTML = `<div class="empty-stats"><h3>${currentLang==='fr'?'Aucune donnée':'No data'}</h3><p>Les statistiques seront ajoutées prochainement.</p></div>`;
   }
 }
 
-// Re-render on lang change
-const originalSetLang = window.setLang;
-window.setLang = function(lang) {
-  if(originalSetLang) originalSetLang(lang);
-  renderSeasonTabs();
-  renderStatsTable();
-};
-
+// Lancer le chargement
 chargerStats();
 </script>
 </body>
