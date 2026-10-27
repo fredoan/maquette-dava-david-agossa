@@ -67,6 +67,10 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 .article-content p{margin-bottom:1.5rem}
 .article-actions{margin-top:3rem;text-align:center}
 
+/* AJOUT DU STYLE MANQUANT POUR LE BOUTON RETOUR */
+.btn-ghost{display:inline-flex;align-items:center;gap:.55rem;padding:.95rem 1.7rem;border-radius:4px;font-family:var(--f-d);font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;transition:all .3s;cursor:pointer;background:transparent;color:var(--texte);border:1.5px solid var(--border-fort)}
+.btn-ghost:hover{border-color:var(--or-clair);color:var(--or-clair);background:rgba(212,175,90,.08)}
+
 .footer{padding:50px 0 30px;border-top:1px solid var(--border);background:rgba(26,0,0,.6);margin-top:60px}
 .footer-inner{max-width:1280px;margin-inline:auto;padding-inline:clamp(20px,4vw,48px);display:flex;flex-wrap:wrap;justify-content:space-between;gap:1.2rem;font-size:.8rem;color:var(--texte-3);align-items:center}
 .footer-inner a{color:var(--or-clair);text-decoration:underline;text-underline-offset:3px}
@@ -121,7 +125,7 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 </div>
 
 <div class="article-hero-img" id="artHero" style="display:none">
-<img id="artImg" src="" alt=""/>
+<img id="artImg" src="" alt="" onerror="this.parentElement.style.display='none'"/>
 </div>
 
 <section class="section" style="padding-top:0">
@@ -194,7 +198,7 @@ document.getElementById('chatClose').addEventListener('click', ()=>{ document.ge
 
 <script type="module">
 import { db } from './firebase-config.js';
-import { doc, getDoc, query, collection, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { Engagement } from './engagement.js';
 
 const params = new URLSearchParams(location.search);
@@ -202,13 +206,13 @@ const articleId = params.get('id');
 
 if (!articleId) {
   document.getElementById('artTitre').textContent = "Article introuvable";
-  document.getElementById('artContenu').textContent = "Aucun identifiant d'article fourni.";
+  document.getElementById('artContenu').innerHTML = "Aucun identifiant d'article fourni. <br><br><a href='actualites.html' style='color:var(--or-clair)'>Retourner aux actualités</a>";
 } else {
   try {
     const d = await getDoc(doc(db, 'articles', articleId));
     if (!d.exists()) {
       document.getElementById('artTitre').textContent = "Article introuvable";
-      document.getElementById('artContenu').textContent = "Cet article n'existe pas ou a été supprimé.";
+      document.getElementById('artContenu').innerHTML = "Cet article n'existe pas ou a été supprimé. <br><br><a href='actualites.html' style='color:var(--or-clair)'>Retourner aux actualités</a>";
     } else {
       const a = d.data();
       
@@ -234,7 +238,7 @@ if (!articleId) {
   } catch(e) {
     console.error(e);
     document.getElementById('artTitre').textContent = "Erreur";
-    document.getElementById('artContenu').textContent = "Impossible de charger l'article.";
+    document.getElementById('artContenu').innerHTML = "Impossible de charger l'article. <br><br><a href='actualites.html' style='color:var(--or-clair)'>Retourner aux actualités</a>";
   }
 }
 </script>
