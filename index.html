@@ -115,13 +115,14 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 @media(max-width:820px){.sel-grid{grid-template-columns:1fr;max-width:400px;margin-inline:auto}}
 
 .clubs-list{list-style:none;border-top:1px solid var(--border);max-width:900px;margin-inline:auto}
-.clubs-list li{display:grid;grid-template-columns:1fr auto auto;gap:1.2rem;align-items:baseline;padding:1.2rem .6rem;border-bottom:1px solid var(--border);transition:all .3s}
+.clubs-list li{display:grid;grid-template-columns:auto 1fr auto auto;gap:1.2rem;align-items:center;padding:1.2rem .6rem;border-bottom:1px solid var(--border);transition:all .3s}
 .clubs-list li:hover{background:rgba(86,10,10,.3);padding-left:1.2rem}
+.clubs-logo{width:40px;height:40px;object-fit:contain;flex-shrink:0}
 .clubs-season{font-family:var(--f-m);font-size:.65rem;color:var(--or-clair);letter-spacing:.14em;margin-bottom:.2rem}
 .clubs-name{font-family:var(--f-d);font-size:clamp(1rem,2.2vw,1.5rem);font-weight:700;color:var(--texte)}
 .clubs-lvl{font-family:var(--f-m);font-size:.7rem;color:var(--or-clair);white-space:nowrap}
 .clubs-country{font-family:var(--f-m);font-size:.7rem;color:var(--texte-3);min-width:80px;text-align:right}
-@media(max-width:600px){.clubs-list li{grid-template-columns:1fr auto}.clubs-country{grid-column:1/-1;text-align:left}}
+@media(max-width:600px){.clubs-list li{grid-template-columns:auto 1fr auto}.clubs-country{grid-column:1/-1;text-align:left;padding-left:52px}}
 
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
 .stat-card{background:linear-gradient(180deg,rgba(86,10,10,.4),rgba(26,0,0,.7));border:1px solid var(--border);border-radius:8px;padding:clamp(24px,4vw,40px) 1rem;text-align:center;transition:all .3s}
@@ -246,18 +247,22 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 </nav>
 
 <header class="hero">
-<div class="hero-bg"><img src="ph11.jpeg" alt="Dava David Agossa en action" onerror="this.style.display='none'"/></div>
+<!-- ID ajouté pour la photo de fond -->
+<div class="hero-bg"><img id="heroBgImg" src="ph11.jpeg" alt="Dava David Agossa en action" onerror="this.style.display='none'"/></div>
 <div class="hero-inner">
 <div>
 <span class="hero-tag" data-fr="Portfolio officiel · 2026" data-en="Official portfolio · 2026">Portfolio officiel · 2026</span>
 <h1><span class="l1">Dava David</span><span class="l2">AGOSSA</span></h1>
-<p class="hero-role" data-fr="Gardien de but professionnel" data-en="Professional goalkeeper">Gardien de but professionnel</p>
-<p class="hero-club">Bourges FC · National 1 🇫🇷 — <span data-fr="International Bénin U20 & U23" data-en="Benin U20 & U23 international">International Bénin U20 & U23</span></p>
-<p class="hero-sub" data-fr="Gardien de but béninois, formé entre le Bénin et le Sénégal, international U20 et U23, avec un parcours entre le Bénin, le Sénégal, Djibouti et la France." data-en="Beninese goalkeeper, trained between Benin and Senegal, U20 and U23 international, with a career across Benin, Senegal, Djibouti and France.">Gardien de but béninois, formé entre le Bénin et le Sénégal, international U20 et U23, avec un parcours entre le Bénin, le Sénégal, Djibouti et la France.</p>
-<div class="hero-facts"><span data-fr="23 ans" data-en="23 y/o">23 ans</span><span>1,87 m</span><span>75 kg</span><span data-fr="Droitier" data-en="Right-footed">Droitier</span><span data-fr="29 sélections" data-en="29 caps">29 sélections</span></div>
+<!-- IDs ajoutés pour le poste et le statut -->
+<p class="hero-role" id="heroRole" data-fr="Gardien de but professionnel" data-en="Professional goalkeeper">Gardien de but professionnel</p>
+<p class="hero-club"><span id="heroClub">Bourges FC · National 1 🇫🇷</span> — <span id="heroStatut" data-fr="International Bénin U20 & U23" data-en="Benin U20 & U23 international">International Bénin U20 & U23</span></p>
+<p class="hero-sub" id="heroBio" data-fr="Gardien de but béninois, formé entre le Bénin et le Sénégal, international U20 et U23, avec un parcours entre le Bénin, le Sénégal, Djibouti et la France." data-en="Beninese goalkeeper, trained between Benin and Senegal, U20 and U23 international, with a career across Benin, Senegal, Djibouti and France.">Gardien de but béninois, formé entre le Bénin et le Sénégal, international U20 et U23, avec un parcours entre le Bénin, le Sénégal, Djibouti et la France.</p>
+<!-- IDs ajoutés pour les faits et les langues -->
+<div class="hero-facts"><span id="heroAge" data-fr="23 ans" data-en="23 y/o">23 ans</span><span id="heroTaille">1,87 m</span><span id="heroPoids">75 kg</span><span id="heroPied" data-fr="Droitier" data-en="Right-footed">Droitier</span><span id="heroSel" data-fr="29 sélections" data-en="29 caps">29 sélections</span><span id="heroLangues" style="display:none;"></span></div>
 <div class="hero-actions"><a href="videos.html" class="btn-primary">🎥 <span data-fr="Voir mes vidéos" data-en="Watch videos">Voir mes vidéos</span></a><a href="contact.html" class="btn-ghost">📩 <span data-fr="Me contacter" data-en="Contact me">Me contacter</span></a></div>
 </div>
-<div class="hero-photo"><img src="ph21.jpeg" alt="Portrait Dava David Agossa" onerror="this.style.display='none'; this.parentElement.querySelector('.hero-photo-fallback').style.display='flex'"/><div class="hero-photo-fallback"><span>#1</span><small>Dava David Agossa</small></div><div class="hero-photo-tag"><div><strong>Dava David Agossa</strong><span>Bourges FC · N1</span></div><span>#1</span></div></div>
+<!-- ID ajouté pour la photo principale -->
+<div class="hero-photo"><img id="heroMainImg" src="ph21.jpeg" alt="Portrait Dava David Agossa" onerror="this.style.display='none'; this.parentElement.querySelector('.hero-photo-fallback').style.display='flex'"/><div class="hero-photo-fallback"><span>#1</span><small>Dava David Agossa</small></div><div class="hero-photo-tag"><div><strong>Dava David Agossa</strong><span id="heroClubTag">Bourges FC · N1</span></div><span>#1</span></div></div>
 </div>
 </header>
 
@@ -265,9 +270,9 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 <div class="wrap">
 <div class="section-title reveal"><span class="eyebrow" data-fr="International" data-en="International">International</span><h2 data-fr="Sélections avec le Bénin" data-en="Benin national team">Sélections avec le Bénin</h2></div>
 <div class="sel-grid">
-<div class="sel-card reveal"><div class="sel-flag">🇧🇯</div><div class="sel-name">Bénin U20</div><span class="sel-num">24</span><span class="sel-lbl" data-fr="Sélections" data-en="Caps">Sélections</span></div>
-<div class="sel-card reveal"><div class="sel-flag">🇧🇯</div><div class="sel-name">Bénin U23</div><span class="sel-num">5</span><span class="sel-lbl" data-fr="Sélections" data-en="Caps">Sélections</span></div>
-<div class="sel-card featured reveal"><div class="sel-flag">🏆</div><div class="sel-name" style="color:var(--or-vif)">Total</div><span class="sel-num">29</span><span class="sel-lbl" data-fr="Sélections internationales" data-en="International caps">Sélections internationales</span></div>
+<div class="sel-card reveal"><div class="sel-flag">🇧🇯</div><div class="sel-name">Bénin U20</div><span class="sel-num" id="selU20">24</span><span class="sel-lbl" data-fr="Sélections" data-en="Caps">Sélections</span></div>
+<div class="sel-card reveal"><div class="sel-flag">🇧🇯</div><div class="sel-name">Bénin U23</div><span class="sel-num" id="selU23">5</span><span class="sel-lbl" data-fr="Sélections" data-en="Caps">Sélections</span></div>
+<div class="sel-card featured reveal"><div class="sel-flag">🏆</div><div class="sel-name" style="color:var(--or-vif)">Total</div><span class="sel-num" id="selTotal">29</span><span class="sel-lbl" data-fr="Sélections internationales" data-en="International caps">Sélections internationales</span></div>
 </div>
 </div>
 </section>
@@ -275,13 +280,8 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 <section class="section bg-alt">
 <div class="wrap">
 <div class="section-title reveal"><span class="eyebrow" data-fr="Carrière en club" data-en="Club career">Carrière en club</span><h2 data-fr="Parcours professionnel" data-en="Professional career">Parcours professionnel</h2></div>
-<ul class="clubs-list reveal">
-<li><div><div class="clubs-season">2026 – 2027</div><div class="clubs-name">Bourges FC</div></div><span class="clubs-lvl">National 1</span><span class="clubs-country">🇫🇷 France</span></li>
-<li><div><div class="clubs-season">2025 – 2026</div><div class="clubs-name">FC Girondins de Bordeaux</div></div><span class="clubs-lvl">National 1</span><span class="clubs-country">🇫🇷 France</span></li>
-<li><div><div class="clubs-season">2025 – 2026</div><div class="clubs-name">Stade Beaucairois FC</div></div><span class="clubs-lvl">National 3</span><span class="clubs-country">🇫🇷 France</span></li>
-<li><div><div class="clubs-season">2024 – 2025</div><div class="clubs-name">SAS Épinal</div></div><span class="clubs-lvl">National 1</span><span class="clubs-country">🇫🇷 France</span></li>
-<li><div><div class="clubs-season">2022 – 2023</div><div class="clubs-name">FC Gendarmerie Nationale</div></div><span class="clubs-lvl">Ligue 1</span><span class="clubs-country">🇩🇯 Djibouti</span></li>
-</ul>
+<!-- Le ul est maintenant vide, le script le remplira -->
+<ul class="clubs-list reveal" id="carriereHomeList"></ul>
 <div style="text-align:center;margin-top:2rem"><a href="biographie.html" class="btn-ghost"><span data-fr="Voir tout le parcours" data-en="See full career">Voir tout le parcours</span> →</a></div>
 </div>
 </section>
@@ -290,10 +290,11 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 <div class="wrap">
 <div class="section-title reveal"><span class="eyebrow" data-fr="Statistiques" data-en="Statistics">Statistiques</span><h2 data-fr="Les chiffres clés" data-en="Key figures">Les chiffres clés</h2></div>
 <div class="stats-grid">
-<div class="stat-card reveal"><span class="stat-num" data-count="10">0</span><span class="stat-lbl" data-fr="Clubs" data-en="Clubs">Clubs</span></div>
+<!-- ID ajouté pour Pro Depuis -->
+<div class="stat-card reveal"><span class="stat-num" id="statProDepuis">2020</span><span class="stat-lbl" data-fr="Pro depuis" data-en="Pro since">Pro depuis</span></div>
 <div class="stat-card reveal"><span class="stat-num" data-count="4">0</span><span class="stat-lbl" data-fr="Pays" data-en="Countries">Pays</span></div>
 <div class="stat-card reveal"><span class="stat-num" data-count="29">0</span><span class="stat-lbl" data-fr="Sélections" data-en="Caps">Sélections</span></div>
-<div class="stat-card reveal"><span class="stat-num">2022</span><span class="stat-lbl" data-fr="Pro depuis" data-en="Pro since">Pro depuis</span></div>
+<div class="stat-card reveal"><span class="stat-num" data-count="10">0</span><span class="stat-lbl" data-fr="Clubs" data-en="Clubs">Clubs</span></div>
 </div>
 <div style="text-align:center;margin-top:2rem"><a href="statistiques.html" class="btn-primary"><span data-fr="Statistiques détaillées" data-en="Detailed stats">Statistiques détaillées</span></a></div>
 </div>
@@ -341,9 +342,10 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 <div class="wrap">
 <div class="section-title reveal" style="text-align:center;margin-inline:auto"><span class="eyebrow" data-fr="Contact" data-en="Contact">Contact</span><h2 data-fr="Travaillons ensemble" data-en="Let's work together">Travaillons ensemble</h2></div>
 <div class="contact-grid">
-<a href="mailto:agdavadavid@gmail.com" class="contact-card reveal"><div class="contact-icon">📧</div><div class="contact-lbl">Email</div><div class="contact-val">agdavadavid@gmail.com</div></a>
-<a href="https://wa.me/2290157312131" target="_blank" rel="noopener" class="contact-card reveal"><div class="contact-icon">💬</div><div class="contact-lbl">WhatsApp</div><div class="contact-val">+229 01 57 31 21 31</div></a>
-<a href="tel:+2290157312131" class="contact-card reveal"><div class="contact-icon">📱</div><div class="contact-lbl" data-fr="Téléphone" data-en="Phone">Téléphone</div><div class="contact-val">+229 01 57 31 21 31</div></a>
+<!-- IDs ajoutés pour les contacts -->
+<a href="mailto:agdavadavid@gmail.com" id="contactEmailLink" class="contact-card reveal"><div class="contact-icon">📧</div><div class="contact-lbl">Email</div><div class="contact-val" id="contactEmailVal">agdavadavid@gmail.com</div></a>
+<a href="https://wa.me/2290157312131" id="contactWaLink" target="_blank" rel="noopener" class="contact-card reveal"><div class="contact-icon">💬</div><div class="contact-lbl">WhatsApp</div><div class="contact-val" id="contactWaVal">+229 01 57 31 21 31</div></a>
+<a href="tel:+2290157312131" id="contactTelLink" class="contact-card reveal"><div class="contact-icon">📱</div><div class="contact-lbl" data-fr="Téléphone" data-en="Phone">Téléphone</div><div class="contact-val" id="contactTelVal">+229 01 57 31 21 31</div></a>
 </div>
 </div>
 </section>
@@ -377,20 +379,6 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 const cIo = new IntersectionObserver(entries=>{ entries.forEach(e=>{ if (!e.isIntersecting) return; const el = e.target; const target = parseInt(el.dataset.count, 10); if (!target) return; const start = performance.now(); function anim(now){ const p = Math.min((now - start) / 1500, 1); el.textContent = Math.floor(p * target); if (p < 1) requestAnimationFrame(anim); else el.textContent = target; } requestAnimationFrame(anim); cIo.unobserve(el); }); },{ threshold:0.5 });
 document.querySelectorAll('[data-count]').forEach(el=>cIo.observe(el));
 
-const GALERIE_PREVIEW = [
-  { f:'ph1.jpeg', fr:'Sélection Bénin', en:'Benin Selection' }, { f:'ph2.jpeg', fr:'Sélection Bénin', en:'Benin Selection' },
-  { f:'ph11.jpeg', fr:'Match & Clubs', en:'Matches & Clubs' }, { f:'ph12.jpeg', fr:'Match & Clubs', en:'Matches & Clubs' },
-  { f:'ph21.jpeg', fr:'Ses photos', en:'His photos' }, { f:'ph22.jpeg', fr:'Ses photos', en:'His photos' }
-];
-document.getElementById('galerieHome').innerHTML = GALERIE_PREVIEW.map(p=>`
-  <div class="gal-item" data-file="${p.f}" style="position:relative;aspect-ratio:1;overflow:hidden;border-radius:4px;cursor:pointer;border:1px solid var(--border);background:var(--fond-5)">
-    <img src="${p.f}" alt="Dava David Agossa" loading="lazy" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none'"/>
-    <span style="position:absolute;bottom:.8rem;left:.8rem;z-index:2;font-family:var(--f-m);font-size:.55rem;text-transform:uppercase;color:var(--or-clair);background:rgba(0,0,0,.6);padding:2px 6px;border-radius:2px">${p.fr}</span>
-  </div>
-`).join('');
-document.querySelectorAll('.gal-item').forEach(el => { el.addEventListener('click', () => { const file = el.dataset.file; const lb = document.getElementById('lightbox'); document.getElementById('lightboxImg').src = file; lb.classList.add('open'); }); });
-document.getElementById('lightbox').addEventListener('click', function(){ this.classList.remove('open'); });
-
 let currentLang = localStorage.getItem('lang') || 'fr';
 const CHAT_OPTS = { fr: [{ k:'qui', l:'👤 Qui est Dava ?' }, { k:'club', l:'⚽ Son club ?' }, { k:'contact', l:'📩 Le contacter' }], en: [{ k:'qui', l:'👤 Who is Dava?' }, { k:'club', l:'⚽ His club?' }, { k:'contact', l:'📩 Contact him' }] };
 const CHAT_ANS = { qui: { fr: "Dava David Agossa est un gardien de but professionnel béninois de 23 ans (1,87 m · 75 kg). Il évolue au Bourges FC et est international U20/U23 (29 sélections).", en: "Dava David Agossa is a 23-year-old Beninese professional goalkeeper (1.87 m · 75 kg). He plays for Bourges FC and is a U20/U23 international (29 caps)." }, club: { fr: "Il évolue au Bourges FC en National 1. Son parcours est passé par Bordeaux, Beaucaire, Épinal, Gueugnon, Djibouti et le Bénin.", en: "He plays for Bourges FC in National 1. His career also went through Bordeaux, Beaucaire, Épinal, Gueugnon, Djibouti and Benin." }, contact: { fr: "Email : agdavadavid@gmail.com · WhatsApp : +229 01 57 31 21 31", en: "Email: agdavadavid@gmail.com · WhatsApp: +229 01 57 31 21 31" } };
@@ -406,13 +394,122 @@ document.getElementById('chatClose').addEventListener('click', ()=>{ document.ge
 
 <script type="module">
 import { db } from './firebase-config.js';
-import { collection, query, orderBy, limit, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { collection, query, orderBy, limit, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { Engagement } from './engagement.js';
 
 const esc = (s) => String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmtDate = (ts) => { if (!ts) return ''; const d = ts.toDate ? ts.toDate() : new Date(ts); return d.toLocaleDateString(document.documentElement.lang === 'en' ? 'en-GB' : 'fr-FR', { day:'numeric', month:'long', year:'numeric' }); };
 const ytThumb = (url) => { if (!url) return ''; const m = url.match(/(?:embed\/|watch\?v=|youtu\.be\/|shorts\/)([^?&/]+)/); return m ? `https://img.youtube.com/vi/${m[1]}/hqdefault.jpg` : ''; };
 
+/* ============================================================
+   CHARGEMENT DES DONNÉES DYNAMIQUES (PROFIL, TEXTES, ETC.)
+   ============================================================ */
+async function loadDynamicData() {
+  try {
+    // 1. Charger le Profil
+    const dProfil = await getDoc(doc(db, 'profil', 'principal'));
+    if (dProfil.exists()) {
+      const p = dProfil.data();
+      if (p.photoBg) document.getElementById('heroBgImg').src = p.photoBg;
+      if (p.photoHero) document.getElementById('heroMainImg').src = p.photoHero;
+      if (p.poste) document.getElementById('heroRole').textContent = p.poste;
+      if (p.club) {
+        const clubText = p.niveau ? `${p.club} · ${p.niveau} 🇫🇷` : p.club;
+        document.getElementById('heroClub').textContent = clubText;
+        document.getElementById('heroClubTag').textContent = p.club;
+      }
+      if (p.statut) document.getElementById('heroStatut').textContent = p.statut;
+      if (p.age) document.getElementById('heroAge').textContent = p.age + (currentLang === 'en' ? ' y/o' : ' ans');
+      if (p.taille) document.getElementById('heroTaille').textContent = p.taille;
+      if (p.poids) document.getElementById('heroPoids').textContent = p.poids;
+      if (p.pied) document.getElementById('heroPied').textContent = p.pied;
+      if (p.selections) document.getElementById('heroSel').textContent = p.selections + (currentLang === 'en' ? ' caps' : ' sélections');
+      if (p.langues) {
+        const langEl = document.getElementById('heroLangues');
+        langEl.textContent = p.langues;
+        langEl.style.display = 'inline-flex';
+      }
+      if (p.proDepuis) document.getElementById('statProDepuis').textContent = p.proDepuis;
+      
+      // Contacts
+      if (p.email) {
+        document.getElementById('contactEmailVal').textContent = p.email;
+        document.getElementById('contactEmailLink').href = 'mailto:' + p.email;
+      }
+      if (p.whatsapp) {
+        document.getElementById('contactWaVal').textContent = p.whatsapp;
+        document.getElementById('contactWaLink').href = 'https://wa.me/' + p.whatsapp.replace(/\s/g, '');
+      }
+      if (p.telephone) {
+        document.getElementById('contactTelVal').textContent = p.telephone;
+        document.getElementById('contactTelLink').href = 'tel:' + p.telephone.replace(/\s/g, '');
+      }
+    }
+
+    // 2. Charger les Textes FR/EN
+    const dTextes = await getDoc(doc(db, 'textes', 'site'));
+    if (dTextes.exists()) {
+      const t = dTextes.data();
+      if (t.heroFr && currentLang === 'fr') document.getElementById('heroRole').textContent = t.heroFr;
+      if (t.heroEn && currentLang === 'en') document.getElementById('heroRole').textContent = t.heroEn;
+      if (t.bioFr && currentLang === 'fr') document.getElementById('heroBio').textContent = t.bioFr;
+      if (t.bioEn && currentLang === 'en') document.getElementById('heroBio').textContent = t.bioEn;
+    }
+
+    // 3. Charger les Sélections (Compteurs)
+    const dSel = await getDoc(doc(db, 'selections', 'compteurs'));
+    if (dSel.exists()) {
+      const s = dSel.data();
+      if (s.u20 !== undefined) document.getElementById('selU20').textContent = s.u20;
+      if (s.u23 !== undefined) document.getElementById('selU23').textContent = s.u23;
+      if (s.total !== undefined) document.getElementById('selTotal').textContent = s.total;
+    }
+
+    // 4. Charger la Carrière (Clubs avec logos)
+    const snapCar = await getDocs(collection(db, 'carriere'));
+    if (!snapCar.empty) {
+      const carList = document.getElementById('carriereHomeList');
+      const docs = snapCar.docs.map(d => d.data()).sort((a,b) => (b.saison||'').localeCompare(a.saison||''));
+      // On affiche max 5 clubs sur l'accueil
+      carList.innerHTML = docs.slice(0, 5).map(c => `
+        <li>
+          ${c.logo ? `<img src="${esc(c.logo)}" class="clubs-logo" onerror="this.style.display='none'"/>` : ''}
+          <div>
+            <div class="clubs-season">${esc(c.saison)}</div>
+            <div class="clubs-name">${esc(c.club)}</div>
+          </div>
+          <span class="clubs-lvl">${esc(c.division)}</span>
+          <span class="clubs-country">${esc(c.pays)}</span>
+        </li>
+      `).join('');
+    }
+
+    // 5. Charger la Galerie
+    const snapGal = await getDocs(collection(db, 'galerie'));
+    if (!snapGal.empty) {
+      const galList = document.getElementById('galerieHome');
+      const docs = snapGal.docs.map(d => d.data()).sort((a,b) => (a.numero||999) - (b.numero||999));
+      // On affiche 6 photos sur l'accueil
+      galList.innerHTML = docs.slice(0, 6).map(p => {
+        const file = p.url || p.fichier;
+        return `<div class="gal-item" data-file="${esc(file)}" style="position:relative;aspect-ratio:1;overflow:hidden;border-radius:4px;cursor:pointer;border:1px solid var(--border);background:var(--fond-5)">
+          <img src="${esc(file)}" alt="${esc(p.alt || 'Dava David Agossa')}" loading="lazy" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none'"/>
+          <span style="position:absolute;bottom:.8rem;left:.8rem;z-index:2;font-family:var(--f-m);font-size:.55rem;text-transform:uppercase;color:var(--or-clair);background:rgba(0,0,0,.6);padding:2px 6px;border-radius:2px">${esc(p.categorie || '')}</span>
+        </div>`;
+      }).join('');
+      // Lightbox
+      document.querySelectorAll('.gal-item').forEach(el => { el.addEventListener('click', () => { const file = el.dataset.file; const lb = document.getElementById('lightbox'); document.getElementById('lightboxImg').src = file; lb.classList.add('open'); }); });
+    }
+
+  } catch(e) { console.warn("Erreur chargement données admin (les infos par défaut restent affichées) :", e); }
+}
+
+/* LIGHTBOX CLOSE */
+document.getElementById('lightbox').addEventListener('click', function(){ this.classList.remove('open'); });
+
+/* ============================================================
+   CHARGEMENT DES VIDÉOS, ACTUS, EVENTS, SPONSORS
+   ============================================================ */
 async function chargerVideos(){
   const cont = document.getElementById('videosHome');
   try {
@@ -560,6 +657,8 @@ async function chargerSponsors(){
   } catch(e){ console.warn('sponsors:', e); }
 }
 
+// LANCEMENT DES CHARGEMENTS
+loadDynamicData();
 chargerVideos();
 chargerNews();
 chargerEvents();
