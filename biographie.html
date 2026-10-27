@@ -86,7 +86,8 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 .tl-item{position:relative;padding-bottom:2rem}
 .tl-item::before{content:'';position:absolute;left:-1.55rem;top:.35rem;width:.85rem;height:.85rem;border-radius:50%;background:var(--or-clair);border:3px solid var(--fond);box-shadow:0 0 0 3px rgba(212,175,90,.3)}
 .tl-season{font-family:var(--f-m);font-size:.68rem;color:var(--or-clair);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.3rem}
-.tl-title{font-family:var(--f-d);font-size:clamp(1rem,2vw,1.35rem);font-weight:700;color:var(--texte);margin-bottom:.2rem}
+.tl-title{font-family:var(--f-d);font-size:clamp(1rem,2vw,1.35rem);font-weight:700;color:var(--texte);margin-bottom:.2rem;display:flex;align-items:center;gap:.5rem}
+.tl-logo{width:24px;height:24px;object-fit:contain}
 .tl-meta{font-size:.85rem;color:var(--texte-3)}
 
 .quote-box{background:linear-gradient(180deg,rgba(86,10,10,.5),rgba(26,0,0,.8));border:1px solid var(--border-fort);border-left:4px solid var(--or-clair);border-radius:6px;padding:clamp(28px,4vw,48px);text-align:center;max-width:860px;margin-inline:auto}
@@ -164,13 +165,13 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 <p data-fr="International U20 et U23 avec le Bénin (29 sélections), il évolue aujourd'hui au Bourges FC en National 1." data-en="A U20 and U23 Benin international (29 caps), he now plays for Bourges FC in National 1.">International U20 et U23 avec le Bénin (29 sélections), il évolue aujourd'hui au Bourges FC en National 1.</p>
 <dl class="facts">
 <dt data-fr="Nom" data-en="Name">Nom</dt><dd>Dava David Agossa</dd>
-<dt data-fr="Poste" data-en="Position">Poste</dt><dd data-fr="Gardien de but" data-en="Goalkeeper">Gardien de but</dd>
+<dt data-fr="Poste" data-en="Position">Poste</dt><dd id="bioPoste" data-fr="Gardien de but" data-en="Goalkeeper">Gardien de but</dd>
 <dt data-fr="Nationalité" data-en="Nationality">Nationalité</dt><dd data-fr="Béninoise" data-en="Beninese">Béninoise</dd>
-<dt data-fr="Âge" data-en="Age">Âge</dt><dd data-fr="23 ans" data-en="23 years old">23 ans</dd>
-<dt data-fr="Taille" data-en="Height">Taille</dt><dd>1,87 m</dd>
-<dt data-fr="Poids" data-en="Weight">Poids</dt><dd>75 kg</dd>
-<dt data-fr="Pied fort" data-en="Strong foot">Pied fort</dt><dd data-fr="Droitier" data-en="Right-footed">Droitier</dd>
-<dt data-fr="Club actuel" data-en="Current club">Club actuel</dt><dd>Bourges FC (National 1)</dd>
+<dt data-fr="Âge" data-en="Age">Âge</dt><dd id="bioAge" data-fr="23 ans" data-en="23 years old">23 ans</dd>
+<dt data-fr="Taille" data-en="Height">Taille</dt><dd id="bioTaille">1,87 m</dd>
+<dt data-fr="Poids" data-en="Weight">Poids</dt><dd id="bioPoids">75 kg</dd>
+<dt data-fr="Pied fort" data-en="Strong foot">Pied fort</dt><dd id="bioPied" data-fr="Droitier" data-en="Right-footed">Droitier</dd>
+<dt data-fr="Club actuel" data-en="Current club">Club actuel</dt><dd id="bioClub">Bourges FC (National 1)</dd>
 </dl>
 </div>
 </div>
@@ -182,17 +183,9 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 <span class="eyebrow" data-fr="Parcours" data-en="Career">Parcours</span>
 <h2 data-fr="Carrière en club" data-en="Club career">Carrière en club</h2>
 </div>
-<div class="timeline reveal">
-<div class="tl-item"><div class="tl-season">2026 – 2027</div><div class="tl-title">Bourges FC</div><div class="tl-meta">National 1 · 🇫🇷 France</div></div>
-<div class="tl-item"><div class="tl-season">2025 – 2026</div><div class="tl-title">FC Girondins de Bordeaux</div><div class="tl-meta">National 1 · 🇫🇷 France</div></div>
-<div class="tl-item"><div class="tl-season">2025 – 2026</div><div class="tl-title">Stade Beaucairois FC</div><div class="tl-meta">National 3 · 🇫🇷 France</div></div>
-<div class="tl-item"><div class="tl-season">2024 – 2025</div><div class="tl-title">SAS Épinal</div><div class="tl-meta">National 1 · 🇫🇷 France</div></div>
-<div class="tl-item"><div class="tl-season">2024 – 2025</div><div class="tl-title">FC Gueugnon</div><div class="tl-meta">National 2 · 🇫🇷 France</div></div>
-<div class="tl-item"><div class="tl-season">2023 – 2024</div><div class="tl-title">USC</div><div class="tl-meta">Régional · 🇫🇷 France</div></div>
-<div class="tl-item"><div class="tl-season">2022 – 2023</div><div class="tl-title">FC Gendarmerie Nationale</div><div class="tl-meta">Ligue 1 · 🇩🇯 Djibouti</div></div>
-<div class="tl-item"><div class="tl-season">2021 – 2022</div><div class="tl-title">EAD / AS PK12</div><div class="tl-meta">Ligue 1 · 🇩🇯 Djibouti</div></div>
-<div class="tl-item"><div class="tl-season">2020 – 2021</div><div class="tl-title">Real Sport de Parakou</div><div class="tl-meta">Ligue 1 · 🇧🇯 Bénin</div></div>
-<div class="tl-item"><div class="tl-season" data-fr="Formation" data-en="Youth">Formation</div><div class="tl-title">Coton Sport de Tambacounda</div><div class="tl-meta">National 2 · 🇸🇳 Sénégal</div></div>
+<!-- Le conteneur de la timeline est vide, le script le remplit -->
+<div class="timeline reveal" id="timelineContainer">
+  <!-- Les éléments seront injectés ici -->
 </div>
 </div>
 </section>
@@ -200,7 +193,8 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 <section class="section">
 <div class="wrap">
 <div class="quote-box reveal">
-<p class="quote-text" data-fr="« Je crois que le poste de gardien est avant tout un poste de responsabilité. Chaque arrêt, chaque sortie, chaque relance peut changer un match. Mon objectif est simple : progresser chaque jour, rester humble et tout donner pour mon équipe. »" data-en="« I believe the goalkeeper position is above all a position of responsibility. Every save, every exit, every restart can change a match. My goal is simple: to improve every day, stay humble and give everything for my team. »">« Je crois que le poste de gardien est avant tout un poste de responsabilité. Chaque arrêt, chaque sortie, chaque relance peut changer un match. Mon objectif est simple : progresser chaque jour, rester humble et tout donner pour mon équipe. »</p>
+<!-- ID ajouté pour la citation -->
+<p class="quote-text" id="bioQuote" data-fr="« Je crois que le poste de gardien est avant tout un poste de responsabilité. Chaque arrêt, chaque sortie, chaque relance peut changer un match. Mon objectif est simple : progresser chaque jour, rester humble et tout donner pour mon équipe. »" data-en="« I believe the goalkeeper position is above all a position of responsibility. Every save, every exit, every restart can change a match. My goal is simple: to improve every day, stay humble and give everything for my team. »">« Je crois que le poste de gardien est avant tout un poste de responsabilité. Chaque arrêt, chaque sortie, chaque relance peut changer un match. Mon objectif est simple : progresser chaque jour, rester humble et tout donner pour mon équipe. »</p>
 <div class="quote-author">— Dava David Agossa</div>
 </div>
 <div style="text-align:center;margin-top:2.5rem">
@@ -273,6 +267,76 @@ document.querySelectorAll('.lang-toggle button').forEach(b=>b.addEventListener('
 setLang(currentLang);
 document.getElementById('chatToggle').addEventListener('click', ()=>{ const p = document.getElementById('chatPanel'); p.classList.toggle('open'); if (p.classList.contains('open') && !document.getElementById('chatBody').children.length){ addMsg(currentLang === 'fr' ? "Bonjour 👋 Je suis l'assistant de Dava David Agossa." : "Hello 👋 I'm Dava David Agossa's assistant.", 'bot'); } });
 document.getElementById('chatClose').addEventListener('click', ()=>{ document.getElementById('chatPanel').classList.remove('open'); });
+</script>
+
+<script type="module">
+import { db } from './firebase-config.js';
+import { doc, getDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const esc = (s) => String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+// Petite fonction pour traduire le nom du pays en drapeau (emoji)
+function getFlag(pays) {
+  if (!pays) return '🌍';
+  const p = pays.toLowerCase();
+  if (p.includes('france')) return '🇫🇷';
+  if (p.includes('bénin') || p.includes('benin')) return '🇧🇯';
+  if (p.includes('djibouti')) return '🇩🇯';
+  if (p.includes('sénégal') || p.includes('senegal')) return '🇸🇳';
+  if (p.includes('côte') || p.includes('ivoire')) return '🇨🇮';
+  return '🌍';
+}
+
+async function loadBiographie() {
+  try {
+    // 1. Charger le Profil (Âge, Taille, Poids, Club, etc.)
+    const dProfil = await getDoc(doc(db, 'profil', 'principal'));
+    if (dProfil.exists()) {
+      const p = dProfil.data();
+      if (p.age) document.getElementById('bioAge').textContent = p.age + (currentLang === 'en' ? ' y/o' : ' ans');
+      if (p.taille) document.getElementById('bioTaille').textContent = p.taille;
+      if (p.poids) document.getElementById('bioPoids').textContent = p.poids;
+      if (p.pied) document.getElementById('bioPied').textContent = p.pied;
+      if (p.club) {
+        const clubText = p.niveau ? `${p.club} (${p.niveau})` : p.club;
+        document.getElementById('bioClub').textContent = clubText;
+      }
+    }
+
+    // 2. Charger la Citation (Textes)
+    const dTextes = await getDoc(doc(db, 'textes', 'site'));
+    if (dTextes.exists()) {
+      const t = dTextes.data();
+      if (t.quoteFr && currentLang === 'fr') document.getElementById('bioQuote').textContent = t.quoteFr;
+      if (t.quoteEn && currentLang === 'en') document.getElementById('bioQuote').textContent = t.quoteEn;
+    }
+
+    // 3. Charger la Carrière (Timeline dynamique avec logos et drapeaux)
+    const snapCar = await getDocs(collection(db, 'carriere'));
+    if (!snapCar.empty) {
+      const timeline = document.getElementById('timelineContainer');
+      // On trie par saison décroissante (ex: 2026 -> 2020)
+      const docs = snapCar.docs.map(d => d.data()).sort((a,b) => (b.saison||'').localeCompare(a.saison||''));
+      
+      timeline.innerHTML = docs.map(c => `
+        <div class="tl-item">
+          <div class="tl-season">${esc(c.saison)}</div>
+          <div class="tl-title">
+            ${c.logo ? `<img src="${esc(c.logo)}" class="tl-logo" onerror="this.style.display='none'"/>` : ''}
+            ${esc(c.club)}
+          </div>
+          <div class="tl-meta">${esc(c.division)} · ${getFlag(c.pays)} ${esc(c.pays)}</div>
+        </div>
+      `).join('');
+    }
+
+  } catch(e) { 
+    console.warn("Erreur chargement biographie admin (les infos par défaut restent affichées) :", e); 
+  }
+}
+
+// Lancer le chargement
+loadBiographie();
 </script>
 </body>
 </html>
