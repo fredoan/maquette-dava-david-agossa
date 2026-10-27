@@ -86,11 +86,9 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 .video-body{padding:1.1rem 1.3rem;display:flex;flex-direction:column;flex:1}
 .video-meta{font-family:var(--f-m);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--or-clair);margin-bottom:.4rem}
 .video-title{font-family:var(--f-d);font-size:.95rem;font-weight:600;color:var(--texte);line-height:1.35;margin-bottom:.6rem}
-/* NOUVEAU : DETAILS DU MATCH */
 .video-details{display:flex;gap:.5rem;flex-wrap:wrap;font-family:var(--f-m);font-size:.6rem;color:var(--texte-3);margin-bottom:1rem;}
 .video-details span{display:inline-flex;align-items:center;gap:.3rem;}
 
-/* NOUVEAU : STATS SUR LA CARTE */
 .card-stats{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:1rem;border-top:1px solid rgba(212,175,90,.15);font-family:var(--f-m);font-size:0.75rem;color:var(--texte-3);}
 .card-stats span{display:flex;align-items:center;gap:0.4rem;}
 .card-stats b{color:var(--or-clair);font-weight:700;}
@@ -239,7 +237,7 @@ document.getElementById('chatClose').addEventListener('click', ()=>{ document.ge
 
 <script type="module">
 import { db } from './firebase-config.js';
-import { collection, query, orderBy, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { Engagement } from './engagement.js';
 
 const esc = (s) => String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -253,7 +251,7 @@ const getEmbed = (url) => {
   return url;
 };
 
-// ⭐ VIDÉOS PAR DÉFAUT (Si l'Admin est vide)
+// ⭐ VIDÉOS PAR DÉFAUT
 const DEFAULT_VIDEOS = [
   { id: 'v1', titre: 'Highlights Saison 2024-2025', categorie: 'Highlights', url: 'https://www.youtube.com/watch?v=LXb3EKWsInQ', competition: 'National 1', club: 'Bourges FC', dateMatch: '2025-05-15' },
   { id: 'v2', titre: 'Arrêts décisifs - Derby', categorie: 'Arrêts & réflexes', url: 'https://www.youtube.com/watch?v=LXb3EKWsInQ', competition: 'National 2', club: 'Bordeaux', dateMatch: '2025-03-10' },
@@ -274,7 +272,6 @@ function renderVideos(){
 
   grid.innerHTML = filtered.map(v => {
     const thumb = v.vignetteUrl || ytThumb(v.url) || 'ph11.jpeg';
-    // Formatage de la date si elle existe
     const dateStr = v.dateMatch ? new Date(v.dateMatch).toLocaleDateString('fr-FR') : '';
     
     return `
@@ -286,13 +283,11 @@ function renderVideos(){
         <div class="video-body">
           <div class="video-meta">${esc(v.categorie || 'Vidéo')}</div>
           <div class="video-title">${esc(v.titre || 'Sans titre')}</div>
-          <!-- NOUVEAU : Détails du match -->
           <div class="video-details">
             ${v.competition ? `<span>🏆 ${esc(v.competition)}</span>` : ''}
             ${v.club ? `<span>🛡️ ${esc(v.club)}</span>` : ''}
             ${dateStr ? `<span>📅 ${dateStr}</span>` : ''}
           </div>
-          <!-- NOUVEAU : Vues et Likes sur la carte -->
           <div class="card-stats">
             <span>👁️ <b class="stat-views" data-id="${v.id}">0</b></span>
             <div class="btn-card-like" data-id="${v.id}" data-type="video">
@@ -304,12 +299,9 @@ function renderVideos(){
     `;
   }).join('');
 
-  // Attacher les événements sur les cartes
   document.querySelectorAll('.video-card').forEach(card => {
     card.addEventListener('click', (e) => {
-      // Si on clique sur le bouton Like, on ne lance pas la vidéo
       if (e.target.closest('.btn-card-like')) return;
-
       const url = card.dataset.url;
       const title = card.dataset.title;
       const videoId = card.dataset.id;
@@ -327,7 +319,6 @@ function renderVideos(){
     });
   });
 
-  // Lancer l'engagement (Vues/Likes) sur les cartes
   attachCardEngagement();
 }
 
@@ -367,13 +358,22 @@ function attachCardEngagement() {
 
 async function chargerVideos(){
   try {
-    const q = query(collection(db, 'videos'), orderBy('date', 'desc'));
-    const snap = await getDocs(q);
+    // ⭐ MODIFICATION : On récupère TOUTES les vidéos sans orderBy (pour éviter les bugs d'index)
+    const snap = await getDocs(collection(db, 'videos'));
     
     if (snap.empty) {
       allVideos = DEFAULT_VIDEOS;
     } else {
-      allVideos = snap.docs.map(d => ({ id: d.id, ...d.data() })).filter(v => v.publie !== false);
+      // On convertit les données et on trie manuellement par date (du plus récent au plus ancien)
+      let videos = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      
+      videos.sort((a, b) => {
+        const dateA = a.date ? (a.date.toDate ? a.date.toDate().getTime() : new Date(a.date).getTime()) : 0;
+        const dateB = b.date ? (b.date.toDate ? b.date.toDate().getTime() : new Date(b.date).getTime()) : 0;
+        return dateB - dateA;
+      });
+      
+      allVideos = videos.filter(v => v.publie !== false);
     }
     
     renderVideos();
