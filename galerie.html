@@ -83,6 +83,14 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 @media(max-width:980px){.gal-grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:640px){.gal-grid{grid-template-columns:repeat(2,1fr)}}
 
+/* Fallback si l'image ne charge pas */
+.photo-fallback {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  width: 100%; height: 100%; background: rgba(255,255,255,.03); color: var(--or-clair);
+  font-family: var(--f-m); font-size: .6rem; text-align: center; padding: 1rem;
+}
+.photo-fallback span { font-size: 2rem; margin-bottom: .5rem; }
+
 .lightbox{position:fixed;inset:0;z-index:1000;background:rgba(10,6,6,.96);display:none;align-items:center;justify-content:center;padding:20px;cursor:zoom-out;overflow-y:auto}
 .lightbox.open{display:flex}
 .lightbox img{max-width:90vw;max-height:70vh;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,.8)}
@@ -147,9 +155,11 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 <div class="wrap">
 <div class="filters" id="filters">
 <button class="filter-btn active" data-cat="all" data-fr="Toutes" data-en="All">Toutes</button>
-<button class="filter-btn" data-cat="Sélection Bénin" data-fr="🇧🇯 Sélection Bénin" data-en="🇧🇯 Benin Selection">🇧🇯 Sélection Bénin</button>
-<button class="filter-btn" data-cat="Match & Clubs" data-fr="⚽ Match & Clubs" data-en="⚽ Matches & Clubs">⚽ Match & Clubs</button>
-<button class="filter-btn" data-cat="Ses photos" data-fr="📸 Ses photos" data-en="📸 His photos">📸 Ses photos</button>
+<button class="filter-btn" data-cat="Photos en club" data-fr="⚽ Photos en club" data-en="⚽ Club photos">⚽ Photos en club</button>
+<button class="filter-btn" data-cat="Photos avec les sélections nationales" data-fr="🇧🇯 Sélections nationales" data-en="🇧🇯 National team">🇧🇯 Sélections nationales</button>
+<button class="filter-btn" data-cat="Photos de matchs" data-fr="🏟️ Photos de matchs" data-en="🏟️ Match photos">🏟️ Photos de matchs</button>
+<button class="filter-btn" data-cat="Photos d'entraînement" data-fr="🏃 Entraînement" data-en="🏃 Training">🏃 Entraînement</button>
+<button class="filter-btn" data-cat="Portraits professionnels" data-fr="📸 Portraits" data-en="📸 Portraits">📸 Portraits</button>
 </div>
 <div class="gal-grid" id="galerieGrid">
 <div class="empty-state">Chargement...</div>
@@ -209,45 +219,48 @@ document.getElementById('chatClose').addEventListener('click', ()=>{ document.ge
 </script>
 
 <script type="module">
+import { db } from './firebase-config.js';
+import { collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { Engagement } from './engagement.js';
-let db = null, fb = null;
-try {
-  const mod = await import('./firebase-config.js');
-  db = mod.db;
-  fb = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js");
-} catch(e){ console.warn('Firebase non chargé:', e); }
 
 const esc = (s) => String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-const INITIAL_PHOTOS = [];
+// ⭐ VOS 30 PHOTOS PAR DÉFAUT (Pour ne jamais avoir une page vide)
+const DEFAULT_PHOTOS = [];
 for (let i = 1; i <= 30; i++) {
-  let cat = 'Ses photos';
-  if (i <= 10) cat = 'Sélection Bénin';
-  else if (i <= 20) cat = 'Match & Clubs';
-  INITIAL_PHOTOS.push({ file: `ph${i}.jpeg`, cat: cat, title: `${cat} — Photo ${i}` });
+  let cat = 'Portraits professionnels'; // Catégorie par défaut
+  if (i <= 10) cat = 'Photos avec les sélections nationales';
+  else if (i <= 20) cat = 'Photos en club';
+  
+  DEFAULT_PHOTOS.push({ 
+    id: `photo_${i}`,
+    file: `ph${i}.jpeg`, 
+    cat: cat, 
+    title: `${cat} — Photo ${i}` 
+  });
 }
 
-let externalPhotos = [];
+let allPhotos = [];
 let currentFilter = 'all';
 
 function renderGalerie(){
   const grid = document.getElementById('galerieGrid');
-  let allPhotos = [...INITIAL_PHOTOS];
   
-  externalPhotos.forEach(p => {
-    allPhotos.push({ file: p.url, cat: p.categorie, title: p.titre });
-  });
-
   const filtered = currentFilter === 'all' ? allPhotos : allPhotos.filter(p => p.cat === currentFilter);
 
   if (!filtered.length) {
-    grid.innerHTML = `<div class="empty-state">Aucune photo.</div>`;
+    grid.innerHTML = `<div class="empty-state">Aucune photo dans cette catégorie.</div>`;
     return;
   }
 
   grid.innerHTML = filtered.map(p => `
-    <div class="gal-item" data-id="${esc(p.file.replace('.jpeg',''))}" data-src="${esc(p.file)}" data-title="${esc(p.title)}">
-      <img src="${esc(p.file)}" alt="${esc(p.title)}" loading="lazy" onerror="this.style.display='none'"/>
+    <div class="gal-item" data-id="${esc(p.id)}" data-src="${esc(p.file)}" data-title="${esc(p.title)}">
+      <img src="${esc(p.file)}" alt="${esc(p.title)}" loading="lazy" 
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"/>
+      <div class="photo-fallback" style="display:none;">
+        <span>📸</span>
+        <div>Photo à venir</div>
+      </div>
       <span class="gi-tag">${esc(p.cat)}</span>
     </div>
   `).join('');
@@ -265,6 +278,7 @@ function renderGalerie(){
       engZone.innerHTML = '';
       
       if (photoId) {
+        // On lance le module d'engagement (likes/commentaires) pour cette photo
         Engagement.render('photo-engagement', 'photo', photoId, window.location.href, title);
       }
       
@@ -273,13 +287,34 @@ function renderGalerie(){
   });
 }
 
-async function chargerPhotosExternes(){
-  if (!db || !fb) { renderGalerie(); return; }
+async function chargerPhotosAdmin(){
   try {
-    const snap = await fb.getDocs(fb.collection(db, 'galerie'));
-    externalPhotos = snap.docs.map(d => d.data()).filter(p => !p.isInitial);
+    const snap = await getDocs(collection(db, 'galerie'));
+    
+    if (snap.empty) {
+      // Si l'Admin est vide, on affiche vos 30 photos locales
+      allPhotos = DEFAULT_PHOTOS;
+    } else {
+      // Si l'Admin contient des photos, on les affiche (elles remplacent les locales)
+      allPhotos = snap.docs.map(d => {
+        const data = d.data();
+        return {
+          id: d.id,
+          file: data.url || data.fichier, // On prend l'URL externe ou le fichier local
+          cat: data.categorie || 'Photos en club',
+          title: data.titre || 'Photo'
+        };
+      });
+      // On trie pour mettre les photos initiales (les 30) en premier
+      allPhotos.sort((a,b) => (a.id.includes('photo_') && b.id.includes('photo_')) ? a.id.localeCompare(b.id) : (a.id.includes('photo_') ? -1 : 1));
+    }
+    
     renderGalerie();
-  } catch(e){ console.warn('galerie:', e); renderGalerie(); }
+  } catch(e) {
+    console.warn("Erreur Firebase, utilisation des photos par défaut :", e);
+    allPhotos = DEFAULT_PHOTOS;
+    renderGalerie();
+  }
 }
 
 document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -295,7 +330,8 @@ document.getElementById('lbClose').addEventListener('click', () => document.getE
 document.getElementById('lightbox').addEventListener('click', (e) => { if (e.target.id === 'lightbox') document.getElementById('lightbox').classList.remove('open'); });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') document.getElementById('lightbox').classList.remove('open'); });
 
-chargerPhotosExternes();
+// Lancer le chargement
+chargerPhotosAdmin();
 </script>
 </body>
 </html>
