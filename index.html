@@ -93,16 +93,17 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 .btn-primary:hover{background:var(--or-vif);transform:translateY(-2px);box-shadow:0 12px 32px rgba(212,175,90,.45)}
 .btn-ghost{background:transparent;color:var(--texte);border:1.5px solid var(--border-fort)}
 .btn-ghost:hover{border-color:var(--or-clair);color:var(--or-clair);background:rgba(212,175,90,.08)}
-.hero-photo{position:relative;aspect-ratio:4/5;border:1px solid var(--border-fort);border-radius:6px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.6);transform:rotate(-1.5deg);transition:transform .6s;background:linear-gradient(160deg,#4a0505,var(--fond-5))}
-.hero-photo:hover{transform:rotate(0deg) scale(1.01)}
-.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:center top}
-.hero-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(26,0,0,.9) 100%);pointer-events:none}
-.hero-photo-tag{position:absolute;bottom:1.2rem;left:1.2rem;right:1.2rem;z-index:2;display:flex;justify-content:space-between;align-items:end;font-family:var(--f-m);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--or-clair)}
+
+/* --- EFFET 3D PHOTO --- */
+.hero-photo-wrap { perspective: 1000px; }
+.hero-photo{position:relative;aspect-ratio:4/5;border:1px solid var(--border-fort);border-radius:6px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.6);background:linear-gradient(160deg,#4a0505,var(--fond-5));transform-style:preserve-3d;transition:transform .1s ease-out;}
+.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;transform:translateZ(20px);}
+.hero-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(26,0,0,.9) 100%);pointer-events:none;transform:translateZ(15px);}
+.hero-photo-tag{position:absolute;bottom:1.2rem;left:1.2rem;right:1.2rem;z-index:2;display:flex;justify-content:space-between;align-items:end;font-family:var(--f-m);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--or-clair);transform:translateZ(30px);}
 .hero-photo-tag strong{font-family:var(--f-d);font-size:.85rem;font-weight:900;color:var(--texte);display:block;margin-bottom:.15rem}
 .hero-photo-fallback{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;font-family:var(--f-d);color:var(--or-clair)}
 .hero-photo-fallback span{font-size:5rem;font-weight:900;opacity:.3;line-height:1;margin-bottom:1rem}
-.hero-photo-fallback small{font-family:var(--f-m);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;opacity:.6}
-@media(max-width:900px){.hero-inner{grid-template-columns:1fr}.hero-photo{max-width:340px;margin-inline:auto;transform:rotate(0)}}
+@media(max-width:900px){.hero-inner{grid-template-columns:1fr}.hero-photo-wrap{max-width:340px;margin-inline:auto}}
 
 .sel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
 .sel-card{position:relative;background:linear-gradient(180deg,rgba(86,10,10,.4),rgba(26,0,0,.7));border:1px solid var(--border);border-radius:8px;padding:clamp(24px,4vw,40px) 1.5rem;text-align:center;transition:all .35s}
@@ -114,15 +115,19 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 .sel-lbl{font-family:var(--f-m);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--texte-3)}
 @media(max-width:820px){.sel-grid{grid-template-columns:1fr;max-width:400px;margin-inline:auto}}
 
+/* --- LISTE CLUBS AMÉLIORÉE --- */
 .clubs-list{list-style:none;border-top:1px solid var(--border);max-width:900px;margin-inline:auto}
 .clubs-list li{display:grid;grid-template-columns:auto 1fr auto auto;gap:1.2rem;align-items:center;padding:1.2rem .6rem;border-bottom:1px solid var(--border);transition:all .3s}
 .clubs-list li:hover{background:rgba(86,10,10,.3);padding-left:1.2rem}
-.clubs-logo{width:40px;height:40px;object-fit:contain;flex-shrink:0}
+/* LOGOS CLUBS */
+.clubs-logo-wrap{width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid var(--border-fort);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;backdrop-filter:blur(5px);transition:transform .3s}
+.clubs-list li:hover .clubs-logo-wrap{transform:scale(1.1);border-color:var(--or-clair);box-shadow:0 0 15px rgba(212,175,90,.3)}
+.clubs-logo{width:80%;height:80%;object-fit:contain}
 .clubs-season{font-family:var(--f-m);font-size:.65rem;color:var(--or-clair);letter-spacing:.14em;margin-bottom:.2rem}
 .clubs-name{font-family:var(--f-d);font-size:clamp(1rem,2.2vw,1.5rem);font-weight:700;color:var(--texte)}
 .clubs-lvl{font-family:var(--f-m);font-size:.7rem;color:var(--or-clair);white-space:nowrap}
 .clubs-country{font-family:var(--f-m);font-size:.7rem;color:var(--texte-3);min-width:80px;text-align:right}
-@media(max-width:600px){.clubs-list li{grid-template-columns:auto 1fr auto}.clubs-country{grid-column:1/-1;text-align:left;padding-left:52px}}
+@media(max-width:600px){.clubs-list li{grid-template-columns:auto 1fr auto}.clubs-country{grid-column:1/-1;text-align:left;padding-left:60px}}
 
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
 .stat-card{background:linear-gradient(180deg,rgba(86,10,10,.4),rgba(26,0,0,.7));border:1px solid var(--border);border-radius:8px;padding:clamp(24px,4vw,40px) 1rem;text-align:center;transition:all .3s}
@@ -130,6 +135,15 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 .stat-num{font-family:var(--f-d);font-weight:900;font-size:clamp(2rem,4.5vw,3.2rem);line-height:1;background:linear-gradient(180deg,#fff 30%,var(--or-vif) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;display:block;margin-bottom:.5rem}
 .stat-lbl{font-family:var(--f-m);font-size:.58rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--texte-3)}
 @media(max-width:820px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* --- GALERIE MODERNE --- */
+.gal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1rem}
+.gal-item{position:relative;border-radius:8px;overflow:hidden;cursor:pointer;aspect-ratio:1;border:1px solid var(--border);background:var(--fond-5)}
+.gal-item img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.gal-item:hover img{transform:scale(1.1)}
+.gal-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,0,0,.9) 0%,transparent 50%);opacity:0;transition:opacity .3s ease;display:flex;align-items:flex-end;padding:1rem}
+.gal-item:hover .gal-overlay{opacity:1}
+.gal-cat{font-family:var(--f-m);font-size:.65rem;text-transform:uppercase;color:var(--or-clair);background:rgba(0,0,0,.6);padding:4px 8px;border-radius:3px}
 
 /* VIDÉOS & ACTUS */
 .videos-grid,.news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
@@ -247,22 +261,24 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 </nav>
 
 <header class="hero">
-<!-- ID ajouté pour la photo de fond -->
 <div class="hero-bg"><img id="heroBgImg" src="ph11.jpeg" alt="Dava David Agossa en action" onerror="this.style.display='none'"/></div>
 <div class="hero-inner">
 <div>
 <span class="hero-tag" data-fr="Portfolio officiel · 2026" data-en="Official portfolio · 2026">Portfolio officiel · 2026</span>
 <h1><span class="l1">Dava David</span><span class="l2">AGOSSA</span></h1>
-<!-- IDs ajoutés pour le poste et le statut -->
 <p class="hero-role" id="heroRole" data-fr="Gardien de but professionnel" data-en="Professional goalkeeper">Gardien de but professionnel</p>
 <p class="hero-club"><span id="heroClub">Bourges FC · National 1 🇫🇷</span> — <span id="heroStatut" data-fr="International Bénin U20 & U23" data-en="Benin U20 & U23 international">International Bénin U20 & U23</span></p>
 <p class="hero-sub" id="heroBio" data-fr="Gardien de but béninois, formé entre le Bénin et le Sénégal, international U20 et U23, avec un parcours entre le Bénin, le Sénégal, Djibouti et la France." data-en="Beninese goalkeeper, trained between Benin and Senegal, U20 and U23 international, with a career across Benin, Senegal, Djibouti and France.">Gardien de but béninois, formé entre le Bénin et le Sénégal, international U20 et U23, avec un parcours entre le Bénin, le Sénégal, Djibouti et la France.</p>
-<!-- IDs ajoutés pour les faits et les langues -->
 <div class="hero-facts"><span id="heroAge" data-fr="23 ans" data-en="23 y/o">23 ans</span><span id="heroTaille">1,87 m</span><span id="heroPoids">75 kg</span><span id="heroPied" data-fr="Droitier" data-en="Right-footed">Droitier</span><span id="heroSel" data-fr="29 sélections" data-en="29 caps">29 sélections</span><span id="heroLangues" style="display:none;"></span></div>
 <div class="hero-actions"><a href="videos.html" class="btn-primary">🎥 <span data-fr="Voir mes vidéos" data-en="Watch videos">Voir mes vidéos</span></a><a href="contact.html" class="btn-ghost">📩 <span data-fr="Me contacter" data-en="Contact me">Me contacter</span></a></div>
 </div>
-<!-- ID ajouté pour la photo principale -->
-<div class="hero-photo"><img id="heroMainImg" src="ph21.jpeg" alt="Portrait Dava David Agossa" onerror="this.style.display='none'; this.parentElement.querySelector('.hero-photo-fallback').style.display='flex'"/><div class="hero-photo-fallback"><span>#1</span><small>Dava David Agossa</small></div><div class="hero-photo-tag"><div><strong>Dava David Agossa</strong><span id="heroClubTag">Bourges FC · N1</span></div><span>#1</span></div></div>
+<div class="hero-photo-wrap">
+  <div class="hero-photo" id="hero3D">
+    <img id="heroMainImg" src="ph21.jpeg" alt="Portrait Dava David Agossa" onerror="this.style.display='none'; this.parentElement.querySelector('.hero-photo-fallback').style.display='flex'"/>
+    <div class="hero-photo-fallback"><span>#1</span><small>Dava David Agossa</small></div>
+    <div class="hero-photo-tag"><div><strong>Dava David Agossa</strong><span id="heroClubTag">Bourges FC · N1</span></div><span>#1</span></div>
+  </div>
+</div>
 </div>
 </header>
 
@@ -279,8 +295,12 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 
 <section class="section bg-alt">
 <div class="wrap">
-<div class="section-title reveal"><span class="eyebrow" data-fr="Carrière en club" data-en="Club career">Carrière en club</span><h2 data-fr="Parcours professionnel" data-en="Professional career">Parcours professionnel</h2></div>
-<!-- Le ul est maintenant vide, le script le remplira -->
+<div class="section-title reveal">
+  <span class="eyebrow" data-fr="Carrière en club" data-en="Club career">Carrière en club</span>
+  <h2 data-fr="Parcours professionnel" data-en="Professional career">Parcours professionnel</h2>
+  <!-- TEXTE AJOUTÉ ICI -->
+  <p id="txtIntroCarriere" data-fr="De ses débuts au Bénin jusqu'à son poste de gardien titulaire au Bourges FC, découvrez les étapes clés de son ascension professionnelle à travers l'Afrique et l'Europe." data-en="From his beginnings in Benin to his position as a starting goalkeeper at Bourges FC, discover the key stages of his professional rise across Africa and Europe.">De ses débuts au Bénin jusqu'à son poste de gardien titulaire au Bourges FC, découvrez les étapes clés de son ascension professionnelle à travers l'Afrique et l'Europe.</p>
+</div>
 <ul class="clubs-list reveal" id="carriereHomeList"></ul>
 <div style="text-align:center;margin-top:2rem"><a href="biographie.html" class="btn-ghost"><span data-fr="Voir tout le parcours" data-en="See full career">Voir tout le parcours</span> →</a></div>
 </div>
@@ -290,7 +310,6 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 <div class="wrap">
 <div class="section-title reveal"><span class="eyebrow" data-fr="Statistiques" data-en="Statistics">Statistiques</span><h2 data-fr="Les chiffres clés" data-en="Key figures">Les chiffres clés</h2></div>
 <div class="stats-grid">
-<!-- ID ajouté pour Pro Depuis -->
 <div class="stat-card reveal"><span class="stat-num" id="statProDepuis">2020</span><span class="stat-lbl" data-fr="Pro depuis" data-en="Pro since">Pro depuis</span></div>
 <div class="stat-card reveal"><span class="stat-num" data-count="4">0</span><span class="stat-lbl" data-fr="Pays" data-en="Countries">Pays</span></div>
 <div class="stat-card reveal"><span class="stat-num" data-count="29">0</span><span class="stat-lbl" data-fr="Sélections" data-en="Caps">Sélections</span></div>
@@ -302,7 +321,12 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 
 <section class="section bg-alt">
 <div class="wrap">
-<div class="section-title reveal"><span class="eyebrow" data-fr="Médias" data-en="Media">Médias</span><h2 data-fr="Dernières vidéos" data-en="Latest videos">Dernières vidéos</h2></div>
+<div class="section-title reveal">
+  <span class="eyebrow" data-fr="Médias" data-en="Media">Médias</span>
+  <h2 data-fr="Dernières vidéos" data-en="Latest videos">Dernières vidéos</h2>
+  <!-- TEXTE AJOUTÉ ICI -->
+  <p id="txtIntroVideos" data-fr="Plongez au cœur de ses performances avec ses derniers arrêts, ses sorties aériennes et ses relances de haut niveau." data-en="Dive into the heart of his performances with his latest saves, aerial exits and high-level clearances.">Plongez au cœur de ses performances avec ses derniers arrêts, ses sorties aériennes et ses relances de haut niveau.</p>
+</div>
 <div class="videos-grid" id="videosHome"><div class="empty-state">Vidéos bientôt disponibles.</div></div>
 <div style="text-align:center;margin-top:2rem"><a href="videos.html" class="btn-ghost"><span data-fr="Toutes les vidéos" data-en="All videos">Toutes les vidéos</span> →</a></div>
 </div>
@@ -310,7 +334,12 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 
 <section class="section">
 <div class="wrap">
-<div class="section-title reveal"><span class="eyebrow" data-fr="Galerie" data-en="Gallery">Galerie</span><h2 data-fr="En images" data-en="In pictures">En images</h2></div>
+<div class="section-title reveal">
+  <span class="eyebrow" data-fr="Galerie" data-en="Gallery">Galerie</span>
+  <h2 data-fr="En images" data-en="In pictures">En images</h2>
+  <!-- TEXTE AJOUTÉ ICI -->
+  <p id="txtIntroGalerie" data-fr="Une sélection de ses plus belles photos, entre moments forts en club, rassemblements avec le Bénin et portraits professionnels." data-en="A selection of his best photos, between highlights in the club, gatherings with Benin and professional portraits.">Une sélection de ses plus belles photos, entre moments forts en club, rassemblements avec le Bénin et portraits professionnels.</p>
+</div>
 <div class="gal-grid" id="galerieHome"></div>
 <div style="text-align:center;margin-top:2rem"><a href="galerie.html" class="btn-ghost"><span data-fr="Toute la galerie (30 photos)" data-en="Full gallery (30 photos)">Toute la galerie (30 photos)</span> →</a></div>
 </div>
@@ -342,7 +371,6 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 <div class="wrap">
 <div class="section-title reveal" style="text-align:center;margin-inline:auto"><span class="eyebrow" data-fr="Contact" data-en="Contact">Contact</span><h2 data-fr="Travaillons ensemble" data-en="Let's work together">Travaillons ensemble</h2></div>
 <div class="contact-grid">
-<!-- IDs ajoutés pour les contacts -->
 <a href="mailto:agdavadavid@gmail.com" id="contactEmailLink" class="contact-card reveal"><div class="contact-icon">📧</div><div class="contact-lbl">Email</div><div class="contact-val" id="contactEmailVal">agdavadavid@gmail.com</div></a>
 <a href="https://wa.me/2290157312131" id="contactWaLink" target="_blank" rel="noopener" class="contact-card reveal"><div class="contact-icon">💬</div><div class="contact-lbl">WhatsApp</div><div class="contact-val" id="contactWaVal">+229 01 57 31 21 31</div></a>
 <a href="tel:+2290157312131" id="contactTelLink" class="contact-card reveal"><div class="contact-icon">📱</div><div class="contact-lbl" data-fr="Téléphone" data-en="Phone">Téléphone</div><div class="contact-val" id="contactTelVal">+229 01 57 31 21 31</div></a>
@@ -378,6 +406,24 @@ const io = new IntersectionObserver(entries=>{ entries.forEach(e=>{ if (e.isInte
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 const cIo = new IntersectionObserver(entries=>{ entries.forEach(e=>{ if (!e.isIntersecting) return; const el = e.target; const target = parseInt(el.dataset.count, 10); if (!target) return; const start = performance.now(); function anim(now){ const p = Math.min((now - start) / 1500, 1); el.textContent = Math.floor(p * target); if (p < 1) requestAnimationFrame(anim); else el.textContent = target; } requestAnimationFrame(anim); cIo.unobserve(el); }); },{ threshold:0.5 });
 document.querySelectorAll('[data-count]').forEach(el=>cIo.observe(el));
+
+// --- EFFET 3D PHOTO HERO ---
+const hero3D = document.getElementById('hero3D');
+if(hero3D) {
+  hero3D.addEventListener('mousemove', (e) => {
+    const rect = hero3D.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = (y - centerY) / 15;
+    const rotateY = (centerX - x) / 15;
+    hero3D.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+  });
+  hero3D.addEventListener('mouseleave', () => {
+    hero3D.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
+  });
+}
 
 let currentLang = localStorage.getItem('lang') || 'fr';
 const CHAT_OPTS = { fr: [{ k:'qui', l:'👤 Qui est Dava ?' }, { k:'club', l:'⚽ Son club ?' }, { k:'contact', l:'📩 Le contacter' }], en: [{ k:'qui', l:'👤 Who is Dava?' }, { k:'club', l:'⚽ His club?' }, { k:'contact', l:'📩 Contact him' }] };
@@ -450,10 +496,18 @@ async function loadDynamicData() {
     const dTextes = await getDoc(doc(db, 'textes', 'site'));
     if (dTextes.exists()) {
       const t = dTextes.data();
+      // Hero
       if (t.heroFr && currentLang === 'fr') document.getElementById('heroRole').textContent = t.heroFr;
       if (t.heroEn && currentLang === 'en') document.getElementById('heroRole').textContent = t.heroEn;
       if (t.bioFr && currentLang === 'fr') document.getElementById('heroBio').textContent = t.bioFr;
       if (t.bioEn && currentLang === 'en') document.getElementById('heroBio').textContent = t.bioEn;
+      // Intros (Parcours, Vidéos, Galerie)
+      if (t.introCarriereFr && currentLang === 'fr') document.getElementById('txtIntroCarriere').textContent = t.introCarriereFr;
+      if (t.introCarriereEn && currentLang === 'en') document.getElementById('txtIntroCarriere').textContent = t.introCarriereEn;
+      if (t.introVideosFr && currentLang === 'fr') document.getElementById('txtIntroVideos').textContent = t.introVideosFr;
+      if (t.introVideosEn && currentLang === 'en') document.getElementById('txtIntroVideos').textContent = t.introVideosEn;
+      if (t.introGalerieFr && currentLang === 'fr') document.getElementById('txtIntroGalerie').textContent = t.introGalerieFr;
+      if (t.introGalerieEn && currentLang === 'en') document.getElementById('txtIntroGalerie').textContent = t.introGalerieEn;
     }
 
     // 3. Charger les Sélections (Compteurs)
@@ -473,7 +527,9 @@ async function loadDynamicData() {
       // On affiche max 5 clubs sur l'accueil
       carList.innerHTML = docs.slice(0, 5).map(c => `
         <li>
-          ${c.logo ? `<img src="${esc(c.logo)}" class="clubs-logo" onerror="this.style.display='none'"/>` : ''}
+          <div class="clubs-logo-wrap">
+            ${c.logo ? `<img src="${esc(c.logo)}" class="clubs-logo" onerror="this.parentElement.style.display='none'"/>` : '⚽'}
+          </div>
           <div>
             <div class="clubs-season">${esc(c.saison)}</div>
             <div class="clubs-name">${esc(c.club)}</div>
@@ -484,7 +540,7 @@ async function loadDynamicData() {
       `).join('');
     }
 
-    // 5. Charger la Galerie
+    // 5. Charger la Galerie (Nouveau design moderne)
     const snapGal = await getDocs(collection(db, 'galerie'));
     if (!snapGal.empty) {
       const galList = document.getElementById('galerieHome');
@@ -492,9 +548,11 @@ async function loadDynamicData() {
       // On affiche 6 photos sur l'accueil
       galList.innerHTML = docs.slice(0, 6).map(p => {
         const file = p.url || p.fichier;
-        return `<div class="gal-item" data-file="${esc(file)}" style="position:relative;aspect-ratio:1;overflow:hidden;border-radius:4px;cursor:pointer;border:1px solid var(--border);background:var(--fond-5)">
-          <img src="${esc(file)}" alt="${esc(p.alt || 'Dava David Agossa')}" loading="lazy" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none'"/>
-          <span style="position:absolute;bottom:.8rem;left:.8rem;z-index:2;font-family:var(--f-m);font-size:.55rem;text-transform:uppercase;color:var(--or-clair);background:rgba(0,0,0,.6);padding:2px 6px;border-radius:2px">${esc(p.categorie || '')}</span>
+        return `<div class="gal-item" data-file="${esc(file)}">
+          <img src="${esc(file)}" alt="${esc(p.alt || 'Dava David Agossa')}" loading="lazy" onerror="this.style.display='none'"/>
+          <div class="gal-overlay">
+            <span class="gal-cat">${esc(p.categorie || 'Photo')}</span>
+          </div>
         </div>`;
       }).join('');
       // Lightbox
