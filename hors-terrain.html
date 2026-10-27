@@ -75,6 +75,8 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 .tl li::before{content:'';position:absolute;left:-1.65rem;top:.4rem;width:10px;height:10px;border-radius:50%;background:var(--or-clair);border:2px solid var(--fond)}
 .tl b{display:block;font-size:1.05rem;color:var(--texte);margin-bottom:.2rem;font-family:var(--f-d)}
 .tl span{font-size:.85rem;color:var(--texte-3);font-family:var(--f-m)}
+/* AMÉLIORATION AFFICHAGE DESCRIPTION */
+.tl .desc { font-size:.9rem; color:var(--texte-2); line-height:1.5; margin-top:.5rem; }
 .empty-state{font-size:.9rem;color:var(--texte-3);font-style:italic}
 @media(max-width:900px){.col3{grid-template-columns:1fr}}
 
@@ -178,6 +180,7 @@ document.documentElement.classList.add('js-ready');
 const burger = document.getElementById('burger'), navLinks = document.getElementById('navLinks');
 burger.addEventListener('click', ()=>{ navLinks.classList.toggle('open'); burger.classList.toggle('open'); });
 navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>{ navLinks.classList.remove('open'); burger.classList.remove('open'); }));
+
 const io = new IntersectionObserver(entries=>{ entries.forEach(e=>{ if (e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } }); },{ threshold:0.12 });
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
@@ -187,22 +190,44 @@ const CHAT_ANS = { qui: { fr: "Dava David Agossa est un gardien de but professio
 function renderChat(){ const opts = document.getElementById('chatOptions'); opts.innerHTML = CHAT_OPTS[currentLang].map(o=>`<button class="chat-opt" data-k="${o.k}">${o.l}</button>`).join(''); opts.querySelectorAll('.chat-opt').forEach(b=>b.addEventListener('click', ()=> askChat(b.dataset.k))); }
 function addMsg(text, sender){ const body = document.getElementById('chatBody'); const div = document.createElement('div'); div.className = 'chat-msg ' + sender; div.textContent = text; body.appendChild(div); body.scrollTop = body.scrollHeight; }
 function askChat(key){ addMsg(CHAT_ANS[key][currentLang], 'bot'); }
-function setLang(lang){ currentLang = lang; localStorage.setItem('lang', lang); document.documentElement.lang = lang; document.querySelectorAll('[data-fr]').forEach(el=>{ const t = el.getAttribute('data-' + lang); if (t) el.textContent = t; }); document.querySelectorAll('.lang-toggle button').forEach(b=>b.classList.toggle('active', b.dataset.lang === lang)); renderChat(); }
+
+// Modification de setLang pour re-rendre les listes au changement de langue
+const originalSetLang = window.setLang;
+function setLang(lang){ 
+  currentLang = lang; localStorage.setItem('lang', lang); document.documentElement.lang = lang; 
+  document.querySelectorAll('[data-fr]').forEach(el=>{ const t = el.getAttribute('data-' + lang); if (t) el.textContent = t; }); 
+  document.querySelectorAll('.lang-toggle button').forEach(b=>b.classList.toggle('active', b.dataset.lang === lang)); 
+  renderChat(); 
+  if (window.htData) renderLists(window.htData);
+}
 document.querySelectorAll('.lang-toggle button').forEach(b=>b.addEventListener('click', ()=> setLang(b.dataset.lang)));
 setLang(currentLang);
+
 document.getElementById('chatToggle').addEventListener('click', ()=>{ const p = document.getElementById('chatPanel'); p.classList.toggle('open'); if (p.classList.contains('open') && !document.getElementById('chatBody').children.length){ addMsg(currentLang === 'fr' ? "Bonjour 👋 Je suis l'assistant de Dava David Agossa." : "Hello 👋 I'm Dava David Agossa's assistant.", 'bot'); } });
 document.getElementById('chatClose').addEventListener('click', ()=>{ document.getElementById('chatPanel').classList.remove('open'); });
 </script>
 
 <script type="module">
-let db = null, fb = null;
-try {
-  const mod = await import('./firebase-config.js');
-  db = mod.db;
-  fb = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js");
-} catch(e){ console.warn('Firebase non chargé:', e); }
+import { db } from './firebase-config.js';
+import { collection, query, orderBy, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const esc = (s) => String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+// ⭐ DONNÉES PAR DÉFAUT (Si l'Admin est vide)
+const DEFAULT_HT = {
+  fr: [
+    { categorie: 'formation', titre: 'Formation professionnelle', sousTitre: 'En cours', description: 'Formation suivie en parallèle de la carrière sportive.' },
+    { categorie: 'experience', titre: 'Expérience terrain', sousTitre: '2023 - Aujourd\'hui', description: 'Expérience acquise dans le milieu du football professionnel.' },
+    { categorie: 'projet', titre: 'Projet personnel', sousTitre: 'Vision long terme', description: 'Développement de projets liés au sport et à l\'éducation.' }
+  ],
+  en: [
+    { categorie: 'formation', titre: 'Professional Training', sousTitre: 'Ongoing', description: 'Training pursued alongside the sports career.' },
+    { categorie: 'experience', titre: 'Field Experience', sousTitre: '2023 - Present', description: 'Experience gained in the professional football sector.' },
+    { categorie: 'projet', titre: 'Personal Project', sousTitre: 'Long-term vision', description: 'Development of projects linked to sport and education.' }
+  ]
+};
+
+window.htData = []; // Global pour le re-rendu
 
 function renderList(elementId, dataArray) {
   const el = document.getElementById(elementId);
@@ -214,30 +239,41 @@ function renderList(elementId, dataArray) {
     <li>
       <b>${esc(item.titre)}</b>
       <span>${esc(item.sousTitre || '')}</span>
-      ${item.description ? `<div style="font-size:0.85rem;margin-top:0.3rem;color:var(--texte-3)">${esc(item.description)}</div>` : ''}
+      ${item.description ? `<div class="desc">${esc(item.description)}</div>` : ''}
     </li>
   `).join('');
 }
 
-async function chargerHorsTerrain(){
-  if (!db || !fb) return;
-  try {
-    const q = fb.query(fb.collection(db, 'horsTerrain'), fb.orderBy('ordre', 'asc'));
-    const snap = await fb.getDocs(q);
-    
-    const items = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-    const formations = items.filter(i => i.categorie === 'formation');
-    const experiences = items.filter(i => i.categorie === 'experience');
-    const projets = items.filter(i => i.categorie === 'projet');
+window.renderLists = function(data) {
+  const formations = data.filter(i => i.categorie === 'formation');
+  const experiences = data.filter(i => i.categorie === 'experience');
+  const projets = data.filter(i => i.categorie === 'projet');
 
-    renderList('listFormation', formations);
-    renderList('listExperience', experiences);
-    renderList('listProjet', projets);
+  renderList('listFormation', formations);
+  renderList('listExperience', experiences);
+  renderList('listProjet', projets);
+}
+
+async function chargerHorsTerrain(){
+  try {
+    const q = query(collection(db, 'horsTerrain'), orderBy('ordre', 'asc'));
+    const snap = await getDocs(q);
+    
+    if (snap.empty) {
+      window.htData = DEFAULT_HT[currentLang];
+    } else {
+      window.htData = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    }
+    
+    renderLists(window.htData);
   } catch(e) {
-    console.warn('horsTerrain:', e);
+    console.warn('Erreur chargement hors terrain, utilisation des données par défaut:', e);
+    window.htData = DEFAULT_HT[currentLang];
+    renderLists(window.htData);
   }
 }
 
+// Lancer le chargement
 chargerHorsTerrain();
 </script>
 </body>
