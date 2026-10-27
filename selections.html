@@ -153,7 +153,6 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 <section class="section">
 <div class="wrap">
 <div class="stats-big">
-<!-- IDs et valeurs par défaut ajoutés pour éviter l'effet "0" -->
 <div class="stat-big reveal"><div class="stat-big-flag">🇧🇯</div><div class="stat-big-name">Bénin U20</div><span class="stat-big-num" id="selU20Display" data-count="24">24</span><span class="stat-big-lbl" data-fr="Sélections" data-en="Caps">Sélections</span></div>
 <div class="stat-big reveal"><div class="stat-big-flag">🇧🇯</div><div class="stat-big-name">Bénin U23</div><span class="stat-big-num" id="selU23Display" data-count="5">5</span><span class="stat-big-lbl" data-fr="Sélections" data-en="Caps">Sélections</span></div>
 <div class="stat-big featured reveal"><div class="stat-big-flag">🏆</div><div class="stat-big-name" style="color:var(--or-vif)">Total</div><span class="stat-big-num" id="selTotalDisplay" data-count="29">29</span><span class="stat-big-lbl" data-fr="Sélections internationales" data-en="International caps">Sélections internationales</span></div>
@@ -164,22 +163,14 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 <section class="section bg-alt">
 <div class="wrap">
 <div class="section-title reveal" style="text-align:center;margin-inline:auto"><span class="eyebrow" data-fr="Compétitions" data-en="Competitions">Compétitions</span><h2 data-fr="Expériences internationales" data-en="International experiences">Expériences internationales</h2></div>
-<!-- Conteneur dynamique pour les compétitions -->
-<div class="comp-grid" id="competitionsContainer">
-  <!-- Les compétitions seront chargées ici par le script -->
-  <div class="empty-state" style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--texte-3);font-style:italic;">Chargement des compétitions...</div>
-</div>
+<div class="comp-grid" id="competitionsContainer"></div>
 </div>
 </section>
 
 <section class="section">
 <div class="wrap">
 <div class="section-title reveal"><span class="eyebrow" data-fr="Chronologie" data-en="Timeline">Chronologie</span><h2 data-fr="Parcours international" data-en="International career">Parcours international</h2></div>
-<!-- Conteneur dynamique pour la timeline -->
-<div class="timeline reveal" id="timelineContainer">
-  <!-- La chronologie sera chargée ici par le script -->
-  <div class="empty-state" style="text-align:center;padding:2rem;color:var(--texte-3);font-style:italic;">Chargement du parcours...</div>
-</div>
+<div class="timeline reveal" id="timelineContainer"></div>
 </div>
 </section>
 
@@ -251,6 +242,14 @@ import { doc, getDoc, collection, getDocs } from "https://www.gstatic.com/fireba
 
 const esc = (s) => String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
+// ⭐ DONNÉES PAR DÉFAUT (Fallback) - S'affichent si l'Admin est vide
+const DEFAULT_COMPS = [
+  { nom: 'CAN U20', annee: '2023', resultat: '1/4 de finale (Égypte)', logo: '' },
+  { nom: 'UFOA B', annee: '2022', resultat: 'Qualifications (Niger)', logo: '' },
+  { nom: 'Jeux de la Francophonie', annee: '2021', resultat: 'Participant', logo: '' },
+  { nom: 'Préparation CAN U23', annee: '2025', resultat: 'Sélectionné', logo: '' }
+];
+
 async function loadSelectionsData() {
   try {
     // 1. Charger les compteurs (U20, U23, Total)
@@ -271,41 +270,45 @@ async function loadSelectionsData() {
       }
     }
 
-    // 2. Charger les compétitions et la chronologie
+    // 2. Charger les compétitions
     const snapComp = await getDocs(collection(db, 'competitions'));
-    if (!snapComp.empty) {
-      const comps = snapComp.docs.map(doc => doc.data()).sort((a,b) => (b.annee||'').localeCompare(a.annee||''));
-      
-      // Remplir les cartes "Expériences internationales"
-      const compContainer = document.getElementById('competitionsContainer');
-      if (comps.length > 0) {
-        compContainer.innerHTML = comps.map(c => `
-          <div class="comp-card reveal visible">
-            <span class="comp-icon">${c.logo ? `<img src="${esc(c.logo)}" style="width:40px;height:40px;object-fit:contain;margin-bottom:.5rem"/>` : '🏆'}</span>
-            <div class="comp-title">${esc(c.nom)} ${c.annee ? '('+esc(c.annee)+')' : ''}</div>
-            <div class="comp-desc">${esc(c.resultat) || 'Participation internationale'}</div>
-          </div>
-        `).join('');
-      }
+    let comps = snapComp.empty ? DEFAULT_COMPS : snapComp.docs.map(doc => doc.data()).sort((a,b) => (b.annee||'').localeCompare(a.annee||''));
+    
+    // Remplir les cartes "Expériences internationales"
+    const compContainer = document.getElementById('competitionsContainer');
+    compContainer.innerHTML = comps.map(c => `
+      <div class="comp-card reveal visible">
+        <span class="comp-icon">${c.logo ? `<img src="${esc(c.logo)}" style="width:40px;height:40px;object-fit:contain;margin-bottom:.5rem"/>` : '🏆'}</span>
+        <div class="comp-title">${esc(c.nom)} ${c.annee ? '('+esc(c.annee)+')' : ''}</div>
+        <div class="comp-desc">${esc(c.resultat) || 'Participation internationale'}</div>
+      </div>
+    `).join('');
 
-      // Remplir la Chronologie
-      const timelineContainer = document.getElementById('timelineContainer');
-      if (comps.length > 0) {
-        timelineContainer.innerHTML = comps.map(c => `
-          <div class="tl-item">
-            <div class="tl-year">${esc(c.annee) || '—'}</div>
-            <div class="tl-title">${esc(c.nom)}</div>
-            <div class="tl-meta">${esc(c.resultat) || 'Participation internationale'}</div>
-          </div>
-        `).join('');
-      }
-    }
+    // Remplir la Chronologie
+    const timelineContainer = document.getElementById('timelineContainer');
+    timelineContainer.innerHTML = comps.map(c => `
+      <div class="tl-item">
+        <div class="tl-year">${esc(c.annee) || '—'}</div>
+        <div class="tl-title">${esc(c.nom)}</div>
+        <div class="tl-meta">${esc(c.resultat) || 'Participation internationale'}</div>
+      </div>
+    `).join('');
+
   } catch (e) {
-    console.warn("Erreur de chargement des sélections depuis Firebase (les données statiques restent affichées) :", e);
+    console.warn("Erreur de chargement :", e);
+    // Si Firebase plante, on affiche quand même les données par défaut
+    const compContainer = document.getElementById('competitionsContainer');
+    compContainer.innerHTML = DEFAULT_COMPS.map(c => `
+      <div class="comp-card reveal visible"><span class="comp-icon">🏆</span><div class="comp-title">${esc(c.nom)} (${esc(c.annee)})</div><div class="comp-desc">${esc(c.resultat)}</div></div>
+    `).join('');
+    
+    const timelineContainer = document.getElementById('timelineContainer');
+    timelineContainer.innerHTML = DEFAULT_COMPS.map(c => `
+      <div class="tl-item"><div class="tl-year">${esc(c.annee)}</div><div class="tl-title">${esc(c.nom)}</div><div class="tl-meta">${esc(c.resultat)}</div></div>
+    `).join('');
   }
 }
 
-// Lancer le chargement
 loadSelectionsData();
 </script>
 </body>
