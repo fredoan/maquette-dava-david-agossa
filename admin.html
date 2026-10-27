@@ -30,9 +30,8 @@ input,select,textarea{font-family:inherit}
 ::-webkit-scrollbar-track{background:var(--fond-5)}
 ::-webkit-scrollbar-thumb{background:var(--or-fonce);border-radius:4px}
 :focus-visible{outline:2px solid var(--or-vif);outline-offset:3px}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 
-/* ============ LOGIN ============ */
+/* LOGIN */
 #loginScreen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
 .login-box{width:100%;max-width:440px;background:linear-gradient(180deg,rgba(86,10,10,.55),rgba(26,0,0,.85));border:1px solid var(--border-fort);border-radius:8px;padding:40px 32px;box-shadow:0 30px 80px rgba(0,0,0,.6);position:relative;overflow:hidden}
 .login-box::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--or-fonce),var(--or-vif),var(--or-fonce))}
@@ -47,7 +46,7 @@ input,select,textarea{font-family:inherit}
 .login-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
 .login-error{display:none;text-align:center;color:#ff9c9c;background:rgba(185,28,28,.15);border-left:3px solid #ef4444;padding:.7rem 1rem;border-radius:3px;font-size:.8rem;margin-top:1rem}
 
-/* ============ LAYOUT ============ */
+/* LAYOUT */
 #adminScreen{display:none;min-height:100vh}
 .admin-top{background:rgba(26,0,0,.93);backdrop-filter:blur(20px);padding:1rem clamp(16px,3vw,32px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border);box-shadow:0 4px 30px rgba(0,0,0,.5)}
 .admin-brand{font-family:var(--f-d);font-size:clamp(1rem,2.4vw,1.3rem);font-weight:700;letter-spacing:.06em;background:linear-gradient(120deg,#fff 30%,var(--or-vif) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -58,9 +57,8 @@ input,select,textarea{font-family:inherit}
 .logout-btn{padding:.55rem 1.1rem;border:1.5px solid var(--border);background:transparent;color:var(--texte-2);border-radius:3px;font-family:var(--f-d);font-size:.66rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;transition:all .3s;cursor:pointer}
 .logout-btn:hover{border-color:#ef4444;color:#ff9c9c;background:rgba(185,28,28,.12)}
 
-.admin-layout{display:grid;grid-template-columns:240px 1fr;min-height:calc(100vh - 70px)}
+.admin-layout{display:grid;grid-template-columns:260px 1fr;min-height:calc(100vh - 70px)}
 @media(max-width:900px){.admin-layout{grid-template-columns:1fr}}
-
 .admin-sidebar{background:rgba(26,0,0,.6);border-right:1px solid var(--border);padding:1.2rem .8rem;position:sticky;top:70px;height:calc(100vh - 70px);overflow-y:auto}
 @media(max-width:900px){.admin-sidebar{position:static;height:auto;border-right:none;border-bottom:1px solid var(--border);padding:.6rem;overflow-x:auto;white-space:nowrap}}
 .admin-tabs{display:flex;flex-direction:column;gap:.3rem}
@@ -74,14 +72,13 @@ input,select,textarea{font-family:inherit}
 .tab-pane.active{display:block;animation:fadeIn .3s}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
-/* ============ CARDS ============ */
+/* CARDS & FORMS */
 .card{background:linear-gradient(180deg,rgba(86,10,10,.35),rgba(26,0,0,.6));border:1px solid var(--border);border-radius:8px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.35);margin-bottom:1.5rem}
 .card-header{padding:1.1rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.6rem;background:rgba(26,0,0,.4)}
 .card-header h2{font-family:var(--f-d);font-size:1.1rem;font-weight:700;color:var(--or-clair);letter-spacing:.04em}
 .card-body{padding:1.5rem}
 @media(max-width:680px){.card-body{padding:1.1rem}}
 
-/* ============ FORMS ============ */
 .form-group{margin-bottom:1.1rem}
 .form-group label{display:block;font-family:var(--f-d);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--or-clair);margin-bottom:.5rem}
 .form-group input,.form-group select,.form-group textarea{width:100%;padding:.85rem 1rem;background:rgba(26,0,0,.6);border:1px solid var(--border);border-radius:4px;color:var(--texte);font-size:.9rem;outline:none;transition:all .3s;resize:vertical}
@@ -92,7 +89,7 @@ input,select,textarea{font-family:inherit}
 .form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}
 @media(max-width:680px){.form-row,.form-row-3{grid-template-columns:1fr}}
 
-/* ============ NOUVEAU : URL TOOLBAR ============ */
+/* URL TOOLBAR */
 .url-field{position:relative}
 .url-toolbar{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem;align-items:center}
 .url-toolbar-label{font-family:var(--f-m);font-size:.6rem;color:var(--texte-3);letter-spacing:.08em;text-transform:uppercase;margin-right:.3rem}
@@ -101,11 +98,6 @@ input,select,textarea{font-family:inherit}
 .url-tool.postimages:hover{background:#ff6b35;border-color:#ff6b35;color:#fff}
 .url-tool.imgbb:hover{background:#4cb7e4;border-color:#4cb7e4;color:#fff}
 .url-tool.cloudinary:hover{background:#3448c5;border-color:#3448c5;color:#fff}
-.url-tool.github:hover{background:#24292e;border-color:#24292e;color:#fff}
-.url-tool.youtube:hover{background:#ff0000;border-color:#ff0000;color:#fff}
-.url-tool.drive:hover{background:#1a73e8;border-color:#1a73e8;color:#fff}
-.url-tool.vimeo:hover{background:#1ab7ea;border-color:#1ab7ea;color:#fff}
-.url-tool.dailymotion:hover{background:#0066dc;border-color:#0066dc;color:#fff}
 .url-tool.preview:hover{background:#22c55e;border-color:#22c55e;color:#fff}
 .url-tool svg{width:12px;height:12px;fill:currentColor}
 
@@ -118,7 +110,7 @@ input,select,textarea{font-family:inherit}
 .url-preview.error::before{content:'⚠️';font-size:1.6rem;color:#f59e0b;flex-shrink:0}
 .url-preview.error .preview-info b{color:#fcd34d}
 
-/* ============ ACTIONS ============ */
+/* ACTIONS & LISTS */
 .actions{display:flex;gap:.8rem;margin-top:1.5rem;flex-wrap:wrap}
 .btn-save{padding:.9rem 1.8rem;background:var(--or-clair);color:var(--fond-5);border-radius:4px;font-family:var(--f-d);font-weight:700;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;transition:all .3s;box-shadow:0 4px 20px rgba(212,175,90,.3);flex:0 1 auto;cursor:pointer}
 .btn-save:hover:not(:disabled){background:var(--or-vif);transform:translateY(-2px);box-shadow:0 10px 30px rgba(212,175,90,.45)}
@@ -128,14 +120,12 @@ input,select,textarea{font-family:inherit}
 .btn-ghost{padding:.6rem 1.2rem;background:rgba(26,0,0,.5);color:var(--texte-2);border:1px solid var(--border);border-radius:4px;font-family:var(--f-d);font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;transition:all .3s;cursor:pointer}
 .btn-ghost:hover{border-color:var(--or-clair);color:var(--or-clair)}
 
-/* ============ DASHBOARD ============ */
 .stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.8rem;margin-bottom:1rem}
 .stat-box{background:rgba(26,0,0,.5);border:1px solid var(--border);padding:1.1rem .8rem;text-align:center;border-radius:6px;transition:all .3s}
 .stat-box:hover{border-color:var(--or-clair);background:rgba(86,10,10,.55)}
 .stat-num{font-family:var(--f-d);font-size:clamp(1.4rem,3vw,1.9rem);font-weight:700;color:var(--or-clair);display:block;line-height:1;text-shadow:0 0 20px rgba(212,175,90,.35)}
 .stat-lbl{font-family:var(--f-m);font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--texte-3);font-weight:700;display:block;margin-top:.5rem}
 
-/* ============ LISTS ============ */
 .item-list{display:flex;flex-direction:column;gap:.7rem}
 .item-row{padding:.9rem 1rem;border:1px solid var(--border);background:rgba(26,0,0,.5);border-radius:6px;display:flex;align-items:center;gap:.85rem;transition:all .25s}
 .item-row:hover{border-color:var(--or-clair);background:rgba(86,10,10,.55);transform:translateX(2px)}
@@ -158,13 +148,11 @@ input,select,textarea{font-family:inherit}
 .spinner{display:inline-block;width:14px;height:14px;border:2px solid currentColor;border-top-color:transparent;border-radius:50%;animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* ============ PHOTO GRID ============ */
 .photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:6px;margin-top:1rem}
 .photo-item{aspect-ratio:1;border:1px solid var(--border);border-radius:4px;overflow:hidden;background:var(--fond-3);display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--f-m);font-size:.55rem;color:var(--texte-3);text-align:center;padding:4px;position:relative}
 .photo-item .num{position:absolute;top:2px;left:4px;font-weight:700;color:var(--or-clair);background:rgba(0,0,0,.6);padding:1px 4px;border-radius:2px;font-size:.5rem}
 .photo-item .cat{position:absolute;bottom:2px;right:4px;font-size:.45rem;color:var(--or-clair);background:rgba(0,0,0,.6);padding:1px 4px;border-radius:2px}
 
-/* ============ TOAST ============ */
 #toastContainer{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:.6rem;max-width:calc(100vw - 48px);pointer-events:none}
 .toast{padding:.9rem 1.3rem;border-radius:6px;font-family:var(--f-d);font-size:.78rem;font-weight:700;letter-spacing:.02em;color:#fff;box-shadow:0 12px 40px rgba(0,0,0,.5);animation:slideIn .35s;pointer-events:auto;min-width:220px;border-left:4px solid}
 .toast.success{background:#14532d;border-color:#22c55e}
@@ -180,7 +168,7 @@ input,select,textarea{font-family:inherit}
 </head>
 <body>
 
-<!-- ============ LOGIN ============ -->
+<!-- LOGIN -->
 <div id="loginScreen">
   <div class="login-box">
     <div class="login-logo">DAVA DAVID</div>
@@ -200,7 +188,7 @@ input,select,textarea{font-family:inherit}
   </div>
 </div>
 
-<!-- ============ ADMIN ============ -->
+<!-- ADMIN -->
 <div id="adminScreen">
   <header class="admin-top">
     <div class="admin-brand">DAVA DAVID <span>— ADMIN</span></div>
@@ -214,24 +202,27 @@ input,select,textarea{font-family:inherit}
     <aside class="admin-sidebar">
       <nav class="admin-tabs">
         <button class="admin-tab active" data-tab="dashboard">📊 Dashboard</button>
-        <button class="admin-tab" data-tab="articles">📰 Articles</button>
+        <button class="admin-tab" data-tab="profil">👤 Profil & Infos</button>
+        <button class="admin-tab" data-tab="carriere">🏟️ Carrière (Clubs)</button>
+        <button class="admin-tab" data-tab="selections">🏆 Sélections & Compét.</button>
+        <button class="admin-tab" data-tab="stats">📈 Statistiques</button>
+        <button class="admin-tab" data-tab="textes">🌍 Textes (FR/EN)</button>
+        <button class="admin-tab" data-tab="articles">📰 Actualités</button>
         <button class="admin-tab" data-tab="videos">🎬 Vidéos</button>
-        <button class="admin-tab" data-tab="photos">🖼️ Photos</button>
+        <button class="admin-tab" data-tab="photos">🖼️ Galerie</button>
         <button class="admin-tab" data-tab="events">📅 Événements</button>
         <button class="admin-tab" data-tab="sponsors">🤝 Sponsors</button>
         <button class="admin-tab" data-tab="horsTerrain">🎓 Hors terrain</button>
-        <button class="admin-tab" data-tab="profil">👤 Profil</button>
-        <button class="admin-tab" data-tab="stats">📊 Statistiques</button>
-        <button class="admin-tab" data-tab="moderation">💬 Modération</button>
+        <button class="admin-tab" data-tab="moderation">💬 Modération & Likes</button>
         <button class="admin-tab" data-tab="config">⚙️ Config</button>
       </nav>
     </aside>
 
     <main class="admin-main">
 
-      <!-- ============ DASHBOARD ============ -->
+      <!-- DASHBOARD -->
       <div class="tab-pane active" id="tab-dashboard">
-        <div class="alert">💡 <span><strong>Bienvenue !</strong> Les 30 photos sont initialisées automatiquement à la première connexion.</span></div>
+        <div class="alert">💡 <span><strong>Bienvenue !</strong> Gérez ici 100% du contenu de votre site. Les 30 photos sont initialisées automatiquement à la première connexion.</span></div>
         <div class="card">
           <div class="card-header"><h2>📊 Vue d'ensemble</h2><button class="btn-ghost" onclick="refreshDashboard()">🔄 Rafraîchir</button></div>
           <div class="card-body">
@@ -250,7 +241,226 @@ input,select,textarea{font-family:inherit}
         </div>
       </div>
 
-      <!-- ============ ARTICLES ============ -->
+      <!-- PROFIL -->
+      <div class="tab-pane" id="tab-profil">
+        <div class="alert warn">⚠️ <span>Remplissez tous les champs. Le statut, les langues et le lien Transfermarkt s'afficheront sur l'accueil.</span></div>
+        <div class="card">
+          <div class="card-header"><h2>👤 Profil du joueur</h2></div>
+          <div class="card-body">
+            <form id="profilForm">
+              <div class="form-row">
+                <div class="form-group"><label>Nom complet</label><input type="text" id="pNom" placeholder="Dava David AGOSSA"/></div>
+                <div class="form-group"><label>Poste</label><input type="text" id="pPoste" value="Gardien de but" placeholder="Gardien de but"/></div>
+              </div>
+              <div class="form-row-3">
+                <div class="form-group"><label>Club actuel</label><input type="text" id="pClub" placeholder="Bourges FC"/></div>
+                <div class="form-group"><label>Statut</label><input type="text" id="pStatut" placeholder="International Espoirs du Bénin"/></div>
+                <div class="form-group"><label>Professionnel depuis</label><input type="text" id="pProDepuis" value="2020" placeholder="2020"/></div>
+              </div>
+              <div class="form-row-3">
+                <div class="form-group"><label>Âge</label><input type="text" id="pAge" placeholder="23"/></div>
+                <div class="form-group"><label>Taille</label><input type="text" id="pTaille" placeholder="1,87 m"/></div>
+                <div class="form-group"><label>Poids</label><input type="text" id="pPoids" placeholder="75 kg"/></div>
+              </div>
+              <div class="form-row-3">
+                <div class="form-group"><label>Pied fort</label><input type="text" id="pPied" placeholder="Droitier"/></div>
+                <div class="form-group"><label>Sélections</label><input type="text" id="pSel" placeholder="29"/></div>
+                <div class="form-group"><label>Langues parlées</label><input type="text" id="pLangues" placeholder="Français (Courant), Anglais (Intermédiaire)"/></div>
+              </div>
+              <div class="form-group"><label>Bio courte (accueil)</label><textarea id="pBio" rows="3"></textarea></div>
+              
+              <div class="divider"></div>
+              <p style="font-family:var(--f-d);font-size:.75rem;color:var(--or-clair);margin-bottom:1rem;text-transform:uppercase;letter-spacing:.14em">Contact & Réseaux</p>
+              
+              <div class="form-row">
+                <div class="form-group"><label>Email</label><input type="email" id="pEmail"/></div>
+                <div class="form-group"><label>WhatsApp</label><input type="text" id="pWhatsapp"/></div>
+              </div>
+              <div class="form-row">
+                <div class="form-group"><label>Téléphone</label><input type="text" id="pTel"/></div>
+                <div class="form-group"><label>Instagram</label><input type="text" id="pInsta"/></div>
+              </div>
+              <div class="form-row">
+                <div class="form-group"><label>Lien Transfermarkt (optionnel)</label><input type="url" id="pTransfermarkt" placeholder="https://www.transfermarkt.com/..."/><small>Laisser vide si le profil n'est pas encore officiel.</small></div>
+                <div class="form-group"><label>Lien Facebook (optionnel)</label><input type="url" id="pFacebook" placeholder="https://facebook.com/..."/></div>
+              </div>
+              
+              <div class="actions"><button type="submit" class="btn-save">💾 Enregistrer le profil</button></div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARRIERE -->
+      <div class="tab-pane" id="tab-carriere">
+        <div class="card">
+          <div class="card-header"><h2>🏟️ Ajouter / Modifier un club</h2></div>
+          <div class="card-body">
+            <form id="carriereForm">
+              <input type="hidden" id="carId"/>
+              <div class="form-row-3">
+                <div class="form-group"><label>Saison *</label><input type="text" id="carSaison" placeholder="2025-2026" required/></div>
+                <div class="form-group"><label>Club *</label><input type="text" id="carClub" placeholder="Bourges FC" required/></div>
+                <div class="form-group"><label>Division *</label><input type="text" id="carDivision" placeholder="National 1" required/></div>
+              </div>
+              <div class="form-row">
+                <div class="form-group"><label>Pays</label><input type="text" id="carPays" placeholder="France"/></div>
+                <div class="form-group"><label>Ordre d'affichage</label><input type="number" id="carOrdre" value="100"/></div>
+              </div>
+              
+              <div class="form-group url-field">
+                <label>Logo du club</label>
+                <input type="url" id="carLogo" placeholder="https://..."/>
+                <div class="url-toolbar">
+                  <span class="url-toolbar-label">📸 Héberger un logo :</span>
+                  <a class="url-tool postimages" href="https://postimages.org" target="_blank" rel="noopener">📤 PostImages</a>
+                  <a class="url-tool imgbb" href="https://imgbb.com" target="_blank" rel="noopener">🖼️ ImgBB</a>
+                  <a class="url-tool cloudinary" href="https://console.cloudinary.com" target="_blank" rel="noopener">☁️ Cloudinary</a>
+                  <button type="button" class="url-tool preview" onclick="previewUrl('carLogo','carPreview')">👁️ Aperçu</button>
+                </div>
+                <div class="url-preview" id="carPreview"></div>
+              </div>
+
+              <div class="actions">
+                <button type="submit" class="btn-save" id="carBtnSave">💾 Enregistrer</button>
+                <button type="button" class="btn-reset" onclick="resetForm('carriere')">🗑️ Effacer</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><h2>📋 Liste des clubs</h2></div>
+          <div class="card-body"><div class="item-list" id="listCarriere"></div></div>
+        </div>
+      </div>
+
+      <!-- SELECTIONS -->
+      <div class="tab-pane" id="tab-selections">
+        <div class="card">
+          <div class="card-header"><h2>🏆 Modifier les compteurs</h2></div>
+          <div class="card-body">
+            <form id="selectionForm">
+              <div class="form-row-3">
+                <div class="form-group"><label>Bénin U20</label><input type="number" id="selU20" value="24"/></div>
+                <div class="form-group"><label>Bénin U23</label><input type="number" id="selU23" value="5"/></div>
+                <div class="form-group"><label>Total</label><input type="number" id="selTotal" value="29"/></div>
+              </div>
+              <div class="actions"><button type="submit" class="btn-save">💾 Mettre à jour les compteurs</button></div>
+            </form>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><h2>🏅 Ajouter une compétition</h2></div>
+          <div class="card-body">
+            <form id="competitionForm">
+              <input type="hidden" id="compId"/>
+              <div class="form-row">
+                <div class="form-group"><label>Nom de la compétition *</label><input type="text" id="compNom" placeholder="CAN U20" required/></div>
+                <div class="form-group"><label>Année *</label><input type="text" id="compAnnee" placeholder="2022" required/></div>
+              </div>
+              <div class="form-group"><label>Résultat / Détails</label><input type="text" id="compResultat" placeholder="1/4 de finale"/></div>
+              
+              <div class="form-group url-field">
+                <label>Drapeau / Logo de la fédération</label>
+                <input type="url" id="compLogo" placeholder="https://..."/>
+                <div class="url-toolbar">
+                  <span class="url-toolbar-label">📸 Héberger un logo :</span>
+                  <a class="url-tool postimages" href="https://postimages.org" target="_blank" rel="noopener">📤 PostImages</a>
+                  <a class="url-tool imgbb" href="https://imgbb.com" target="_blank" rel="noopener">🖼️ ImgBB</a>
+                  <button type="button" class="url-tool preview" onclick="previewUrl('compLogo','compPreview')">👁️ Aperçu</button>
+                </div>
+                <div class="url-preview" id="compPreview"></div>
+              </div>
+
+              <div class="actions">
+                <button type="submit" class="btn-save" id="compBtnSave">💾 Enregistrer</button>
+                <button type="button" class="btn-reset" onclick="resetForm('competition')">🗑️ Effacer</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><h2>📋 Compétitions</h2></div>
+          <div class="card-body"><div class="item-list" id="listCompetitions"></div></div>
+        </div>
+      </div>
+
+      <!-- STATS -->
+      <div class="tab-pane" id="tab-stats">
+        <div class="card">
+          <div class="card-header"><h2 id="stFormTitle">📈 Nouvelle saison</h2></div>
+          <div class="card-body">
+            <form id="statsForm">
+              <input type="hidden" id="stId"/>
+              <div class="form-row-3">
+                <div class="form-group"><label>Saison *</label><input type="text" id="stSaison" required placeholder="2025-26"/></div>
+                <div class="form-group"><label>Club</label><input type="text" id="stClub" placeholder="Bourges FC"/></div>
+                <div class="form-group"><label>Niveau</label><input type="text" id="stNiveau" placeholder="National 1"/></div>
+              </div>
+              <div class="form-row-3">
+                <div class="form-group"><label>Matchs totaux</label><input type="number" id="stMatchs"/></div>
+                <div class="form-group"><label>Titularisations</label><input type="number" id="stTitul"/></div>
+                <div class="form-group"><label>Minutes</label><input type="number" id="stMinutes"/></div>
+              </div>
+              <div class="form-row-3">
+                <div class="form-group"><label>Buts encaissés</label><input type="number" id="stButs"/></div>
+                <div class="form-group"><label>Clean sheets</label><input type="number" id="stClean"/></div>
+                <div class="form-group"><label>Penalties arrêtés</label><input type="number" id="stPen"/></div>
+              </div>
+              <div class="form-row-3">
+                <div class="form-group"><label>Cartons</label><input type="number" id="stCartons"/></div>
+                <div class="form-group"><label>Matchs Championnat</label><input type="number" id="stChamp"/></div>
+                <div class="form-group"><label>Matchs Coupe de France</label><input type="number" id="stCoupe"/></div>
+              </div>
+              <div class="form-row-3">
+                <div class="form-group"><label>Matchs Équipe réserve</label><input type="number" id="stReserve"/></div>
+              </div>
+              <div class="actions">
+                <button type="submit" class="btn-save" id="stBtnSave">💾 Enregistrer</button>
+                <button type="button" class="btn-reset" onclick="resetForm('stats')">🗑️ Effacer</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><h2>📋 Saisons</h2><button class="btn-ghost" onclick="loadStats()">🔄 Actualiser</button></div>
+          <div class="card-body"><div class="item-list" id="listStats"></div></div>
+        </div>
+      </div>
+
+      <!-- TEXTES FR/EN -->
+      <div class="tab-pane" id="tab-textes">
+        <div class="alert">🌍 <span>Modifiez ici les textes de la page d'accueil et de la biographie pour le Français et l'Anglais.</span></div>
+        <div class="card">
+          <div class="card-header"><h2>🌍 Textes du site</h2></div>
+          <div class="card-body">
+            <div class="form-group">
+              <label>Titre Héro (Accueil)</label>
+              <div class="form-row">
+                <input type="text" id="txtHeroFr" placeholder="FR: Gardien de but professionnel"/>
+                <input type="text" id="txtHeroEn" placeholder="EN: Professional goalkeeper"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Paragraphe de présentation (Accueil)</label>
+              <div class="form-row">
+                <textarea id="txtBioFr" rows="3" placeholder="FR: Gardien de but béninois..."></textarea>
+                <textarea id="txtBioEn" rows="3" placeholder="EN: Beninese goalkeeper..."></textarea>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Citation (Biographie)</label>
+              <div class="form-row">
+                <textarea id="txtQuoteFr" rows="3" placeholder="FR: Je crois que le poste..."></textarea>
+                <textarea id="txtQuoteEn" rows="3" placeholder="EN: I believe the goalkeeper..."></textarea>
+              </div>
+            </div>
+            <div class="actions"><button type="button" class="btn-save" onclick="saveTextes()">💾 Enregistrer les textes</button></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ARTICLES -->
       <div class="tab-pane" id="tab-articles">
         <div class="card">
           <div class="card-header"><h2 id="artFormTitle">✏️ Nouvel article</h2></div>
@@ -258,35 +468,13 @@ input,select,textarea{font-family:inherit}
             <form id="articleForm">
               <input type="hidden" id="artId"/>
               <div class="form-row">
-                <div class="form-group">
-                  <label>Titre *</label>
-                  <input type="text" id="artTitre" required placeholder="Ex: Première titularisation avec Bourges FC"/>
-                </div>
-                <div class="form-group">
-                  <label>Slug (URL)</label>
-                  <input type="text" id="artSlug" placeholder="auto-généré si vide"/>
-                </div>
+                <div class="form-group"><label>Titre *</label><input type="text" id="artTitre" required placeholder="Ex: Première titularisation"/></div>
+                <div class="form-group"><label>Slug (URL)</label><input type="text" id="artSlug" placeholder="auto-généré si vide"/></div>
               </div>
               <div class="form-row">
-                <div class="form-group">
-                  <label>Catégorie</label>
-                  <select id="artCat">
-                    <option value="Match">Match</option>
-                    <option value="Sélection">Sélection</option>
-                    <option value="Carrière">Carrière</option>
-                    <option value="Actualité">Actualité</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label>Statut</label>
-                  <select id="artPublie">
-                    <option value="true">✅ Publié</option>
-                    <option value="false">📝 Brouillon</option>
-                  </select>
-                </div>
+                <div class="form-group"><label>Catégorie</label><select id="artCat"><option value="Match">Match</option><option value="Sélection">Sélection</option><option value="Carrière">Carrière</option><option value="Actualité">Actualité</option></select></div>
+                <div class="form-group"><label>Statut</label><select id="artPublie"><option value="true">✅ Publié</option><option value="false">📝 Brouillon</option></select></div>
               </div>
-
-              <!-- ⭐ IMAGE AVEC BOUTONS D'HÉBERGEMENT -->
               <div class="form-group url-field">
                 <label>Image principale</label>
                 <input type="url" id="artImage" placeholder="https://..."/>
@@ -295,30 +483,19 @@ input,select,textarea{font-family:inherit}
                   <a class="url-tool postimages" href="https://postimages.org" target="_blank" rel="noopener">📤 PostImages</a>
                   <a class="url-tool imgbb" href="https://imgbb.com" target="_blank" rel="noopener">🖼️ ImgBB</a>
                   <a class="url-tool cloudinary" href="https://console.cloudinary.com" target="_blank" rel="noopener">☁️ Cloudinary</a>
-                  <a class="url-tool github" href="https://github.com" target="_blank" rel="noopener">💻 GitHub</a>
                   <button type="button" class="url-tool preview" onclick="previewUrl('artImage','artImagePreview')">👁️ Aperçu</button>
                 </div>
                 <div class="url-preview" id="artImagePreview"></div>
-                <small>Collez le lien direct de l'image (finissant par .jpg, .jpeg, .png ou .webp).</small>
               </div>
-
-              <div class="form-group">
-                <label>Résumé (extrait)</label>
-                <textarea id="artResume" rows="2" placeholder="Résumé affiché dans les listes"></textarea>
-              </div>
-              <div class="form-group">
-                <label>Contenu *</label>
-                <textarea id="artContenu" rows="8" required placeholder="Rédigez votre article ici..."></textarea>
-              </div>
-
+              <div class="form-group"><label>Résumé (extrait)</label><textarea id="artResume" rows="2"></textarea></div>
+              <div class="form-group"><label>Contenu *</label><textarea id="artContenu" rows="8" required></textarea></div>
               <div class="divider"></div>
               <p style="font-family:var(--f-d);font-size:.75rem;color:var(--or-clair);margin-bottom:1rem;text-transform:uppercase;letter-spacing:.14em">SEO</p>
               <div class="form-row">
-                <div class="form-group"><label>Titre SEO</label><input type="text" id="artSeoTitre" placeholder="Titre pour Google"/></div>
-                <div class="form-group"><label>Mots-clés</label><input type="text" id="artKeywords" placeholder="dava, agossa, bourges..."/></div>
+                <div class="form-group"><label>Titre SEO</label><input type="text" id="artSeoTitre"/></div>
+                <div class="form-group"><label>Mots-clés</label><input type="text" id="artKeywords"/></div>
               </div>
-              <div class="form-group"><label>Description SEO</label><textarea id="artSeoDesc" rows="2" placeholder="Description meta (160 caractères)"></textarea></div>
-
+              <div class="form-group"><label>Description SEO</label><textarea id="artSeoDesc" rows="2"></textarea></div>
               <div class="actions">
                 <button type="submit" class="btn-save" id="artBtnSave">💾 Enregistrer</button>
                 <button type="button" class="btn-reset" onclick="resetForm('article')">🗑️ Effacer</button>
@@ -332,7 +509,7 @@ input,select,textarea{font-family:inherit}
         </div>
       </div>
 
-      <!-- ============ VIDEOS ============ -->
+      <!-- VIDEOS -->
       <div class="tab-pane" id="tab-videos">
         <div class="alert">💡 <span><strong>Vidéos</strong> : collez un lien YouTube, Drive ou .mp4. La vignette YouTube est détectée automatiquement.</span></div>
         <div class="card">
@@ -340,44 +517,18 @@ input,select,textarea{font-family:inherit}
           <div class="card-body">
             <form id="videoForm">
               <input type="hidden" id="vidId"/>
-              <div class="form-group">
-                <label>Titre *</label>
-                <input type="text" id="vidTitre" required placeholder="Ex: Highlights 2026/27"/>
-              </div>
+              <div class="form-group"><label>Titre *</label><input type="text" id="vidTitre" required placeholder="Ex: Highlights 2026/27"/></div>
               <div class="form-row">
-                <div class="form-group">
-                  <label>Catégorie</label>
-                  <select id="vidCat">
-                    <option value="Arrêts & réflexes">🧤 Arrêts & réflexes</option>
-                    <option value="Jeu aérien">🦅 Jeu aérien & sorties</option>
-                    <option value="Jeu au pied">🦶 Jeu au pied & relance</option>
-                    <option value="Highlights">⭐ Highlights</option>
-                    <option value="Match">⚽ Match</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label>Statut</label>
-                  <select id="vidPublie">
-                    <option value="true">✅ Publié</option>
-                    <option value="false">📝 Brouillon</option>
-                  </select>
-                </div>
+                <div class="form-group"><label>Catégorie</label><select id="vidCat"><option value="Arrêts & réflexes">🧤 Arrêts & réflexes</option><option value="Jeu aérien">🦅 Jeu aérien & sorties</option><option value="Jeu au pied">🦶 Jeu au pied & relance</option><option value="Highlights">⭐ Highlights</option><option value="Match">⚽ Match</option></select></div>
+                <div class="form-group"><label>Statut</label><select id="vidPublie"><option value="true">✅ Publié</option><option value="false">📝 Brouillon</option></select></div>
               </div>
-
-              <!-- ⭐ URL VIDÉO AVEC BOUTONS -->
               <div class="form-group url-field">
                 <label>Lien vidéo (YouTube, Drive, .mp4) *</label>
                 <input type="url" id="vidUrl" required placeholder="https://www.youtube.com/watch?v=..." oninput="onVideoUrlChange()"/>
                 <div class="url-toolbar">
                   <span class="url-toolbar-label">🎬 Ouvrir la plateforme :</span>
-                  <a class="url-tool youtube" href="https://studio.youtube.com" target="_blank" rel="noopener">
-                    <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31.4 31.4 0 0 0 0 12a31.4 31.4 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.4 31.4 0 0 0 24 12a31.4 31.4 0 0 0-.5-5.8zM9.5 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
-                    YouTube
-                  </a>
-                  <a class="url-tool drive" href="https://drive.google.com" target="_blank" rel="noopener">
-                    <svg viewBox="0 0 24 24"><path d="M8.6 3.4L0 17.3l3.4 5.9L12 9.3zM15.4 3.4h-6.8l8.5 14.7h6.9zM22.6 17.3h-6.9L12.3 23.2h6.8z"/></svg>
-                    Google Drive
-                  </a>
+                  <a class="url-tool youtube" href="https://studio.youtube.com" target="_blank" rel="noopener">YouTube</a>
+                  <a class="url-tool drive" href="https://drive.google.com" target="_blank" rel="noopener">Google Drive</a>
                   <a class="url-tool vimeo" href="https://vimeo.com" target="_blank" rel="noopener">🎬 Vimeo</a>
                   <a class="url-tool dailymotion" href="https://www.dailymotion.com" target="_blank" rel="noopener">🎥 Dailymotion</a>
                   <button type="button" class="url-tool preview" onclick="onVideoUrlChange(true)">👁️ Aperçu</button>
@@ -385,12 +536,7 @@ input,select,textarea{font-family:inherit}
                 <div class="url-preview" id="vidPreview"></div>
                 <small id="vidPlatformHint">Plateforme détectée : —</small>
               </div>
-
-              <div class="form-group">
-                <label>Description</label>
-                <textarea id="vidDesc" rows="2" placeholder="Description de la vidéo"></textarea>
-              </div>
-
+              <div class="form-group"><label>Description</label><textarea id="vidDesc" rows="2" placeholder="Description de la vidéo"></textarea></div>
               <div class="form-group url-field">
                 <label>Vignette personnalisée (optionnel)</label>
                 <input type="url" id="vidVignette" placeholder="Laisser vide = vignette YouTube auto"/>
@@ -401,7 +547,6 @@ input,select,textarea{font-family:inherit}
                   <a class="url-tool cloudinary" href="https://console.cloudinary.com" target="_blank" rel="noopener">☁️ Cloudinary</a>
                 </div>
               </div>
-
               <div class="actions">
                 <button type="submit" class="btn-save" id="vidBtnSave">💾 Enregistrer</button>
                 <button type="button" class="btn-reset" onclick="resetForm('video')">🗑️ Effacer</button>
@@ -415,14 +560,12 @@ input,select,textarea{font-family:inherit}
         </div>
       </div>
 
-      <!-- ============ PHOTOS ============ -->
+      <!-- PHOTOS -->
       <div class="tab-pane" id="tab-photos">
         <div class="alert">📸 <span><strong>30 photos</strong> : ph1.jpeg à ph30.jpeg, 3 catégories de 10. Initialisées automatiquement.</span></div>
         <div class="card">
           <div class="card-header"><h2>🖼️ Galerie</h2><button class="btn-ghost" onclick="initPhotos(true)">🚀 (Re)générer les 30</button></div>
-          <div class="card-body">
-            <div class="photo-grid" id="photoGrid"><div class="empty">Chargement...</div></div>
-          </div>
+          <div class="card-body"><div class="photo-grid" id="photoGrid"><div class="empty">Chargement...</div></div></div>
         </div>
         <div class="card">
           <div class="card-header"><h2>➕ Ajouter une photo externe</h2></div>
@@ -430,14 +573,7 @@ input,select,textarea{font-family:inherit}
             <form id="photoForm">
               <div class="form-row">
                 <div class="form-group"><label>Titre *</label><input type="text" id="phTitre" required placeholder="Ex: Portrait 2026"/></div>
-                <div class="form-group">
-                  <label>Catégorie *</label>
-                  <select id="phCat">
-                    <option value="Sélection Bénin">Sélection Bénin</option>
-                    <option value="Match & Clubs">Match & Clubs</option>
-                    <option value="Ses photos">Ses photos</option>
-                  </select>
-                </div>
+                <div class="form-group"><label>Catégorie *</label><select id="phCat"><option value="Sélection Bénin">Sélection Bénin</option><option value="Match & Clubs">Match & Clubs</option><option value="Ses photos">Ses photos</option></select></div>
               </div>
               <div class="form-group url-field">
                 <label>URL image *</label>
@@ -447,19 +583,18 @@ input,select,textarea{font-family:inherit}
                   <a class="url-tool postimages" href="https://postimages.org" target="_blank" rel="noopener">📤 PostImages</a>
                   <a class="url-tool imgbb" href="https://imgbb.com" target="_blank" rel="noopener">🖼️ ImgBB</a>
                   <a class="url-tool cloudinary" href="https://console.cloudinary.com" target="_blank" rel="noopener">☁️ Cloudinary</a>
-                  <a class="url-tool github" href="https://github.com" target="_blank" rel="noopener">💻 GitHub</a>
                   <button type="button" class="url-tool preview" onclick="previewUrl('phUrl','phPreview')">👁️ Aperçu</button>
                 </div>
                 <div class="url-preview" id="phPreview"></div>
               </div>
-              <div class="form-group"><label>Texte alternatif (SEO)</label><input type="text" id="phAlt" placeholder="Description pour Google et accessibilité"/></div>
+              <div class="form-group"><label>Texte alternatif (SEO)</label><input type="text" id="phAlt" placeholder="Description pour Google"/></div>
               <div class="actions"><button type="submit" class="btn-save">💾 Ajouter</button></div>
             </form>
           </div>
         </div>
       </div>
 
-      <!-- ============ EVENTS ============ -->
+      <!-- EVENTS -->
       <div class="tab-pane" id="tab-events">
         <div class="card">
           <div class="card-header"><h2 id="evFormTitle">📅 Nouvel événement</h2></div>
@@ -472,12 +607,9 @@ input,select,textarea{font-family:inherit}
               </div>
               <div class="form-row">
                 <div class="form-group"><label>Lieu</label><input type="text" id="evLieu" placeholder="Bourges, France"/></div>
-                <div class="form-group"><label>Statut</label>
-                  <select id="evPublie"><option value="true">✅ Publié</option><option value="false">📝 Brouillon</option></select>
-                </div>
+                <div class="form-group"><label>Statut</label><select id="evPublie"><option value="true">✅ Publié</option><option value="false">📝 Brouillon</option></select></div>
               </div>
               <div class="form-group"><label>Description</label><textarea id="evDesc" rows="3"></textarea></div>
-
               <div class="form-group url-field">
                 <label>Image</label>
                 <input type="url" id="evImage" placeholder="https://..."/>
@@ -485,12 +617,10 @@ input,select,textarea{font-family:inherit}
                   <span class="url-toolbar-label">📸 Héberger une image :</span>
                   <a class="url-tool postimages" href="https://postimages.org" target="_blank" rel="noopener">📤 PostImages</a>
                   <a class="url-tool imgbb" href="https://imgbb.com" target="_blank" rel="noopener">🖼️ ImgBB</a>
-                  <a class="url-tool cloudinary" href="https://console.cloudinary.com" target="_blank" rel="noopener">☁️ Cloudinary</a>
                   <button type="button" class="url-tool preview" onclick="previewUrl('evImage','evPreview')">👁️ Aperçu</button>
                 </div>
                 <div class="url-preview" id="evPreview"></div>
               </div>
-
               <div class="actions">
                 <button type="submit" class="btn-save" id="evBtnSave">💾 Enregistrer</button>
                 <button type="button" class="btn-reset" onclick="resetForm('event')">🗑️ Effacer</button>
@@ -504,7 +634,7 @@ input,select,textarea{font-family:inherit}
         </div>
       </div>
 
-      <!-- ============ SPONSORS ============ -->
+      <!-- SPONSORS -->
       <div class="tab-pane" id="tab-sponsors">
         <div class="card">
           <div class="card-header"><h2 id="spFormTitle">🤝 Nouveau sponsor</h2></div>
@@ -522,7 +652,6 @@ input,select,textarea{font-family:inherit}
                   <span class="url-toolbar-label">📸 Héberger un logo :</span>
                   <a class="url-tool postimages" href="https://postimages.org" target="_blank" rel="noopener">📤 PostImages</a>
                   <a class="url-tool imgbb" href="https://imgbb.com" target="_blank" rel="noopener">🖼️ ImgBB</a>
-                  <a class="url-tool cloudinary" href="https://console.cloudinary.com" target="_blank" rel="noopener">☁️ Cloudinary</a>
                   <button type="button" class="url-tool preview" onclick="previewUrl('spLogo','spPreview')">👁️ Aperçu</button>
                 </div>
                 <div class="url-preview" id="spPreview"></div>
@@ -530,9 +659,7 @@ input,select,textarea{font-family:inherit}
               <div class="form-group"><label>Description</label><textarea id="spDesc" rows="2"></textarea></div>
               <div class="form-row">
                 <div class="form-group"><label>Ordre</label><input type="number" id="spOrdre" value="100"/></div>
-                <div class="form-group"><label>Actif</label>
-                  <select id="spActif"><option value="true">✅ Oui</option><option value="false">🚫 Non</option></select>
-                </div>
+                <div class="form-group"><label>Actif</label><select id="spActif"><option value="true">✅ Oui</option><option value="false">🚫 Non</option></select></div>
               </div>
               <div class="actions">
                 <button type="submit" class="btn-save" id="spBtnSave">💾 Enregistrer</button>
@@ -547,7 +674,7 @@ input,select,textarea{font-family:inherit}
         </div>
       </div>
 
-      <!-- ============ HORS TERRAIN ============ -->
+      <!-- HORS TERRAIN -->
       <div class="tab-pane" id="tab-horsTerrain">
         <div class="card">
           <div class="card-header"><h2 id="htFormTitle">🎓 Nouvelle entrée</h2></div>
@@ -555,13 +682,7 @@ input,select,textarea{font-family:inherit}
             <form id="horsTerrainForm">
               <input type="hidden" id="htId"/>
               <div class="form-row">
-                <div class="form-group"><label>Catégorie *</label>
-                  <select id="htCat" required>
-                    <option value="formation">Formation / Diplôme</option>
-                    <option value="experience">Expérience</option>
-                    <option value="projet">Projet / Vision</option>
-                  </select>
-                </div>
+                <div class="form-group"><label>Catégorie *</label><select id="htCat" required><option value="formation">Formation / Diplôme</option><option value="experience">Expérience</option><option value="projet">Projet / Vision</option></select></div>
                 <div class="form-group"><label>Ordre</label><input type="number" id="htOrdre" value="100"/></div>
               </div>
               <div class="form-group"><label>Titre *</label><input type="text" id="htTitre" required placeholder="Ex: Bachelor Management"/></div>
@@ -580,94 +701,16 @@ input,select,textarea{font-family:inherit}
         </div>
       </div>
 
-      <!-- ============ PROFIL ============ -->
-      <div class="tab-pane" id="tab-profil">
-        <div class="alert warn">⚠️ <span>Le profil est stocké dans <code>profil/principal</code>. Remplissez tous les champs visibles sur l'accueil.</span></div>
-        <div class="card">
-          <div class="card-header"><h2>👤 Profil du joueur</h2></div>
-          <div class="card-body">
-            <form id="profilForm">
-              <div class="form-row">
-                <div class="form-group"><label>Nom complet</label><input type="text" id="pNom" placeholder="Dava David AGOSSA"/></div>
-                <div class="form-group"><label>Club actuel</label><input type="text" id="pClub" placeholder="Bourges FC"/></div>
-              </div>
-              <div class="form-row-3">
-                <div class="form-group"><label>Niveau</label><input type="text" id="pNiveau" placeholder="National 1"/></div>
-                <div class="form-group"><label>Âge</label><input type="text" id="pAge" placeholder="23"/></div>
-                <div class="form-group"><label>Pied fort</label><input type="text" id="pPied" placeholder="Droitier"/></div>
-              </div>
-              <div class="form-row-3">
-                <div class="form-group"><label>Taille</label><input type="text" id="pTaille" placeholder="1,87 m"/></div>
-                <div class="form-group"><label>Poids</label><input type="text" id="pPoids" placeholder="75 kg"/></div>
-                <div class="form-group"><label>Sélections</label><input type="text" id="pSel" placeholder="29"/></div>
-              </div>
-              <div class="form-group"><label>Bio courte (accueil)</label><textarea id="pBio" rows="3"></textarea></div>
-              <div class="divider"></div>
-              <p style="font-family:var(--f-d);font-size:.75rem;color:var(--or-clair);margin-bottom:1rem;text-transform:uppercase;letter-spacing:.14em">Contact</p>
-              <div class="form-row">
-                <div class="form-group"><label>Email</label><input type="email" id="pEmail"/></div>
-                <div class="form-group"><label>WhatsApp</label><input type="text" id="pWhatsapp"/></div>
-              </div>
-              <div class="form-row">
-                <div class="form-group"><label>Téléphone</label><input type="text" id="pTel"/></div>
-                <div class="form-group"><label>Instagram</label><input type="text" id="pInsta"/></div>
-              </div>
-              <div class="actions"><button type="submit" class="btn-save">💾 Enregistrer le profil</button></div>
-            </form>
-          </div>
-        </div>
-      </div>
-
-      <!-- ============ STATISTIQUES ============ -->
-      <div class="tab-pane" id="tab-stats">
-        <div class="card">
-          <div class="card-header"><h2 id="stFormTitle">📊 Nouvelle saison</h2></div>
-          <div class="card-body">
-            <form id="statsForm">
-              <input type="hidden" id="stId"/>
-              <div class="form-row-3">
-                <div class="form-group"><label>Saison *</label><input type="text" id="stSaison" required placeholder="2025-26"/></div>
-                <div class="form-group"><label>Club</label><input type="text" id="stClub" placeholder="Bourges FC"/></div>
-                <div class="form-group"><label>Niveau</label><input type="text" id="stNiveau" placeholder="National 1"/></div>
-              </div>
-              <div class="form-row-3">
-                <div class="form-group"><label>Matchs</label><input type="number" id="stMatchs"/></div>
-                <div class="form-group"><label>Titularisations</label><input type="number" id="stTitul"/></div>
-                <div class="form-group"><label>Minutes</label><input type="number" id="stMinutes"/></div>
-              </div>
-              <div class="form-row-3">
-                <div class="form-group"><label>Buts encaissés</label><input type="number" id="stButs"/></div>
-                <div class="form-group"><label>Clean sheets</label><input type="number" id="stClean"/></div>
-                <div class="form-group"><label>Penalties arrêtés</label><input type="number" id="stPen"/></div>
-              </div>
-              <div class="form-row-3">
-                <div class="form-group"><label>Cartons</label><input type="number" id="stCartons"/></div>
-                <div class="form-group"><label>Coupe de France</label><input type="number" id="stCoupe"/></div>
-                <div class="form-group"><label>Équipe réserve</label><input type="number" id="stReserve"/></div>
-              </div>
-              <div class="actions">
-                <button type="submit" class="btn-save" id="stBtnSave">💾 Enregistrer</button>
-                <button type="button" class="btn-reset" onclick="resetForm('stats')">🗑️ Effacer</button>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-header"><h2>📋 Saisons</h2><button class="btn-ghost" onclick="loadStats()">🔄 Actualiser</button></div>
-          <div class="card-body"><div class="item-list" id="listStats"><div class="empty">Chargement...</div></div></div>
-        </div>
-      </div>
-
-      <!-- ============ MODERATION ============ -->
+      <!-- MODERATION & LIKES -->
       <div class="tab-pane" id="tab-moderation">
-        <div class="alert">💬 <span><strong>Modération</strong> : vues, likes et commentaires. Cliquez sur 👁️ pour modérer.</span></div>
+        <div class="alert">💬 <span><strong>Modération & Engagement</strong> : Vues, likes et commentaires. Les partages sont gérés directement sur le site public via les boutons réseaux sociaux.</span></div>
         <div class="card">
-          <div class="card-header"><h2>💬 Engagements</h2><button class="btn-ghost" onclick="loadEngagement()">🔄 Actualiser</button></div>
+          <div class="card-header"><h2>💬 Engagements (Vues & Likes)</h2><button class="btn-ghost" onclick="loadEngagement()">🔄 Actualiser</button></div>
           <div class="card-body"><div class="item-list" id="listEngagement"><div class="empty">Chargement...</div></div></div>
         </div>
       </div>
 
-      <!-- ============ CONFIG ============ -->
+      <!-- CONFIG -->
       <div class="tab-pane" id="tab-config">
         <div class="alert">⚙️ <span><strong>Configuration</strong> : ces valeurs sont utilisées partout sur le site.</span></div>
         <div class="card">
@@ -694,14 +737,10 @@ input,select,textarea{font-family:inherit}
 
 <script type="module">
 import { auth, db } from './firebase-config.js';
-import { signInWithEmailAndPassword, signOut, onAuthStateChanged }
-  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-import { collection, addDoc, updateDoc, deleteDoc, doc, getDoc, getDocs, setDoc, query, orderBy, Timestamp }
-  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { collection, addDoc, updateDoc, deleteDoc, doc, getDoc, getDocs, setDoc, query, orderBy, Timestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-/* ============================================================
-   HELPERS
-   ============================================================ */
+/* HELPERS */
 function toast(msg, type = 'success') {
   const c = document.getElementById('toastContainer');
   const el = document.createElement('div');
@@ -712,15 +751,11 @@ function toast(msg, type = 'success') {
 }
 
 function slugify(s) {
-  return String(s || '').toLowerCase()
-    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  return String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 }
 
 function esc(s) {
-  return String(s || '').replace(/[&<>"']/g, c => ({
-    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-  }[c]));
+  return String(s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
 
 function fmtDate(ts) {
@@ -729,33 +764,18 @@ function fmtDate(ts) {
   return d.toLocaleDateString('fr-FR');
 }
 
-/* ============================================================
-   ⭐ APERÇU URL (images)
-   ============================================================ */
+/* APERÇU URL */
 window.previewUrl = function(inputId, previewId) {
   const input = document.getElementById(inputId);
   const preview = document.getElementById(previewId);
   if (!input || !preview) return;
   const url = input.value.trim();
-  if (!url) {
-    preview.classList.remove('show', 'error');
-    preview.innerHTML = '';
-    return;
-  }
-  preview.classList.add('show');
-  preview.classList.remove('error');
-  preview.innerHTML = `
-    <img src="${esc(url)}" alt="Aperçu" onerror="this.parentElement.classList.add('error'); this.parentElement.querySelector('.preview-info b').textContent = 'Image introuvable'"/>
-    <div class="preview-info">
-      <b>✅ Aperçu de l'image</b>
-      <span title="${esc(url)}">${esc(url)}</span>
-    </div>
-  `;
+  if (!url) { preview.classList.remove('show', 'error'); preview.innerHTML = ''; return; }
+  preview.classList.add('show'); preview.classList.remove('error');
+  preview.innerHTML = `<img src="${esc(url)}" alt="Aperçu" onerror="this.parentElement.classList.add('error'); this.parentElement.querySelector('.preview-info b').textContent = 'Image introuvable'"/><div class="preview-info"><b>✅ Aperçu de l'image</b><span title="${esc(url)}">${esc(url)}</span></div>`;
 };
 
-/* ============================================================
-   ⭐ DÉTECTION VIDÉO + VIGNETTE AUTO
-   ============================================================ */
+/* DÉTECTION VIDÉO */
 function ytThumb(url) {
   if (!url) return '';
   const m = url.match(/(?:embed\/|watch\?v=|youtu\.be\/|shorts\/)([^?&/]+)/);
@@ -768,22 +788,12 @@ window.onVideoUrlChange = function(forceShow) {
   const preview = document.getElementById('vidPreview');
   if (!input || !hint) return;
   const url = input.value.trim().toLowerCase();
-  let name = 'Inconnu';
-  let thumb = '';
-  if (url.includes('youtube.com') || url.includes('youtu.be')) {
-    name = '▶️ YouTube';
-    thumb = ytThumb(input.value);
-  } else if (url.includes('drive.google.com')) {
-    name = '📁 Google Drive';
-    const m = input.value.match(/\/d\/([^/]+)/);
-    if (m) thumb = `https://drive.google.com/thumbnail?id=${m[1]}&sz=w400`;
-  } else if (url.includes('vimeo.com')) {
-    name = '🎬 Vimeo';
-  } else if (url.includes('dailymotion.com')) {
-    name = '🎥 Dailymotion';
-  } else if (url.match(/\.(mp4|webm|mov)(\?|$)/)) {
-    name = '🎥 Vidéo directe';
-  }
+  let name = 'Inconnu', thumb = '';
+  if (url.includes('youtube.com') || url.includes('youtu.be')) { name = '▶️ YouTube'; thumb = ytThumb(input.value); }
+  else if (url.includes('drive.google.com')) { name = '📁 Google Drive'; const m = input.value.match(/\/d\/([^/]+)/); if (m) thumb = `https://drive.google.com/thumbnail?id=${m[1]}&sz=w400`; }
+  else if (url.includes('vimeo.com')) { name = '🎬 Vimeo'; }
+  else if (url.includes('dailymotion.com')) { name = '🎥 Dailymotion'; }
+  else if (url.match(/\.(mp4|webm|mov)(\?|$)/)) { name = '🎥 Vidéo directe'; }
   hint.textContent = 'Plateforme détectée : ' + (url ? name : '—');
 
   if (!url) { preview.classList.remove('show', 'error'); preview.innerHTML = ''; return; }
@@ -791,55 +801,27 @@ window.onVideoUrlChange = function(forceShow) {
     preview.classList.add('show');
     if (thumb) {
       preview.classList.remove('error');
-      preview.innerHTML = `
-        <img src="${esc(thumb)}" alt="Vignette" onerror="this.parentElement.classList.add('error'); this.parentElement.querySelector('.preview-info b').textContent = 'Vignette non disponible'"/>
-        <div class="preview-info">
-          <b>${name} — vignette détectée</b>
-          <span>${esc(input.value)}</span>
-        </div>
-      `;
+      preview.innerHTML = `<img src="${esc(thumb)}" alt="Vignette" onerror="this.parentElement.classList.add('error')"/><div class="preview-info"><b>${name} — vignette détectée</b><span>${esc(input.value)}</span></div>`;
     } else {
       preview.classList.remove('error');
-      preview.innerHTML = `
-        <div class="preview-info" style="text-align:center;padding:.6rem">
-          <b>${name}</b>
-          <span>Vignette non détectée automatiquement</span>
-        </div>
-      `;
+      preview.innerHTML = `<div class="preview-info" style="text-align:center;padding:.6rem"><b>${name}</b><span>Vignette non détectée automatiquement</span></div>`;
     }
   }
 };
 
-/* ============================================================
-   AUTH
-   ============================================================ */
+/* AUTH */
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
   e.preventDefault();
-  const email = document.getElementById('loginEmail').value.trim();
-  const pass = document.getElementById('loginPass').value;
-  const btn = document.getElementById('loginBtn');
-  const err = document.getElementById('loginError');
-  err.style.display = 'none';
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span> Connexion...';
+  const btn = document.getElementById('loginBtn'), err = document.getElementById('loginError');
+  err.style.display = 'none'; btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Connexion...';
   try {
-    await signInWithEmailAndPassword(auth, email, pass);
+    await signInWithEmailAndPassword(auth, document.getElementById('loginEmail').value.trim(), document.getElementById('loginPass').value);
   } catch (ex) {
-    let msg = 'Identifiants incorrects.';
-    if (ex.code === 'auth/too-many-requests') msg = 'Trop de tentatives. Réessayez plus tard.';
-    if (ex.code === 'auth/user-not-found') msg = 'Aucun compte avec cet email.';
-    if (ex.code === 'auth/wrong-password') msg = 'Mot de passe incorrect.';
-    err.textContent = '❌ ' + msg;
-    err.style.display = 'block';
-  } finally {
-    btn.disabled = false;
-    btn.innerHTML = '🔐 Se connecter';
-  }
+    err.textContent = '❌ Identifiants incorrects.'; err.style.display = 'block';
+  } finally { btn.disabled = false; btn.innerHTML = '🔐 Se connecter'; }
 });
 
-document.getElementById('logoutBtn').addEventListener('click', async () => {
-  await signOut(auth);
-});
+document.getElementById('logoutBtn').addEventListener('click', async () => { await signOut(auth); });
 
 onAuthStateChanged(auth, async (user) => {
   if (user) {
@@ -854,9 +836,7 @@ onAuthStateChanged(auth, async (user) => {
   }
 });
 
-/* ============================================================
-   TABS
-   ============================================================ */
+/* TABS */
 document.querySelectorAll('.admin-tab').forEach(btn => {
   btn.addEventListener('click', () => {
     const name = btn.dataset.tab;
@@ -867,17 +847,11 @@ document.querySelectorAll('.admin-tab').forEach(btn => {
   });
 });
 
-/* ============================================================
-   DASHBOARD
-   ============================================================ */
+/* DASHBOARD */
 async function refreshDashboard() {
   try {
     const [arts, vids, photos, evs, sps] = await Promise.all([
-      getDocs(collection(db, 'articles')),
-      getDocs(collection(db, 'videos')),
-      getDocs(collection(db, 'galerie')),
-      getDocs(collection(db, 'evenements')),
-      getDocs(collection(db, 'sponsors')),
+      getDocs(collection(db, 'articles')), getDocs(collection(db, 'videos')), getDocs(collection(db, 'galerie')), getDocs(collection(db, 'evenements')), getDocs(collection(db, 'sponsors')),
     ]);
     document.getElementById('dashArticles').textContent = arts.size;
     document.getElementById('dashVideos').textContent = vids.size;
@@ -885,695 +859,296 @@ async function refreshDashboard() {
     document.getElementById('dashEvents').textContent = evs.size;
     document.getElementById('dashSponsors').textContent = sps.size;
 
-    const recent = arts.docs
-      .map(d => ({ id: d.id, ...d.data() }))
-      .sort((a, b) => {
-        const ta = a.date?.toDate?.()?.getTime() || 0;
-        const tb = b.date?.toDate?.()?.getTime() || 0;
-        return tb - ta;
-      }).slice(0, 5);
-
+    const recent = arts.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => (b.date?.toDate?.()?.getTime() || 0) - (a.date?.toDate?.()?.getTime() || 0)).slice(0, 5);
     const box = document.getElementById('dashRecent');
-    if (!recent.length) { box.innerHTML = '<div class="empty">Aucun article pour le moment.</div>'; return; }
+    if (!recent.length) { box.innerHTML = '<div class="empty">Aucun article.</div>'; return; }
     box.innerHTML = recent.map(a => `
       <div class="item-row">
         <div class="item-thumb">${a.imageUrl ? `<img src="${esc(a.imageUrl)}" onerror="this.style.display='none'"/>` : '📰'}</div>
-        <div class="item-info">
-          <div class="item-title">${esc(a.titre || 'Sans titre')}</div>
-          <div class="item-meta"><span>📅 ${fmtDate(a.date)}</span><span>${esc(a.categorie || '')}</span></div>
-        </div>
+        <div class="item-info"><div class="item-title">${esc(a.titre || 'Sans titre')}</div><div class="item-meta"><span>📅 ${fmtDate(a.date)}</span></div></div>
       </div>
     `).join('');
-  } catch (e) {
-    console.warn(e);
-  }
+  } catch (e) { console.warn(e); }
 }
 
 async function loadAll() {
-  await Promise.all([
-    loadArticles(), loadVideos(), loadPhotos(),
-    loadEvents(), loadSponsors(), loadHorsTerrain(),
-    loadProfil(), loadStats()
-  ]);
+  await Promise.all([ loadProfil(), loadCarriere(), loadSelections(), loadStats(), loadTextes(), loadArticles(), loadVideos(), loadPhotos(), loadEvents(), loadSponsors(), loadHorsTerrain() ]);
 }
 
-/* ============================================================
-   ARTICLES
-   ============================================================ */
-let editingArticle = null;
+/* PROFIL */
+async function loadProfil() {
+  const d = await getDoc(doc(db, 'profil', 'principal'));
+  if (d.exists()) {
+    const p = d.data();
+    const map = { nom:'pNom', club:'pClub', poste:'pPoste', statut:'pStatut', proDepuis:'pProDepuis', age:'pAge', taille:'pTaille', poids:'pPoids', pied:'pPied', selections:'pSel', langues:'pLangues', bio:'pBio', email:'pEmail', whatsapp:'pWhatsapp', telephone:'pTel', instagram:'pInsta', transfermarkt:'pTransfermarkt', facebook:'pFacebook' };
+    for (const k in map) { const el = document.getElementById(map[k]); if (el && p[k] !== undefined) el.value = p[k] || ''; }
+  }
+}
+document.getElementById('profilForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const data = {
+    nom: document.getElementById('pNom').value.trim(), club: document.getElementById('pClub').value.trim(), poste: document.getElementById('pPoste').value.trim(), statut: document.getElementById('pStatut').value.trim(), proDepuis: document.getElementById('pProDepuis').value.trim(), age: document.getElementById('pAge').value.trim(), taille: document.getElementById('pTaille').value.trim(), poids: document.getElementById('pPoids').value.trim(), pied: document.getElementById('pPied').value.trim(), selections: document.getElementById('pSel').value.trim(), langues: document.getElementById('pLangues').value.trim(), bio: document.getElementById('pBio').value.trim(), email: document.getElementById('pEmail').value.trim(), whatsapp: document.getElementById('pWhatsapp').value.trim(), telephone: document.getElementById('pTel').value.trim(), instagram: document.getElementById('pInsta').value.trim(), transfermarkt: document.getElementById('pTransfermarkt').value.trim(), facebook: document.getElementById('pFacebook').value.trim(), updatedAt: Timestamp.now()
+  };
+  try { await setDoc(doc(db, 'profil', 'principal'), data, { merge: true }); toast('✅ Profil enregistré'); }
+  catch (ex) { toast('❌ ' + ex.message, 'error'); }
+});
 
+/* CARRIERE */
+async function loadCarriere() {
+  const box = document.getElementById('listCarriere');
+  const snap = await getDocs(collection(db, 'carriere'));
+  box.innerHTML = snap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a,b) => (b.saison||'').localeCompare(a.saison||'')).map(c => `
+    <div class="item-row">
+      <div class="item-thumb">${c.logo ? `<img src="${esc(c.logo)}" onerror="this.style.display='none'"/>` : '🏟️'}</div>
+      <div class="item-info"><div class="item-title">${esc(c.saison)} — ${esc(c.club)}</div><div class="item-meta"><span>${esc(c.division)} · ${esc(c.pays)}</span></div></div>
+      <div class="item-actions"><button class="mini-btn" onclick="editCar('${c.id}')">✏️</button><button class="mini-btn del" onclick="delCar('${c.id}')">🗑️</button></div>
+    </div>
+  `).join('') || '<div class="empty">Aucun club.</div>';
+}
+document.getElementById('carriereForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const data = { saison: document.getElementById('carSaison').value.trim(), club: document.getElementById('carClub').value.trim(), division: document.getElementById('carDivision').value.trim(), pays: document.getElementById('carPays').value.trim(), logo: document.getElementById('carLogo').value.trim(), ordre: parseInt(document.getElementById('carOrdre').value) || 100 };
+  const id = document.getElementById('carId').value;
+  if (id) await updateDoc(doc(db, 'carriere', id), data); else await addDoc(collection(db, 'carriere'), data);
+  resetForm('carriere'); toast('✅ Club enregistré'); loadCarriere();
+});
+
+/* SELECTIONS & COMPETITIONS */
+async function loadSelections() {
+  const d = await getDoc(doc(db, 'selections', 'compteurs'));
+  if (d.exists()) { document.getElementById('selU20').value = d.data().u20 || 24; document.getElementById('selU23').value = d.data().u23 || 5; document.getElementById('selTotal').value = d.data().total || 29; }
+  const snap = await getDocs(collection(db, 'competitions'));
+  const box = document.getElementById('listCompetitions');
+  box.innerHTML = snap.docs.map(d => ({ id: d.id, ...d.data() })).map(c => `
+    <div class="item-row">
+      <div class="item-thumb">${c.logo ? `<img src="${esc(c.logo)}" onerror="this.style.display='none'"/>` : '🏆'}</div>
+      <div class="item-info"><div class="item-title">${esc(c.nom)} (${esc(c.annee)})</div><div class="item-meta"><span>${esc(c.resultat)}</span></div></div>
+      <div class="item-actions"><button class="mini-btn" onclick="editComp('${c.id}')">✏️</button><button class="mini-btn del" onclick="delComp('${c.id}')">🗑️</button></div>
+    </div>
+  `).join('') || '<div class="empty">Aucune compétition.</div>';
+}
+document.getElementById('selectionForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  await setDoc(doc(db, 'selections', 'compteurs'), { u20: parseInt(document.getElementById('selU20').value), u23: parseInt(document.getElementById('selU23').value), total: parseInt(document.getElementById('selTotal').value) });
+  toast('✅ Compteurs mis à jour');
+});
+document.getElementById('competitionForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const data = { nom: document.getElementById('compNom').value.trim(), annee: document.getElementById('compAnnee').value.trim(), resultat: document.getElementById('compResultat').value.trim(), logo: document.getElementById('compLogo').value.trim() };
+  const id = document.getElementById('compId').value;
+  if (id) await updateDoc(doc(db, 'competitions', id), data); else await addDoc(collection(db, 'competitions'), data);
+  resetForm('competition'); toast('✅ Compétition enregistrée'); loadSelections();
+});
+
+/* STATS */
+async function loadStats() {
+  const box = document.getElementById('listStats');
+  const snap = await getDocs(collection(db, 'statistiques'));
+  box.innerHTML = snap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => (b.saison || '').localeCompare(a.saison || '')).map(s => `
+    <div class="item-row">
+      <div class="item-thumb">📊</div>
+      <div class="item-info"><div class="item-title">${esc(s.saison)} — ${esc(s.club || '—')}</div><div class="item-meta"><span>⚽ ${s.matchs || 0} matchs</span><span>🧤 ${s.cleanSheets || 0} clean sheets</span><span>🏆 ${s.championnat || 0} champ.</span><span>🇫🇷 ${s.coupeDeFrance || 0} coupe</span></div></div>
+      <div class="item-actions"><button class="mini-btn" onclick="editStats('${s.id}')">✏️</button><button class="mini-btn del" onclick="delStats('${s.id}')">🗑️</button></div>
+    </div>
+  `).join('') || '<div class="empty">Aucune saison.</div>';
+}
+document.getElementById('statsForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const num = id => parseInt(document.getElementById(id).value) || 0;
+  const data = { saison: document.getElementById('stSaison').value.trim(), club: document.getElementById('stClub').value.trim(), niveau: document.getElementById('stNiveau').value.trim(), matchs: num('stMatchs'), titularisations: num('stTitul'), minutes: num('stMinutes'), butsEncaisses: num('stButs'), cleanSheets: num('stClean'), penaltiesArretes: num('stPen'), cartons: num('stCartons'), championnat: num('stChamp'), coupeDeFrance: num('stCoupe'), equipeReserve: num('stReserve'), updatedAt: Timestamp.now() };
+  const id = document.getElementById('stId').value;
+  if (id) await updateDoc(doc(db, 'statistiques', id), data); else await addDoc(collection(db, 'statistiques'), data);
+  resetForm('stats'); toast('✅ Saison enregistrée'); loadStats();
+});
+
+/* TEXTES FR/EN */
+async function loadTextes() {
+  const d = await getDoc(doc(db, 'textes', 'site'));
+  if (d.exists()) {
+    const t = d.data();
+    document.getElementById('txtHeroFr').value = t.heroFr || ''; document.getElementById('txtHeroEn').value = t.heroEn || '';
+    document.getElementById('txtBioFr').value = t.bioFr || ''; document.getElementById('txtBioEn').value = t.bioEn || '';
+    document.getElementById('txtQuoteFr').value = t.quoteFr || ''; document.getElementById('txtQuoteEn').value = t.quoteEn || '';
+  }
+}
+async function saveTextes() {
+  await setDoc(doc(db, 'textes', 'site'), {
+    heroFr: document.getElementById('txtHeroFr').value, heroEn: document.getElementById('txtHeroEn').value,
+    bioFr: document.getElementById('txtBioFr').value, bioEn: document.getElementById('txtBioEn').value,
+    quoteFr: document.getElementById('txtQuoteFr').value, quoteEn: document.getElementById('txtQuoteEn').value
+  }, { merge: true });
+  toast('✅ Textes enregistrés');
+}
+
+/* ARTICLES */
+let editingArticle = null;
 async function loadArticles() {
   const box = document.getElementById('listArticles');
   box.innerHTML = '<div class="empty">Chargement...</div>';
   try {
     const snap = await getDocs(collection(db, 'articles'));
-    const docs = snap.docs.map(d => ({ id: d.id, ...d.data() }))
-      .sort((a, b) => {
-        const ta = a.date?.toDate?.()?.getTime() || 0;
-        const tb = b.date?.toDate?.()?.getTime() || 0;
-        return tb - ta;
-      });
-    if (!docs.length) { box.innerHTML = '<div class="empty">Aucun article pour le moment.</div>'; return; }
+    const docs = snap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => (b.date?.toDate?.()?.getTime() || 0) - (a.date?.toDate?.()?.getTime() || 0));
+    if (!docs.length) { box.innerHTML = '<div class="empty">Aucun article.</div>'; return; }
     box.innerHTML = docs.map(a => `
       <div class="item-row">
         <div class="item-thumb">${a.imageUrl ? `<img src="${esc(a.imageUrl)}" onerror="this.style.display='none'"/>` : '📰'}</div>
-        <div class="item-info">
-          <div class="item-title">${esc(a.titre || 'Sans titre')}</div>
-          <div class="item-meta">
-            <span>📅 ${fmtDate(a.date)}</span>
-            <span>${esc(a.categorie || '')}</span>
-            <span class="badge ${a.publie ? 'badge-pub' : 'badge-draft'}">${a.publie ? '✅ Publié' : '📝 Brouillon'}</span>
-          </div>
-        </div>
-        <div class="item-actions">
-          <button class="mini-btn" onclick="editArticle('${a.id}')">✏️</button>
-          <button class="mini-btn pub" onclick="toggleArticlePublish('${a.id}', ${!!a.publie})">${a.publie ? '📝' : '✅'}</button>
-          <button class="mini-btn del" onclick="deleteArticle('${a.id}')">🗑️</button>
-        </div>
+        <div class="item-info"><div class="item-title">${esc(a.titre || 'Sans titre')}</div><div class="item-meta"><span>📅 ${fmtDate(a.date)}</span><span>${esc(a.categorie || '')}</span><span class="badge ${a.publie ? 'badge-pub' : 'badge-draft'}">${a.publie ? '✅ Publié' : '📝 Brouillon'}</span></div></div>
+        <div class="item-actions"><button class="mini-btn" onclick="editArticle('${a.id}')">✏️</button><button class="mini-btn pub" onclick="toggleArticlePublish('${a.id}', ${!!a.publie})">${a.publie ? '📝' : '✅'}</button><button class="mini-btn del" onclick="deleteArticle('${a.id}')">🗑️</button></div>
       </div>
     `).join('');
   } catch (e) { box.innerHTML = '<div class="empty">Erreur : ' + esc(e.message) + '</div>'; }
 }
-
 document.getElementById('articleForm').addEventListener('submit', async (e) => {
   e.preventDefault();
-  const btn = document.getElementById('artBtnSave');
-  btn.disabled = true;
-  const orig = btn.innerHTML;
-  btn.innerHTML = '<span class="spinner"></span> Enregistrement...';
-  const data = {
-    titre: document.getElementById('artTitre').value.trim(),
-    slug: document.getElementById('artSlug').value.trim() || slugify(document.getElementById('artTitre').value),
-    categorie: document.getElementById('artCat').value,
-    publie: document.getElementById('artPublie').value === 'true',
-    imageUrl: document.getElementById('artImage').value.trim(),
-    resume: document.getElementById('artResume').value.trim(),
-    contenu: document.getElementById('artContenu').value.trim(),
-    seoTitre: document.getElementById('artSeoTitre').value.trim(),
-    keywords: document.getElementById('artKeywords').value.trim(),
-    seoDescription: document.getElementById('artSeoDesc').value.trim(),
-    updatedAt: Timestamp.now()
-  };
+  const btn = document.getElementById('artBtnSave'); btn.disabled = true;
+  const data = { titre: document.getElementById('artTitre').value.trim(), slug: document.getElementById('artSlug').value.trim() || slugify(document.getElementById('artTitre').value), categorie: document.getElementById('artCat').value, publie: document.getElementById('artPublie').value === 'true', imageUrl: document.getElementById('artImage').value.trim(), resume: document.getElementById('artResume').value.trim(), contenu: document.getElementById('artContenu').value.trim(), seoTitre: document.getElementById('artSeoTitre').value.trim(), keywords: document.getElementById('artKeywords').value.trim(), seoDescription: document.getElementById('artSeoDesc').value.trim(), updatedAt: Timestamp.now() };
   try {
-    if (editingArticle) {
-      await updateDoc(doc(db, 'articles', editingArticle), data);
-      toast('✅ Article mis à jour');
-    } else {
-      data.date = Timestamp.now();
-      await addDoc(collection(db, 'articles'), data);
-      toast('✅ Article publié');
-    }
-    resetForm('article');
-    await loadArticles();
-    await refreshDashboard();
-  } catch (ex) { toast('❌ ' + ex.message, 'error'); }
-  finally { btn.disabled = false; btn.innerHTML = orig; }
+    if (editingArticle) { await updateDoc(doc(db, 'articles', editingArticle), data); toast('✅ Article mis à jour'); }
+    else { data.date = Timestamp.now(); await addDoc(collection(db, 'articles'), data); toast('✅ Article publié'); }
+    resetForm('article'); await loadArticles(); await refreshDashboard();
+  } catch (ex) { toast('❌ ' + ex.message, 'error'); } finally { btn.disabled = false; btn.innerHTML = '💾 Enregistrer'; }
 });
 
-window.editArticle = async (id) => {
-  try {
-    const d = await getDoc(doc(db, 'articles', id));
-    if (!d.exists()) return;
-    const a = d.data();
-    editingArticle = id;
-    document.getElementById('artId').value = id;
-    document.getElementById('artTitre').value = a.titre || '';
-    document.getElementById('artSlug').value = a.slug || '';
-    document.getElementById('artCat').value = a.categorie || 'Match';
-    document.getElementById('artPublie').value = a.publie ? 'true' : 'false';
-    document.getElementById('artImage').value = a.imageUrl || '';
-    document.getElementById('artResume').value = a.resume || '';
-    document.getElementById('artContenu').value = a.contenu || '';
-    document.getElementById('artSeoTitre').value = a.seoTitre || '';
-    document.getElementById('artKeywords').value = a.keywords || '';
-    document.getElementById('artSeoDesc').value = a.seoDescription || '';
-    document.getElementById('artFormTitle').textContent = '✏️ Modifier l\'article';
-    previewUrl('artImage', 'artImagePreview');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    toast('✏️ Mode modification', 'info');
-  } catch (e) { toast('❌ ' + e.message, 'error'); }
-};
-
-window.deleteArticle = async (id) => {
-  if (!confirm('Supprimer définitivement cet article ?')) return;
-  try { await deleteDoc(doc(db, 'articles', id)); toast('🗑️ Supprimé'); await loadArticles(); await refreshDashboard(); }
-  catch (e) { toast('❌ ' + e.message, 'error'); }
-};
-
-window.toggleArticlePublish = async (id, current) => {
-  try { await updateDoc(doc(db, 'articles', id), { publie: !current }); toast(!current ? '✅ Publié' : '📝 Repassé en brouillon'); await loadArticles(); }
-  catch (e) { toast('❌ ' + e.message, 'error'); }
-};
-
-/* ============================================================
-   VIDEOS
-   ============================================================ */
+/* VIDEOS */
 let editingVideo = null;
-
 async function loadVideos() {
   const box = document.getElementById('listVideos');
   box.innerHTML = '<div class="empty">Chargement...</div>';
   try {
     const snap = await getDocs(collection(db, 'videos'));
     const docs = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-    if (!docs.length) { box.innerHTML = '<div class="empty">Aucune vidéo pour le moment. (Ajoutez-en quand vous aurez les vidéos du joueur.)</div>'; return; }
+    if (!docs.length) { box.innerHTML = '<div class="empty">Aucune vidéo.</div>'; return; }
     box.innerHTML = docs.map(v => {
       const thumb = v.vignetteUrl || ytThumb(v.url) || '';
-      return `
-      <div class="item-row">
-        <div class="item-thumb">${thumb ? `<img src="${esc(thumb)}" onerror="this.style.display='none'"/>` : '🎬'}</div>
-        <div class="item-info">
-          <div class="item-title">${esc(v.titre || 'Sans titre')}</div>
-          <div class="item-meta">
-            <span>${esc(v.categorie || '')}</span>
-            <span class="badge ${v.publie !== false ? 'badge-pub' : 'badge-draft'}">${v.publie !== false ? '✅ Publié' : '📝 Brouillon'}</span>
-          </div>
-        </div>
-        <div class="item-actions">
-          <button class="mini-btn" onclick="editVideo('${v.id}')">✏️</button>
-          <button class="mini-btn del" onclick="deleteVideo('${v.id}')">🗑️</button>
-        </div>
-      </div>
-    `}).join('');
+      return `<div class="item-row"><div class="item-thumb">${thumb ? `<img src="${esc(thumb)}" onerror="this.style.display='none'"/>` : '🎬'}</div><div class="item-info"><div class="item-title">${esc(v.titre || 'Sans titre')}</div><div class="item-meta"><span>${esc(v.categorie || '')}</span><span class="badge ${v.publie !== false ? 'badge-pub' : 'badge-draft'}">${v.publie !== false ? '✅ Publié' : '📝 Brouillon'}</span></div></div><div class="item-actions"><button class="mini-btn" onclick="editVideo('${v.id}')">✏️</button><button class="mini-btn del" onclick="deleteVideo('${v.id}')">🗑️</button></div></div>`;
+    }).join('');
   } catch (e) { box.innerHTML = '<div class="empty">Erreur : ' + esc(e.message) + '</div>'; }
 }
-
 document.getElementById('videoForm').addEventListener('submit', async (e) => {
   e.preventDefault();
-  const btn = document.getElementById('vidBtnSave');
-  btn.disabled = true;
-  const orig = btn.innerHTML;
-  btn.innerHTML = '<span class="spinner"></span>';
+  const btn = document.getElementById('vidBtnSave'); btn.disabled = true;
   const url = document.getElementById('vidUrl').value.trim();
   const customVignette = document.getElementById('vidVignette').value.trim();
-  const data = {
-    titre: document.getElementById('vidTitre').value.trim(),
-    categorie: document.getElementById('vidCat').value,
-    url,
-    vignetteUrl: customVignette || ytThumb(url),
-    description: document.getElementById('vidDesc').value.trim(),
-    publie: document.getElementById('vidPublie').value === 'true',
-    updatedAt: Timestamp.now()
-  };
+  const data = { titre: document.getElementById('vidTitre').value.trim(), categorie: document.getElementById('vidCat').value, url, vignetteUrl: customVignette || ytThumb(url), description: document.getElementById('vidDesc').value.trim(), publie: document.getElementById('vidPublie').value === 'true', updatedAt: Timestamp.now() };
   try {
-    if (editingVideo) {
-      await updateDoc(doc(db, 'videos', editingVideo), data);
-      toast('✅ Vidéo mise à jour');
-    } else {
-      data.date = Timestamp.now();
-      await addDoc(collection(db, 'videos'), data);
-      toast('✅ Vidéo ajoutée');
-    }
-    resetForm('video');
-    await loadVideos();
-    await refreshDashboard();
-  } catch (ex) { toast('❌ ' + ex.message, 'error'); }
-  finally { btn.disabled = false; btn.innerHTML = orig; }
+    if (editingVideo) { await updateDoc(doc(db, 'videos', editingVideo), data); toast('✅ Vidéo mise à jour'); }
+    else { data.date = Timestamp.now(); await addDoc(collection(db, 'videos'), data); toast('✅ Vidéo ajoutée'); }
+    resetForm('video'); await loadVideos(); await refreshDashboard();
+  } catch (ex) { toast('❌ ' + ex.message, 'error'); } finally { btn.disabled = false; btn.innerHTML = '💾 Enregistrer'; }
 });
 
-window.editVideo = async (id) => {
-  const d = await getDoc(doc(db, 'videos', id));
-  if (!d.exists()) return;
-  const v = d.data();
-  editingVideo = id;
-  document.getElementById('vidId').value = id;
-  document.getElementById('vidTitre').value = v.titre || '';
-  document.getElementById('vidCat').value = v.categorie || 'Arrêts & réflexes';
-  document.getElementById('vidUrl').value = v.url || '';
-  document.getElementById('vidDesc').value = v.description || '';
-  document.getElementById('vidVignette').value = v.vignetteUrl || '';
-  document.getElementById('vidPublie').value = v.publie === false ? 'false' : 'true';
-  document.getElementById('vidFormTitle').textContent = '✏️ Modifier la vidéo';
-  onVideoUrlChange();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-};
-
-window.deleteVideo = async (id) => {
-  if (!confirm('Supprimer cette vidéo ?')) return;
-  await deleteDoc(doc(db, 'videos', id));
-  toast('🗑️ Supprimée'); await loadVideos(); await refreshDashboard();
-};
-
-/* ============================================================
-   PHOTOS — AUTO-INIT 30
-   ============================================================ */
+/* PHOTOS */
 async function maybeInitPhotos() {
   try {
     const snap = await getDocs(collection(db, 'galerie'));
-    if (snap.empty) {
-      await initPhotos(false);
-      toast('✨ 30 photos initialisées automatiquement');
-    } else {
-      await loadPhotos();
-    }
+    if (snap.empty) { await initPhotos(false); toast('✨ 30 photos initialisées'); } else { await loadPhotos(); }
   } catch (e) { console.warn(e); }
 }
-
 window.initPhotos = async (manual = false) => {
-  if (manual && !confirm('Générer/regénérer les 30 photos (ph1.jpeg à ph30.jpeg) ?')) return;
+  if (manual && !confirm('Générer/regénérer les 30 photos ?')) return;
   const cats = ['Sélection Bénin', 'Match & Clubs', 'Ses photos'];
   const promises = [];
   for (let i = 1; i <= 30; i++) {
     const cat = cats[Math.floor((i - 1) / 10)];
     const ref = doc(db, 'galerie', 'photo_' + i);
-    promises.push(setDoc(ref, {
-      numero: i,
-      fichier: 'ph' + i + '.jpeg',
-      categorie: cat,
-      titre: cat + ' — Photo ' + i,
-      alt: 'Dava David Agossa — ' + cat + ' ' + i,
-      isInitial: true,
-      date: Timestamp.now()
-    }, { merge: true }));
+    promises.push(setDoc(ref, { numero: i, fichier: 'ph' + i + '.jpeg', categorie: cat, titre: cat + ' — Photo ' + i, alt: 'Dava David Agossa — ' + cat + ' ' + i, isInitial: true, date: Timestamp.now() }, { merge: true }));
   }
-  try {
-    await Promise.all(promises);
-    if (manual) toast('✅ 30 photos générées');
-    await loadPhotos();
-  } catch (e) { toast('❌ ' + e.message, 'error'); }
+  try { await Promise.all(promises); if (manual) toast('✅ 30 photos générées'); await loadPhotos(); } catch (e) { toast('❌ ' + e.message, 'error'); }
 };
-
 async function loadPhotos() {
   const grid = document.getElementById('photoGrid');
   grid.innerHTML = '<div class="empty">Chargement...</div>';
   try {
     const snap = await getDocs(collection(db, 'galerie'));
-    if (snap.empty) { grid.innerHTML = '<div class="empty">Aucune photo. Cliquez sur « Générer les 30 ».</div>'; return; }
+    if (snap.empty) { grid.innerHTML = '<div class="empty">Aucune photo.</div>'; return; }
     const docs = snap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => (a.numero || 999) - (b.numero || 999));
     grid.innerHTML = docs.map(p => {
-      if (p.isInitial) {
-        return `<div class="photo-item" title="${esc(p.fichier)}">
-          <span class="num">${p.numero}</span>
-          <span style="padding:.3rem;text-align:center">${esc(p.fichier)}</span>
-          <span class="cat">${esc(p.categorie)}</span>
-        </div>`;
-      }
-      return `<div class="photo-item" title="${esc(p.titre || '')}">
-        ${p.url ? `<img src="${esc(p.url)}" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none'"/>` : ''}
-        <span class="cat">${esc(p.categorie || '')}</span>
-        <button class="mini-btn del" style="position:absolute;top:2px;right:2px;padding:2px 4px;font-size:.5rem" onclick="deletePhoto('${p.id}')">✕</button>
-      </div>`;
+      if (p.isInitial) { return `<div class="photo-item" title="${esc(p.fichier)}"><span class="num">${p.numero}</span><span style="padding:.3rem;text-align:center">${esc(p.fichier)}</span><span class="cat">${esc(p.categorie)}</span></div>`; }
+      return `<div class="photo-item" title="${esc(p.titre || '')}">${p.url ? `<img src="${esc(p.url)}" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none'"/>` : ''}<span class="cat">${esc(p.categorie || '')}</span><button class="mini-btn del" style="position:absolute;top:2px;right:2px;padding:2px 4px;font-size:.5rem" onclick="deletePhoto('${p.id}')">✕</button></div>`;
     }).join('');
   } catch (e) { grid.innerHTML = '<div class="empty">Erreur : ' + esc(e.message) + '</div>'; }
 }
-
 document.getElementById('photoForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   try {
-    await addDoc(collection(db, 'galerie'), {
-      titre: document.getElementById('phTitre').value.trim(),
-      categorie: document.getElementById('phCat').value,
-      url: document.getElementById('phUrl').value.trim(),
-      alt: document.getElementById('phAlt').value.trim(),
-      isInitial: false,
-      date: Timestamp.now()
-    });
-    toast('✅ Photo ajoutée');
-    document.getElementById('photoForm').reset();
-    document.getElementById('phPreview').classList.remove('show', 'error');
-    document.getElementById('phPreview').innerHTML = '';
+    await addDoc(collection(db, 'galerie'), { titre: document.getElementById('phTitre').value.trim(), categorie: document.getElementById('phCat').value, url: document.getElementById('phUrl').value.trim(), alt: document.getElementById('phAlt').value.trim(), isInitial: false, date: Timestamp.now() });
+    toast('✅ Photo ajoutée'); document.getElementById('photoForm').reset(); document.getElementById('phPreview').classList.remove('show', 'error'); document.getElementById('phPreview').innerHTML = '';
     await loadPhotos(); await refreshDashboard();
   } catch (ex) { toast('❌ ' + ex.message, 'error'); }
 });
 
-window.deletePhoto = async (id) => {
-  if (!confirm('Supprimer cette photo ?')) return;
-  await deleteDoc(doc(db, 'galerie', id));
-  toast('🗑️ Supprimée'); await loadPhotos(); await refreshDashboard();
-};
-
-/* ============================================================
-   EVENTS
-   ============================================================ */
+/* EVENTS */
 let editingEvent = null;
-
 async function loadEvents() {
   const box = document.getElementById('listEvents');
   box.innerHTML = '<div class="empty">Chargement...</div>';
   try {
     const snap = await getDocs(collection(db, 'evenements'));
-    const docs = snap.docs.map(d => ({ id: d.id, ...d.data() }))
-      .sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+    const docs = snap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => (b.date || '').localeCompare(a.date || ''));
     if (!docs.length) { box.innerHTML = '<div class="empty">Aucun événement.</div>'; return; }
     const today = new Date().toISOString().slice(0, 10);
     box.innerHTML = docs.map(ev => {
       const futur = ev.date && ev.date >= today;
-      return `
-      <div class="item-row">
-        <div class="item-thumb">📅</div>
-        <div class="item-info">
-          <div class="item-title">${esc(ev.titre || 'Sans titre')}</div>
-          <div class="item-meta">
-            <span>📅 ${esc(ev.date || '')}</span>
-            <span>📍 ${esc(ev.lieu || '—')}</span>
-            <span class="badge ${futur ? 'badge-pub' : 'badge-draft'}">${futur ? '🗓️ À venir' : '⏳ Passé'}</span>
-          </div>
-        </div>
-        <div class="item-actions">
-          <button class="mini-btn" onclick="editEvent('${ev.id}')">✏️</button>
-          <button class="mini-btn del" onclick="deleteEvent('${ev.id}')">🗑️</button>
-        </div>
-      </div>`;
+      return `<div class="item-row"><div class="item-thumb">📅</div><div class="item-info"><div class="item-title">${esc(ev.titre || 'Sans titre')}</div><div class="item-meta"><span>📅 ${esc(ev.date || '')}</span><span>📍 ${esc(ev.lieu || '—')}</span><span class="badge ${futur ? 'badge-pub' : 'badge-draft'}">${futur ? '🗓️ À venir' : '⏳ Passé'}</span></div></div><div class="item-actions"><button class="mini-btn" onclick="editEvent('${ev.id}')">✏️</button><button class="mini-btn del" onclick="deleteEvent('${ev.id}')">🗑️</button></div></div>`;
     }).join('');
   } catch (e) { box.innerHTML = '<div class="empty">Erreur : ' + esc(e.message) + '</div>'; }
 }
-
 document.getElementById('eventForm').addEventListener('submit', async (e) => {
   e.preventDefault();
-  const data = {
-    titre: document.getElementById('evTitre').value.trim(),
-    date: document.getElementById('evDate').value,
-    lieu: document.getElementById('evLieu').value.trim(),
-    description: document.getElementById('evDesc').value.trim(),
-    imageUrl: document.getElementById('evImage').value.trim(),
-    publie: document.getElementById('evPublie').value === 'true',
-    updatedAt: Timestamp.now()
-  };
+  const data = { titre: document.getElementById('evTitre').value.trim(), date: document.getElementById('evDate').value, lieu: document.getElementById('evLieu').value.trim(), description: document.getElementById('evDesc').value.trim(), imageUrl: document.getElementById('evImage').value.trim(), publie: document.getElementById('evPublie').value === 'true', updatedAt: Timestamp.now() };
   try {
-    if (editingEvent) {
-      await updateDoc(doc(db, 'evenements', editingEvent), data);
-      toast('✅ Événement mis à jour');
-    } else {
-      await addDoc(collection(db, 'evenements'), data);
-      toast('✅ Événement ajouté');
-    }
-    resetForm('event');
-    await loadEvents(); await refreshDashboard();
+    if (editingEvent) { await updateDoc(doc(db, 'evenements', editingEvent), data); toast('✅ Événement mis à jour'); }
+    else { await addDoc(collection(db, 'evenements'), data); toast('✅ Événement ajouté'); }
+    resetForm('event'); await loadEvents(); await refreshDashboard();
   } catch (ex) { toast('❌ ' + ex.message, 'error'); }
 });
 
-window.editEvent = async (id) => {
-  const d = await getDoc(doc(db, 'evenements', id));
-  if (!d.exists()) return;
-  const v = d.data();
-  editingEvent = id;
-  document.getElementById('evId').value = id;
-  document.getElementById('evTitre').value = v.titre || '';
-  document.getElementById('evDate').value = v.date || '';
-  document.getElementById('evLieu').value = v.lieu || '';
-  document.getElementById('evDesc').value = v.description || '';
-  document.getElementById('evImage').value = v.imageUrl || '';
-  document.getElementById('evPublie').value = v.publie === false ? 'false' : 'true';
-  document.getElementById('evFormTitle').textContent = '✏️ Modifier l\'événement';
-  previewUrl('evImage', 'evPreview');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-};
-
-window.deleteEvent = async (id) => {
-  if (!confirm('Supprimer cet événement ?')) return;
-  await deleteDoc(doc(db, 'evenements', id));
-  toast('🗑️ Supprimé'); await loadEvents(); await refreshDashboard();
-};
-
-/* ============================================================
-   SPONSORS
-   ============================================================ */
+/* SPONSORS */
 let editingSponsor = null;
-
 async function loadSponsors() {
   const box = document.getElementById('listSponsors');
   box.innerHTML = '<div class="empty">Chargement...</div>';
   try {
     const snap = await getDocs(collection(db, 'sponsors'));
-    const docs = snap.docs.map(d => ({ id: d.id, ...d.data() }))
-      .sort((a, b) => (a.ordre || 999) - (b.ordre || 999));
+    const docs = snap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => (a.ordre || 999) - (b.ordre || 999));
     if (!docs.length) { box.innerHTML = '<div class="empty">Aucun sponsor.</div>'; return; }
-    box.innerHTML = docs.map(s => `
-      <div class="item-row">
-        <div class="item-thumb">${s.logoUrl ? `<img src="${esc(s.logoUrl)}" onerror="this.style.display='none'"/>` : '🤝'}</div>
-        <div class="item-info">
-          <div class="item-title">${esc(s.nom || 'Sans nom')}</div>
-          <div class="item-meta">
-            <span class="badge ${s.actif !== false ? 'badge-pub' : 'badge-draft'}">${s.actif !== false ? '✅ Actif' : '🚫 Inactif'}</span>
-          </div>
-        </div>
-        <div class="item-actions">
-          <button class="mini-btn" onclick="editSponsor('${s.id}')">✏️</button>
-          <button class="mini-btn del" onclick="deleteSponsor('${s.id}')">🗑️</button>
-        </div>
-      </div>
-    `).join('');
+    box.innerHTML = docs.map(s => `<div class="item-row"><div class="item-thumb">${s.logoUrl ? `<img src="${esc(s.logoUrl)}" onerror="this.style.display='none'"/>` : '🤝'}</div><div class="item-info"><div class="item-title">${esc(s.nom || 'Sans nom')}</div><div class="item-meta"><span class="badge ${s.actif !== false ? 'badge-pub' : 'badge-draft'}">${s.actif !== false ? '✅ Actif' : '🚫 Inactif'}</span></div></div><div class="item-actions"><button class="mini-btn" onclick="editSponsor('${s.id}')">✏️</button><button class="mini-btn del" onclick="deleteSponsor('${s.id}')">🗑️</button></div></div>`).join('');
   } catch (e) { box.innerHTML = '<div class="empty">Erreur : ' + esc(e.message) + '</div>'; }
 }
-
 document.getElementById('sponsorForm').addEventListener('submit', async (e) => {
   e.preventDefault();
-  const data = {
-    nom: document.getElementById('spNom').value.trim(),
-    url: document.getElementById('spUrl').value.trim(),
-    logoUrl: document.getElementById('spLogo').value.trim(),
-    description: document.getElementById('spDesc').value.trim(),
-    ordre: parseInt(document.getElementById('spOrdre').value, 10) || 100,
-    actif: document.getElementById('spActif').value === 'true',
-    updatedAt: Timestamp.now()
-  };
+  const data = { nom: document.getElementById('spNom').value.trim(), url: document.getElementById('spUrl').value.trim(), logoUrl: document.getElementById('spLogo').value.trim(), description: document.getElementById('spDesc').value.trim(), ordre: parseInt(document.getElementById('spOrdre').value, 10) || 100, actif: document.getElementById('spActif').value === 'true', updatedAt: Timestamp.now() };
   try {
-    if (editingSponsor) {
-      await updateDoc(doc(db, 'sponsors', editingSponsor), data);
-      toast('✅ Sponsor mis à jour');
-    } else {
-      await addDoc(collection(db, 'sponsors'), data);
-      toast('✅ Sponsor ajouté');
-    }
-    resetForm('sponsor');
-    await loadSponsors(); await refreshDashboard();
+    if (editingSponsor) { await updateDoc(doc(db, 'sponsors', editingSponsor), data); toast('✅ Sponsor mis à jour'); }
+    else { await addDoc(collection(db, 'sponsors'), data); toast('✅ Sponsor ajouté'); }
+    resetForm('sponsor'); await loadSponsors(); await refreshDashboard();
   } catch (ex) { toast('❌ ' + ex.message, 'error'); }
 });
 
-window.editSponsor = async (id) => {
-  const d = await getDoc(doc(db, 'sponsors', id));
-  if (!d.exists()) return;
-  const s = d.data();
-  editingSponsor = id;
-  document.getElementById('spId').value = id;
-  document.getElementById('spNom').value = s.nom || '';
-  document.getElementById('spUrl').value = s.url || '';
-  document.getElementById('spLogo').value = s.logoUrl || '';
-  document.getElementById('spDesc').value = s.description || '';
-  document.getElementById('spOrdre').value = s.ordre || 100;
-  document.getElementById('spActif').value = s.actif === false ? 'false' : 'true';
-  document.getElementById('spFormTitle').textContent = '✏️ Modifier le sponsor';
-  previewUrl('spLogo', 'spPreview');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-};
-
-window.deleteSponsor = async (id) => {
-  if (!confirm('Supprimer ce sponsor ?')) return;
-  await deleteDoc(doc(db, 'sponsors', id));
-  toast('🗑️ Supprimé'); await loadSponsors(); await refreshDashboard();
-};
-
-/* ============================================================
-   HORS TERRAIN
-   ============================================================ */
+/* HORS TERRAIN */
 let editingHors = null;
-
 async function loadHorsTerrain() {
   const box = document.getElementById('listHorsTerrain');
   box.innerHTML = '<div class="empty">Chargement...</div>';
   try {
     const snap = await getDocs(collection(db, 'horsTerrain'));
-    const docs = snap.docs.map(d => ({ id: d.id, ...d.data() }))
-      .sort((a, b) => (a.ordre || 999) - (b.ordre || 999));
+    const docs = snap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => (a.ordre || 999) - (b.ordre || 999));
     if (!docs.length) { box.innerHTML = '<div class="empty">Aucune entrée.</div>'; return; }
     const labels = { formation: '🎓 Formation', experience: '💼 Expérience', projet: '🚀 Projet' };
-    box.innerHTML = docs.map(h => `
-      <div class="item-row">
-        <div class="item-thumb">${h.categorie === 'formation' ? '🎓' : h.categorie === 'experience' ? '💼' : '🚀'}</div>
-        <div class="item-info">
-          <div class="item-title">${esc(h.titre || 'Sans titre')}</div>
-          <div class="item-meta"><span>${labels[h.categorie] || h.categorie}</span><span>${esc(h.sousTitre || '')}</span></div>
-        </div>
-        <div class="item-actions">
-          <button class="mini-btn" onclick="editHors('${h.id}')">✏️</button>
-          <button class="mini-btn del" onclick="deleteHors('${h.id}')">🗑️</button>
-        </div>
-      </div>
-    `).join('');
+    box.innerHTML = docs.map(h => `<div class="item-row"><div class="item-thumb">${h.categorie === 'formation' ? '🎓' : h.categorie === 'experience' ? '💼' : '🚀'}</div><div class="item-info"><div class="item-title">${esc(h.titre || 'Sans titre')}</div><div class="item-meta"><span>${labels[h.categorie] || h.categorie}</span><span>${esc(h.sousTitre || '')}</span></div></div><div class="item-actions"><button class="mini-btn" onclick="editHors('${h.id}')">✏️</button><button class="mini-btn del" onclick="deleteHors('${h.id}')">🗑️</button></div></div>`).join('');
   } catch (e) { box.innerHTML = '<div class="empty">Erreur : ' + esc(e.message) + '</div>'; }
 }
-
 document.getElementById('horsTerrainForm').addEventListener('submit', async (e) => {
   e.preventDefault();
-  const data = {
-    categorie: document.getElementById('htCat').value,
-    titre: document.getElementById('htTitre').value.trim(),
-    sousTitre: document.getElementById('htSous').value.trim(),
-    description: document.getElementById('htDesc').value.trim(),
-    ordre: parseInt(document.getElementById('htOrdre').value, 10) || 100,
-    updatedAt: Timestamp.now()
-  };
+  const data = { categorie: document.getElementById('htCat').value, titre: document.getElementById('htTitre').value.trim(), sousTitre: document.getElementById('htSous').value.trim(), description: document.getElementById('htDesc').value.trim(), ordre: parseInt(document.getElementById('htOrdre').value, 10) || 100, updatedAt: Timestamp.now() };
   try {
-    if (editingHors) {
-      await updateDoc(doc(db, 'horsTerrain', editingHors), data);
-      toast('✅ Entrée mise à jour');
-    } else {
-      await addDoc(collection(db, 'horsTerrain'), data);
-      toast('✅ Entrée ajoutée');
-    }
-    resetForm('horsTerrain');
-    await loadHorsTerrain();
+    if (editingHors) { await updateDoc(doc(db, 'horsTerrain', editingHors), data); toast('✅ Entrée mise à jour'); }
+    else { await addDoc(collection(db, 'horsTerrain'), data); toast('✅ Entrée ajoutée'); }
+    resetForm('horsTerrain'); await loadHorsTerrain();
   } catch (ex) { toast('❌ ' + ex.message, 'error'); }
 });
 
-window.editHors = async (id) => {
-  const d = await getDoc(doc(db, 'horsTerrain', id));
-  if (!d.exists()) return;
-  const h = d.data();
-  editingHors = id;
-  document.getElementById('htId').value = id;
-  document.getElementById('htCat').value = h.categorie || 'formation';
-  document.getElementById('htTitre').value = h.titre || '';
-  document.getElementById('htSous').value = h.sousTitre || '';
-  document.getElementById('htDesc').value = h.description || '';
-  document.getElementById('htOrdre').value = h.ordre || 100;
-  document.getElementById('htFormTitle').textContent = '✏️ Modifier l\'entrée';
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-};
-
-window.deleteHors = async (id) => {
-  if (!confirm('Supprimer cette entrée ?')) return;
-  await deleteDoc(doc(db, 'horsTerrain', id));
-  toast('🗑️ Supprimée'); await loadHorsTerrain();
-};
-
-/* ============================================================
-   PROFIL
-   ============================================================ */
-async function loadProfil() {
-  try {
-    const d = await getDoc(doc(db, 'profil', 'principal'));
-    if (!d.exists()) return;
-    const p = d.data();
-    const map = { nom:'pNom', club:'pClub', niveau:'pNiveau', age:'pAge', pied:'pPied',
-                  taille:'pTaille', poids:'pPoids', selections:'pSel', bio:'pBio',
-                  email:'pEmail', whatsapp:'pWhatsapp', telephone:'pTel', instagram:'pInsta' };
-    for (const k in map) {
-      const el = document.getElementById(map[k]);
-      if (el && p[k] !== undefined) el.value = p[k] || '';
-    }
-  } catch (e) { console.warn(e); }
-}
-
-document.getElementById('profilForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const data = {
-    nom: document.getElementById('pNom').value.trim(),
-    club: document.getElementById('pClub').value.trim(),
-    niveau: document.getElementById('pNiveau').value.trim(),
-    age: document.getElementById('pAge').value.trim(),
-    pied: document.getElementById('pPied').value.trim(),
-    taille: document.getElementById('pTaille').value.trim(),
-    poids: document.getElementById('pPoids').value.trim(),
-    selections: document.getElementById('pSel').value.trim(),
-    bio: document.getElementById('pBio').value.trim(),
-    email: document.getElementById('pEmail').value.trim(),
-    whatsapp: document.getElementById('pWhatsapp').value.trim(),
-    telephone: document.getElementById('pTel').value.trim(),
-    instagram: document.getElementById('pInsta').value.trim(),
-    updatedAt: Timestamp.now()
-  };
-  try {
-    await setDoc(doc(db, 'profil', 'principal'), data, { merge: true });
-    toast('✅ Profil enregistré');
-  } catch (ex) { toast('❌ ' + ex.message, 'error'); }
-});
-
-/* ============================================================
-   STATS
-   ============================================================ */
-let editingStats = null;
-
-async function loadStats() {
-  const box = document.getElementById('listStats');
-  box.innerHTML = '<div class="empty">Chargement...</div>';
-  try {
-    const snap = await getDocs(collection(db, 'statistiques'));
-    const docs = snap.docs.map(d => ({ id: d.id, ...d.data() }))
-      .sort((a, b) => (b.saison || '').localeCompare(a.saison || ''));
-    if (!docs.length) { box.innerHTML = '<div class="empty">Aucune saison.</div>'; return; }
-    box.innerHTML = docs.map(s => `
-      <div class="item-row">
-        <div class="item-thumb">📊</div>
-        <div class="item-info">
-          <div class="item-title">${esc(s.saison)} — ${esc(s.club || '—')}</div>
-          <div class="item-meta">
-            <span>⚽ ${s.matchs || 0} matchs</span>
-            <span>🧤 ${s.cleanSheets || 0} clean sheets</span>
-            <span>⏱️ ${s.minutes || 0} min</span>
-          </div>
-        </div>
-        <div class="item-actions">
-          <button class="mini-btn" onclick="editStats('${s.id}')">✏️</button>
-          <button class="mini-btn del" onclick="deleteStats('${s.id}')">🗑️</button>
-        </div>
-      </div>
-    `).join('');
-  } catch (e) { box.innerHTML = '<div class="empty">Erreur : ' + esc(e.message) + '</div>'; }
-}
-
-document.getElementById('statsForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const num = id => parseInt(document.getElementById(id).value, 10) || 0;
-  const data = {
-    saison: document.getElementById('stSaison').value.trim(),
-    club: document.getElementById('stClub').value.trim(),
-    niveau: document.getElementById('stNiveau').value.trim(),
-    matchs: num('stMatchs'),
-    titularisations: num('stTitul'),
-    minutes: num('stMinutes'),
-    butsEncaisses: num('stButs'),
-    cleanSheets: num('stClean'),
-    penaltiesArretes: num('stPen'),
-    cartons: num('stCartons'),
-    coupeDeFrance: num('stCoupe'),
-    equipeReserve: num('stReserve'),
-    updatedAt: Timestamp.now()
-  };
-  try {
-    if (editingStats) {
-      await updateDoc(doc(db, 'statistiques', editingStats), data);
-      toast('✅ Saison mise à jour');
-    } else {
-      await addDoc(collection(db, 'statistiques'), data);
-      toast('✅ Saison ajoutée');
-    }
-    resetForm('stats');
-    await loadStats();
-  } catch (ex) { toast('❌ ' + ex.message, 'error'); }
-});
-
-window.editStats = async (id) => {
-  const d = await getDoc(doc(db, 'statistiques', id));
-  if (!d.exists()) return;
-  const s = d.data();
-  editingStats = id;
-  document.getElementById('stId').value = id;
-  document.getElementById('stSaison').value = s.saison || '';
-  document.getElementById('stClub').value = s.club || '';
-  document.getElementById('stNiveau').value = s.niveau || '';
-  document.getElementById('stMatchs').value = s.matchs || 0;
-  document.getElementById('stTitul').value = s.titularisations || 0;
-  document.getElementById('stMinutes').value = s.minutes || 0;
-  document.getElementById('stButs').value = s.butsEncaisses || 0;
-  document.getElementById('stClean').value = s.cleanSheets || 0;
-  document.getElementById('stPen').value = s.penaltiesArretes || 0;
-  document.getElementById('stCartons').value = s.cartons || 0;
-  document.getElementById('stCoupe').value = s.coupeDeFrance || 0;
-  document.getElementById('stReserve').value = s.equipeReserve || 0;
-  document.getElementById('stFormTitle').textContent = '✏️ Modifier la saison';
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-};
-
-window.deleteStats = async (id) => {
-  if (!confirm('Supprimer cette saison ?')) return;
-  await deleteDoc(doc(db, 'statistiques', id));
-  toast('🗑️ Supprimée'); await loadStats();
-};
-
-/* ============================================================
-   MODERATION
-   ============================================================ */
+/* MODERATION & ENGAGEMENT */
 async function loadEngagement() {
   const box = document.getElementById('listEngagement');
   box.innerHTML = '<div class="empty">Chargement...</div>';
@@ -1585,22 +1160,7 @@ async function loadEngagement() {
       const cs = await getDocs(collection(db, 'engagements', d.id, 'commentaires'));
       return { id: d.id, ...data, nbReel: cs.size };
     }));
-    box.innerHTML = items.map(e => `
-      <div class="item-row">
-        <div class="item-thumb">💬</div>
-        <div class="item-info">
-          <div class="item-title">${esc(e.type || '?')} — ${esc(e.itemId || '?')}</div>
-          <div class="item-meta">
-            <span>👁️ ${e.vues || 0}</span>
-            <span>❤️ ${e.likes || 0}</span>
-            <span>💬 ${e.nbReel}</span>
-          </div>
-        </div>
-        <div class="item-actions">
-          <button class="mini-btn" onclick="showComments('${e.id}')">👁️</button>
-        </div>
-      </div>
-    `).join('');
+    box.innerHTML = items.map(e => `<div class="item-row"><div class="item-thumb">💬</div><div class="item-info"><div class="item-title">${esc(e.type || '?')} — ${esc(e.itemId || '?')}</div><div class="item-meta"><span>👁️ ${e.vues || 0} vues</span><span>❤️ ${e.likes || 0} likes</span><span>💬 ${e.nbReel} comms</span></div></div><div class="item-actions"><button class="mini-btn" onclick="showComments('${e.id}')">👁️ Modérer</button></div></div>`).join('');
   } catch (e) { box.innerHTML = '<div class="empty">Erreur : ' + esc(e.message) + '</div>'; }
 }
 
@@ -1609,95 +1169,71 @@ window.showComments = async (engId) => {
     const snap = await getDocs(collection(db, 'engagements', engId, 'commentaires'));
     if (snap.empty) { toast('Aucun commentaire à modérer', 'info'); return; }
     const comments = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-    const html = comments.map((c, i) =>
-      `#${i + 1} — ${c.auteur || 'Anonyme'}\n${c.texte}\n`
-    ).join('\n');
+    const html = comments.map((c, i) => `#${i + 1} — ${c.auteur || 'Anonyme'}\n${c.texte}\n`).join('\n');
     if (confirm('Commentaires :\n\n' + html + '\n\nCliquez sur OK puis choisissez le numéro à supprimer.')) {
       const num = prompt('Numéro du commentaire à supprimer (1-' + comments.length + ') :');
       const idx = parseInt(num, 10) - 1;
       if (idx >= 0 && idx < comments.length) {
         if (confirm('Supprimer ce commentaire ?')) {
-          const c = comments[idx];
-          await deleteDoc(doc(db, 'engagements', engId, 'commentaires', c.id));
+          await deleteDoc(doc(db, 'engagements', engId, 'commentaires', comments[idx].id));
           await updateDoc(doc(db, 'engagements', engId), { nbCommentaires: Math.max(0, (comments.length - 1)) });
-          toast('🗑️ Commentaire supprimé');
-          await loadEngagement();
+          toast('🗑️ Commentaire supprimé'); await loadEngagement();
         }
       }
     }
   } catch (e) { toast('❌ ' + e.message, 'error'); }
 };
 
-/* ============================================================
-   CONFIG
-   ============================================================ */
+/* CONFIG */
 document.getElementById('configForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   try {
-    await setDoc(doc(db, 'config', 'site'), {
-      email: document.getElementById('cfgEmail').value.trim(),
-      whatsapp: document.getElementById('cfgWhatsapp').value.trim(),
-      canonical: document.getElementById('cfgCanonical').value.trim(),
-      updatedAt: Timestamp.now()
-    }, { merge: true });
+    await setDoc(doc(db, 'config', 'site'), { email: document.getElementById('cfgEmail').value.trim(), whatsapp: document.getElementById('cfgWhatsapp').value.trim(), canonical: document.getElementById('cfgCanonical').value.trim(), updatedAt: Timestamp.now() }, { merge: true });
     toast('✅ Config enregistrée');
   } catch (ex) { toast('❌ ' + ex.message, 'error'); }
 });
 
-/* ============================================================
-   RESET FORMS
-   ============================================================ */
+/* RESET FORMS */
 window.resetForm = (type) => {
-  if (type === 'article') {
-    document.getElementById('articleForm').reset();
-    document.getElementById('artId').value = '';
-    editingArticle = null;
-    document.getElementById('artFormTitle').textContent = '✏️ Nouvel article';
-    document.getElementById('artImagePreview').classList.remove('show', 'error');
-    document.getElementById('artImagePreview').innerHTML = '';
-  }
-  if (type === 'video') {
-    document.getElementById('videoForm').reset();
-    document.getElementById('vidId').value = '';
-    editingVideo = null;
-    document.getElementById('vidFormTitle').textContent = '🎬 Nouvelle vidéo';
-    document.getElementById('vidPlatformHint').textContent = 'Plateforme détectée : —';
-    document.getElementById('vidPreview').classList.remove('show', 'error');
-    document.getElementById('vidPreview').innerHTML = '';
-  }
-  if (type === 'event') {
-    document.getElementById('eventForm').reset();
-    document.getElementById('evId').value = '';
-    editingEvent = null;
-    document.getElementById('evFormTitle').textContent = '📅 Nouvel événement';
-    document.getElementById('evPreview').classList.remove('show', 'error');
-    document.getElementById('evPreview').innerHTML = '';
-  }
-  if (type === 'sponsor') {
-    document.getElementById('sponsorForm').reset();
-    document.getElementById('spId').value = '';
-    editingSponsor = null;
-    document.getElementById('spFormTitle').textContent = '🤝 Nouveau sponsor';
-    document.getElementById('spOrdre').value = 100;
-    document.getElementById('spPreview').classList.remove('show', 'error');
-    document.getElementById('spPreview').innerHTML = '';
-  }
-  if (type === 'horsTerrain') {
-    document.getElementById('horsTerrainForm').reset();
-    document.getElementById('htId').value = '';
-    editingHors = null;
-    document.getElementById('htFormTitle').textContent = '🎓 Nouvelle entrée';
-    document.getElementById('htOrdre').value = 100;
-  }
-  if (type === 'stats') {
-    document.getElementById('statsForm').reset();
-    document.getElementById('stId').value = '';
-    editingStats = null;
-    document.getElementById('stFormTitle').textContent = '📊 Nouvelle saison';
-  }
+  if (type === 'carriere') { document.getElementById('carriereForm').reset(); document.getElementById('carId').value = ''; document.getElementById('carPreview').classList.remove('show', 'error'); document.getElementById('carPreview').innerHTML = ''; }
+  if (type === 'competition') { document.getElementById('competitionForm').reset(); document.getElementById('compId').value = ''; document.getElementById('compPreview').classList.remove('show', 'error'); document.getElementById('compPreview').innerHTML = ''; }
+  if (type === 'stats') { document.getElementById('statsForm').reset(); document.getElementById('stId').value = ''; }
+  if (type === 'article') { document.getElementById('articleForm').reset(); document.getElementById('artId').value = ''; editingArticle = null; document.getElementById('artFormTitle').textContent = '✏️ Nouvel article'; document.getElementById('artImagePreview').classList.remove('show', 'error'); document.getElementById('artImagePreview').innerHTML = ''; }
+  if (type === 'video') { document.getElementById('videoForm').reset(); document.getElementById('vidId').value = ''; editingVideo = null; document.getElementById('vidFormTitle').textContent = '🎬 Nouvelle vidéo'; document.getElementById('vidPlatformHint').textContent = 'Plateforme détectée : —'; document.getElementById('vidPreview').classList.remove('show', 'error'); document.getElementById('vidPreview').innerHTML = ''; }
+  if (type === 'event') { document.getElementById('eventForm').reset(); document.getElementById('evId').value = ''; editingEvent = null; document.getElementById('evFormTitle').textContent = '📅 Nouvel événement'; document.getElementById('evPreview').classList.remove('show', 'error'); document.getElementById('evPreview').innerHTML = ''; }
+  if (type === 'sponsor') { document.getElementById('sponsorForm').reset(); document.getElementById('spId').value = ''; editingSponsor = null; document.getElementById('spFormTitle').textContent = '🤝 Nouveau sponsor'; document.getElementById('spOrdre').value = 100; document.getElementById('spPreview').classList.remove('show', 'error'); document.getElementById('spPreview').innerHTML = ''; }
+  if (type === 'horsTerrain') { document.getElementById('horsTerrainForm').reset(); document.getElementById('htId').value = ''; editingHors = null; document.getElementById('htFormTitle').textContent = '🎓 Nouvelle entrée'; document.getElementById('htOrdre').value = 100; }
 };
 
-console.log('✅ admin.html chargé — version complète avec boutons d\'hébergement');
+/* FONCTIONS GLOBALES D'ÉDITION */
+window.editCar = async (id) => { const d = await getDoc(doc(db, 'carriere', id)); const v = d.data(); document.getElementById('carId').value = id; document.getElementById('carSaison').value = v.saison || ''; document.getElementById('carClub').value = v.club || ''; document.getElementById('carDivision').value = v.division || ''; document.getElementById('carPays').value = v.pays || ''; document.getElementById('carLogo').value = v.logo || ''; document.getElementById('carOrdre').value = v.ordre || 100; previewUrl('carLogo', 'carPreview'); window.scrollTo({ top: 0, behavior: 'smooth' }); };
+window.delCar = async (id) => { if(confirm('Supprimer ?')) { await deleteDoc(doc(db, 'carriere', id)); loadCarriere(); } };
+
+window.editComp = async (id) => { const d = await getDoc(doc(db, 'competitions', id)); const v = d.data(); document.getElementById('compId').value = id; document.getElementById('compNom').value = v.nom || ''; document.getElementById('compAnnee').value = v.annee || ''; document.getElementById('compResultat').value = v.resultat || ''; document.getElementById('compLogo').value = v.logo || ''; previewUrl('compLogo', 'compPreview'); window.scrollTo({ top: 0, behavior: 'smooth' }); };
+window.delComp = async (id) => { if(confirm('Supprimer ?')) { await deleteDoc(doc(db, 'competitions', id)); loadSelections(); } };
+
+window.editStats = async (id) => { const d = await getDoc(doc(db, 'statistiques', id)); const s = d.data(); document.getElementById('stId').value = id; document.getElementById('stSaison').value = s.saison || ''; document.getElementById('stClub').value = s.club || ''; document.getElementById('stNiveau').value = s.niveau || ''; document.getElementById('stMatchs').value = s.matchs || 0; document.getElementById('stTitul').value = s.titularisations || 0; document.getElementById('stMinutes').value = s.minutes || 0; document.getElementById('stButs').value = s.butsEncaisses || 0; document.getElementById('stClean').value = s.cleanSheets || 0; document.getElementById('stPen').value = s.penaltiesArretes || 0; document.getElementById('stCartons').value = s.cartons || 0; document.getElementById('stChamp').value = s.championnat || 0; document.getElementById('stCoupe').value = s.coupeDeFrance || 0; document.getElementById('stReserve').value = s.equipeReserve || 0; document.getElementById('stFormTitle').textContent = '✏️ Modifier la saison'; window.scrollTo({ top: 0, behavior: 'smooth' }); };
+window.delStats = async (id) => { if(confirm('Supprimer ?')) { await deleteDoc(doc(db, 'statistiques', id)); loadStats(); } };
+
+window.editArticle = async (id) => { const d = await getDoc(doc(db, 'articles', id)); const a = d.data(); editingArticle = id; document.getElementById('artId').value = id; document.getElementById('artTitre').value = a.titre || ''; document.getElementById('artSlug').value = a.slug || ''; document.getElementById('artCat').value = a.categorie || 'Match'; document.getElementById('artPublie').value = a.publie ? 'true' : 'false'; document.getElementById('artImage').value = a.imageUrl || ''; document.getElementById('artResume').value = a.resume || ''; document.getElementById('artContenu').value = a.contenu || ''; document.getElementById('artSeoTitre').value = a.seoTitre || ''; document.getElementById('artKeywords').value = a.keywords || ''; document.getElementById('artSeoDesc').value = a.seoDescription || ''; document.getElementById('artFormTitle').textContent = '✏️ Modifier l\'article'; previewUrl('artImage', 'artImagePreview'); window.scrollTo({ top: 0, behavior: 'smooth' }); };
+window.deleteArticle = async (id) => { if(confirm('Supprimer ?')) { await deleteDoc(doc(db, 'articles', id)); loadArticles(); refreshDashboard(); } };
+window.toggleArticlePublish = async (id, current) => { await updateDoc(doc(db, 'articles', id), { publie: !current }); loadArticles(); };
+
+window.editVideo = async (id) => { const d = await getDoc(doc(db, 'videos', id)); const v = d.data(); editingVideo = id; document.getElementById('vidId').value = id; document.getElementById('vidTitre').value = v.titre || ''; document.getElementById('vidCat').value = v.categorie || 'Arrêts & réflexes'; document.getElementById('vidUrl').value = v.url || ''; document.getElementById('vidDesc').value = v.description || ''; document.getElementById('vidVignette').value = v.vignetteUrl || ''; document.getElementById('vidPublie').value = v.publie === false ? 'false' : 'true'; document.getElementById('vidFormTitle').textContent = '✏️ Modifier la vidéo'; onVideoUrlChange(); window.scrollTo({ top: 0, behavior: 'smooth' }); };
+window.deleteVideo = async (id) => { if(confirm('Supprimer ?')) { await deleteDoc(doc(db, 'videos', id)); loadVideos(); refreshDashboard(); } };
+
+window.deletePhoto = async (id) => { if(confirm('Supprimer ?')) { await deleteDoc(doc(db, 'galerie', id)); loadPhotos(); refreshDashboard(); } };
+
+window.editEvent = async (id) => { const d = await getDoc(doc(db, 'evenements', id)); const v = d.data(); editingEvent = id; document.getElementById('evId').value = id; document.getElementById('evTitre').value = v.titre || ''; document.getElementById('evDate').value = v.date || ''; document.getElementById('evLieu').value = v.lieu || ''; document.getElementById('evDesc').value = v.description || ''; document.getElementById('evImage').value = v.imageUrl || ''; document.getElementById('evPublie').value = v.publie === false ? 'false' : 'true'; document.getElementById('evFormTitle').textContent = '✏️ Modifier l\'événement'; previewUrl('evImage', 'evPreview'); window.scrollTo({ top: 0, behavior: 'smooth' }); };
+window.deleteEvent = async (id) => { if(confirm('Supprimer ?')) { await deleteDoc(doc(db, 'evenements', id)); loadEvents(); refreshDashboard(); } };
+
+window.editSponsor = async (id) => { const d = await getDoc(doc(db, 'sponsors', id)); const s = d.data(); editingSponsor = id; document.getElementById('spId').value = id; document.getElementById('spNom').value = s.nom || ''; document.getElementById('spUrl').value = s.url || ''; document.getElementById('spLogo').value = s.logoUrl || ''; document.getElementById('spDesc').value = s.description || ''; document.getElementById('spOrdre').value = s.ordre || 100; document.getElementById('spActif').value = s.actif === false ? 'false' : 'true'; document.getElementById('spFormTitle').textContent = '✏️ Modifier le sponsor'; previewUrl('spLogo', 'spPreview'); window.scrollTo({ top: 0, behavior: 'smooth' }); };
+window.deleteSponsor = async (id) => { if(confirm('Supprimer ?')) { await deleteDoc(doc(db, 'sponsors', id)); loadSponsors(); refreshDashboard(); } };
+
+window.editHors = async (id) => { const d = await getDoc(doc(db, 'horsTerrain', id)); const h = d.data(); editingHors = id; document.getElementById('htId').value = id; document.getElementById('htCat').value = h.categorie || 'formation'; document.getElementById('htTitre').value = h.titre || ''; document.getElementById('htSous').value = h.sousTitre || ''; document.getElementById('htDesc').value = h.description || ''; document.getElementById('htOrdre').value = h.ordre || 100; document.getElementById('htFormTitle').textContent = '✏️ Modifier l\'entrée'; window.scrollTo({ top: 0, behavior: 'smooth' }); };
+window.deleteHors = async (id) => { if(confirm('Supprimer ?')) { await deleteDoc(doc(db, 'horsTerrain', id)); loadHorsTerrain(); } };
+
+console.log('✅ admin.html chargé — version complète et définitive');
 </script>
 </body>
 </html>
