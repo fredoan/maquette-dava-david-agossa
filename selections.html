@@ -153,9 +153,10 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 <section class="section">
 <div class="wrap">
 <div class="stats-big">
-<div class="stat-big reveal"><div class="stat-big-flag">🇧🇯</div><div class="stat-big-name">Bénin U20</div><span class="stat-big-num" data-count="24">0</span><span class="stat-big-lbl" data-fr="Sélections" data-en="Caps">Sélections</span></div>
-<div class="stat-big reveal"><div class="stat-big-flag">🇧🇯</div><div class="stat-big-name">Bénin U23</div><span class="stat-big-num" data-count="5">0</span><span class="stat-big-lbl" data-fr="Sélections" data-en="Caps">Sélections</span></div>
-<div class="stat-big featured reveal"><div class="stat-big-flag">🏆</div><div class="stat-big-name" style="color:var(--or-vif)">Total</div><span class="stat-big-num" data-count="29">0</span><span class="stat-big-lbl" data-fr="Sélections internationales" data-en="International caps">Sélections internationales</span></div>
+<!-- IDs et valeurs par défaut ajoutés pour éviter l'effet "0" -->
+<div class="stat-big reveal"><div class="stat-big-flag">🇧🇯</div><div class="stat-big-name">Bénin U20</div><span class="stat-big-num" id="selU20Display" data-count="24">24</span><span class="stat-big-lbl" data-fr="Sélections" data-en="Caps">Sélections</span></div>
+<div class="stat-big reveal"><div class="stat-big-flag">🇧🇯</div><div class="stat-big-name">Bénin U23</div><span class="stat-big-num" id="selU23Display" data-count="5">5</span><span class="stat-big-lbl" data-fr="Sélections" data-en="Caps">Sélections</span></div>
+<div class="stat-big featured reveal"><div class="stat-big-flag">🏆</div><div class="stat-big-name" style="color:var(--or-vif)">Total</div><span class="stat-big-num" id="selTotalDisplay" data-count="29">29</span><span class="stat-big-lbl" data-fr="Sélections internationales" data-en="International caps">Sélections internationales</span></div>
 </div>
 </div>
 </section>
@@ -163,11 +164,10 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 <section class="section bg-alt">
 <div class="wrap">
 <div class="section-title reveal" style="text-align:center;margin-inline:auto"><span class="eyebrow" data-fr="Compétitions" data-en="Competitions">Compétitions</span><h2 data-fr="Expériences internationales" data-en="International experiences">Expériences internationales</h2></div>
-<div class="comp-grid">
-<div class="comp-card reveal"><span class="comp-icon">🏆</span><div class="comp-title">CAN U20</div><div class="comp-desc" data-fr="Coupe d'Afrique des Nations U20 — le plus grand rendez-vous continental des jeunes talents africains." data-en="U20 Africa Cup of Nations — the biggest continental gathering of young African talents.">Coupe d'Afrique des Nations U20 — le plus grand rendez-vous continental des jeunes talents africains.</div></div>
-<div class="comp-card reveal"><span class="comp-icon">🌍</span><div class="comp-title">UFOA B</div><div class="comp-desc" data-fr="Qualifications CAN U20 — tournoi de la zone Afrique de l'Ouest B, qualificatif pour la CAN U20." data-en="U20 AFCON qualifiers — West Africa B zone tournament, qualifying for the U20 AFCON.">Qualifications CAN U20 — tournoi de la zone Afrique de l'Ouest B, qualificatif pour la CAN U20.</div></div>
-<div class="comp-card reveal"><span class="comp-icon">🇫🇷</span><div class="comp-title" data-fr="Jeux de la Francophonie" data-en="Francophonie Games">Jeux de la Francophonie</div><div class="comp-desc" data-fr="Rencontre internationale multisports réunissant les pays francophones — une expérience unique pour un jeune international." data-en="International multi-sport gathering of French-speaking countries — a unique experience for a young international.">Rencontre internationale multisports réunissant les pays francophones — une expérience unique pour un jeune international.</div></div>
-<div class="comp-card reveal"><span class="comp-icon">🔥</span><div class="comp-title" data-fr="Préparation CAN U23" data-en="U23 AFCON preparation">Préparation CAN U23</div><div class="comp-desc" data-fr="Stages et matchs de préparation avec la sélection U23 du Bénin, en vue de la Coupe d'Afrique des Nations U23." data-en="Training camps and preparation matches with Benin's U23 squad, ahead of the U23 Africa Cup of Nations.">Stages et matchs de préparation avec la sélection U23 du Bénin, en vue de la Coupe d'Afrique des Nations U23.</div></div>
+<!-- Conteneur dynamique pour les compétitions -->
+<div class="comp-grid" id="competitionsContainer">
+  <!-- Les compétitions seront chargées ici par le script -->
+  <div class="empty-state" style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--texte-3);font-style:italic;">Chargement des compétitions...</div>
 </div>
 </div>
 </section>
@@ -175,12 +175,10 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 <section class="section">
 <div class="wrap">
 <div class="section-title reveal"><span class="eyebrow" data-fr="Chronologie" data-en="Timeline">Chronologie</span><h2 data-fr="Parcours international" data-en="International career">Parcours international</h2></div>
-<div class="timeline reveal">
-<div class="tl-item"><div class="tl-year">2022</div><div class="tl-title" data-fr="Premières sélections U20" data-en="First U20 caps">Premières sélections U20</div><div class="tl-meta" data-fr="Intégration de l'équipe nationale U20 du Bénin. Premières convocations." data-en="Integration into Benin's U20 national team. First call-ups.">Intégration de l'équipe nationale U20 du Bénin. Premières convocations.</div></div>
-<div class="tl-item"><div class="tl-year">2023</div><div class="tl-title" data-fr="CAN U20 & UFOA B" data-en="U20 AFCON & UFOA B">CAN U20 & UFOA B</div><div class="tl-meta" data-fr="Participation à la Coupe d'Afrique des Nations U20 et aux qualifications UFOA B avec le Bénin." data-en="Participation in the U20 Africa Cup of Nations and UFOA B qualifiers with Benin.">Participation à la Coupe d'Afrique des Nations U20 et aux qualifications UFOA B avec le Bénin.</div></div>
-<div class="tl-item"><div class="tl-year">2024</div><div class="tl-title" data-fr="Jeux de la Francophonie" data-en="Francophonie Games">Jeux de la Francophonie</div><div class="tl-meta" data-fr="Représentation du Bénin aux Jeux de la Francophonie — expérience internationale multisports." data-en="Representing Benin at the Francophonie Games — a multi-sport international experience.">Représentation du Bénin aux Jeux de la Francophonie — expérience internationale multisports.</div></div>
-<div class="tl-item"><div class="tl-year">2025</div><div class="tl-title" data-fr="Intégration U23" data-en="U23 integration">Intégration U23</div><div class="tl-meta" data-fr="Passage en équipe U23 du Bénin. Préparation de la CAN U23. 5 sélections." data-en="Moving up to Benin's U23 squad. Preparation for the U23 AFCON. 5 caps.">Passage en équipe U23 du Bénin. Préparation de la CAN U23. 5 sélections.</div></div>
-<div class="tl-item"><div class="tl-year" data-fr="Aujourd'hui" data-en="Today">Aujourd'hui</div><div class="tl-title" data-fr="Objectif : équipe A" data-en="Goal: senior team">Objectif : équipe A</div><div class="tl-meta" data-fr="29 sélections cumulées. Objectif : intégrer l'équipe nationale A du Bénin et disputer de grandes compétitions." data-en="29 caps combined. Goal: join Benin's senior national team and play in major competitions.">29 sélections cumulées. Objectif : intégrer l'équipe nationale A du Bénin et disputer de grandes compétitions.</div></div>
+<!-- Conteneur dynamique pour la timeline -->
+<div class="timeline reveal" id="timelineContainer">
+  <!-- La chronologie sera chargée ici par le script -->
+  <div class="empty-state" style="text-align:center;padding:2rem;color:var(--texte-3);font-style:italic;">Chargement du parcours...</div>
 </div>
 </div>
 </section>
@@ -245,6 +243,70 @@ document.querySelectorAll('.lang-toggle button').forEach(b=>b.addEventListener('
 setLang(currentLang);
 document.getElementById('chatToggle').addEventListener('click', ()=>{ const p = document.getElementById('chatPanel'); p.classList.toggle('open'); if (p.classList.contains('open') && !document.getElementById('chatBody').children.length){ addMsg(currentLang === 'fr' ? "Bonjour 👋 Je suis l'assistant de Dava David Agossa." : "Hello 👋 I'm Dava David Agossa's assistant.", 'bot'); } });
 document.getElementById('chatClose').addEventListener('click', ()=>{ document.getElementById('chatPanel').classList.remove('open'); });
+</script>
+
+<script type="module">
+import { db } from './firebase-config.js';
+import { doc, getDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const esc = (s) => String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+async function loadSelectionsData() {
+  try {
+    // 1. Charger les compteurs (U20, U23, Total)
+    const docSel = await getDoc(doc(db, 'selections', 'compteurs'));
+    if (docSel.exists()) {
+      const d = docSel.data();
+      if (d.u20 !== undefined) {
+        document.getElementById('selU20Display').setAttribute('data-count', d.u20);
+        document.getElementById('selU20Display').textContent = d.u20;
+      }
+      if (d.u23 !== undefined) {
+        document.getElementById('selU23Display').setAttribute('data-count', d.u23);
+        document.getElementById('selU23Display').textContent = d.u23;
+      }
+      if (d.total !== undefined) {
+        document.getElementById('selTotalDisplay').setAttribute('data-count', d.total);
+        document.getElementById('selTotalDisplay').textContent = d.total;
+      }
+    }
+
+    // 2. Charger les compétitions et la chronologie
+    const snapComp = await getDocs(collection(db, 'competitions'));
+    if (!snapComp.empty) {
+      const comps = snapComp.docs.map(doc => doc.data()).sort((a,b) => (b.annee||'').localeCompare(a.annee||''));
+      
+      // Remplir les cartes "Expériences internationales"
+      const compContainer = document.getElementById('competitionsContainer');
+      if (comps.length > 0) {
+        compContainer.innerHTML = comps.map(c => `
+          <div class="comp-card reveal visible">
+            <span class="comp-icon">${c.logo ? `<img src="${esc(c.logo)}" style="width:40px;height:40px;object-fit:contain;margin-bottom:.5rem"/>` : '🏆'}</span>
+            <div class="comp-title">${esc(c.nom)} ${c.annee ? '('+esc(c.annee)+')' : ''}</div>
+            <div class="comp-desc">${esc(c.resultat) || 'Participation internationale'}</div>
+          </div>
+        `).join('');
+      }
+
+      // Remplir la Chronologie
+      const timelineContainer = document.getElementById('timelineContainer');
+      if (comps.length > 0) {
+        timelineContainer.innerHTML = comps.map(c => `
+          <div class="tl-item">
+            <div class="tl-year">${esc(c.annee) || '—'}</div>
+            <div class="tl-title">${esc(c.nom)}</div>
+            <div class="tl-meta">${esc(c.resultat) || 'Participation internationale'}</div>
+          </div>
+        `).join('');
+      }
+    }
+  } catch (e) {
+    console.warn("Erreur de chargement des sélections depuis Firebase (les données statiques restent affichées) :", e);
+  }
+}
+
+// Lancer le chargement
+loadSelectionsData();
 </script>
 </body>
 </html>
