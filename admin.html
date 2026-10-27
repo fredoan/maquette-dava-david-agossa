@@ -222,11 +222,9 @@ input,select,textarea{font-family:inherit}
         <button class="admin-tab" data-tab="horsTerrain">🎓 Hors terrain</button>
         <button class="admin-tab" data-tab="profil">👤 Profil</button>
         <button class="admin-tab" data-tab="stats">📊 Statistiques</button>
-        <!-- NOUVEAUX ONGLETS AJOUTÉS ICI -->
         <button class="admin-tab" data-tab="carriere">🏟️ Carrière (Clubs)</button>
         <button class="admin-tab" data-tab="selections">🏆 Sélections</button>
         <button class="admin-tab" data-tab="textes">🌍 Textes FR/EN</button>
-        <!-- FIN NOUVEAUX ONGLETS -->
         <button class="admin-tab" data-tab="moderation">💬 Modération</button>
         <button class="admin-tab" data-tab="config">⚙️ Config</button>
       </nav>
@@ -234,7 +232,7 @@ input,select,textarea{font-family:inherit}
 
     <main class="admin-main">
 
-      <!-- ============ DASHBOARD ============ -->
+      <!-- DASHBOARD -->
       <div class="tab-pane active" id="tab-dashboard">
         <div class="alert">💡 <span><strong>Bienvenue !</strong> Les 30 photos sont initialisées automatiquement à la première connexion.</span></div>
         <div class="card">
@@ -255,7 +253,7 @@ input,select,textarea{font-family:inherit}
         </div>
       </div>
 
-      <!-- ============ ARTICLES ============ -->
+      <!-- ARTICLES -->
       <div class="tab-pane" id="tab-articles">
         <div class="card">
           <div class="card-header"><h2 id="artFormTitle">✏️ Nouvel article</h2></div>
@@ -291,7 +289,6 @@ input,select,textarea{font-family:inherit}
                 </div>
               </div>
 
-              <!-- ⭐ IMAGE AVEC BOUTONS D'HÉBERGEMENT -->
               <div class="form-group url-field">
                 <label>Image principale</label>
                 <input type="url" id="artImage" placeholder="https://..."/>
@@ -337,7 +334,7 @@ input,select,textarea{font-family:inherit}
         </div>
       </div>
 
-      <!-- ============ VIDEOS ============ -->
+      <!-- VIDEOS -->
       <div class="tab-pane" id="tab-videos">
         <div class="alert">💡 <span><strong>Vidéos</strong> : collez un lien YouTube, Drive ou .mp4. La vignette YouTube est détectée automatiquement.</span></div>
         <div class="card">
@@ -369,7 +366,13 @@ input,select,textarea{font-family:inherit}
                 </div>
               </div>
 
-              <!-- ⭐ URL VIDÉO AVEC BOUTONS -->
+              <!-- NOUVEAUX CHAMPS VIDÉOS AJOUTÉS ICI -->
+              <div class="form-row-3">
+                <div class="form-group"><label>Compétition</label><input type="text" id="vidCompet" placeholder="National 1"/></div>
+                <div class="form-group"><label>Club</label><input type="text" id="vidClub" placeholder="Bourges FC"/></div>
+                <div class="form-group"><label>Date du match</label><input type="date" id="vidDate"/></div>
+              </div>
+
               <div class="form-group url-field">
                 <label>Lien vidéo (YouTube, Drive, .mp4) *</label>
                 <input type="url" id="vidUrl" required placeholder="https://www.youtube.com/watch?v=..." oninput="onVideoUrlChange()"/>
@@ -420,7 +423,7 @@ input,select,textarea{font-family:inherit}
         </div>
       </div>
 
-      <!-- ============ PHOTOS ============ -->
+      <!-- PHOTOS -->
       <div class="tab-pane" id="tab-photos">
         <div class="alert">📸 <span><strong>30 photos</strong> : ph1.jpeg à ph30.jpeg, 3 catégories de 10. Initialisées automatiquement.</span></div>
         <div class="card">
@@ -438,9 +441,12 @@ input,select,textarea{font-family:inherit}
                 <div class="form-group">
                   <label>Catégorie *</label>
                   <select id="phCat">
-                    <option value="Sélection Bénin">Sélection Bénin</option>
-                    <option value="Match & Clubs">Match & Clubs</option>
-                    <option value="Ses photos">Ses photos</option>
+                    <!-- CATÉGORIES EXACTES DU CLIENT AJOUTÉES ICI -->
+                    <option value="Photos en club">Photos en club</option>
+                    <option value="Photos avec les sélections nationales">Photos avec les sélections nationales</option>
+                    <option value="Photos de matchs">Photos de matchs</option>
+                    <option value="Photos d'entraînement">Photos d'entraînement</option>
+                    <option value="Portraits professionnels">Portraits professionnels</option>
                   </select>
                 </div>
               </div>
@@ -464,7 +470,7 @@ input,select,textarea{font-family:inherit}
         </div>
       </div>
 
-      <!-- ============ EVENTS ============ -->
+      <!-- EVENTS -->
       <div class="tab-pane" id="tab-events">
         <div class="card">
           <div class="card-header"><h2 id="evFormTitle">📅 Nouvel événement</h2></div>
@@ -509,7 +515,7 @@ input,select,textarea{font-family:inherit}
         </div>
       </div>
 
-      <!-- ============ SPONSORS ============ -->
+      <!-- SPONSORS -->
       <div class="tab-pane" id="tab-sponsors">
         <div class="card">
           <div class="card-header"><h2 id="spFormTitle">🤝 Nouveau sponsor</h2></div>
@@ -552,7 +558,7 @@ input,select,textarea{font-family:inherit}
         </div>
       </div>
 
-      <!-- ============ HORS TERRAIN ============ -->
+      <!-- HORS TERRAIN -->
       <div class="tab-pane" id="tab-horsTerrain">
         <div class="card">
           <div class="card-header"><h2 id="htFormTitle">🎓 Nouvelle entrée</h2></div>
@@ -585,7 +591,7 @@ input,select,textarea{font-family:inherit}
         </div>
       </div>
 
-      <!-- ============ PROFIL ============ -->
+      <!-- PROFIL -->
       <div class="tab-pane" id="tab-profil">
         <div class="alert warn">⚠️ <span>Le profil est stocké dans <code>profil/principal</code>. Remplissez tous les champs visibles sur l'accueil.</span></div>
         <div class="card">
@@ -606,8 +612,6 @@ input,select,textarea{font-family:inherit}
                 <div class="form-group"><label>Poids</label><input type="text" id="pPoids" placeholder="75 kg"/></div>
                 <div class="form-group"><label>Sélections</label><input type="text" id="pSel" placeholder="29"/></div>
               </div>
-              
-              <!-- NOUVEAUX CHAMPS AJOUTÉS ICI -->
               <div class="form-row">
                 <div class="form-group"><label>Poste</label><input type="text" id="pPoste" placeholder="Gardien de but"/></div>
                 <div class="form-group"><label>Statut</label><input type="text" id="pStatut" placeholder="International Espoirs du Bénin"/></div>
@@ -620,7 +624,13 @@ input,select,textarea{font-family:inherit}
                 <div class="form-group"><label>Lien Transfermarkt</label><input type="url" id="pTransfermarkt" placeholder="https://..."/></div>
                 <div class="form-group"><label>Lien Facebook</label><input type="url" id="pFacebook" placeholder="https://..."/></div>
               </div>
-              <!-- FIN NOUVEAUX CHAMPS -->
+              
+              <!-- NOUVEAUX CHAMPS PHOTOS AJOUTÉS ICI -->
+              <div class="form-row">
+                <div class="form-group"><label>Photo principale (Hero)</label><input type="text" id="pPhotoHero" placeholder="ph21.jpeg ou https://..."/></div>
+                <div class="form-group"><label>Image de fond (Background)</label><input type="text" id="pPhotoBg" placeholder="ph11.jpeg ou https://..."/></div>
+              </div>
+              <!-- FIN NOUVEAUX CHAMPS PHOTOS -->
 
               <div class="form-group"><label>Bio courte (accueil)</label><textarea id="pBio" rows="3"></textarea></div>
               <div class="divider"></div>
@@ -639,7 +649,7 @@ input,select,textarea{font-family:inherit}
         </div>
       </div>
 
-      <!-- ============ STATISTIQUES ============ -->
+      <!-- STATISTIQUES -->
       <div class="tab-pane" id="tab-stats">
         <div class="card">
           <div class="card-header"><h2 id="stFormTitle">📊 Nouvelle saison</h2></div>
@@ -667,11 +677,9 @@ input,select,textarea{font-family:inherit}
                 <div class="form-group"><label>Équipe réserve</label><input type="number" id="stReserve"/></div>
               </div>
               
-              <!-- NOUVEAU CHAMP AJOUTÉ ICI -->
               <div class="form-row-3">
                 <div class="form-group"><label>Matchs de Championnat</label><input type="number" id="stChamp"/></div>
               </div>
-              <!-- FIN NOUVEAU CHAMP -->
 
               <div class="actions">
                 <button type="submit" class="btn-save" id="stBtnSave">💾 Enregistrer</button>
@@ -686,7 +694,7 @@ input,select,textarea{font-family:inherit}
         </div>
       </div>
 
-      <!-- ============ NOUVEAU : CARRIERE ============ -->
+      <!-- CARRIERE -->
       <div class="tab-pane" id="tab-carriere">
         <div class="card">
           <div class="card-header"><h2>🏟️ Ajouter / Modifier un club</h2></div>
@@ -727,7 +735,7 @@ input,select,textarea{font-family:inherit}
         </div>
       </div>
 
-      <!-- ============ NOUVEAU : SELECTIONS ============ -->
+      <!-- SELECTIONS -->
       <div class="tab-pane" id="tab-selections">
         <div class="card">
           <div class="card-header"><h2>🏆 Modifier les compteurs</h2></div>
@@ -776,7 +784,7 @@ input,select,textarea{font-family:inherit}
         </div>
       </div>
 
-      <!-- ============ NOUVEAU : TEXTES FR/EN ============ -->
+      <!-- TEXTES FR/EN -->
       <div class="tab-pane" id="tab-textes">
         <div class="alert">🌍 <span>Modifiez ici les textes de la page d'accueil et de la biographie pour le Français et l'Anglais.</span></div>
         <div class="card">
@@ -808,7 +816,7 @@ input,select,textarea{font-family:inherit}
         </div>
       </div>
 
-      <!-- ============ MODERATION ============ -->
+      <!-- MODERATION -->
       <div class="tab-pane" id="tab-moderation">
         <div class="alert">💬 <span><strong>Modération</strong> : vues, likes et commentaires. Cliquez sur 👁️ pour modérer.</span></div>
         <div class="card">
@@ -817,7 +825,7 @@ input,select,textarea{font-family:inherit}
         </div>
       </div>
 
-      <!-- ============ CONFIG ============ -->
+      <!-- CONFIG -->
       <div class="tab-pane" id="tab-config">
         <div class="alert">⚙️ <span><strong>Configuration</strong> : ces valeurs sont utilisées partout sur le site.</span></div>
         <div class="card">
@@ -1064,7 +1072,6 @@ async function loadAll() {
     loadArticles(), loadVideos(), loadPhotos(),
     loadEvents(), loadSponsors(), loadHorsTerrain(),
     loadProfil(), loadStats(),
-    /* NOUVELLES FONCTIONS AJOUTÉES ICI */
     loadCarriere(), loadSelections(), loadTextes()
   ]);
 }
@@ -1225,6 +1232,10 @@ document.getElementById('videoForm').addEventListener('submit', async (e) => {
     vignetteUrl: customVignette || ytThumb(url),
     description: document.getElementById('vidDesc').value.trim(),
     publie: document.getElementById('vidPublie').value === 'true',
+    /* NOUVELLES DONNÉES VIDÉO AJOUTÉES ICI */
+    competition: document.getElementById('vidCompet').value.trim(),
+    club: document.getElementById('vidClub').value.trim(),
+    dateMatch: document.getElementById('vidDate').value,
     updatedAt: Timestamp.now()
   };
   try {
@@ -1255,6 +1266,10 @@ window.editVideo = async (id) => {
   document.getElementById('vidDesc').value = v.description || '';
   document.getElementById('vidVignette').value = v.vignetteUrl || '';
   document.getElementById('vidPublie').value = v.publie === false ? 'false' : 'true';
+  /* CHARGEMENT DES NOUVELLES DONNÉES VIDÉO AJOUTÉ ICI */
+  document.getElementById('vidCompet').value = v.competition || '';
+  document.getElementById('vidClub').value = v.club || '';
+  document.getElementById('vidDate').value = v.dateMatch || '';
   document.getElementById('vidFormTitle').textContent = '✏️ Modifier la vidéo';
   onVideoUrlChange();
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1283,10 +1298,10 @@ async function maybeInitPhotos() {
 
 window.initPhotos = async (manual = false) => {
   if (manual && !confirm('Générer/regénérer les 30 photos (ph1.jpeg à ph30.jpeg) ?')) return;
-  const cats = ['Sélection Bénin', 'Match & Clubs', 'Ses photos'];
+  const cats = ['Photos en club', 'Photos avec les sélections nationales', 'Photos de matchs', 'Photos d\'entraînement', 'Portraits professionnels'];
   const promises = [];
   for (let i = 1; i <= 30; i++) {
-    const cat = cats[Math.floor((i - 1) / 10)];
+    const cat = cats[Math.floor((i - 1) / 6)];
     const ref = doc(db, 'galerie', 'photo_' + i);
     promises.push(setDoc(ref, {
       numero: i,
@@ -1597,11 +1612,11 @@ async function loadProfil() {
     const d = await getDoc(doc(db, 'profil', 'principal'));
     if (!d.exists()) return;
     const p = d.data();
-    /* CHAMPS AJOUTÉS ICI */
     const map = { nom:'pNom', club:'pClub', niveau:'pNiveau', age:'pAge', pied:'pPied',
                   taille:'pTaille', poids:'pPoids', selections:'pSel', bio:'pBio',
                   email:'pEmail', whatsapp:'pWhatsapp', telephone:'pTel', instagram:'pInsta',
-                  poste:'pPoste', statut:'pStatut', proDepuis:'pProDepuis', langues:'pLangues', transfermarkt:'pTransfermarkt', facebook:'pFacebook' };
+                  poste:'pPoste', statut:'pStatut', proDepuis:'pProDepuis', langues:'pLangues', transfermarkt:'pTransfermarkt', facebook:'pFacebook',
+                  photoHero:'pPhotoHero', photoBg:'pPhotoBg' };
     for (const k in map) {
       const el = document.getElementById(map[k]);
       if (el && p[k] !== undefined) el.value = p[k] || '';
@@ -1625,13 +1640,15 @@ document.getElementById('profilForm').addEventListener('submit', async (e) => {
     whatsapp: document.getElementById('pWhatsapp').value.trim(),
     telephone: document.getElementById('pTel').value.trim(),
     instagram: document.getElementById('pInsta').value.trim(),
-    /* NOUVEAUX CHAMPS AJOUTÉS ICI */
     poste: document.getElementById('pPoste').value.trim(),
     statut: document.getElementById('pStatut').value.trim(),
     proDepuis: document.getElementById('pProDepuis').value.trim(),
     langues: document.getElementById('pLangues').value.trim(),
     transfermarkt: document.getElementById('pTransfermarkt').value.trim(),
     facebook: document.getElementById('pFacebook').value.trim(),
+    /* NOUVELLES PHOTOS AJOUTÉES ICI */
+    photoHero: document.getElementById('pPhotoHero').value.trim(),
+    photoBg: document.getElementById('pPhotoBg').value.trim(),
     updatedAt: Timestamp.now()
   };
   try {
@@ -1689,7 +1706,6 @@ document.getElementById('statsForm').addEventListener('submit', async (e) => {
     cartons: num('stCartons'),
     coupeDeFrance: num('stCoupe'),
     equipeReserve: num('stReserve'),
-    /* NOUVEAU CHAMP AJOUTÉ ICI */
     championnat: num('stChamp'),
     updatedAt: Timestamp.now()
   };
@@ -1724,7 +1740,6 @@ window.editStats = async (id) => {
   document.getElementById('stCartons').value = s.cartons || 0;
   document.getElementById('stCoupe').value = s.coupeDeFrance || 0;
   document.getElementById('stReserve').value = s.equipeReserve || 0;
-  /* NOUVEAU CHAMP AJOUTÉ ICI */
   document.getElementById('stChamp').value = s.championnat || 0;
   document.getElementById('stFormTitle').textContent = '✏️ Modifier la saison';
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1737,7 +1752,7 @@ window.deleteStats = async (id) => {
 };
 
 /* ============================================================
-   NOUVELLES FONCTIONS : CARRIERE
+   CARRIERE
    ============================================================ */
 async function loadCarriere() {
   const box = document.getElementById('listCarriere');
@@ -1777,7 +1792,7 @@ window.editCar = async (id) => {
 window.delCar = async (id) => { if(confirm('Supprimer ?')) { await deleteDoc(doc(db, 'carriere', id)); loadCarriere(); } };
 
 /* ============================================================
-   NOUVELLES FONCTIONS : SELECTIONS
+   SELECTIONS
    ============================================================ */
 async function loadSelections() {
   const d = await getDoc(doc(db, 'selections', 'compteurs'));
@@ -1823,7 +1838,7 @@ window.editComp = async (id) => {
 window.delComp = async (id) => { if(confirm('Supprimer ?')) { await deleteDoc(doc(db, 'competitions', id)); loadSelections(); } };
 
 /* ============================================================
-   NOUVELLES FONCTIONS : TEXTES
+   TEXTES
    ============================================================ */
 async function loadTextes() {
   const d = await getDoc(doc(db, 'textes', 'site'));
@@ -1968,7 +1983,6 @@ window.resetForm = (type) => {
     editingStats = null;
     document.getElementById('stFormTitle').textContent = '📊 Nouvelle saison';
   }
-  /* NOUVEAUX RESETS AJOUTÉS ICI */
   if (type === 'carriere') {
     document.getElementById('carriereForm').reset();
     document.getElementById('carId').value = '';
@@ -1983,7 +1997,7 @@ window.resetForm = (type) => {
   }
 };
 
-console.log('✅ admin.html chargé — version complète avec boutons d\'hébergement');
+console.log('✅ admin.html chargé — version complète et finale');
 </script>
 </body>
 </html>
