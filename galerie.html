@@ -7,8 +7,33 @@
 <meta name="description" content="Galerie photo officielle de Dava David Agossa : sélection Bénin, matchs, clubs et portraits."/>
 <meta name="robots" content="index,follow"/>
 <link rel="canonical" href="https://www.davadavidagossa.com/galerie.html"/>
+
+<!-- ⭐ OPEN GRAPH (partage Messenger / WhatsApp / Facebook / X) -->
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="Dava David Agossa"/>
+<meta property="og:title" content="Galerie — Dava David Agossa | Photos officielles"/>
+<meta property="og:description" content="Galerie photo officielle : sélection Bénin, matchs, clubs et portraits professionnels."/>
+<meta property="og:image" content="https://www.davadavidagossa.com/ph25.jpeg"/>
+<meta property="og:image:type" content="image/jpeg"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:image:alt" content="Dava David Agossa — Gardien de but professionnel"/>
+<meta property="og:url" content="https://www.davadavidagossa.com/galerie.html"/>
+<meta property="og:locale" content="fr_FR"/>
+<meta property="og:locale:alternate" content="en_GB"/>
+
+<!-- ⭐ TWITTER CARD -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Galerie — Dava David Agossa"/>
+<meta name="twitter:description" content="Sélection Bénin, matchs, clubs et portraits professionnels."/>
+<meta name="twitter:image" content="https://www.davadavidagossa.com/ph25.jpeg"/>
+
 <meta name="theme-color" content="#3d0000"/>
-<link rel="icon" type="image/png" href="favicon.png"/>
+
+<!-- ⭐ FAVICON = photo du joueur -->
+<link rel="icon" type="image/jpeg" href="ph25.jpeg"/>
+<link rel="apple-touch-icon" sizes="180x180" href="ph25.jpeg"/>
+
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
@@ -119,6 +144,11 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 .chat-options{padding:.8rem 1rem 1rem;display:flex;flex-direction:column;gap:.4rem;border-top:1px solid var(--border)}
 .chat-opt{padding:.6rem .9rem;border:1px solid var(--border);border-radius:6px;background:rgba(26,0,0,.6);color:var(--texte);font-size:.78rem;text-align:left;cursor:pointer;transition:all .2s}
 .chat-opt:hover{background:rgba(212,175,90,.15);border-color:var(--or-clair);color:var(--or-clair)}
+
+/* État vide propre */
+.empty-state{text-align:center;padding:4rem 1.5rem;border:1px dashed var(--border);border-radius:8px;background:rgba(26,0,0,.4);grid-column:1/-1}
+.empty-state h3{color:var(--or-clair);margin-bottom:.6rem;font-family:var(--f-d)}
+.empty-state p{color:var(--texte-3);font-size:.9rem;max-width:520px;margin-inline:auto}
 </style>
 </head>
 <body>
@@ -162,7 +192,7 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 <button class="filter-btn" data-cat="Portraits professionnels" data-fr="📸 Portraits" data-en="📸 Portraits">📸 Portraits</button>
 </div>
 <div class="gal-grid" id="galerieGrid">
-<div class="empty-state">Chargement...</div>
+<div class="empty-state"><h3>Chargement…</h3></div>
 </div>
 </div>
 </section>
@@ -225,19 +255,11 @@ import { Engagement } from './engagement.js';
 
 const esc = (s) => String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-// ⭐ VOS 30 PHOTOS PAR DÉFAUT (Pour ne jamais avoir une page vide)
-const DEFAULT_PHOTOS = [];
-for (let i = 1; i <= 30; i++) {
-  let cat = 'Portraits professionnels'; // Catégorie par défaut
-  if (i <= 10) cat = 'Photos avec les sélections nationales';
-  else if (i <= 20) cat = 'Photos en club';
-  
-  DEFAULT_PHOTOS.push({ 
-    id: `photo_${i}`,
-    file: `ph${i}.jpeg`, 
-    cat: cat, 
-    title: `${cat} — Photo ${i}` 
-  });
+/* ─── Langue sécurisée (accessible depuis le module sans dépendre du scope global) ─── */
+function safeLang() {
+  try {
+    return (typeof currentLang !== 'undefined' && currentLang) ? currentLang : (localStorage.getItem('lang') || 'fr');
+  } catch (e) { return 'fr'; }
 }
 
 let allPhotos = [];
@@ -245,21 +267,38 @@ let currentFilter = 'all';
 
 function renderGalerie(){
   const grid = document.getElementById('galerieGrid');
-  
+  if (!grid) return;
+
+  // ⭐ Aucun fallback "30 photos" : si la base est vide, on affiche un message clair
+  if (!allPhotos.length) {
+    grid.innerHTML = `
+      <div class="empty-state">
+        <h3>${safeLang() === 'fr' ? 'Galerie en préparation' : 'Gallery coming soon'}</h3>
+        <p>${safeLang() === 'fr'
+          ? 'Les photos seront ajoutées très prochainement depuis l\'espace d\'administration.'
+          : 'Photos will be added shortly from the admin space.'}</p>
+      </div>`;
+    return;
+  }
+
   const filtered = currentFilter === 'all' ? allPhotos : allPhotos.filter(p => p.cat === currentFilter);
 
   if (!filtered.length) {
-    grid.innerHTML = `<div class="empty-state">Aucune photo dans cette catégorie.</div>`;
+    grid.innerHTML = `
+      <div class="empty-state">
+        <h3>${safeLang() === 'fr' ? 'Aucune photo dans cette catégorie' : 'No photo in this category'}</h3>
+        <p>${safeLang() === 'fr' ? 'Essayez une autre catégorie.' : 'Try another category.'}</p>
+      </div>`;
     return;
   }
 
   grid.innerHTML = filtered.map(p => `
     <div class="gal-item" data-id="${esc(p.id)}" data-src="${esc(p.file)}" data-title="${esc(p.title)}">
-      <img src="${esc(p.file)}" alt="${esc(p.title)}" loading="lazy" 
+      <img src="${esc(p.file)}" alt="${esc(p.title)}" loading="lazy"
            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"/>
       <div class="photo-fallback" style="display:none;">
         <span>📸</span>
-        <div>Photo à venir</div>
+        <div>${safeLang() === 'fr' ? 'Photo à venir' : 'Photo coming'}</div>
       </div>
       <span class="gi-tag">${esc(p.cat)}</span>
     </div>
@@ -270,18 +309,22 @@ function renderGalerie(){
       const src = el.dataset.src;
       const title = el.dataset.title;
       const photoId = el.dataset.id;
-      
+
       document.getElementById('lightboxImg').src = src;
       document.getElementById('lbInfo').textContent = title;
-      
+
       const engZone = document.getElementById('photo-engagement');
       engZone.innerHTML = '';
-      
+
       if (photoId) {
-        // On lance le module d'engagement (likes/commentaires) pour cette photo
-        Engagement.render('photo-engagement', 'photo', photoId, window.location.href, title);
+        // ⭐ try/catch : évite un crash du lightbox si Engagement rencontre une erreur
+        try {
+          Engagement.render('photo-engagement', 'photo', photoId, window.location.href, title);
+        } catch (err) {
+          console.warn('[galerie] Engagement.render error:', err);
+        }
       }
-      
+
       document.getElementById('lightbox').classList.add('open');
     });
   });
@@ -290,30 +333,39 @@ function renderGalerie(){
 async function chargerPhotosAdmin(){
   try {
     const snap = await getDocs(collection(db, 'galerie'));
-    
+    console.log('[galerie] Documents Firestore trouvés :', snap.size);
+
     if (snap.empty) {
-      // Si l'Admin est vide, on affiche vos 30 photos locales
-      allPhotos = DEFAULT_PHOTOS;
+      // ⭐ Plus de 30 photos inventées : collection vide → tableau vide → message d'état vide
+      console.log('[galerie] Collection vide → affichage du message d\'attente');
+      allPhotos = [];
     } else {
-      // Si l'Admin contient des photos, on les affiche (elles remplacent les locales)
       allPhotos = snap.docs.map(d => {
         const data = d.data();
         return {
           id: d.id,
-          file: data.url || data.fichier, // On prend l'URL externe ou le fichier local
+          file: data.url || data.fichier,
           cat: data.categorie || 'Photos en club',
-          title: data.titre || 'Photo'
+          title: data.titre || 'Photo',
+          numero: data.numero || 999
         };
       });
-      // On trie pour mettre les photos initiales (les 30) en premier
-      allPhotos.sort((a,b) => (a.id.includes('photo_') && b.id.includes('photo_')) ? a.id.localeCompare(b.id) : (a.id.includes('photo_') ? -1 : 1));
+      // Tri : numero croissant si présent, sinon ordre naturel Firebase
+      allPhotos.sort((a, b) => (a.numero || 999) - (b.numero || 999));
     }
-    
+
     renderGalerie();
   } catch(e) {
-    console.warn("Erreur Firebase, utilisation des photos par défaut :", e);
-    allPhotos = DEFAULT_PHOTOS;
-    renderGalerie();
+    console.error('[galerie] Erreur Firestore :', e);
+    allPhotos = [];
+    const grid = document.getElementById('galerieGrid');
+    if (grid) {
+      grid.innerHTML = `
+        <div class="empty-state">
+          <h3>${safeLang() === 'fr' ? 'Erreur de chargement' : 'Loading error'}</h3>
+          <p>${safeLang() === 'fr' ? 'Vérifiez votre connexion et réessayez.' : 'Check your connection and retry.'}</p>
+        </div>`;
+    }
   }
 }
 
@@ -330,7 +382,6 @@ document.getElementById('lbClose').addEventListener('click', () => document.getE
 document.getElementById('lightbox').addEventListener('click', (e) => { if (e.target.id === 'lightbox') document.getElementById('lightbox').classList.remove('open'); });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') document.getElementById('lightbox').classList.remove('open'); });
 
-// Lancer le chargement
 chargerPhotosAdmin();
 </script>
 </body>
