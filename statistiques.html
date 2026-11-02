@@ -7,8 +7,33 @@
 <meta name="description" content="Statistiques détaillées de Dava David Agossa, gardien de but au Bourges FC. Matchs, titularisations, clean sheets, penalties arrêtés."/>
 <meta name="robots" content="index,follow"/>
 <link rel="canonical" href="https://www.davadavidagossa.com/statistiques.html"/>
+
+<!-- ⭐ OPEN GRAPH -->
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="Dava David Agossa"/>
+<meta property="og:title" content="Statistiques — Dava David Agossa | Matchs, clean sheets"/>
+<meta property="og:description" content="Statistiques détaillées saison par saison : matchs, clean sheets, penalties arrêtés."/>
+<meta property="og:image" content="https://www.davadavidagossa.com/ph25.jpeg"/>
+<meta property="og:image:type" content="image/jpeg"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:image:alt" content="Dava David Agossa — Gardien de but professionnel"/>
+<meta property="og:url" content="https://www.davadavidagossa.com/statistiques.html"/>
+<meta property="og:locale" content="fr_FR"/>
+<meta property="og:locale:alternate" content="en_GB"/>
+
+<!-- ⭐ TWITTER CARD -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Statistiques — Dava David Agossa"/>
+<meta name="twitter:description" content="Matchs, clean sheets, penalties arrêtés — saison par saison."/>
+<meta name="twitter:image" content="https://www.davadavidagossa.com/ph25.jpeg"/>
+
 <meta name="theme-color" content="#3d0000"/>
-<link rel="icon" type="image/png" href="favicon.png"/>
+
+<!-- ⭐ FAVICON -->
+<link rel="icon" type="image/jpeg" href="ph25.jpeg"/>
+<link rel="apple-touch-icon" sizes="180x180" href="ph25.jpeg"/>
+
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
@@ -146,7 +171,8 @@ th.center{text-align:center}
 <div class="page-hero-inner">
 <span class="eyebrow" data-fr="Performance" data-en="Performance">Performance</span>
 <h1 data-fr="Statistiques" data-en="Statistics">Statistiques</h1>
-<p data-fr="Toutes les statistiques du gardien, saison par saison. Mis à jour depuis l'espace d'administration." data-en="All goalkeeper statistics, season by season. Updated from the admin space.">Toutes les statistiques du gardien, saison par saison. Mis à jour depuis l'espace d'administration.</p>
+<!-- ⭐ Ajout de l'id="pageIntro" pour permettre la mise à jour depuis Firestore -->
+<p id="pageIntro" data-fr="Toutes les statistiques du gardien, saison par saison. Mis à jour depuis l'espace d'administration." data-en="All goalkeeper statistics, season by season. Updated from the admin space.">Toutes les statistiques du gardien, saison par saison. Mis à jour depuis l'espace d'administration.</p>
 </div>
 </header>
 
@@ -194,7 +220,10 @@ navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>{ navL
 const io = new IntersectionObserver(entries=>{ entries.forEach(e=>{ if (e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } }); },{ threshold:0.12 });
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
+/* ⭐ currentLang exposé au module via window.currentLang */
 let currentLang = localStorage.getItem('lang') || 'fr';
+window.currentLang = currentLang;
+
 const CHAT_OPTS = {
   fr: [{ k:'qui', l:'👤 Qui est Dava ?' }, { k:'stats', l:'📊 Ses stats ?' }, { k:'contact', l:'📩 Le contacter' }],
   en: [{ k:'qui', l:'👤 Who is Dava?' }, { k:'stats', l:'📊 His stats?' }, { k:'contact', l:'📩 Contact him' }]
@@ -207,7 +236,20 @@ const CHAT_ANS = {
 function renderChat(){ const opts = document.getElementById('chatOptions'); opts.innerHTML = CHAT_OPTS[currentLang].map(o=>`<button class="chat-opt" data-k="${o.k}">${o.l}</button>`).join(''); opts.querySelectorAll('.chat-opt').forEach(b=>b.addEventListener('click', ()=> askChat(b.dataset.k))); }
 function addMsg(text, sender){ const body = document.getElementById('chatBody'); const div = document.createElement('div'); div.className = 'chat-msg ' + sender; div.textContent = text; body.appendChild(div); body.scrollTop = body.scrollHeight; }
 function askChat(key){ addMsg(CHAT_ANS[key][currentLang], 'bot'); }
-function setLang(lang){ currentLang = lang; localStorage.setItem('lang', lang); document.documentElement.lang = lang; document.querySelectorAll('[data-fr]').forEach(el=>{ const t = el.getAttribute('data-' + lang); if (t) el.textContent = t; }); document.querySelectorAll('.lang-toggle button').forEach(b=>b.classList.toggle('active', b.dataset.lang === lang)); renderChat(); renderSeasonTabs(); renderStatsTable(); }
+
+/* ⭐ setLang corrigé : plus de crash (renderSeasonTabs/renderStatsTable appelés via window avec guard) */
+function setLang(lang){
+  currentLang = lang;
+  window.currentLang = lang;
+  localStorage.setItem('lang', lang);
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-fr]').forEach(el=>{ const t = el.getAttribute('data-' + lang); if (t) el.textContent = t; });
+  document.querySelectorAll('.lang-toggle button').forEach(b=>b.classList.toggle('active', b.dataset.lang === lang));
+  try { renderChat(); } catch(e) { console.warn('[setLang] renderChat:', e); }
+  try { if (typeof window.renderSeasonTabs === 'function') window.renderSeasonTabs(); } catch(e) { console.warn('[setLang] renderSeasonTabs:', e); }
+  try { if (typeof window.renderStatsTable === 'function') window.renderStatsTable(); } catch(e) { console.warn('[setLang] renderStatsTable:', e); }
+  try { if (typeof window.loadStatsPageText === 'function') window.loadStatsPageText(); } catch(e) { console.warn('[setLang] loadStatsPageText:', e); }
+}
 document.querySelectorAll('.lang-toggle button').forEach(b=>b.addEventListener('click', ()=> setLang(b.dataset.lang)));
 setLang(currentLang);
 document.getElementById('chatToggle').addEventListener('click', ()=>{ const p = document.getElementById('chatPanel'); p.classList.toggle('open'); if (p.classList.contains('open') && !document.getElementById('chatBody').children.length){ addMsg(currentLang === 'fr' ? "Bonjour 👋 Je suis l'assistant de Dava David Agossa." : "Hello 👋 I'm Dava David Agossa's assistant.", 'bot'); } });
@@ -216,11 +258,19 @@ document.getElementById('chatClose').addEventListener('click', ()=>{ document.ge
 
 <script type="module">
 import { db } from './firebase-config.js';
-import { collection, query, orderBy, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { collection, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const esc = (s) => String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-// ⭐ DONNÉES PAR DÉFAUT (Fallback) - S'affichent si l'Admin est vide
+/* ⭐ Langue sécurisée — accessible depuis le module même si currentLang est dans un autre <script> */
+function safeLang() {
+  try {
+    if (typeof window.currentLang === 'string' && window.currentLang) return window.currentLang;
+    return localStorage.getItem('lang') || 'fr';
+  } catch (e) { return 'fr'; }
+}
+
+// Fallback : utilisé uniquement si la collection Firestore est vide ou en erreur
 const DEFAULT_STATS = [
   { saison: '2025-2026', club: 'Bourges FC', niveau: 'National 1', matchs: 10, titularisations: 10, minutes: 900, butsEncaisses: 12, cleanSheets: 3, penaltiesArretes: 1, championnat: 10, coupeDeFrance: 0, equipeReserve: 0, cartons: 1 },
   { saison: '2024-2025', club: 'FC Girondins de Bordeaux', niveau: 'National 2', matchs: 15, titularisations: 12, minutes: 1100, butsEncaisses: 15, cleanSheets: 5, penaltiesArretes: 0, championnat: 14, coupeDeFrance: 1, equipeReserve: 0, cartons: 2 },
@@ -237,36 +287,43 @@ function getFlag(clubName) {
   return '🌍';
 }
 
-let allStats = []; 
+let allStats = [];
 let currentSeason = 'all';
 
 function renderStatsTable(){
   const container = document.getElementById('tableContainer');
   const summary = document.getElementById('statsSummary');
-  
-  let data = currentSeason === 'all' ? allStats : allStats.filter(s => s.saison === currentSeason);
-  
+  if (!container || !summary) return;
+
+  const lang = safeLang();
+  const data = currentSeason === 'all' ? allStats : allStats.filter(s => s.saison === currentSeason);
+
   if (!data.length) {
     summary.innerHTML = '';
-    container.innerHTML = `<div class="empty-stats"><h3>${currentLang==='fr'?'Aucune donnée pour cette saison':'No data for this season'}</h3></div>`;
+    container.innerHTML = `<div class="empty-stats"><h3>${lang === 'fr' ? 'Aucune donnée pour cette saison' : 'No data for this season'}</h3></div>`;
     return;
   }
 
   const tot = data.reduce((a,s)=>{
-    a.matchs+=(s.matchs||0); a.clean+=(s.cleanSheets||0); a.penalties+=(s.penaltiesArretes||0); a.minutes+=(s.minutes||0);
+    a.matchs += (s.matchs||0);
+    a.clean += (s.cleanSheets||0);
+    a.penalties += (s.penaltiesArretes||0);
+    a.minutes += (s.minutes||0);
     return a;
   },{matchs:0,clean:0,penalties:0,minutes:0});
-  
-  const labels = currentLang==='fr' ? {m:'Matchs',c:'Clean sheets',p:'Penalties arrêtés',min:'Minutes'} : {m:'Matches',c:'Clean sheets',p:'Penalties saved',min:'Minutes'};
-  
+
+  const labels = lang==='fr'
+    ? {m:'Matchs',c:'Clean sheets',p:'Penalties arrêtés',min:'Minutes'}
+    : {m:'Matches',c:'Clean sheets',p:'Penalties saved',min:'Minutes'};
+
   summary.innerHTML = `
     <div class="sum-card"><span class="sum-num">${tot.matchs}</span><span class="sum-lbl">${labels.m}</span></div>
     <div class="sum-card"><span class="sum-num">${tot.clean}</span><span class="sum-lbl">${labels.c}</span></div>
     <div class="sum-card"><span class="sum-num">${tot.penalties}</span><span class="sum-lbl">${labels.p}</span></div>
     <div class="sum-card"><span class="sum-num">${tot.minutes.toLocaleString('fr-FR')}</span><span class="sum-lbl">${labels.min}</span></div>`;
 
-  const headers = currentLang==='fr' 
-    ? ['Saison','Club','Niveau','Matchs','Titul.','Minutes','Buts enc.','Clean sheets','Penalties arr.','Championnat','Coupe de France','Équipe réserve','Cartons'] 
+  const headers = lang==='fr'
+    ? ['Saison','Club','Niveau','Matchs','Titul.','Minutes','Buts enc.','Clean sheets','Penalties arr.','Championnat','Coupe de France','Équipe réserve','Cartons']
     : ['Season','Club','Level','Matches','Starts','Minutes','Conceded','Clean sheets','Penalties saved','League','French Cup','Reserve team','Cards'];
 
   container.innerHTML = `<div class="table-wrap"><table><thead><tr>
@@ -292,10 +349,12 @@ function renderStatsTable(){
 
 function renderSeasonTabs(){
   const tabs = document.getElementById('seasonTabs');
-  if(!allStats.length){ tabs.innerHTML=''; return; }
-  const allLabel = currentLang==='fr'?'Toutes les saisons':'All seasons';
+  if (!tabs) return;
+  if (!allStats.length) { tabs.innerHTML=''; return; }
+  const lang = safeLang();
+  const allLabel = lang==='fr' ? 'Toutes les saisons' : 'All seasons';
   tabs.innerHTML = `<button class="season-btn ${currentSeason === 'all' ? 'active' : ''}" onclick="window.selectSeason('all')">${allLabel}</button>` +
-    allStats.map(s=>`<button class="season-btn ${currentSeason === s.saison ? 'active' : ''}" onclick="window.selectSeason('${s.saison}')">${s.saison}</button>`).join('');
+    allStats.map(s=>`<button class="season-btn ${currentSeason === s.saison ? 'active' : ''}" onclick="window.selectSeason('${esc(s.saison)}')">${esc(s.saison)}</button>`).join('');
 }
 
 window.selectSeason = function(s){
@@ -304,26 +363,63 @@ window.selectSeason = function(s){
   renderStatsTable();
 };
 
-async function chargerStats(){
+/* ⭐ Charge le texte d'intro de la page depuis textes/site (éditable dans l'admin) */
+async function loadStatsPageText() {
   try {
-    const q = query(collection(db, 'statistiques'), orderBy('saison', 'desc'));
-    const snap = await getDocs(q);
-    
-    // ⭐ Si Firebase est vide, on utilise les données par défaut
-    allStats = snap.empty ? DEFAULT_STATS : snap.docs.map(d => ({ id: d.id, ...d.data() }));
-    
-    renderSeasonTabs();
-    renderStatsTable();
-  } catch(e) {
-    console.warn("Erreur stats, utilisation des données par défaut:", e);
-    // Si Firebase plante, on utilise aussi les données par défaut
-    allStats = DEFAULT_STATS;
-    renderSeasonTabs();
-    renderStatsTable();
+    const d = await getDoc(doc(db, 'textes', 'site'));
+    if (!d.exists()) return;
+    const t = d.data();
+    const p = document.getElementById('pageIntro');
+    if (!p) return;
+    const lang = safeLang();
+    const txt = t['statsPageIntro' + (lang === 'en' ? 'En' : 'Fr')];
+    if (txt) {
+      p.textContent = txt;
+      // mise à jour des data-fr/data-en pour que le switch FR/EN conserve la valeur admin
+      if (t.statsPageIntroFr) p.setAttribute('data-fr', t.statsPageIntroFr);
+      if (t.statsPageIntroEn) p.setAttribute('data-en', t.statsPageIntroEn);
+    }
+  } catch (e) {
+    console.warn('[stats] loadStatsPageText:', e);
   }
 }
 
+async function chargerStats(){
+  const container = document.getElementById('tableContainer');
+  try {
+    // ⭐ Sans orderBy : évite les erreurs d'index Firestore.
+    // Tri manuel côté client (saison desc).
+    const snap = await getDocs(collection(db, 'statistiques'));
+    console.log('[stats] Documents Firestore trouvés :', snap.size);
+
+    if (snap.empty) {
+      console.log('[stats] Collection vide → affichage des DEFAULT_STATS');
+      allStats = DEFAULT_STATS.slice();
+    } else {
+      allStats = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      allStats.sort((a, b) => (b.saison || '').localeCompare(a.saison || ''));
+    }
+
+    renderSeasonTabs();
+    renderStatsTable();
+  } catch(e) {
+    console.error('[stats] Erreur Firestore → fallback DEFAULT_STATS :', e);
+    allStats = DEFAULT_STATS.slice();
+    try { renderSeasonTabs(); } catch(_) {}
+    try { renderStatsTable(); } catch(_) {}
+    if (container && !container.children.length) {
+      container.innerHTML = `<div class="empty-stats"><h3>${safeLang() === 'fr' ? 'Erreur de chargement' : 'Loading error'}</h3><p>${esc(e.message || '')}</p></div>`;
+    }
+  }
+}
+
+// ⭐ Expose les fonctions au script principal (setLang) — évite le ReferenceError
+window.renderSeasonTabs = renderSeasonTabs;
+window.renderStatsTable = renderStatsTable;
+window.loadStatsPageText = loadStatsPageText;
+
 chargerStats();
+loadStatsPageText();
 </script>
 </body>
 </html>
