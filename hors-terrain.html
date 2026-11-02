@@ -7,8 +7,33 @@
 <meta name="description" content="Formations, diplômes, expériences et projets professionnels de Dava David Agossa, en parallèle de sa carrière de gardien de but."/>
 <meta name="robots" content="index,follow"/>
 <link rel="canonical" href="https://www.davadavidagossa.com/hors-terrain.html"/>
+
+<!-- ⭐ OPEN GRAPH -->
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="Dava David Agossa"/>
+<meta property="og:title" content="Hors terrain — Dava David Agossa | Formations & Projets"/>
+<meta property="og:description" content="Formations, diplômes, expériences et projets professionnels menés en parallèle de la carrière sportive."/>
+<meta property="og:image" content="https://www.davadavidagossa.com/ph25.jpeg"/>
+<meta property="og:image:type" content="image/jpeg"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:image:alt" content="Dava David Agossa — Gardien de but professionnel"/>
+<meta property="og:url" content="https://www.davadavidagossa.com/hors-terrain.html"/>
+<meta property="og:locale" content="fr_FR"/>
+<meta property="og:locale:alternate" content="en_GB"/>
+
+<!-- ⭐ TWITTER CARD -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Hors terrain — Dava David Agossa"/>
+<meta name="twitter:description" content="Formations, diplômes, expériences et projets professionnels."/>
+<meta name="twitter:image" content="https://www.davadavidagossa.com/ph25.jpeg"/>
+
 <meta name="theme-color" content="#3d0000"/>
-<link rel="icon" type="image/png" href="favicon.png"/>
+
+<!-- ⭐ FAVICON -->
+<link rel="icon" type="image/jpeg" href="ph25.jpeg"/>
+<link rel="apple-touch-icon" sizes="180x180" href="ph25.jpeg"/>
+
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
@@ -75,7 +100,6 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 .tl li::before{content:'';position:absolute;left:-1.65rem;top:.4rem;width:10px;height:10px;border-radius:50%;background:var(--or-clair);border:2px solid var(--fond)}
 .tl b{display:block;font-size:1.05rem;color:var(--texte);margin-bottom:.2rem;font-family:var(--f-d)}
 .tl span{font-size:.85rem;color:var(--texte-3);font-family:var(--f-m)}
-/* AMÉLIORATION AFFICHAGE DESCRIPTION */
 .tl .desc { font-size:.9rem; color:var(--texte-2); line-height:1.5; margin-top:.5rem; }
 .empty-state{font-size:.9rem;color:var(--texte-3);font-style:italic}
 @media(max-width:900px){.col3{grid-template-columns:1fr}}
@@ -129,7 +153,8 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 <div class="page-hero-inner">
 <span class="eyebrow" data-fr="Au-delà du terrain" data-en="Beyond the pitch">Au-delà du terrain</span>
 <h1 data-fr="Hors terrain" data-en="Off-field">Hors terrain</h1>
-<p data-fr="Formations, expériences et projets menés en parallèle de la carrière sportive." data-en="Education, experiences and projects pursued alongside his sporting career.">Formations, expériences et projets menés en parallèle de la carrière sportive.</p>
+<!-- ⭐ id="pageIntro" : remplaçable depuis textes/site.horsPageIntroFr/En -->
+<p id="pageIntro" data-fr="Formations, expériences et projets menés en parallèle de la carrière sportive." data-en="Education, experiences and projects pursued alongside his sporting career.">Formations, expériences et projets menés en parallèle de la carrière sportive.</p>
 </div>
 </header>
 
@@ -184,21 +209,27 @@ navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>{ navL
 const io = new IntersectionObserver(entries=>{ entries.forEach(e=>{ if (e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } }); },{ threshold:0.12 });
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
+/* ⭐ currentLang exposé au module */
 let currentLang = localStorage.getItem('lang') || 'fr';
+window.currentLang = currentLang;
+
 const CHAT_OPTS = { fr: [{ k:'qui', l:'👤 Qui est Dava ?' }, { k:'club', l:'⚽ Son club ?' }, { k:'contact', l:'📩 Le contacter' }], en: [{ k:'qui', l:'👤 Who is Dava?' }, { k:'club', l:'⚽ His club?' }, { k:'contact', l:'📩 Contact him' }] };
 const CHAT_ANS = { qui: { fr: "Dava David Agossa est un gardien de but professionnel béninois de 23 ans (1,87 m · 75 kg). Il évolue au Bourges FC et est international U20/U23 (29 sélections).", en: "Dava David Agossa is a 23-year-old Beninese professional goalkeeper (1.87 m · 75 kg). He plays for Bourges FC and is a U20/U23 international (29 caps)." }, club: { fr: "Il évolue au Bourges FC en National 1. Son parcours est passé par Bordeaux, Beaucaire, Épinal, Gueugnon, Djibouti et le Bénin.", en: "He plays for Bourges FC in National 1. His career also went through Bordeaux, Beaucaire, Épinal, Gueugnon, Djibouti and Benin." }, contact: { fr: "Email : agdavadavid@gmail.com · WhatsApp : +229 01 57 31 21 31", en: "Email: agdavadavid@gmail.com · WhatsApp: +229 01 57 31 21 31" } };
 function renderChat(){ const opts = document.getElementById('chatOptions'); opts.innerHTML = CHAT_OPTS[currentLang].map(o=>`<button class="chat-opt" data-k="${o.k}">${o.l}</button>`).join(''); opts.querySelectorAll('.chat-opt').forEach(b=>b.addEventListener('click', ()=> askChat(b.dataset.k))); }
 function addMsg(text, sender){ const body = document.getElementById('chatBody'); const div = document.createElement('div'); div.className = 'chat-msg ' + sender; div.textContent = text; body.appendChild(div); body.scrollTop = body.scrollHeight; }
 function askChat(key){ addMsg(CHAT_ANS[key][currentLang], 'bot'); }
 
-// Modification de setLang pour re-rendre les listes au changement de langue
-const originalSetLang = window.setLang;
-function setLang(lang){ 
-  currentLang = lang; localStorage.setItem('lang', lang); document.documentElement.lang = lang; 
-  document.querySelectorAll('[data-fr]').forEach(el=>{ const t = el.getAttribute('data-' + lang); if (t) el.textContent = t; }); 
-  document.querySelectorAll('.lang-toggle button').forEach(b=>b.classList.toggle('active', b.dataset.lang === lang)); 
-  renderChat(); 
-  if (window.htData) renderLists(window.htData);
+/* ⭐ setLang sécurisé : try/catch + guards, plus de dead code */
+function setLang(lang){
+  currentLang = lang;
+  window.currentLang = lang;
+  localStorage.setItem('lang', lang);
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-fr]').forEach(el=>{ const t = el.getAttribute('data-' + lang); if (t) el.textContent = t; });
+  document.querySelectorAll('.lang-toggle button').forEach(b=>b.classList.toggle('active', b.dataset.lang === lang));
+  try { renderChat(); } catch(e) { console.warn('[setLang] renderChat:', e); }
+  try { if (typeof window.loadHorsPageText === 'function') window.loadHorsPageText(); } catch(e) { console.warn('[setLang] loadHorsPageText:', e); }
+  try { if (window.htData && typeof window.renderLists === 'function') window.renderLists(window.htData); } catch(e) { console.warn('[setLang] renderLists:', e); }
 }
 document.querySelectorAll('.lang-toggle button').forEach(b=>b.addEventListener('click', ()=> setLang(b.dataset.lang)));
 setLang(currentLang);
@@ -209,30 +240,44 @@ document.getElementById('chatClose').addEventListener('click', ()=>{ document.ge
 
 <script type="module">
 import { db } from './firebase-config.js';
-import { collection, query, orderBy, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { collection, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const esc = (s) => String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-// ⭐ DONNÉES PAR DÉFAUT (Si l'Admin est vide)
-const DEFAULT_HT = {
-  fr: [
-    { categorie: 'formation', titre: 'Formation professionnelle', sousTitre: 'En cours', description: 'Formation suivie en parallèle de la carrière sportive.' },
-    { categorie: 'experience', titre: 'Expérience terrain', sousTitre: '2023 - Aujourd\'hui', description: 'Expérience acquise dans le milieu du football professionnel.' },
-    { categorie: 'projet', titre: 'Projet personnel', sousTitre: 'Vision long terme', description: 'Développement de projets liés au sport et à l\'éducation.' }
-  ],
-  en: [
-    { categorie: 'formation', titre: 'Professional Training', sousTitre: 'Ongoing', description: 'Training pursued alongside the sports career.' },
-    { categorie: 'experience', titre: 'Field Experience', sousTitre: '2023 - Present', description: 'Experience gained in the professional football sector.' },
-    { categorie: 'projet', titre: 'Personal Project', sousTitre: 'Long-term vision', description: 'Development of projects linked to sport and education.' }
-  ]
-};
+/* ⭐ Langue sécurisée (module ES n'a pas accès à currentLang du parent) */
+function safeLang() {
+  try {
+    if (typeof window.currentLang === 'string' && window.currentLang) return window.currentLang;
+    return localStorage.getItem('lang') || 'fr';
+  } catch (e) { return 'fr'; }
+}
 
-window.htData = []; // Global pour le re-rendu
+window.htData = []; // Global pour re-rendu au changement de langue
+
+/* ⭐ Charge l'intro de la page depuis textes/site (éditable dans l'admin) */
+async function loadHorsPageText() {
+  try {
+    const d = await getDoc(doc(db, 'textes', 'site'));
+    if (!d.exists()) return;
+    const t = d.data();
+    const p = document.getElementById('pageIntro');
+    if (!p) return;
+    const lang = safeLang();
+    const txt = t['horsPageIntro' + (lang === 'en' ? 'En' : 'Fr')];
+    if (txt) {
+      p.textContent = txt;
+      if (t.horsPageIntroFr) p.setAttribute('data-fr', t.horsPageIntroFr);
+      if (t.horsPageIntroEn) p.setAttribute('data-en', t.horsPageIntroEn);
+    }
+  } catch (e) { console.warn('[hors-terrain] loadHorsPageText:', e); }
+}
 
 function renderList(elementId, dataArray) {
   const el = document.getElementById(elementId);
+  if (!el) return;
+  const lang = safeLang();
   if (!dataArray || !dataArray.length) {
-    el.innerHTML = `<li class="empty-state">${currentLang==='fr'?'Aucune entrée pour le moment.':'No entry yet.'}</li>`;
+    el.innerHTML = `<li class="empty-state">${lang === 'fr' ? 'Aucune entrée pour le moment.' : 'No entry yet.'}</li>`;
     return;
   }
   el.innerHTML = dataArray.map(item => `
@@ -244,7 +289,7 @@ function renderList(elementId, dataArray) {
   `).join('');
 }
 
-window.renderLists = function(data) {
+function renderLists(data) {
   const formations = data.filter(i => i.categorie === 'formation');
   const experiences = data.filter(i => i.categorie === 'experience');
   const projets = data.filter(i => i.categorie === 'projet');
@@ -256,25 +301,36 @@ window.renderLists = function(data) {
 
 async function chargerHorsTerrain(){
   try {
-    const q = query(collection(db, 'horsTerrain'), orderBy('ordre', 'asc'));
-    const snap = await getDocs(q);
-    
+    // ⭐ Sans orderBy : évite les erreurs d'index Firestore
+    const snap = await getDocs(collection(db, 'horsTerrain'));
+    console.log('[hors-terrain] Documents Firestore trouvés :', snap.size);
+
     if (snap.empty) {
-      window.htData = DEFAULT_HT[currentLang];
-    } else {
-      window.htData = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      console.log('[hors-terrain] Collection vide → affichage d\'un état vide propre');
+      window.htData = [];
+      renderLists([]);
+      return;
     }
-    
+
+    // Tri manuel par ordre croissant (fallback 999 si absent)
+    window.htData = snap.docs
+      .map(d => ({ id: d.id, ...d.data() }))
+      .sort((a, b) => (a.ordre || 999) - (b.ordre || 999));
+
     renderLists(window.htData);
   } catch(e) {
-    console.warn('Erreur chargement hors terrain, utilisation des données par défaut:', e);
-    window.htData = DEFAULT_HT[currentLang];
-    renderLists(window.htData);
+    console.error('[hors-terrain] Erreur Firestore :', e);
+    window.htData = [];
+    renderLists([]);
   }
 }
 
-// Lancer le chargement
+/* ⭐ Expose au script principal (setLang) */
+window.renderLists = renderLists;
+window.loadHorsPageText = loadHorsPageText;
+
 chargerHorsTerrain();
+loadHorsPageText();
 </script>
 </body>
 </html>
