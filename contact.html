@@ -7,8 +7,33 @@
 <meta name="description" content="Contactez Dava David Agossa pour toute demande professionnelle (clubs, agents, recruteurs, médias)."/>
 <meta name="robots" content="index,follow"/>
 <link rel="canonical" href="https://www.davadavidagossa.com/contact.html"/>
+
+<!-- ⭐ OPEN GRAPH -->
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="Dava David Agossa"/>
+<meta property="og:title" content="Contact — Dava David Agossa | Clubs, agents, médias"/>
+<meta property="og:description" content="Contactez Dava David Agossa pour toute demande professionnelle : clubs, agents, recruteurs, médias, partenaires."/>
+<meta property="og:image" content="https://www.davadavidagossa.com/ph25.jpeg"/>
+<meta property="og:image:type" content="image/jpeg"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:image:alt" content="Dava David Agossa — Gardien de but professionnel"/>
+<meta property="og:url" content="https://www.davadavidagossa.com/contact.html"/>
+<meta property="og:locale" content="fr_FR"/>
+<meta property="og:locale:alternate" content="en_GB"/>
+
+<!-- ⭐ TWITTER CARD -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Contact — Dava David Agossa"/>
+<meta name="twitter:description" content="Clubs, agents, recruteurs, médias — contactez-moi directement."/>
+<meta name="twitter:image" content="https://www.davadavidagossa.com/ph25.jpeg"/>
+
 <meta name="theme-color" content="#3d0000"/>
-<link rel="icon" type="image/png" href="favicon.png"/>
+
+<!-- ⭐ FAVICON -->
+<link rel="icon" type="image/jpeg" href="ph25.jpeg"/>
+<link rel="apple-touch-icon" sizes="180x180" href="ph25.jpeg"/>
+
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
@@ -75,7 +100,6 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 .contact-val{font-family:var(--f-d);font-size:1rem;font-weight:700;color:var(--texte);word-break:break-word}
 @media(max-width:700px){.contact-grid{grid-template-columns:1fr}}
 
-/* NOUVEAU : RÉSEAUX SOCIAUX */
 .social-links{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-bottom:3rem}
 .social-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.2rem;border-radius:100px;border:1px solid var(--border);background:rgba(26,0,0,.5);color:var(--texte-2);font-family:var(--f-m);font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;transition:all .3s}
 .social-btn:hover{transform:translateY(-2px);color:var(--fond-5)}
@@ -141,7 +165,8 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 <div class="page-hero-inner">
 <span class="eyebrow" data-fr="Travaillons ensemble" data-en="Let's work together">Travaillons ensemble</span>
 <h1 data-fr="Contact" data-en="Contact">Contact</h1>
-<p data-fr="Clubs, agents, recruteurs, médias et partenaires — contactez-moi directement." data-en="Clubs, agents, recruiters, media and partners — get in touch.">Clubs, agents, recruteurs, médias et partenaires — contactez-moi directement.</p>
+<!-- ⭐ id="pageIntro" : remplaçable depuis textes/site.contactPageIntroFr/En -->
+<p id="pageIntro" data-fr="Clubs, agents, recruteurs, médias et partenaires — contactez-moi directement." data-en="Clubs, agents, recruiters, media and partners — get in touch.">Clubs, agents, recruteurs, médias et partenaires — contactez-moi directement.</p>
 </div>
 </header>
 
@@ -154,7 +179,7 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 <a href="tel:+2290157312131" id="contactTelLink" class="contact-card"><div class="contact-icon">📱</div><div class="contact-lbl" data-fr="Téléphone" data-en="Phone">Téléphone</div><div class="contact-val" id="contactTelVal">+229 01 57 31 21 31</div></a>
 </div>
 
-<!-- NOUVEAU : BLOC RÉSEAUX SOCIAUX -->
+<!-- BLOC RÉSEAUX SOCIAUX -->
 <div class="social-links reveal" id="socialLinks">
   <!-- Les boutons seront générés par le script si les liens existent dans l'Admin -->
 </div>
@@ -211,28 +236,45 @@ navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>{ navL
 const io = new IntersectionObserver(entries=>{ entries.forEach(e=>{ if (e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } }); },{ threshold:0.12 });
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
+/* ⭐ currentLang exposé au module */
 let currentLang = localStorage.getItem('lang') || 'fr';
+window.currentLang = currentLang;
+
 const CHAT_OPTS = { fr: [{ k:'qui', l:'👤 Qui est Dava ?' }, { k:'club', l:'⚽ Son club ?' }, { k:'contact', l:'📩 Le contacter' }], en: [{ k:'qui', l:'👤 Who is Dava?' }, { k:'club', l:'⚽ His club?' }, { k:'contact', l:'📩 Contact him' }] };
 const CHAT_ANS = { qui: { fr: "Dava David Agossa est un gardien de but professionnel béninois de 23 ans (1,87 m · 75 kg). Il évolue au Bourges FC et est international U20/U23 (29 sélections).", en: "Dava David Agossa is a 23-year-old Beninese professional goalkeeper (1.87 m · 75 kg). He plays for Bourges FC and is a U20/U23 international (29 caps)." }, club: { fr: "Il évolue au Bourges FC en National 1. Son parcours est passé par Bordeaux, Beaucaire, Épinal, Gueugnon, Djibouti et le Bénin.", en: "He plays for Bourges FC in National 1. His career also went through Bordeaux, Beaucaire, Épinal, Gueugnon, Djibouti and Benin." }, contact: { fr: "Email : agdavadavid@gmail.com · WhatsApp : +229 01 57 31 21 31", en: "Email: agdavadavid@gmail.com · WhatsApp: +229 01 57 31 21 31" } };
 function renderChat(){ const opts = document.getElementById('chatOptions'); opts.innerHTML = CHAT_OPTS[currentLang].map(o=>`<button class="chat-opt" data-k="${o.k}">${o.l}</button>`).join(''); opts.querySelectorAll('.chat-opt').forEach(b=>b.addEventListener('click', ()=> askChat(b.dataset.k))); }
 function addMsg(text, sender){ const body = document.getElementById('chatBody'); const div = document.createElement('div'); div.className = 'chat-msg ' + sender; div.textContent = text; body.appendChild(div); body.scrollTop = body.scrollHeight; }
 function askChat(key){ addMsg(CHAT_ANS[key][currentLang], 'bot'); }
-function setLang(lang){ currentLang = lang; localStorage.setItem('lang', lang); document.documentElement.lang = lang; document.querySelectorAll('[data-fr]').forEach(el=>{ const t = el.getAttribute('data-' + lang); if (t) el.textContent = t; }); document.querySelectorAll('.lang-toggle button').forEach(b=>b.classList.toggle('active', b.dataset.lang === lang)); renderChat(); }
+
+function setLang(lang){
+  currentLang = lang;
+  window.currentLang = lang;
+  localStorage.setItem('lang', lang);
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-fr]').forEach(el=>{ const t = el.getAttribute('data-' + lang); if (t) el.textContent = t; });
+  document.querySelectorAll('.lang-toggle button').forEach(b=>b.classList.toggle('active', b.dataset.lang === lang));
+  try { renderChat(); } catch(e) { console.warn('[setLang] renderChat:', e); }
+  try { if (typeof window.loadContactPageText === 'function') window.loadContactPageText(); } catch(e) { console.warn('[setLang] loadContactPageText:', e); }
+}
 document.querySelectorAll('.lang-toggle button').forEach(b=>b.addEventListener('click', ()=> setLang(b.dataset.lang)));
 setLang(currentLang);
 document.getElementById('chatToggle').addEventListener('click', ()=>{ const p = document.getElementById('chatPanel'); p.classList.toggle('open'); if (p.classList.contains('open') && !document.getElementById('chatBody').children.length){ addMsg(currentLang === 'fr' ? "Bonjour 👋 Je suis l'assistant de Dava David Agossa." : "Hello 👋 I'm Dava David Agossa's assistant.", 'bot'); } });
 document.getElementById('chatClose').addEventListener('click', ()=>{ document.getElementById('chatPanel').classList.remove('open'); });
 
-// ⭐ VARIABLE GLOBALE POUR LE NUMERO WHATSAPP (Fallback par défaut)
-let currentWaNumber = '2290157312131';
+/* ⭐ FIX CRITIQUE : currentWaNumber exposé sur window pour être accessible depuis le module ES.
+   Avant : `let currentWaNumber` dans ce script n'était PAS visible du module → l'assignation
+   `currentWaNumber = cleanWa` plantait en silence → WhatsApp restait toujours le fallback. */
+window.currentWaNumber = '2290157312131';
 
+/* ⭐ sendMessage lit window.currentWaNumber (mis à jour depuis Firestore) */
 function sendMessage(e) {
   e.preventDefault();
   const name = document.getElementById('cName').value;
   const contact = document.getElementById('cContact').value;
   const msg = document.getElementById('cMsg').value;
   const text = `Bonjour Dava,\n\nNom : ${name}\nContact : ${contact}\n\nMessage :\n${msg}`;
-  window.open('https://wa.me/' + currentWaNumber + '?text=' + encodeURIComponent(text), '_blank');
+  const num = window.currentWaNumber || '2290157312131';
+  window.open('https://wa.me/' + num + '?text=' + encodeURIComponent(text), '_blank');
 }
 </script>
 
@@ -242,59 +284,89 @@ import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase
 
 const esc = (s) => String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
+/* ⭐ Langue sécurisée */
+function safeLang() {
+  try {
+    if (typeof window.currentLang === 'string' && window.currentLang) return window.currentLang;
+    return localStorage.getItem('lang') || 'fr';
+  } catch (e) { return 'fr'; }
+}
+
+/* ⭐ Charge l'intro de la page depuis textes/site (éditable dans l'admin) */
+async function loadContactPageText() {
+  try {
+    const d = await getDoc(doc(db, 'textes', 'site'));
+    if (!d.exists()) return;
+    const t = d.data();
+    const p = document.getElementById('pageIntro');
+    if (!p) return;
+    const lang = safeLang();
+    const txt = t['contactPageIntro' + (lang === 'en' ? 'En' : 'Fr')];
+    if (txt) {
+      p.textContent = txt;
+      if (t.contactPageIntroFr) p.setAttribute('data-fr', t.contactPageIntroFr);
+      if (t.contactPageIntroEn) p.setAttribute('data-en', t.contactPageIntroEn);
+    }
+  } catch (e) { console.warn('[contact] loadContactPageText:', e); }
+}
+
 async function loadContactData() {
   try {
     const docProfil = await getDoc(doc(db, 'profil', 'principal'));
-    if (docProfil.exists()) {
-      const p = docProfil.data();
-      
-      // Mise à jour de l'Email
-      if (p.email) {
-        document.getElementById('contactEmailVal').textContent = p.email;
-        document.getElementById('contactEmailLink').href = 'mailto:' + p.email;
-      }
-      
-      // Mise à jour du WhatsApp
-      if (p.whatsapp) {
-        document.getElementById('contactWaVal').textContent = p.whatsapp;
-        // On nettoie le numéro pour le lien (on enlève les espaces)
-        const cleanWa = p.whatsapp.replace(/\s/g, '');
-        currentWaNumber = cleanWa;
-        document.getElementById('contactWaLink').href = 'https://wa.me/' + cleanWa;
-        document.getElementById('waFloat').href = 'https://wa.me/' + cleanWa + '?text=Bonjour%20Dava%20!';
-      }
+    if (!docProfil.exists()) return;
+    const p = docProfil.data();
 
-      // Mise à jour du Téléphone
-      if (p.telephone) {
-        document.getElementById('contactTelVal').textContent = p.telephone;
-        document.getElementById('contactTelLink').href = 'tel:' + p.telephone.replace(/\s/g, '');
-      }
-
-      // Gestion des réseaux sociaux (Instagram, Facebook, Transfermarkt)
-      let socialHtml = '';
-      if (p.instagram) {
-        const instaUrl = p.instagram.startsWith('http') ? p.instagram : 'https://instagram.com/' + p.instagram.replace('@','');
-        socialHtml += `<a href="${esc(instaUrl)}" target="_blank" rel="noopener" class="social-btn insta">📸 Instagram</a>`;
-      }
-      if (p.facebook) {
-        socialHtml += `<a href="${esc(p.facebook)}" target="_blank" rel="noopener" class="social-btn fb">📘 Facebook</a>`;
-      }
-      if (p.transfermarkt) {
-        socialHtml += `<a href="${esc(p.transfermarkt)}" target="_blank" rel="noopener" class="social-btn tm">📊 Transfermarkt</a>`;
-      } else {
-        // Si le client n'a pas encore de lien Transfermarkt, on affiche un bouton désactivé
-        socialHtml += `<span class="social-btn tm" style="opacity:.5;cursor:not-allowed;" title="Profil en cours de création">📊 Transfermarkt (À venir)</span>`;
-      }
-      
-      document.getElementById('socialLinks').innerHTML = socialHtml;
+    // Email
+    if (p.email) {
+      document.getElementById('contactEmailVal').textContent = p.email;
+      document.getElementById('contactEmailLink').href = 'mailto:' + p.email;
     }
+
+    // WhatsApp — ⭐ FIX : window.currentWaNumber (pas la variable locale du script)
+    if (p.whatsapp) {
+      document.getElementById('contactWaVal').textContent = p.whatsapp;
+      const cleanWa = String(p.whatsapp).replace(/\s/g, '');
+      window.currentWaNumber = cleanWa;
+      document.getElementById('contactWaLink').href = 'https://wa.me/' + cleanWa;
+      document.getElementById('waFloat').href = 'https://wa.me/' + cleanWa + '?text=Bonjour%20Dava%20!';
+    }
+
+    // Téléphone
+    if (p.telephone) {
+      document.getElementById('contactTelVal').textContent = p.telephone;
+      document.getElementById('contactTelLink').href = 'tel:' + p.telephone.replace(/\s/g, '');
+    }
+
+    // Réseaux sociaux
+    let socialHtml = '';
+    if (p.instagram) {
+      const instaUrl = p.instagram.startsWith('http') ? p.instagram : 'https://instagram.com/' + p.instagram.replace('@','');
+      socialHtml += `<a href="${esc(instaUrl)}" target="_blank" rel="noopener" class="social-btn insta">📸 Instagram</a>`;
+    }
+    if (p.facebook) {
+      socialHtml += `<a href="${esc(p.facebook)}" target="_blank" rel="noopener" class="social-btn fb">📘 Facebook</a>`;
+    }
+    if (p.transfermarkt) {
+      socialHtml += `<a href="${esc(p.transfermarkt)}" target="_blank" rel="noopener" class="social-btn tm">📊 Transfermarkt</a>`;
+    } else {
+      socialHtml += `<span class="social-btn tm" style="opacity:.5;cursor:not-allowed;" title="Profil en cours de création">📊 Transfermarkt (À venir)</span>`;
+    }
+
+    document.getElementById('socialLinks').innerHTML = socialHtml;
+
+    console.log('[contact] Profil chargé — WhatsApp :', window.currentWaNumber);
+
   } catch(e) {
-    console.warn("Erreur chargement contact (les données par défaut restent affichées) :", e);
+    console.error('[contact] Erreur Firestore (les données par défaut restent affichées) :', e);
   }
 }
 
-// Lancer le chargement
+/* ⭐ Expose au script principal (setLang) */
+window.loadContactData = loadContactData;
+window.loadContactPageText = loadContactPageText;
+
 loadContactData();
+loadContactPageText();
 </script>
 </body>
 </html>
