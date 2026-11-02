@@ -7,8 +7,24 @@
 <meta name="description" content="Les vidéos officielles de Dava David Agossa : arrêts, jeu aérien, jeu au pied et highlights."/>
 <meta name="robots" content="index,follow"/>
 <link rel="canonical" href="https://www.davadavidagossa.com/videos.html"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="Dava David Agossa"/>
+<meta property="og:title" content="Vidéos — Dava David Agossa | Highlights, arrêts, matchs"/>
+<meta property="og:description" content="Les vidéos officielles de Dava David Agossa : arrêts, jeu aérien, jeu au pied et highlights."/>
+<meta property="og:image" content="https://www.davadavidagossa.com/ph25.jpeg"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:image:alt" content="Dava David Agossa — Gardien de but professionnel"/>
+<meta property="og:url" content="https://www.davadavidagossa.com/videos.html"/>
+<meta property="og:locale" content="fr_FR"/>
+<meta property="og:locale:alternate" content="en_GB"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Vidéos — Dava David Agossa"/>
+<meta name="twitter:description" content="Arrêts, jeu aérien, jeu au pied — les images qui parlent aux recruteurs."/>
+<meta name="twitter:image" content="https://www.davadavidagossa.com/ph25.jpeg"/>
 <meta name="theme-color" content="#3d0000"/>
-<link rel="icon" type="image/png" href="favicon.png"/>
+<link rel="icon" type="image/jpeg" href="ph25.jpeg"/>
+<link rel="apple-touch-icon" sizes="180x180" href="ph25.jpeg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
@@ -251,7 +267,7 @@ const getEmbed = (url) => {
   return url;
 };
 
-// ⭐ VIDÉOS PAR DÉFAUT
+// ⭐ VIDÉOS PAR DÉFAUT (affichées uniquement si la collection Firestore est vide)
 const DEFAULT_VIDEOS = [
   { id: 'v1', titre: 'Highlights Saison 2024-2025', categorie: 'Highlights', url: 'https://www.youtube.com/watch?v=LXb3EKWsInQ', competition: 'National 1', club: 'Bourges FC', dateMatch: '2025-05-15' },
   { id: 'v2', titre: 'Arrêts décisifs - Derby', categorie: 'Arrêts & réflexes', url: 'https://www.youtube.com/watch?v=LXb3EKWsInQ', competition: 'National 2', club: 'Bordeaux', dateMatch: '2025-03-10' },
@@ -261,21 +277,30 @@ const DEFAULT_VIDEOS = [
 let allVideos = [];
 let currentFilter = 'all';
 
+/* ─── LANG SÉCURISÉ (utilisable depuis les modules sans dépendre du scope global) ─── */
+function safeLang() {
+  try {
+    return (typeof currentLang !== 'undefined' && currentLang) ? currentLang : (localStorage.getItem('lang') || 'fr');
+  } catch (e) { return 'fr'; }
+}
+
 function renderVideos(){
   const grid = document.getElementById('videosGrid');
+  if (!grid) return;
+
   const filtered = currentFilter === 'all' ? allVideos : allVideos.filter(v => v.categorie === currentFilter);
-  
+
   if (!filtered.length) {
-    grid.innerHTML = `<div class="empty-state">${currentLang==='fr'?'Aucune vidéo dans cette catégorie pour le moment.':'No videos in this category yet.'}</div>`;
+    grid.innerHTML = `<div class="empty-state">${safeLang() === 'fr' ? 'Aucune vidéo dans cette catégorie pour le moment.' : 'No videos in this category yet.'}</div>`;
     return;
   }
 
   grid.innerHTML = filtered.map(v => {
     const thumb = v.vignetteUrl || ytThumb(v.url) || 'ph11.jpeg';
     const dateStr = v.dateMatch ? new Date(v.dateMatch).toLocaleDateString('fr-FR') : '';
-    
+
     return `
-      <div class="video-card" data-id="${v.id}" data-url="${esc(v.url)}" data-title="${esc(v.titre)}">
+      <div class="video-card" data-id="${esc(v.id)}" data-url="${esc(v.url)}" data-title="${esc(v.titre)}">
         <div class="video-thumb">
           <img src="${esc(thumb)}" alt="${esc(v.titre)}" loading="lazy" onerror="this.style.display='none'"/>
           <span class="video-play"></span>
@@ -289,8 +314,8 @@ function renderVideos(){
             ${dateStr ? `<span>📅 ${dateStr}</span>` : ''}
           </div>
           <div class="card-stats">
-            <span>👁️ <b class="stat-views" data-id="${v.id}">0</b></span>
-            <div class="btn-card-like" data-id="${v.id}" data-type="video">
+            <span>👁️ <b class="stat-views" data-id="${esc(v.id)}">0</b></span>
+            <div class="btn-card-like" data-id="${esc(v.id)}" data-type="video">
               <span class="ico">🤍</span> <b class="stat-likes">0</b>
             </div>
           </div>
@@ -305,16 +330,18 @@ function renderVideos(){
       const url = card.dataset.url;
       const title = card.dataset.title;
       const videoId = card.dataset.id;
-      
+
       document.getElementById('modalTitle').textContent = title;
       document.getElementById('modalVideoZone').innerHTML = `<iframe src="${getEmbed(url)}" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
-      
+
       const engZone = document.getElementById('video-engagement');
       engZone.innerHTML = '';
       if (videoId) {
-        Engagement.render('video-engagement', 'video', videoId, window.location.href, title);
+        try {
+          Engagement.render('video-engagement', 'video', videoId, window.location.href, title);
+        } catch (err) { console.warn('[videos] Engagement.render error:', err); }
       }
-      
+
       document.getElementById('videoModal').classList.add('open');
     });
   });
@@ -323,62 +350,80 @@ function renderVideos(){
 }
 
 function attachCardEngagement() {
-  const cards = document.querySelectorAll(`.btn-card-like[data-type="video"]`);
-  
+  const cards = document.querySelectorAll('.btn-card-like[data-type="video"]');
+
   cards.forEach(btn => {
     const id = btn.dataset.id;
-    
-    Engagement.listen('video', id, (data) => {
-      const card = btn.closest('.video-card');
-      if (!card) return;
-      
-      const vuesEl = card.querySelector('.stat-views');
-      if (vuesEl) vuesEl.textContent = Engagement.formatNum(data.vues || 0);
-      
-      const likesEl = btn.querySelector('.stat-likes');
-      if (likesEl) likesEl.textContent = Engagement.formatNum(data.likes || 0);
-    });
+    if (!id) return;
+
+    // ⭐ FIX : protège contre l'absence de listen() ou tout crash de Firestore
+    try {
+      if (typeof Engagement.listen === 'function') {
+        Engagement.listen('video', id, (data) => {
+          const card = btn.closest('.video-card');
+          if (!card) return;
+          const vuesEl = card.querySelector('.stat-views');
+          if (vuesEl) vuesEl.textContent = Engagement.formatNum(data.vues || 0);
+          const likesEl = btn.querySelector('.stat-likes');
+          if (likesEl) likesEl.textContent = Engagement.formatNum(data.likes || 0);
+        });
+      }
+    } catch (e) { console.warn('[videos] listen error:', e); }
 
     const isLiked = localStorage.getItem('eng_l_video_' + id) === '1';
     if (isLiked) {
       btn.classList.add('liked');
-      btn.querySelector('.ico').textContent = '❤️';
+      const ico = btn.querySelector('.ico');
+      if (ico) ico.textContent = '❤️';
     }
 
     btn.addEventListener('click', async (e) => {
       e.preventDefault();
       e.stopPropagation();
-      
-      const newState = await Engagement.toggleLike('video', id);
-      btn.classList.toggle('liked', newState);
-      btn.querySelector('.ico').textContent = newState ? '❤️' : '🤍';
+      try {
+        const newState = await Engagement.toggleLike('video', id);
+        btn.classList.toggle('liked', newState);
+        const ico = btn.querySelector('.ico');
+        if (ico) ico.textContent = newState ? '❤️' : '🤍';
+      } catch (err) { console.warn('[videos] toggleLike error:', err); }
     });
   });
 }
 
 async function chargerVideos(){
   try {
-    // ⭐ MODIFICATION : On récupère TOUTES les vidéos sans orderBy (pour éviter les bugs d'index)
     const snap = await getDocs(collection(db, 'videos'));
-    
+    console.log('[videos] Documents Firestore trouvés :', snap.size);
+
     if (snap.empty) {
+      console.log('[videos] Collection vide → affichage des vidéos par défaut');
       allVideos = DEFAULT_VIDEOS;
     } else {
-      // On convertit les données et on trie manuellement par date (du plus récent au plus ancien)
       let videos = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-      
+
       videos.sort((a, b) => {
         const dateA = a.date ? (a.date.toDate ? a.date.toDate().getTime() : new Date(a.date).getTime()) : 0;
         const dateB = b.date ? (b.date.toDate ? b.date.toDate().getTime() : new Date(b.date).getTime()) : 0;
         return dateB - dateA;
       });
-      
-      allVideos = videos.filter(v => v.publie !== false);
+
+      const published = videos.filter(v => v.publie !== false);
+      const drafts    = videos.filter(v => v.publie === false);
+      console.log('[videos] Publiées :', published.length, '| Brouillons :', drafts.length);
+
+      if (published.length === 0) {
+        // Il y a des vidéos en base, mais toutes en brouillon
+        allVideos = [];
+        const grid = document.getElementById('videosGrid');
+        if (grid) grid.innerHTML = `<div class="empty-state">🕒 ${drafts.length} vidéo(s) en brouillon. Publiez-les depuis l'administration pour les afficher ici.</div>`;
+        return;
+      }
+      allVideos = published;
     }
-    
+
     renderVideos();
   } catch(e){
-    console.warn('Erreur chargement vidéos, utilisation des vidéos par défaut:', e);
+    console.error('[videos] Erreur Firestore :', e);
     allVideos = DEFAULT_VIDEOS;
     renderVideos();
   }
