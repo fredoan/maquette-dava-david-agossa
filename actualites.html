@@ -7,8 +7,33 @@
 <meta name="description" content="Toutes les actualités de Dava David Agossa : matchs, sélections, performances et évolutions de carrière."/>
 <meta name="robots" content="index,follow"/>
 <link rel="canonical" href="https://www.davadavidagossa.com/actualites.html"/>
+
+<!-- ⭐ OPEN GRAPH -->
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="Dava David Agossa"/>
+<meta property="og:title" content="Actualités — Dava David Agossa"/>
+<meta property="og:description" content="Matchs, sélections, performances et étapes de carrière de Dava David Agossa."/>
+<meta property="og:image" content="https://www.davadavidagossa.com/ph25.jpeg"/>
+<meta property="og:image:type" content="image/jpeg"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:image:alt" content="Dava David Agossa — Gardien de but professionnel"/>
+<meta property="og:url" content="https://www.davadavidagossa.com/actualites.html"/>
+<meta property="og:locale" content="fr_FR"/>
+<meta property="og:locale:alternate" content="en_GB"/>
+
+<!-- ⭐ TWITTER CARD -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Actualités — Dava David Agossa"/>
+<meta name="twitter:description" content="Toute l'actualité : matchs, sélections, performances et carrière."/>
+<meta name="twitter:image" content="https://www.davadavidagossa.com/ph25.jpeg"/>
+
 <meta name="theme-color" content="#3d0000"/>
-<link rel="icon" type="image/png" href="favicon.png"/>
+
+<!-- ⭐ FAVICON -->
+<link rel="icon" type="image/jpeg" href="ph25.jpeg"/>
+<link rel="apple-touch-icon" sizes="180x180" href="ph25.jpeg"/>
+
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
@@ -80,7 +105,6 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 .news-excerpt{font-size:.85rem;color:var(--texte-3);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .news-link{color:var(--or-clair);font-family:var(--f-m);font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-top:auto;padding-top:.5rem;}
 
-/* NOUVEAU : STATS SUR LA CARTE */
 .card-stats{display:flex;align-items:center;justify-content:space-between;margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(212,175,90,.15);font-family:var(--f-m);font-size:0.75rem;color:var(--texte-3);}
 .card-stats span{display:flex;align-items:center;gap:0.4rem;}
 .card-stats b{color:var(--or-clair);font-weight:700;}
@@ -89,7 +113,6 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 .btn-card-like.liked{color:var(--or-clair);}
 .btn-card-like.liked .ico{animation:pulse .4s ease;}
 
-/* Fallback image manquante */
 .photo-fallback{display:none;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;color:var(--or-clair);font-family:var(--f-m);font-size:.6rem;text-align:center;padding:1rem;}
 .photo-fallback span{font-size:2rem;margin-bottom:.5rem;}
 
@@ -145,7 +168,8 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 <div class="page-hero-inner">
 <span class="eyebrow" data-fr="Le fil" data-en="The feed">Le fil</span>
 <h1 data-fr="Actualités" data-en="News">Actualités</h1>
-<p data-fr="Toute l'actualité de Dava David Agossa : matchs, sélections, performances et étapes de carrière." data-en="All Dava David Agossa news: matches, call-ups, performances and career milestones.">Toute l'actualité de Dava David Agossa : matchs, sélections, performances et étapes de carrière.</p>
+<!-- ⭐ id="pageIntro" : remplaçable depuis textes/site.newsPageIntroFr/En -->
+<p id="pageIntro" data-fr="Toute l'actualité de Dava David Agossa : matchs, sélections, performances et étapes de carrière." data-en="All Dava David Agossa news: matches, call-ups, performances and career milestones.">Toute l'actualité de Dava David Agossa : matchs, sélections, performances et étapes de carrière.</p>
 </div>
 </header>
 
@@ -188,7 +212,10 @@ navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>{ navL
 const io = new IntersectionObserver(entries=>{ entries.forEach(e=>{ if (e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } }); },{ threshold:0.12 });
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
+/* ⭐ currentLang exposé au module */
 let currentLang = localStorage.getItem('lang') || 'fr';
+window.currentLang = currentLang;
+
 const CHAT_OPTS = {
   fr: [{ k:'qui', l:'👤 Qui est Dava ?' }, { k:'club', l:'⚽ Son club ?' }, { k:'sel', l:'🇧🇯 Ses sélections ?' }, { k:'contact', l:'📩 Le contacter' }],
   en: [{ k:'qui', l:'👤 Who is Dava?' }, { k:'club', l:'⚽ His club?' }, { k:'sel', l:'🇧🇯 His caps?' }, { k:'contact', l:'📩 Contact him' }]
@@ -202,76 +229,102 @@ const CHAT_ANS = {
 function renderChat(){ const opts = document.getElementById('chatOptions'); opts.innerHTML = CHAT_OPTS[currentLang].map(o=>`<button class="chat-opt" data-k="${o.k}">${o.l}</button>`).join(''); opts.querySelectorAll('.chat-opt').forEach(b=>b.addEventListener('click', ()=> askChat(b.dataset.k))); }
 function addMsg(text, sender){ const body = document.getElementById('chatBody'); const div = document.createElement('div'); div.className = 'chat-msg ' + sender; div.textContent = text; body.appendChild(div); body.scrollTop = body.scrollHeight; }
 function askChat(key){ addMsg(CHAT_ANS[key][currentLang], 'bot'); }
-function setLang(lang){ currentLang = lang; localStorage.setItem('lang', lang); document.documentElement.lang = lang; document.querySelectorAll('[data-fr]').forEach(el=>{ const t = el.getAttribute('data-' + lang); if (t) el.textContent = t; }); document.querySelectorAll('.lang-toggle button').forEach(b=>b.classList.toggle('active', b.dataset.lang === lang)); renderChat(); }
+
+/* ⭐ setLang sécurisé : try/catch + guards */
+function setLang(lang){
+  currentLang = lang;
+  window.currentLang = lang;
+  localStorage.setItem('lang', lang);
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-fr]').forEach(el=>{ const t = el.getAttribute('data-' + lang); if (t) el.textContent = t; });
+  document.querySelectorAll('.lang-toggle button').forEach(b=>b.classList.toggle('active', b.dataset.lang === lang));
+  try { renderChat(); } catch(e) { console.warn('[setLang] renderChat:', e); }
+  try { if (typeof window.loadNewsPageText === 'function') window.loadNewsPageText(); } catch(e) { console.warn('[setLang] loadNewsPageText:', e); }
+  try { if (typeof window.chargerActus === 'function') window.chargerActus(); } catch(e) { console.warn('[setLang] chargerActus:', e); }
+}
 document.querySelectorAll('.lang-toggle button').forEach(b=>b.addEventListener('click', ()=> setLang(b.dataset.lang)));
 setLang(currentLang);
+
 document.getElementById('chatToggle').addEventListener('click', ()=>{ const p = document.getElementById('chatPanel'); p.classList.toggle('open'); if (p.classList.contains('open') && !document.getElementById('chatBody').children.length){ addMsg(currentLang === 'fr' ? "Bonjour 👋 Je suis l'assistant de Dava David Agossa." : "Hello 👋 I'm Dava David Agossa's assistant.", 'bot'); } });
 document.getElementById('chatClose').addEventListener('click', ()=>{ document.getElementById('chatPanel').classList.remove('open'); });
 </script>
 
 <script type="module">
 import { db } from './firebase-config.js';
-import { collection, query, orderBy, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { collection, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { Engagement } from './engagement.js';
 
 const esc = (s) => String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const fmtDate = (ts) => { if (!ts) return ''; const d = ts.toDate ? ts.toDate() : new Date(ts); return d.toLocaleDateString(currentLang === 'en' ? 'en-GB' : 'fr-FR', { day:'numeric', month:'long', year:'numeric' }); };
 
-// ⭐ ARTICLES PAR DÉFAUT (Si l'Admin est vide)
-const DEFAULT_ARTICLES = [
-  { 
-    id: 'def_1', 
-    titre: 'Première titularisation avec Bourges FC', 
-    categorie: 'Match', 
-    date: '2025-08-15T10:00:00Z', 
-    resume: 'Dava David Agossa a disputé son premier match officiel sous les couleurs du Bourges FC en National 1, réalisant plusieurs arrêts décisifs.', 
-    imageUrl: 'ph11.jpeg' 
-  },
-  { 
-    id: 'def_2', 
-    titre: 'Convocation avec la sélection U23 du Bénin', 
-    categorie: 'Sélection', 
-    date: '2025-09-01T10:00:00Z', 
-    resume: 'Le gardien béninois a été appelé par le sélectionneur pour le rassemblement de préparation de la CAN U23.', 
-    imageUrl: 'ph1.jpeg' 
-  },
-  { 
-    id: 'def_3', 
-    titre: 'Retour sur sa progression au fil des saisons', 
-    categorie: 'Carrière', 
-    date: '2025-09-10T10:00:00Z', 
-    resume: 'Des débuts au Bénin jusqu\'à la France, Dava revient sur son parcours et ses objectifs pour l\'avenir.', 
-    imageUrl: 'ph21.jpeg' 
-  }
-];
+/* ⭐ Langue sécurisée (module ES n'a pas accès à currentLang du script parent) */
+function safeLang() {
+  try {
+    if (typeof window.currentLang === 'string' && window.currentLang) return window.currentLang;
+    return localStorage.getItem('lang') || 'fr';
+  } catch (e) { return 'fr'; }
+}
 
+const fmtDate = (ts) => {
+  if (!ts) return '';
+  const d = ts.toDate ? ts.toDate() : new Date(ts);
+  return d.toLocaleDateString(safeLang() === 'en' ? 'en-GB' : 'fr-FR', { day:'numeric', month:'long', year:'numeric' });
+};
+
+/* ⭐ Charge le texte d'intro depuis textes/site (éditable dans l'admin) */
+async function loadNewsPageText() {
+  try {
+    const d = await getDoc(doc(db, 'textes', 'site'));
+    if (!d.exists()) return;
+    const t = d.data();
+    const p = document.getElementById('pageIntro');
+    if (!p) return;
+    const lang = safeLang();
+    const txt = t['newsPageIntro' + (lang === 'en' ? 'En' : 'Fr')];
+    if (txt) {
+      p.textContent = txt;
+      if (t.newsPageIntroFr) p.setAttribute('data-fr', t.newsPageIntroFr);
+      if (t.newsPageIntroEn) p.setAttribute('data-en', t.newsPageIntroEn);
+    }
+  } catch (e) { console.warn('[news] loadNewsPageText:', e); }
+}
+
+/* ⭐ Chargement articles — SANS orderBy (évite les erreurs d'index Firestore) */
 async function chargerActus(){
   const grid = document.getElementById('newsGrid');
+  if (!grid) return;
+  const lang = safeLang();
+
   try {
-    const q = query(collection(db, 'articles'), orderBy('date', 'desc'));
-    const snap = await getDocs(q);
-    
-    let articles = [];
+    const snap = await getDocs(collection(db, 'articles'));
+    console.log('[news] Documents Firestore trouvés :', snap.size);
+
     if (snap.empty) {
-      articles = DEFAULT_ARTICLES;
-    } else {
-      articles = snap.docs.map(d => ({ id: d.id, ...d.data() })).filter(a => a.publie !== false);
+      console.log('[news] Collection vide → message d\'état vide');
+      grid.innerHTML = `<div class="empty-state">${lang === 'fr' ? 'Aucune actualité pour le moment. Revenez très bientôt !' : 'No news yet. Check back soon!'}</div>`;
+      return;
     }
-    
+
+    // Tri manuel par date desc (tolérant aux Timestamp Firestore et aux dates string/ISO)
+    const toMs = (d) => { if (!d) return 0; return d.toDate ? d.toDate().getTime() : (new Date(d).getTime() || 0); };
+    const articles = snap.docs
+      .map(d => ({ id: d.id, ...d.data() }))
+      .filter(a => a.publie !== false)
+      .sort((a, b) => toMs(b.date) - toMs(a.date));
+
     if (!articles.length) {
-      grid.innerHTML = `<div class="empty-state">${currentLang==='fr'?'Aucune actualité pour le moment.':'No news yet.'}</div>`;
+      grid.innerHTML = `<div class="empty-state">${lang === 'fr' ? 'Aucun article publié pour le moment.' : 'No published articles yet.'}</div>`;
       return;
     }
 
     grid.innerHTML = articles.map(a => {
-      const excerpt = a.resume || (a.contenu || '').slice(0,140) + '…';
-      return `<a href="article.html?id=${a.id}" class="news-card">
+      const excerpt = a.resume || ((a.contenu || '').slice(0, 140) + '…');
+      return `<a href="article.html?id=${esc(a.id)}" class="news-card">
         <div class="news-img">
-          <img src="${esc(a.imageUrl || 'ph21.jpeg')}" alt="${esc(a.titre)}" loading="lazy" 
+          <img src="${esc(a.imageUrl || 'ph25.jpeg')}" alt="${esc(a.titre || 'Article')}" loading="lazy"
                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"/>
           <div class="photo-fallback">
             <span>📰</span>
-            <div>Image à venir</div>
+            <div>${lang === 'fr' ? 'Image à venir' : 'Image coming'}</div>
           </div>
           <span class="news-badge">${esc(a.categorie || 'News')}</span>
         </div>
@@ -279,88 +332,72 @@ async function chargerActus(){
           <div class="news-date">📅 ${fmtDate(a.date)}</div>
           <div class="news-title">${esc(a.titre || 'Sans titre')}</div>
           <div class="news-excerpt">${esc(excerpt)}</div>
-          
-          <!-- NOUVEAU : Vues et Likes sur la carte -->
           <div class="card-stats">
-            <span>👁️ <b class="stat-views" data-id="${a.id}">0</b></span>
-            <div class="btn-card-like" data-id="${a.id}" data-type="article">
+            <span>👁️ <b class="stat-views" data-id="${esc(a.id)}">0</b></span>
+            <div class="btn-card-like" data-id="${esc(a.id)}" data-type="article">
               <span class="ico">🤍</span> <b class="stat-likes">0</b>
             </div>
           </div>
-          
-          <span class="news-link">${currentLang==='fr'?'Lire la suite':'Read more'} →</span>
+          <span class="news-link">${lang === 'fr' ? 'Lire la suite' : 'Read more'} →</span>
         </div>
       </a>`;
     }).join('');
 
     attachCardEngagement();
 
-  } catch(e){
-    console.warn('Erreur chargement actus, utilisation des articles par défaut:', e);
-    const grid = document.getElementById('newsGrid');
-    grid.innerHTML = DEFAULT_ARTICLES.map(a => `
-      <a href="article.html?id=${a.id}" class="news-card">
-        <div class="news-img">
-          <img src="${a.imageUrl}" alt="${a.titre}" onerror="this.style.display='none'"/>
-          <span class="news-badge">${a.categorie}</span>
-        </div>
-        <div class="news-body">
-          <div class="news-date">📅 ${new Date(a.date).toLocaleDateString('fr-FR')}</div>
-          <div class="news-title">${a.titre}</div>
-          <div class="news-excerpt">${a.resume}</div>
-          <div class="card-stats">
-            <span>👁️ <b class="stat-views" data-id="${a.id}">0</b></span>
-            <div class="btn-card-like" data-id="${a.id}" data-type="article">
-              <span class="ico">🤍</span> <b class="stat-likes">0</b>
-            </div>
-          </div>
-          <span class="news-link">Lire la suite →</span>
-        </div>
-      </a>
-    `).join('');
-    attachCardEngagement();
+  } catch(e) {
+    console.error('[news] Erreur Firestore :', e);
+    grid.innerHTML = `<div class="empty-state">${lang === 'fr' ? 'Erreur de chargement. Vérifiez votre connexion et réessayez.' : 'Loading error. Check your connection and retry.'}</div>`;
   }
 }
 
+/* ⭐ Engagement sur cartes — protégé par try/catch */
 function attachCardEngagement() {
   const cards = document.querySelectorAll(`.btn-card-like[data-type="article"]`);
-  
+
   cards.forEach(btn => {
     const id = btn.dataset.id;
-    
-    // Écoute des compteurs en temps réel
-    Engagement.listen('article', id, (data) => {
-      const card = btn.closest('.news-card');
-      if (!card) return;
-      
-      const vuesEl = card.querySelector('.stat-views');
-      if (vuesEl) vuesEl.textContent = Engagement.formatNum(data.vues || 0);
-      
-      const likesEl = btn.querySelector('.stat-likes');
-      if (likesEl) likesEl.textContent = Engagement.formatNum(data.likes || 0);
-    });
+    if (!id) return;
 
-    // Vérifier si l'utilisateur a déjà liké
+    try {
+      if (typeof Engagement.listen === 'function') {
+        Engagement.listen('article', id, (data) => {
+          const card = btn.closest('.news-card');
+          if (!card) return;
+          const vuesEl = card.querySelector('.stat-views');
+          if (vuesEl) vuesEl.textContent = Engagement.formatNum(data.vues || 0);
+          const likesEl = btn.querySelector('.stat-likes');
+          if (likesEl) likesEl.textContent = Engagement.formatNum(data.likes || 0);
+        });
+      }
+    } catch (err) { console.warn('[news] listen error:', err); }
+
     const isLiked = localStorage.getItem('eng_l_article_' + id) === '1';
     if (isLiked) {
       btn.classList.add('liked');
-      btn.querySelector('.ico').textContent = '❤️';
+      const ico = btn.querySelector('.ico');
+      if (ico) ico.textContent = '❤️';
     }
 
-    // Action au clic (sans ouvrir l'article)
     btn.addEventListener('click', async (e) => {
       e.preventDefault();
       e.stopPropagation();
-      
-      const newState = await Engagement.toggleLike('article', id);
-      btn.classList.toggle('liked', newState);
-      btn.querySelector('.ico').textContent = newState ? '❤️' : '🤍';
+      try {
+        const newState = await Engagement.toggleLike('article', id);
+        btn.classList.toggle('liked', newState);
+        const ico = btn.querySelector('.ico');
+        if (ico) ico.textContent = newState ? '❤️' : '🤍';
+      } catch (err) { console.warn('[news] toggleLike error:', err); }
     });
   });
 }
 
-// Lancer le chargement
+/* ⭐ Expose au script principal (setLang) */
+window.chargerActus = chargerActus;
+window.loadNewsPageText = loadNewsPageText;
+
 chargerActus();
+loadNewsPageText();
 </script>
 </body>
 </html>
