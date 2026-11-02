@@ -1,17 +1,13 @@
 // ============================================================
-// ENGAGEMENT.JS — Likes + Vues + Commentaires + Partage
-// Version 2026 — ajout de listen() manquante
+// ENGAGEMENT.JS — v3 — Vues + Likes + Partages + Commentaires
 // ============================================================
-
 import { db } from './firebase-config.js';
 import {
   doc, setDoc, onSnapshot, collection, addDoc, query, orderBy,
   serverTimestamp, increment
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-/* ============================================================
-   INJECTION DU CSS — inchangée
-   ============================================================ */
+/* ---------- CSS (inchangé) ---------- */
 if (!document.getElementById('engagement-style')) {
   const style = document.createElement('style');
   style.id = 'engagement-style';
@@ -55,16 +51,13 @@ if (!document.getElementById('engagement-style')) {
   document.head.appendChild(style);
 }
 
-/* ============================================================
-   HELPERS — inchangés
-   ============================================================ */
+/* ---------- Helpers ---------- */
 function formatNum(n) {
   n = parseInt(n, 10) || 0;
   if (n >= 1000000) return (n / 1000000).toFixed(1).replace('.0', '') + 'M';
   if (n >= 1000) return (n / 1000).toFixed(1).replace('.0', '') + 'k';
   return String(n);
 }
-
 function timeAgo(ts) {
   if (!ts) return '';
   const d = ts.toDate ? ts.toDate() : new Date(ts);
@@ -75,21 +68,34 @@ function timeAgo(ts) {
   if (s < 2592000) return Math.floor(s / 86400) + ' j';
   return d.toLocaleDateString('fr-FR');
 }
-
 function escapeHtml(str) {
   return String(str || '').replace(/[&<>"']/g, c => ({
     '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
   }[c]));
 }
 
-/* ============================================================
-   LOGIQUE — inchangée (sauf ajout listen)
-   ============================================================ */
+/* ---------- Ref Firestore ---------- */
 const engagementRef = (type, id) => doc(db, 'engagements', type + '_' + id);
 
+/* ---------- Erreur visible (toast console + page) ---------- */
+function reportError(label, err) {
+  console.error('[Engagement] ❌', label, err);
+  if (err && err.code === 'permission-denied') {
+    console.error(
+      '%c⚠️ RÈGLES FIRESTORE BLOQUENT LES ÉCRITURES',
+      'background:#7f1d1d;color:#fff;padding:6px 12px;border-radius:4px;font-weight:bold',
+      '\nVérifiez que les règles sont bien PUBLIÉES sur Firebase Console.',
+      '\nMenu → Firestore Database → Règles → Publier'
+    );
+  }
+}
+
+/* ---------- VUES ---------- */
 async function incrementView(type, id) {
   if (!type || !id) return;
   const key = 'eng_v_' + type + '_' + id;
+  // On garde sessionStorage pour éviter de compter en boucle sur rechargement.
+  // Si tu veux compter CHAQUE chargement, change 'sessionStorage' par 'null' ici :
   if (sessionStorage.getItem(key)) return;
   try {
     await setDoc(engagementRef(type, id), {
@@ -98,9 +104,13 @@ async function incrementView(type, id) {
       updatedAt: serverTimestamp()
     }, { merge: true });
     sessionStorage.setItem(key, '1');
-  } catch (e) { console.warn('[Engagement] view:', e); }
+    console.log('[Engagement] ✅ vue incrémentée (' + type + '_' + id + ')');
+  } catch (e) {
+    reportError('incrementView(' + type + ',' + id + ')', e);
+  }
 }
 
+/* ---------- LIKES ---------- */
 async function toggleLike(type, id) {
   const key = 'eng_l_' + type + '_' + id;
   const alreadyLiked = localStorage.getItem(key) === '1';
@@ -112,13 +122,30 @@ async function toggleLike(type, id) {
     }, { merge: true });
     if (alreadyLiked) localStorage.removeItem(key);
     else localStorage.setItem(key, '1');
+    console.log('[Engagement] ✅ like ' + (alreadyLiked ? 'retiré' : 'ajouté') + ' (' + type + '_' + id + ')');
     return !alreadyLiked;
   } catch (e) {
-    console.warn('[Engagement] like:', e);
+    reportError('toggleLike(' + type + ',' + id + ')', e);
     return alreadyLiked;
   }
 }
 
+/* ---------- PARTAGES (nouveau) ---------- */
+async function incrementShare(type, id) {
+  if (!type || !id) return;
+  try {
+    await setDoc(engagementRef(type, id), {
+      type, itemId: id,
+      partages: increment(1),
+      updatedAt: serverTimestamp()
+    }, { merge: true });
+    console.log('[Engagement] ✅ partage incrémenté (' + type + '_' + id + ')');
+  } catch (e) {
+    reportError('incrementShare(' + type + ',' + id + ')', e);
+  }
+}
+
+/* ---------- COMMENTAIRES ---------- */
 async function addComment(type, id, auteur, texte) {
   auteur = (auteur || 'Anonyme').trim().slice(0, 80);
   texte = (texte || '').trim().slice(0, 2000);
@@ -131,38 +158,38 @@ async function addComment(type, id, auteur, texte) {
     await setDoc(engagementRef(type, id), {
       nbCommentaires: increment(1)
     }, { merge: true });
+    console.log('[Engagement] ✅ commentaire ajouté');
   } catch (e) {
-    console.warn('[Engagement] comment:', e);
+    reportError('addComment(' + type + ',' + id + ')', e);
     throw e;
   }
 }
 
-/* ⭐ AJOUT — écoute temps réel d'un doc d'engagement (utilisé par index.html et videos.html) */
+/* ---------- LISTEN ---------- */
 function listen(type, id, callback) {
-  if (!type || !id) {
-    console.warn('[Engagement] listen: type et id requis');
-    return () => {};
-  }
+  if (!type || !id) { console.warn('[Engagement] listen: type et id requis'); return () => {}; }
   return onSnapshot(
     engagementRef(type, id),
     (snap) => {
-      const d = snap.exists() ? snap.data() : { vues: 0, likes: 0, nbCommentaires: 0 };
-      try { callback(d); } catch (e) { console.warn('[Engagement] listen callback:', e); }
+      const d = snap.exists() ? snap.data() : { vues: 0, likes: 0, partages: 0, nbCommentaires: 0 };
+      try { callback(d); } catch (e) { reportError('listen callback', e); }
     },
-    (e) => console.warn('[Engagement] listen:', e)
+    (e) => reportError('listen(' + type + ',' + id + ')', e)
   );
 }
 
+/* ---------- SHARE URLs ---------- */
 function shareUrls(url, title) {
   const u = encodeURIComponent(url);
   const t = encodeURIComponent(title || 'Dava David Agossa');
   return {
     whatsapp: `https://wa.me/?text=${t}%20${u}`,
     facebook: `https://www.facebook.com/sharer/sharer.php?u=${u}`,
-    twitter: `https://twitter.com/intent/tweet?text=${t}&url=${u}`
+    twitter:  `https://twitter.com/intent/tweet?text=${t}&url=${u}`
   };
 }
 
+/* ---------- RENDU ---------- */
 async function render(containerId, type, id, url, title) {
   const container = document.getElementById(containerId);
   if (!container) { console.warn('[Engagement] Conteneur introuvable :', containerId); return; }
@@ -172,16 +199,17 @@ async function render(containerId, type, id, url, title) {
       <div class="eng-stats">
         <span>👁️ <b class="eng-vues">0</b> vues</span>
         <span>❤️ <b class="eng-likes">0</b> likes</span>
+        <span>🔗 <b class="eng-partages">0</b> partages</span>
         <span>💬 <b class="eng-nbcom">0</b> commentaires</span>
       </div>
       <div class="eng-actions">
         <button class="eng-btn-like" type="button"><span class="ico">🤍</span><span class="lbl">J'aime</span></button>
         <div class="eng-share-group">
-          <a class="eng-share-btn eng-share-wa" target="_blank" rel="noopener">📱 WhatsApp</a>
-          <a class="eng-share-btn eng-share-fb" target="_blank" rel="noopener">📘 Facebook</a>
-          <a class="eng-share-btn eng-share-tw" target="_blank" rel="noopener">🐦 X</a>
-          <button class="eng-share-btn eng-share-tk" type="button">🎵 TikTok</button>
-          <button class="eng-share-btn eng-share-cp" type="button">🔗 Copier</button>
+          <a class="eng-share-btn eng-share-wa" target="_blank" rel="noopener" data-share="wa">📱 WhatsApp</a>
+          <a class="eng-share-btn eng-share-fb" target="_blank" rel="noopener" data-share="fb">📘 Facebook</a>
+          <a class="eng-share-btn eng-share-tw" target="_blank" rel="noopener" data-share="tw">🐦 X</a>
+          <button class="eng-share-btn eng-share-tk" type="button" data-share="tk">🎵 TikTok</button>
+          <button class="eng-share-btn eng-share-cp" type="button" data-share="cp">🔗 Copier</button>
         </div>
       </div>
       <div class="eng-comments">
@@ -195,18 +223,20 @@ async function render(containerId, type, id, url, title) {
       </div>
     </div>`;
 
+  // Comptage de vue (1x par session)
   incrementView(type, id);
 
+  // Écoute temps réel
   onSnapshot(engagementRef(type, id), (snap) => {
-    const d = snap.exists() ? snap.data() : { vues: 0, likes: 0, nbCommentaires: 0 };
-    const vuesEl = container.querySelector('.eng-vues');
-    const likesEl = container.querySelector('.eng-likes');
-    const nbEl = container.querySelector('.eng-nbcom');
-    if (vuesEl) vuesEl.textContent = formatNum(d.vues || 0);
-    if (likesEl) likesEl.textContent = formatNum(d.likes || 0);
-    if (nbEl) nbEl.textContent = formatNum(d.nbCommentaires || 0);
-  }, (e) => console.warn('[Engagement] listen:', e));
+    const d = snap.exists() ? snap.data() : { vues: 0, likes: 0, partages: 0, nbCommentaires: 0 };
+    const set = (sel, val) => { const el = container.querySelector(sel); if (el) el.textContent = formatNum(val); };
+    set('.eng-vues', d.vues || 0);
+    set('.eng-likes', d.likes || 0);
+    set('.eng-partages', d.partages || 0);
+    set('.eng-nbcom', d.nbCommentaires || 0);
+  }, (e) => reportError('render snapshot', e));
 
+  // Bouton Like
   const btnLike = container.querySelector('.eng-btn-like');
   const icoEl = btnLike.querySelector('.ico');
   const lblEl = btnLike.querySelector('.lbl');
@@ -225,34 +255,51 @@ async function render(containerId, type, id, url, title) {
     btnLike.disabled = false;
   });
 
+  // Partage URLs
   const urls = shareUrls(url, title);
-  const waBtn = container.querySelector('.eng-share-wa');
-  const fbBtn = container.querySelector('.eng-share-fb');
-  const twBtn = container.querySelector('.eng-share-tw');
+  const waBtn = container.querySelector('[data-share="wa"]');
+  const fbBtn = container.querySelector('[data-share="fb"]');
+  const twBtn = container.querySelector('[data-share="tw"]');
   if (waBtn) waBtn.href = urls.whatsapp;
   if (fbBtn) fbBtn.href = urls.facebook;
   if (twBtn) twBtn.href = urls.twitter;
 
-  const tkBtn = container.querySelector('.eng-share-tk');
+  // ⭐ Comptage partages : clique sur WhatsApp/Facebook/X
+  if (waBtn) waBtn.addEventListener('click', () => incrementShare(type, id));
+  if (fbBtn) fbBtn.addEventListener('click', () => incrementShare(type, id));
+  if (twBtn) twBtn.addEventListener('click', () => incrementShare(type, id));
+
+  // TikTok → copier le lien + incrémenter
+  const tkBtn = container.querySelector('[data-share="tk"]');
   tkBtn.addEventListener('click', async () => {
     try {
       await navigator.clipboard.writeText(url);
+      await incrementShare(type, id);
       const old = tkBtn.textContent;
       tkBtn.textContent = '✅ Lien copié';
       setTimeout(() => { tkBtn.textContent = old; }, 2000);
-    } catch (e) { alert('Lien : ' + url); }
+    } catch (e) {
+      reportError('partage TikTok', e);
+      alert('Lien : ' + url);
+    }
   });
 
-  const cpBtn = container.querySelector('.eng-share-cp');
+  // Copier → incrémenter
+  const cpBtn = container.querySelector('[data-share="cp"]');
   cpBtn.addEventListener('click', async () => {
     try {
       await navigator.clipboard.writeText(url);
+      await incrementShare(type, id);
       const old = cpBtn.textContent;
       cpBtn.textContent = '✅ Copié !';
       setTimeout(() => { cpBtn.textContent = old; }, 2000);
-    } catch (e) { alert('Lien : ' + url); }
+    } catch (e) {
+      reportError('copier', e);
+      alert('Lien : ' + url);
+    }
   });
 
+  // Formulaire commentaire
   const form = container.querySelector('.eng-form');
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -268,13 +315,14 @@ async function render(containerId, type, id, url, title) {
       submitBtn.textContent = '✅ Publié';
       setTimeout(() => { submitBtn.textContent = 'Publier'; }, 1500);
     } catch (err) {
-      submitBtn.textContent = '❌ Erreur';
-      setTimeout(() => { submitBtn.textContent = 'Publier'; }, 2000);
+      submitBtn.textContent = '❌ Erreur (voir console)';
+      setTimeout(() => { submitBtn.textContent = 'Publier'; }, 2500);
     } finally {
       submitBtn.disabled = false;
     }
   });
 
+  // Liste commentaires temps réel
   const listEl = container.querySelector('.eng-list');
   const q = query(
     collection(db, 'engagements', type + '_' + id, 'commentaires'),
@@ -296,20 +344,12 @@ async function render(containerId, type, id, url, title) {
           <div class="eng-comment-body">${escapeHtml(c.texte).replace(/\n/g, '<br>')}</div>
         </div>`;
     }).join('');
-  }, (e) => console.warn('[Engagement] comments listen:', e));
+  }, (e) => reportError('listen comments', e));
 }
 
-/* ============================================================
-   EXPORT — ⭐ listen ajouté
-   ============================================================ */
+/* ---------- EXPORT ---------- */
 export const Engagement = {
-  render,
-  listen,        // ⭐ AJOUT
-  incrementView,
-  toggleLike,
-  addComment,
-  formatNum,
-  timeAgo
+  render, listen, incrementView, toggleLike, incrementShare, addComment, formatNum, timeAgo
 };
 
-console.log('✅ engagement.js chargé (avec listen)');
+console.log('✅ engagement.js v3 chargé (avec partages)');
