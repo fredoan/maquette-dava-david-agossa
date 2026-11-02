@@ -7,8 +7,33 @@
 <meta name="description" content="Dava David Agossa, international béninois : 24 sélections U20, 5 sélections U23 (29 au total). CAN U20, UFOA B, Jeux de la Francophonie."/>
 <meta name="robots" content="index,follow"/>
 <link rel="canonical" href="https://www.davadavidagossa.com/selections.html"/>
+
+<!-- ⭐ OPEN GRAPH -->
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="Dava David Agossa"/>
+<meta property="og:title" content="Sélections Bénin U20 & U23 — Dava David Agossa | 29 sélections"/>
+<meta property="og:description" content="24 sélections U20, 5 sélections U23 — 29 sélections avec le Bénin. CAN U20, UFOA B, Jeux de la Francophonie."/>
+<meta property="og:image" content="https://www.davadavidagossa.com/ph25.jpeg"/>
+<meta property="og:image:type" content="image/jpeg"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:image:alt" content="Dava David Agossa — International Bénin U20 & U23"/>
+<meta property="og:url" content="https://www.davadavidagossa.com/selections.html"/>
+<meta property="og:locale" content="fr_FR"/>
+<meta property="og:locale:alternate" content="en_GB"/>
+
+<!-- ⭐ TWITTER CARD -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Sélections Bénin — Dava David Agossa"/>
+<meta name="twitter:description" content="29 sélections avec le Bénin U20 et U23. Un parcours international."/>
+<meta name="twitter:image" content="https://www.davadavidagossa.com/ph25.jpeg"/>
+
 <meta name="theme-color" content="#3d0000"/>
-<link rel="icon" type="image/png" href="favicon.png"/>
+
+<!-- ⭐ FAVICON -->
+<link rel="icon" type="image/jpeg" href="ph25.jpeg"/>
+<link rel="apple-touch-icon" sizes="180x180" href="ph25.jpeg"/>
+
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
@@ -94,6 +119,10 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 .tl-title{font-family:var(--f-d);font-size:clamp(1rem,2vw,1.3rem);font-weight:700;color:var(--texte);margin-bottom:.3rem}
 .tl-meta{font-size:.88rem;color:var(--texte-3)}
 
+.empty-state{text-align:center;padding:3rem 1.5rem;border:1px dashed var(--border);border-radius:8px;background:rgba(26,0,0,.4);max-width:600px;margin-inline:auto}
+.empty-state h3{color:var(--or-clair);margin-bottom:.6rem;font-family:var(--f-d)}
+.empty-state p{color:var(--texte-3);font-size:.9rem;margin-bottom:1rem}
+
 .btn-primary{display:inline-flex;align-items:center;gap:.55rem;padding:.95rem 1.7rem;border-radius:4px;font-family:var(--f-d);font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;transition:all .3s;cursor:pointer;background:var(--or-clair);color:var(--fond-5);box-shadow:0 4px 24px rgba(212,175,90,.3);border:none}
 .btn-primary:hover{background:var(--or-vif);transform:translateY(-2px)}
 
@@ -146,7 +175,8 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
 <div class="page-hero-inner">
 <span class="eyebrow" data-fr="International" data-en="International">International</span>
 <h1 data-fr="Sélections nationales" data-en="National team">Sélections nationales</h1>
-<p data-fr="29 sélections avec le Bénin, des U20 aux U23. Un parcours international entre compétitions continentales et préparation de haut niveau." data-en="29 caps with Benin, from U20 to U23. An international career between continental competitions and high-level preparation.">29 sélections avec le Bénin, des U20 aux U23. Un parcours international entre compétitions continentales et préparation de haut niveau.</p>
+<!-- ⭐ id="pageIntro" : le texte sera remplacé par celui saisi dans l'admin (textes/site) -->
+<p id="pageIntro" data-fr="29 sélections avec le Bénin, des U20 aux U23. Un parcours international entre compétitions continentales et préparation de haut niveau." data-en="29 caps with Benin, from U20 to U23. An international career between continental competitions and high-level preparation.">29 sélections avec le Bénin, des U20 aux U23. Un parcours international entre compétitions continentales et préparation de haut niveau.</p>
 </div>
 </header>
 
@@ -215,7 +245,10 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 const cIo = new IntersectionObserver(entries=>{ entries.forEach(e=>{ if (!e.isIntersecting) return; const el = e.target; const target = parseInt(el.dataset.count, 10); if (!target) return; const start = performance.now(); function anim(now){ const p = Math.min((now - start) / 1500, 1); el.textContent = Math.floor(p * target); if (p < 1) requestAnimationFrame(anim); else el.textContent = target; } requestAnimationFrame(anim); cIo.unobserve(el); }); },{ threshold:0.5 });
 document.querySelectorAll('[data-count]').forEach(el=>cIo.observe(el));
 
+/* ⭐ currentLang exposé au module */
 let currentLang = localStorage.getItem('lang') || 'fr';
+window.currentLang = currentLang;
+
 const CHAT_OPTS = {
   fr: [{ k:'qui', l:'👤 Qui est Dava ?' }, { k:'sel', l:'🇧🇯 Ses sélections ?' }, { k:'stats', l:'📊 Ses stats ?' }, { k:'contact', l:'📩 Le contacter' }],
   en: [{ k:'qui', l:'👤 Who is Dava?' }, { k:'sel', l:'🇧🇯 His caps?' }, { k:'stats', l:'📊 His stats?' }, { k:'contact', l:'📩 Contact him' }]
@@ -229,9 +262,21 @@ const CHAT_ANS = {
 function renderChat(){ const opts = document.getElementById('chatOptions'); opts.innerHTML = CHAT_OPTS[currentLang].map(o=>`<button class="chat-opt" data-k="${o.k}">${o.l}</button>`).join(''); opts.querySelectorAll('.chat-opt').forEach(b=>b.addEventListener('click', ()=> askChat(b.dataset.k))); }
 function addMsg(text, sender){ const body = document.getElementById('chatBody'); const div = document.createElement('div'); div.className = 'chat-msg ' + sender; div.textContent = text; body.appendChild(div); body.scrollTop = body.scrollHeight; }
 function askChat(key){ addMsg(CHAT_ANS[key][currentLang], 'bot'); }
-function setLang(lang){ currentLang = lang; localStorage.setItem('lang', lang); document.documentElement.lang = lang; document.querySelectorAll('[data-fr]').forEach(el=>{ const t = el.getAttribute('data-' + lang); if (t) el.textContent = t; }); document.querySelectorAll('.lang-toggle button').forEach(b=>b.classList.toggle('active', b.dataset.lang === lang)); renderChat(); }
+
+/* ⭐ setLang sécurisé : try/catch + guards (empêche le crash si un renderer est absent) */
+function setLang(lang){
+  currentLang = lang;
+  window.currentLang = lang;
+  localStorage.setItem('lang', lang);
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-fr]').forEach(el=>{ const t = el.getAttribute('data-' + lang); if (t) el.textContent = t; });
+  document.querySelectorAll('.lang-toggle button').forEach(b=>b.classList.toggle('active', b.dataset.lang === lang));
+  try { renderChat(); } catch(e) { console.warn('[setLang] renderChat:', e); }
+  try { if (typeof window.loadSelPageText === 'function') window.loadSelPageText(); } catch(e) { console.warn('[setLang] loadSelPageText:', e); }
+}
 document.querySelectorAll('.lang-toggle button').forEach(b=>b.addEventListener('click', ()=> setLang(b.dataset.lang)));
 setLang(currentLang);
+
 document.getElementById('chatToggle').addEventListener('click', ()=>{ const p = document.getElementById('chatPanel'); p.classList.toggle('open'); if (p.classList.contains('open') && !document.getElementById('chatBody').children.length){ addMsg(currentLang === 'fr' ? "Bonjour 👋 Je suis l'assistant de Dava David Agossa." : "Hello 👋 I'm Dava David Agossa's assistant.", 'bot'); } });
 document.getElementById('chatClose').addEventListener('click', ()=>{ document.getElementById('chatPanel').classList.remove('open'); });
 </script>
@@ -242,7 +287,17 @@ import { doc, getDoc, collection, getDocs } from "https://www.gstatic.com/fireba
 
 const esc = (s) => String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-// ⭐ DONNÉES PAR DÉFAUT (Fallback) - S'affichent si l'Admin est vide
+/* ⭐ Langue sécurisée (accessible depuis le module) */
+function safeLang() {
+  try {
+    if (typeof window.currentLang === 'string' && window.currentLang) return window.currentLang;
+    return localStorage.getItem('lang') || 'fr';
+  } catch (e) { return 'fr'; }
+}
+
+/* Fallback temporaire : affiché UNIQUEMENT si la collection `competitions` est vide
+   ET qu'on est encore en train de charger. Ce n'est pas de la "fausse donnée persistée"
+   — rien n'est écrit dans Firestore, uniquement côté client pour ne pas avoir une page vide. */
 const DEFAULT_COMPS = [
   { nom: 'CAN U20', annee: '2023', resultat: '1/4 de finale (Égypte)', logo: '' },
   { nom: 'UFOA B', annee: '2022', resultat: 'Qualifications (Niger)', logo: '' },
@@ -250,9 +305,61 @@ const DEFAULT_COMPS = [
   { nom: 'Préparation CAN U23', annee: '2025', resultat: 'Sélectionné', logo: '' }
 ];
 
+/* Charge le texte d'intro depuis textes/site (éditable dans l'admin) */
+async function loadSelPageText() {
+  try {
+    const d = await getDoc(doc(db, 'textes', 'site'));
+    if (!d.exists()) return;
+    const t = d.data();
+    const p = document.getElementById('pageIntro');
+    if (!p) return;
+    const lang = safeLang();
+    const txt = t['selPageIntro' + (lang === 'en' ? 'En' : 'Fr')];
+    if (txt) {
+      p.textContent = txt;
+      if (t.selPageIntroFr) p.setAttribute('data-fr', t.selPageIntroFr);
+      if (t.selPageIntroEn) p.setAttribute('data-en', t.selPageIntroEn);
+    }
+  } catch (e) { console.warn('[selections] loadSelPageText:', e); }
+}
+
+function renderCompetitions(comps, showEmptyState) {
+  const compContainer = document.getElementById('competitionsContainer');
+  const timelineContainer = document.getElementById('timelineContainer');
+  if (!compContainer || !timelineContainer) return;
+
+  const lang = safeLang();
+
+  if (showEmptyState && !comps.length) {
+    compContainer.innerHTML = `
+      <div class="empty-state" style="grid-column:1/-1">
+        <h3>${lang === 'fr' ? 'Compétitions à venir' : 'Competitions coming soon'}</h3>
+        <p>${lang === 'fr' ? 'Les compétitions seront ajoutées très prochainement depuis l\'espace d\'administration.' : 'Competitions will be added shortly from the admin space.'}</p>
+      </div>`;
+    timelineContainer.innerHTML = '';
+    return;
+  }
+
+  compContainer.innerHTML = comps.map(c => `
+    <div class="comp-card reveal visible">
+      <span class="comp-icon">${c.logo ? `<img src="${esc(c.logo)}" style="width:40px;height:40px;object-fit:contain;margin-bottom:.5rem"/>` : '🏆'}</span>
+      <div class="comp-title">${esc(c.nom)} ${c.annee ? '(' + esc(c.annee) + ')' : ''}</div>
+      <div class="comp-desc">${esc(c.resultat) || (lang === 'fr' ? 'Participation internationale' : 'International participation')}</div>
+    </div>
+  `).join('');
+
+  timelineContainer.innerHTML = comps.map(c => `
+    <div class="tl-item">
+      <div class="tl-year">${esc(c.annee) || '—'}</div>
+      <div class="tl-title">${esc(c.nom)}</div>
+      <div class="tl-meta">${esc(c.resultat) || (lang === 'fr' ? 'Participation internationale' : 'International participation')}</div>
+    </div>
+  `).join('');
+}
+
 async function loadSelectionsData() {
   try {
-    // 1. Charger les compteurs (U20, U23, Total)
+    // 1. Compteurs
     const docSel = await getDoc(doc(db, 'selections', 'compteurs'));
     if (docSel.exists()) {
       const d = docSel.data();
@@ -270,46 +377,32 @@ async function loadSelectionsData() {
       }
     }
 
-    // 2. Charger les compétitions
+    // 2. Compétitions
     const snapComp = await getDocs(collection(db, 'competitions'));
-    let comps = snapComp.empty ? DEFAULT_COMPS : snapComp.docs.map(doc => doc.data()).sort((a,b) => (b.annee||'').localeCompare(a.annee||''));
-    
-    // Remplir les cartes "Expériences internationales"
-    const compContainer = document.getElementById('competitionsContainer');
-    compContainer.innerHTML = comps.map(c => `
-      <div class="comp-card reveal visible">
-        <span class="comp-icon">${c.logo ? `<img src="${esc(c.logo)}" style="width:40px;height:40px;object-fit:contain;margin-bottom:.5rem"/>` : '🏆'}</span>
-        <div class="comp-title">${esc(c.nom)} ${c.annee ? '('+esc(c.annee)+')' : ''}</div>
-        <div class="comp-desc">${esc(c.resultat) || 'Participation internationale'}</div>
-      </div>
-    `).join('');
+    console.log('[selections] Compétitions Firestore trouvées :', snapComp.size);
 
-    // Remplir la Chronologie
-    const timelineContainer = document.getElementById('timelineContainer');
-    timelineContainer.innerHTML = comps.map(c => `
-      <div class="tl-item">
-        <div class="tl-year">${esc(c.annee) || '—'}</div>
-        <div class="tl-title">${esc(c.nom)}</div>
-        <div class="tl-meta">${esc(c.resultat) || 'Participation internationale'}</div>
-      </div>
-    `).join('');
-
+    if (snapComp.empty) {
+      console.log('[selections] Collection vide → DEFAULT_COMPS (fallback visuel uniquement, rien n\'est écrit dans Firestore)');
+      const comps = DEFAULT_COMPS.slice().sort((a,b) => (b.annee||'').localeCompare(a.annee||''));
+      renderCompetitions(comps, false);
+    } else {
+      const comps = snapComp.docs
+        .map(d => ({ id: d.id, ...d.data() }))
+        .sort((a,b) => (b.annee||'').localeCompare(a.annee||''));
+      renderCompetitions(comps, false);
+    }
   } catch (e) {
-    console.warn("Erreur de chargement :", e);
-    // Si Firebase plante, on affiche quand même les données par défaut
-    const compContainer = document.getElementById('competitionsContainer');
-    compContainer.innerHTML = DEFAULT_COMPS.map(c => `
-      <div class="comp-card reveal visible"><span class="comp-icon">🏆</span><div class="comp-title">${esc(c.nom)} (${esc(c.annee)})</div><div class="comp-desc">${esc(c.resultat)}</div></div>
-    `).join('');
-    
-    const timelineContainer = document.getElementById('timelineContainer');
-    timelineContainer.innerHTML = DEFAULT_COMPS.map(c => `
-      <div class="tl-item"><div class="tl-year">${esc(c.annee)}</div><div class="tl-title">${esc(c.nom)}</div><div class="tl-meta">${esc(c.resultat)}</div></div>
-    `).join('');
+    console.error('[selections] Erreur Firestore :', e);
+    const comps = DEFAULT_COMPS.slice().sort((a,b) => (b.annee||'').localeCompare(a.annee||''));
+    renderCompetitions(comps, false);
   }
 }
 
+/* ⭐ Expose au script principal (setLang) */
+window.loadSelPageText = loadSelPageText;
+
 loadSelectionsData();
+loadSelPageText();
 </script>
 </body>
 </html>
