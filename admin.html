@@ -6,7 +6,8 @@
 <title>Administration — Dava David Agossa</title>
 <meta name="robots" content="noindex,nofollow"/>
 <meta name="theme-color" content="#3d0000"/>
-<link rel="icon" type="image/png" href="favicon.png"/>
+<link rel="icon" type="image/jpeg" href="ph25.jpeg"/>
+<link rel="apple-touch-icon" sizes="180x180" href="ph25.jpeg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Lato:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
@@ -92,7 +93,7 @@ input,select,textarea{font-family:inherit}
 .form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}
 @media(max-width:680px){.form-row,.form-row-3{grid-template-columns:1fr}}
 
-/* ============ NOUVEAU : URL TOOLBAR ============ */
+/* ============ URL TOOLBAR ============ */
 .url-field{position:relative}
 .url-toolbar{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem;align-items:center}
 .url-toolbar-label{font-family:var(--f-m);font-size:.6rem;color:var(--texte-3);letter-spacing:.08em;text-transform:uppercase;margin-right:.3rem}
@@ -159,10 +160,10 @@ input,select,textarea{font-family:inherit}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* ============ PHOTO GRID ============ */
-.photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:6px;margin-top:1rem}
+.photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:6px;margin-top:1rem}
 .photo-item{aspect-ratio:1;border:1px solid var(--border);border-radius:4px;overflow:hidden;background:var(--fond-3);display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--f-m);font-size:.55rem;color:var(--texte-3);text-align:center;padding:4px;position:relative}
-.photo-item .num{position:absolute;top:2px;left:4px;font-weight:700;color:var(--or-clair);background:rgba(0,0,0,.6);padding:1px 4px;border-radius:2px;font-size:.5rem}
-.photo-item .cat{position:absolute;bottom:2px;right:4px;font-size:.45rem;color:var(--or-clair);background:rgba(0,0,0,.6);padding:1px 4px;border-radius:2px}
+.photo-item img{width:100%;height:100%;object-fit:cover}
+.photo-item .cat{position:absolute;bottom:2px;right:4px;font-size:.45rem;color:var(--or-clair);background:rgba(0,0,0,.7);padding:1px 4px;border-radius:2px;max-width:calc(100% - 8px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
 /* ============ TOAST ============ */
 #toastContainer{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:.6rem;max-width:calc(100vw - 48px);pointer-events:none}
@@ -176,6 +177,13 @@ input,select,textarea{font-family:inherit}
 .divider{height:1px;background:var(--border);margin:1.5rem 0}
 .alert{background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.3);border-radius:6px;padding:1rem 1.2rem;font-size:.85rem;color:#93c5fd;margin-bottom:1.2rem;display:flex;gap:.8rem;align-items:flex-start}
 .alert.warn{background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.3);color:#fcd34d}
+
+/* ============ SECTION TITLE (Textes) ============ */
+.text-section{margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px dashed var(--border)}
+.text-section:last-of-type{border-bottom:none}
+.text-section-title{font-family:var(--f-d);font-size:.82rem;font-weight:700;color:var(--or-vif);text-transform:uppercase;letter-spacing:.16em;margin-bottom:1rem;display:flex;align-items:center;gap:.6rem}
+.text-section-title::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--or-clair)}
+.text-lang-label{font-family:var(--f-m);font-size:.58rem;color:var(--texte-3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.3rem;display:block}
 </style>
 </head>
 <body>
@@ -224,7 +232,7 @@ input,select,textarea{font-family:inherit}
         <button class="admin-tab" data-tab="stats">📊 Statistiques</button>
         <button class="admin-tab" data-tab="carriere">🏟️ Carrière (Clubs)</button>
         <button class="admin-tab" data-tab="selections">🏆 Sélections</button>
-        <button class="admin-tab" data-tab="textes">🌍 Textes FR/EN</button>
+        <button class="admin-tab" data-tab="textes">🌍 Textes du site</button>
         <button class="admin-tab" data-tab="moderation">💬 Modération</button>
         <button class="admin-tab" data-tab="config">⚙️ Config</button>
       </nav>
@@ -234,7 +242,7 @@ input,select,textarea{font-family:inherit}
 
       <!-- DASHBOARD -->
       <div class="tab-pane active" id="tab-dashboard">
-        <div class="alert">💡 <span><strong>Bienvenue !</strong> Les 30 photos sont initialisées automatiquement à la première connexion.</span></div>
+        <div class="alert">💡 <span><strong>Bienvenue !</strong> Gérez ici tout le contenu du site. Chaque section est autonome et fonctionne en temps réel. Les photos de la galerie s'ajoutent manuellement depuis l'onglet « Photos ».</span></div>
         <div class="card">
           <div class="card-header"><h2>📊 Vue d'ensemble</h2><button class="btn-ghost" onclick="refreshDashboard()">🔄 Rafraîchir</button></div>
           <div class="card-body">
@@ -288,7 +296,6 @@ input,select,textarea{font-family:inherit}
                   </select>
                 </div>
               </div>
-
               <div class="form-group url-field">
                 <label>Image principale</label>
                 <input type="url" id="artImage" placeholder="https://..."/>
@@ -301,9 +308,7 @@ input,select,textarea{font-family:inherit}
                   <button type="button" class="url-tool preview" onclick="previewUrl('artImage','artImagePreview')">👁️ Aperçu</button>
                 </div>
                 <div class="url-preview" id="artImagePreview"></div>
-                <small>Collez le lien direct de l'image (finissant par .jpg, .jpeg, .png ou .webp).</small>
               </div>
-
               <div class="form-group">
                 <label>Résumé (extrait)</label>
                 <textarea id="artResume" rows="2" placeholder="Résumé affiché dans les listes"></textarea>
@@ -312,7 +317,6 @@ input,select,textarea{font-family:inherit}
                 <label>Contenu *</label>
                 <textarea id="artContenu" rows="8" required placeholder="Rédigez votre article ici..."></textarea>
               </div>
-
               <div class="divider"></div>
               <p style="font-family:var(--f-d);font-size:.75rem;color:var(--or-clair);margin-bottom:1rem;text-transform:uppercase;letter-spacing:.14em">SEO</p>
               <div class="form-row">
@@ -320,7 +324,6 @@ input,select,textarea{font-family:inherit}
                 <div class="form-group"><label>Mots-clés</label><input type="text" id="artKeywords" placeholder="dava, agossa, bourges..."/></div>
               </div>
               <div class="form-group"><label>Description SEO</label><textarea id="artSeoDesc" rows="2" placeholder="Description meta (160 caractères)"></textarea></div>
-
               <div class="actions">
                 <button type="submit" class="btn-save" id="artBtnSave">💾 Enregistrer</button>
                 <button type="button" class="btn-reset" onclick="resetForm('article')">🗑️ Effacer</button>
@@ -365,27 +368,18 @@ input,select,textarea{font-family:inherit}
                   </select>
                 </div>
               </div>
-
-              <!-- NOUVEAUX CHAMPS VIDÉOS AJOUTÉS ICI -->
               <div class="form-row-3">
                 <div class="form-group"><label>Compétition</label><input type="text" id="vidCompet" placeholder="National 1"/></div>
                 <div class="form-group"><label>Club</label><input type="text" id="vidClub" placeholder="Bourges FC"/></div>
                 <div class="form-group"><label>Date du match</label><input type="date" id="vidDate"/></div>
               </div>
-
               <div class="form-group url-field">
                 <label>Lien vidéo (YouTube, Drive, .mp4) *</label>
                 <input type="url" id="vidUrl" required placeholder="https://www.youtube.com/watch?v=..." oninput="onVideoUrlChange()"/>
                 <div class="url-toolbar">
                   <span class="url-toolbar-label">🎬 Ouvrir la plateforme :</span>
-                  <a class="url-tool youtube" href="https://studio.youtube.com" target="_blank" rel="noopener">
-                    <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31.4 31.4 0 0 0 0 12a31.4 31.4 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.4 31.4 0 0 0 24 12a31.4 31.4 0 0 0-.5-5.8zM9.5 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
-                    YouTube
-                  </a>
-                  <a class="url-tool drive" href="https://drive.google.com" target="_blank" rel="noopener">
-                    <svg viewBox="0 0 24 24"><path d="M8.6 3.4L0 17.3l3.4 5.9L12 9.3zM15.4 3.4h-6.8l8.5 14.7h6.9zM22.6 17.3h-6.9L12.3 23.2h6.8z"/></svg>
-                    Google Drive
-                  </a>
+                  <a class="url-tool youtube" href="https://studio.youtube.com" target="_blank" rel="noopener">YouTube</a>
+                  <a class="url-tool drive" href="https://drive.google.com" target="_blank" rel="noopener">Google Drive</a>
                   <a class="url-tool vimeo" href="https://vimeo.com" target="_blank" rel="noopener">🎬 Vimeo</a>
                   <a class="url-tool dailymotion" href="https://www.dailymotion.com" target="_blank" rel="noopener">🎥 Dailymotion</a>
                   <button type="button" class="url-tool preview" onclick="onVideoUrlChange(true)">👁️ Aperçu</button>
@@ -393,12 +387,10 @@ input,select,textarea{font-family:inherit}
                 <div class="url-preview" id="vidPreview"></div>
                 <small id="vidPlatformHint">Plateforme détectée : —</small>
               </div>
-
               <div class="form-group">
                 <label>Description</label>
                 <textarea id="vidDesc" rows="2" placeholder="Description de la vidéo"></textarea>
               </div>
-
               <div class="form-group url-field">
                 <label>Vignette personnalisée (optionnel)</label>
                 <input type="url" id="vidVignette" placeholder="Laisser vide = vignette YouTube auto"/>
@@ -409,7 +401,6 @@ input,select,textarea{font-family:inherit}
                   <a class="url-tool cloudinary" href="https://console.cloudinary.com" target="_blank" rel="noopener">☁️ Cloudinary</a>
                 </div>
               </div>
-
               <div class="actions">
                 <button type="submit" class="btn-save" id="vidBtnSave">💾 Enregistrer</button>
                 <button type="button" class="btn-reset" onclick="resetForm('video')">🗑️ Effacer</button>
@@ -425,15 +416,15 @@ input,select,textarea{font-family:inherit}
 
       <!-- PHOTOS -->
       <div class="tab-pane" id="tab-photos">
-        <div class="alert">📸 <span><strong>30 photos</strong> : ph1.jpeg à ph30.jpeg, 3 catégories de 10. Initialisées automatiquement.</span></div>
+        <div class="alert">📸 <span><strong>Galerie</strong> : ajoutez vos photos manuellement ci-dessous. Chaque photo est rangée dans sa catégorie (club, sélections, matchs, entraînement, portraits).</span></div>
         <div class="card">
-          <div class="card-header"><h2>🖼️ Galerie</h2><button class="btn-ghost" onclick="initPhotos(true)">🚀 (Re)générer les 30</button></div>
+          <div class="card-header"><h2>🖼️ Photos existantes</h2><button class="btn-ghost" onclick="loadPhotos()">🔄 Actualiser</button></div>
           <div class="card-body">
             <div class="photo-grid" id="photoGrid"><div class="empty">Chargement...</div></div>
           </div>
         </div>
         <div class="card">
-          <div class="card-header"><h2>➕ Ajouter une photo externe</h2></div>
+          <div class="card-header"><h2>➕ Ajouter une photo</h2></div>
           <div class="card-body">
             <form id="photoForm">
               <div class="form-row">
@@ -441,7 +432,6 @@ input,select,textarea{font-family:inherit}
                 <div class="form-group">
                   <label>Catégorie *</label>
                   <select id="phCat">
-                    <!-- CATÉGORIES EXACTES DU CLIENT AJOUTÉES ICI -->
                     <option value="Photos en club">Photos en club</option>
                     <option value="Photos avec les sélections nationales">Photos avec les sélections nationales</option>
                     <option value="Photos de matchs">Photos de matchs</option>
@@ -488,7 +478,6 @@ input,select,textarea{font-family:inherit}
                 </div>
               </div>
               <div class="form-group"><label>Description</label><textarea id="evDesc" rows="3"></textarea></div>
-
               <div class="form-group url-field">
                 <label>Image</label>
                 <input type="url" id="evImage" placeholder="https://..."/>
@@ -501,7 +490,6 @@ input,select,textarea{font-family:inherit}
                 </div>
                 <div class="url-preview" id="evPreview"></div>
               </div>
-
               <div class="actions">
                 <button type="submit" class="btn-save" id="evBtnSave">💾 Enregistrer</button>
                 <button type="button" class="btn-reset" onclick="resetForm('event')">🗑️ Effacer</button>
@@ -593,7 +581,7 @@ input,select,textarea{font-family:inherit}
 
       <!-- PROFIL -->
       <div class="tab-pane" id="tab-profil">
-        <div class="alert warn">⚠️ <span>Le profil est stocké dans <code>profil/principal</code>. Remplissez tous les champs visibles sur l'accueil.</span></div>
+        <div class="alert warn">⚠️ <span>Le profil est stocké dans <code>profil/principal</code>. Remplissez tous les champs visibles sur l'accueil. Photo hero par défaut : <code>ph25.jpeg</code>.</span></div>
         <div class="card">
           <div class="card-header"><h2>👤 Profil du joueur</h2></div>
           <div class="card-body">
@@ -624,14 +612,10 @@ input,select,textarea{font-family:inherit}
                 <div class="form-group"><label>Lien Transfermarkt</label><input type="url" id="pTransfermarkt" placeholder="https://..."/></div>
                 <div class="form-group"><label>Lien Facebook</label><input type="url" id="pFacebook" placeholder="https://..."/></div>
               </div>
-              
-              <!-- NOUVEAUX CHAMPS PHOTOS AJOUTÉS ICI -->
               <div class="form-row">
-                <div class="form-group"><label>Photo principale (Hero)</label><input type="text" id="pPhotoHero" placeholder="ph21.jpeg ou https://..."/></div>
+                <div class="form-group"><label>Photo principale (Hero)</label><input type="text" id="pPhotoHero" placeholder="ph25.jpeg ou https://..."/></div>
                 <div class="form-group"><label>Image de fond (Background)</label><input type="text" id="pPhotoBg" placeholder="ph11.jpeg ou https://..."/></div>
               </div>
-              <!-- FIN NOUVEAUX CHAMPS PHOTOS -->
-
               <div class="form-group"><label>Bio courte (accueil)</label><textarea id="pBio" rows="3"></textarea></div>
               <div class="divider"></div>
               <p style="font-family:var(--f-d);font-size:.75rem;color:var(--or-clair);margin-bottom:1rem;text-transform:uppercase;letter-spacing:.14em">Contact</p>
@@ -676,11 +660,9 @@ input,select,textarea{font-family:inherit}
                 <div class="form-group"><label>Coupe de France</label><input type="number" id="stCoupe"/></div>
                 <div class="form-group"><label>Équipe réserve</label><input type="number" id="stReserve"/></div>
               </div>
-              
               <div class="form-row-3">
                 <div class="form-group"><label>Matchs de Championnat</label><input type="number" id="stChamp"/></div>
               </div>
-
               <div class="actions">
                 <button type="submit" class="btn-save" id="stBtnSave">💾 Enregistrer</button>
                 <button type="button" class="btn-reset" onclick="resetForm('stats')">🗑️ Effacer</button>
@@ -784,35 +766,195 @@ input,select,textarea{font-family:inherit}
         </div>
       </div>
 
-      <!-- TEXTES FR/EN -->
+      <!-- TEXTES DU SITE -->
       <div class="tab-pane" id="tab-textes">
-        <div class="alert">🌍 <span>Modifiez ici les textes de la page d'accueil et de la biographie pour le Français et l'Anglais.</span></div>
+        <div class="alert">🌍 <span>Modifiez ici <strong>tous les textes du site</strong> en Français et en Anglais. Chaque bloc correspond à une section visible sur le site.</span></div>
         <div class="card">
-          <div class="card-header"><h2>🌍 Textes du site</h2></div>
+          <div class="card-header"><h2>🌍 Textes — Accueil</h2></div>
+          <div class="card-body">
+            <div class="text-section">
+              <div class="text-section-title">Hero</div>
+              <div class="form-group">
+                <label>Titre Héro (rôle)</label>
+                <div class="form-row">
+                  <div><span class="text-lang-label">🇫🇷 Français</span><input type="text" id="txtHeroFr" placeholder="Gardien de but professionnel"/></div>
+                  <div><span class="text-lang-label">🇬🇧 English</span><input type="text" id="txtHeroEn" placeholder="Professional goalkeeper"/></div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Paragraphe de présentation</label>
+                <div class="form-row">
+                  <div><span class="text-lang-label">🇫🇷 Français</span><textarea id="txtBioFr" rows="3"></textarea></div>
+                  <div><span class="text-lang-label">🇬🇧 English</span><textarea id="txtBioEn" rows="3"></textarea></div>
+                </div>
+              </div>
+            </div>
+            <div class="text-section">
+              <div class="text-section-title">Section Carrière (Accueil)</div>
+              <div class="form-group">
+                <label>Introduction « Parcours professionnel »</label>
+                <div class="form-row">
+                  <div><span class="text-lang-label">🇫🇷 Français</span><textarea id="txtIntroCarriereFr" rows="2"></textarea></div>
+                  <div><span class="text-lang-label">🇬🇧 English</span><textarea id="txtIntroCarriereEn" rows="2"></textarea></div>
+                </div>
+              </div>
+            </div>
+            <div class="text-section">
+              <div class="text-section-title">Section Vidéos (Accueil)</div>
+              <div class="form-group">
+                <label>Introduction « Dernières vidéos »</label>
+                <div class="form-row">
+                  <div><span class="text-lang-label">🇫🇷 Français</span><textarea id="txtIntroVideosFr" rows="2"></textarea></div>
+                  <div><span class="text-lang-label">🇬🇧 English</span><textarea id="txtIntroVideosEn" rows="2"></textarea></div>
+                </div>
+              </div>
+            </div>
+            <div class="text-section">
+              <div class="text-section-title">Section Galerie (Accueil)</div>
+              <div class="form-group">
+                <label>Introduction « En images »</label>
+                <div class="form-row">
+                  <div><span class="text-lang-label">🇫🇷 Français</span><textarea id="txtIntroGalerieFr" rows="2"></textarea></div>
+                  <div><span class="text-lang-label">🇬🇧 English</span><textarea id="txtIntroGalerieEn" rows="2"></textarea></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><h2>📖 Textes — Biographie</h2></div>
           <div class="card-body">
             <div class="form-group">
-              <label>Titre Héro (Accueil)</label>
+              <label>Citation personnelle</label>
               <div class="form-row">
-                <input type="text" id="txtHeroFr" placeholder="FR: Gardien de but professionnel"/>
-                <input type="text" id="txtHeroEn" placeholder="EN: Professional goalkeeper"/>
+                <div><span class="text-lang-label">🇫🇷 Français</span><textarea id="txtQuoteFr" rows="2"></textarea></div>
+                <div><span class="text-lang-label">🇬🇧 English</span><textarea id="txtQuoteEn" rows="2"></textarea></div>
               </div>
             </div>
             <div class="form-group">
-              <label>Paragraphe de présentation (Accueil)</label>
+              <label>Introduction / chapeau de la page</label>
               <div class="form-row">
-                <textarea id="txtBioFr" rows="2" placeholder="FR: Gardien de but béninois..."></textarea>
-                <textarea id="txtBioEn" rows="2" placeholder="EN: Beninese goalkeeper..."></textarea>
+                <div><span class="text-lang-label">🇫🇷 Français</span><textarea id="txtBioPageIntroFr" rows="3"></textarea></div>
+                <div><span class="text-lang-label">🇬🇧 English</span><textarea id="txtBioPageIntroEn" rows="3"></textarea></div>
               </div>
             </div>
-            <div class="form-group">
-              <label>Citation (Biographie)</label>
-              <div class="form-row">
-                <textarea id="txtQuoteFr" rows="2" placeholder="FR: Je crois que le poste..."></textarea>
-                <textarea id="txtQuoteEn" rows="2" placeholder="EN: I believe the goalkeeper..."></textarea>
-              </div>
-            </div>
-            <div class="actions"><button type="button" class="btn-save" onclick="saveTextes()">💾 Enregistrer les textes</button></div>
           </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><h2>🏆 Textes — Sélections</h2></div>
+          <div class="card-body">
+            <div class="form-group">
+              <label>Introduction / chapeau de la page</label>
+              <div class="form-row">
+                <div><span class="text-lang-label">🇫🇷 Français</span><textarea id="txtSelPageIntroFr" rows="3"></textarea></div>
+                <div><span class="text-lang-label">🇬🇧 English</span><textarea id="txtSelPageIntroEn" rows="3"></textarea></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><h2>📊 Textes — Statistiques</h2></div>
+          <div class="card-body">
+            <div class="form-group">
+              <label>Introduction / chapeau de la page</label>
+              <div class="form-row">
+                <div><span class="text-lang-label">🇫🇷 Français</span><textarea id="txtStatsPageIntroFr" rows="3"></textarea></div>
+                <div><span class="text-lang-label">🇬🇧 English</span><textarea id="txtStatsPageIntroEn" rows="3"></textarea></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><h2>🎬 Textes — Vidéos</h2></div>
+          <div class="card-body">
+            <div class="form-group">
+              <label>Introduction / chapeau de la page</label>
+              <div class="form-row">
+                <div><span class="text-lang-label">🇫🇷 Français</span><textarea id="txtVideosPageIntroFr" rows="3"></textarea></div>
+                <div><span class="text-lang-label">🇬🇧 English</span><textarea id="txtVideosPageIntroEn" rows="3"></textarea></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><h2>🖼️ Textes — Galerie</h2></div>
+          <div class="card-body">
+            <div class="form-group">
+              <label>Introduction / chapeau de la page</label>
+              <div class="form-row">
+                <div><span class="text-lang-label">🇫🇷 Français</span><textarea id="txtGaleriePageIntroFr" rows="3"></textarea></div>
+                <div><span class="text-lang-label">🇬🇧 English</span><textarea id="txtGaleriePageIntroEn" rows="3"></textarea></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><h2>📰 Textes — Actualités</h2></div>
+          <div class="card-body">
+            <div class="form-group">
+              <label>Introduction / chapeau de la page</label>
+              <div class="form-row">
+                <div><span class="text-lang-label">🇫🇷 Français</span><textarea id="txtNewsPageIntroFr" rows="3"></textarea></div>
+                <div><span class="text-lang-label">🇬🇧 English</span><textarea id="txtNewsPageIntroEn" rows="3"></textarea></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><h2>🎓 Textes — Hors terrain</h2></div>
+          <div class="card-body">
+            <div class="form-group">
+              <label>Introduction / chapeau de la page</label>
+              <div class="form-row">
+                <div><span class="text-lang-label">🇫🇷 Français</span><textarea id="txtHorsPageIntroFr" rows="3"></textarea></div>
+                <div><span class="text-lang-label">🇬🇧 English</span><textarea id="txtHorsPageIntroEn" rows="3"></textarea></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><h2>📩 Textes — Contact</h2></div>
+          <div class="card-body">
+            <div class="form-group">
+              <label>Introduction / chapeau de la page</label>
+              <div class="form-row">
+                <div><span class="text-lang-label">🇫🇷 Français</span><textarea id="txtContactPageIntroFr" rows="3"></textarea></div>
+                <div><span class="text-lang-label">🇬🇧 English</span><textarea id="txtContactPageIntroEn" rows="3"></textarea></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><h2>🤖 Textes — Chatbot & Footer</h2></div>
+          <div class="card-body">
+            <div class="form-group">
+              <label>Message d'accueil du chatbot</label>
+              <div class="form-row">
+                <div><span class="text-lang-label">🇫🇷 Français</span><input type="text" id="txtChatWelcomeFr" placeholder="Bonjour 👋 Je suis l'assistant de Dava David Agossa."/></div>
+                <div><span class="text-lang-label">🇬🇧 English</span><input type="text" id="txtChatWelcomeEn" placeholder="Hello 👋 I'm Dava David Agossa's assistant."/></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Texte du footer (crédits / mentions)</label>
+              <div class="form-row">
+                <div><span class="text-lang-label">🇫🇷 Français</span><input type="text" id="txtFooterFr" placeholder="Conception & développement : Novasavoir"/></div>
+                <div><span class="text-lang-label">🇬🇧 English</span><input type="text" id="txtFooterEn" placeholder="Design & development: Novasavoir"/></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="button" class="btn-save" onclick="saveTextes()">💾 Enregistrer tous les textes</button>
         </div>
       </div>
 
@@ -854,7 +996,7 @@ input,select,textarea{font-family:inherit}
 import { auth, db } from './firebase-config.js';
 import { signInWithEmailAndPassword, signOut, onAuthStateChanged }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-import { collection, addDoc, updateDoc, deleteDoc, doc, getDoc, getDocs, setDoc, query, orderBy, Timestamp }
+import { collection, addDoc, updateDoc, deleteDoc, doc, getDoc, getDocs, setDoc, Timestamp }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 /* ============================================================
@@ -888,7 +1030,7 @@ function fmtDate(ts) {
 }
 
 /* ============================================================
-   ⭐ APERÇU URL (images)
+   APERÇU URL
    ============================================================ */
 window.previewUrl = function(inputId, previewId) {
   const input = document.getElementById(inputId);
@@ -912,7 +1054,7 @@ window.previewUrl = function(inputId, previewId) {
 };
 
 /* ============================================================
-   ⭐ DÉTECTION VIDÉO + VIGNETTE AUTO
+   DÉTECTION VIDÉO
    ============================================================ */
 function ytThumb(url) {
   if (!url) return '';
@@ -1003,7 +1145,6 @@ onAuthStateChanged(auth, async (user) => {
   if (user) {
     document.getElementById('loginScreen').style.display = 'none';
     document.getElementById('adminScreen').style.display = 'block';
-    await maybeInitPhotos();
     await refreshDashboard();
     await loadAll();
   } else {
@@ -1195,7 +1336,7 @@ async function loadVideos() {
   try {
     const snap = await getDocs(collection(db, 'videos'));
     const docs = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-    if (!docs.length) { box.innerHTML = '<div class="empty">Aucune vidéo pour le moment. (Ajoutez-en quand vous aurez les vidéos du joueur.)</div>'; return; }
+    if (!docs.length) { box.innerHTML = '<div class="empty">Aucune vidéo pour le moment.</div>'; return; }
     box.innerHTML = docs.map(v => {
       const thumb = v.vignetteUrl || ytThumb(v.url) || '';
       return `
@@ -1232,7 +1373,6 @@ document.getElementById('videoForm').addEventListener('submit', async (e) => {
     vignetteUrl: customVignette || ytThumb(url),
     description: document.getElementById('vidDesc').value.trim(),
     publie: document.getElementById('vidPublie').value === 'true',
-    /* NOUVELLES DONNÉES VIDÉO AJOUTÉES ICI */
     competition: document.getElementById('vidCompet').value.trim(),
     club: document.getElementById('vidClub').value.trim(),
     dateMatch: document.getElementById('vidDate').value,
@@ -1266,7 +1406,6 @@ window.editVideo = async (id) => {
   document.getElementById('vidDesc').value = v.description || '';
   document.getElementById('vidVignette').value = v.vignetteUrl || '';
   document.getElementById('vidPublie').value = v.publie === false ? 'false' : 'true';
-  /* CHARGEMENT DES NOUVELLES DONNÉES VIDÉO AJOUTÉ ICI */
   document.getElementById('vidCompet').value = v.competition || '';
   document.getElementById('vidClub').value = v.club || '';
   document.getElementById('vidDate').value = v.dateMatch || '';
@@ -1282,66 +1421,30 @@ window.deleteVideo = async (id) => {
 };
 
 /* ============================================================
-   PHOTOS — AUTO-INIT 30
+   PHOTOS — ⭐ PLUS AUCUNE GÉNÉRATION AUTOMATIQUE
    ============================================================ */
-async function maybeInitPhotos() {
-  try {
-    const snap = await getDocs(collection(db, 'galerie'));
-    if (snap.empty) {
-      await initPhotos(false);
-      toast('✨ 30 photos initialisées automatiquement');
-    } else {
-      await loadPhotos();
-    }
-  } catch (e) { console.warn(e); }
-}
-
-window.initPhotos = async (manual = false) => {
-  if (manual && !confirm('Générer/regénérer les 30 photos (ph1.jpeg à ph30.jpeg) ?')) return;
-  const cats = ['Photos en club', 'Photos avec les sélections nationales', 'Photos de matchs', 'Photos d\'entraînement', 'Portraits professionnels'];
-  const promises = [];
-  for (let i = 1; i <= 30; i++) {
-    const cat = cats[Math.floor((i - 1) / 6)];
-    const ref = doc(db, 'galerie', 'photo_' + i);
-    promises.push(setDoc(ref, {
-      numero: i,
-      fichier: 'ph' + i + '.jpeg',
-      categorie: cat,
-      titre: cat + ' — Photo ' + i,
-      alt: 'Dava David Agossa — ' + cat + ' ' + i,
-      isInitial: true,
-      date: Timestamp.now()
-    }, { merge: true }));
-  }
-  try {
-    await Promise.all(promises);
-    if (manual) toast('✅ 30 photos générées');
-    await loadPhotos();
-  } catch (e) { toast('❌ ' + e.message, 'error'); }
-};
-
 async function loadPhotos() {
   const grid = document.getElementById('photoGrid');
   grid.innerHTML = '<div class="empty">Chargement...</div>';
   try {
     const snap = await getDocs(collection(db, 'galerie'));
-    if (snap.empty) { grid.innerHTML = '<div class="empty">Aucune photo. Cliquez sur « Générer les 30 ».</div>'; return; }
-    const docs = snap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => (a.numero || 999) - (b.numero || 999));
+    if (snap.empty) {
+      grid.innerHTML = '<div class="empty">Aucune photo pour le moment. Utilisez le formulaire ci-dessous pour ajouter votre première photo.</div>';
+      return;
+    }
+    const docs = snap.docs.map(d => ({ id: d.id, ...d.data() }))
+      .sort((a, b) => (a.numero || 999) - (b.numero || 999));
     grid.innerHTML = docs.map(p => {
-      if (p.isInitial) {
-        return `<div class="photo-item" title="${esc(p.fichier)}">
-          <span class="num">${p.numero}</span>
-          <span style="padding:.3rem;text-align:center">${esc(p.fichier)}</span>
-          <span class="cat">${esc(p.categorie)}</span>
-        </div>`;
-      }
-      return `<div class="photo-item" title="${esc(p.titre || '')}">
-        ${p.url ? `<img src="${esc(p.url)}" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none'"/>` : ''}
+      const src = p.url || p.fichier || '';
+      return `<div class="photo-item" title="${esc(p.titre || p.categorie || '')}">
+        ${src ? `<img src="${esc(src)}" onerror="this.style.display='none'"/>` : '🖼️'}
         <span class="cat">${esc(p.categorie || '')}</span>
-        <button class="mini-btn del" style="position:absolute;top:2px;right:2px;padding:2px 4px;font-size:.5rem" onclick="deletePhoto('${p.id}')">✕</button>
+        <button class="mini-btn del" style="position:absolute;top:2px;right:2px;padding:2px 4px;font-size:.5rem;line-height:1" onclick="deletePhoto('${p.id}')">✕</button>
       </div>`;
     }).join('');
-  } catch (e) { grid.innerHTML = '<div class="empty">Erreur : ' + esc(e.message) + '</div>'; }
+  } catch (e) {
+    grid.innerHTML = '<div class="empty">Erreur : ' + esc(e.message) + '</div>';
+  }
 }
 
 document.getElementById('photoForm').addEventListener('submit', async (e) => {
@@ -1365,8 +1468,10 @@ document.getElementById('photoForm').addEventListener('submit', async (e) => {
 
 window.deletePhoto = async (id) => {
   if (!confirm('Supprimer cette photo ?')) return;
-  await deleteDoc(doc(db, 'galerie', id));
-  toast('🗑️ Supprimée'); await loadPhotos(); await refreshDashboard();
+  try {
+    await deleteDoc(doc(db, 'galerie', id));
+    toast('🗑️ Supprimée'); await loadPhotos(); await refreshDashboard();
+  } catch (e) { toast('❌ ' + e.message, 'error'); }
 };
 
 /* ============================================================
@@ -1646,7 +1751,6 @@ document.getElementById('profilForm').addEventListener('submit', async (e) => {
     langues: document.getElementById('pLangues').value.trim(),
     transfermarkt: document.getElementById('pTransfermarkt').value.trim(),
     facebook: document.getElementById('pFacebook').value.trim(),
-    /* NOUVELLES PHOTOS AJOUTÉES ICI */
     photoHero: document.getElementById('pPhotoHero').value.trim(),
     photoBg: document.getElementById('pPhotoBg').value.trim(),
     updatedAt: Timestamp.now()
@@ -1756,22 +1860,27 @@ window.deleteStats = async (id) => {
    ============================================================ */
 async function loadCarriere() {
   const box = document.getElementById('listCarriere');
-  const snap = await getDocs(collection(db, 'carriere'));
-  box.innerHTML = snap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a,b) => (b.saison||'').localeCompare(a.saison||'')).map(c => `
-    <div class="item-row">
-      <div class="item-thumb">${c.logo ? `<img src="${esc(c.logo)}" onerror="this.style.display='none'"/>` : '🏟️'}</div>
-      <div class="item-info"><div class="item-title">${esc(c.saison)} — ${esc(c.club)}</div><div class="item-meta"><span>${esc(c.division)} · ${esc(c.pays)}</span></div></div>
-      <div class="item-actions"><button class="mini-btn" onclick="editCar('${c.id}')">✏️</button><button class="mini-btn del" onclick="delCar('${c.id}')">🗑️</button></div>
-    </div>
-  `).join('') || '<div class="empty">Aucun club.</div>';
+  try {
+    const snap = await getDocs(collection(db, 'carriere'));
+    box.innerHTML = snap.docs.map(d => ({ id: d.id, ...d.data() }))
+      .sort((a,b) => (b.saison||'').localeCompare(a.saison||'')).map(c => `
+      <div class="item-row">
+        <div class="item-thumb">${c.logo ? `<img src="${esc(c.logo)}" onerror="this.style.display='none'"/>` : '🏟️'}</div>
+        <div class="item-info"><div class="item-title">${esc(c.saison)} — ${esc(c.club)}</div><div class="item-meta"><span>${esc(c.division)} · ${esc(c.pays)}</span></div></div>
+        <div class="item-actions"><button class="mini-btn" onclick="editCar('${c.id}')">✏️</button><button class="mini-btn del" onclick="delCar('${c.id}')">🗑️</button></div>
+      </div>
+    `).join('') || '<div class="empty">Aucun club.</div>';
+  } catch (e) { box.innerHTML = '<div class="empty">Erreur : ' + esc(e.message) + '</div>'; }
 }
 
 document.getElementById('carriereForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   const data = { saison: document.getElementById('carSaison').value.trim(), club: document.getElementById('carClub').value.trim(), division: document.getElementById('carDivision').value.trim(), pays: document.getElementById('carPays').value.trim(), logo: document.getElementById('carLogo').value.trim(), ordre: parseInt(document.getElementById('carOrdre').value) || 100 };
   const id = document.getElementById('carId').value;
-  if (id) await updateDoc(doc(db, 'carriere', id), data); else await addDoc(collection(db, 'carriere'), data);
-  resetForm('carriere'); toast('✅ Club enregistré'); loadCarriere();
+  try {
+    if (id) await updateDoc(doc(db, 'carriere', id), data); else await addDoc(collection(db, 'carriere'), data);
+    resetForm('carriere'); toast('✅ Club enregistré'); loadCarriere();
+  } catch (ex) { toast('❌ ' + ex.message, 'error'); }
 });
 
 window.editCar = async (id) => {
@@ -1810,16 +1919,20 @@ async function loadSelections() {
 
 document.getElementById('selectionForm').addEventListener('submit', async (e) => {
   e.preventDefault();
-  await setDoc(doc(db, 'selections', 'compteurs'), { u20: parseInt(document.getElementById('selU20').value), u23: parseInt(document.getElementById('selU23').value), total: parseInt(document.getElementById('selTotal').value) });
-  toast('✅ Compteurs mis à jour');
+  try {
+    await setDoc(doc(db, 'selections', 'compteurs'), { u20: parseInt(document.getElementById('selU20').value), u23: parseInt(document.getElementById('selU23').value), total: parseInt(document.getElementById('selTotal').value) });
+    toast('✅ Compteurs mis à jour');
+  } catch (ex) { toast('❌ ' + ex.message, 'error'); }
 });
 
 document.getElementById('competitionForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   const data = { nom: document.getElementById('compNom').value.trim(), annee: document.getElementById('compAnnee').value.trim(), resultat: document.getElementById('compResultat').value.trim(), logo: document.getElementById('compLogo').value.trim() };
   const id = document.getElementById('compId').value;
-  if (id) await updateDoc(doc(db, 'competitions', id), data); else await addDoc(collection(db, 'competitions'), data);
-  resetForm('competition'); toast('✅ Compétition enregistrée'); loadSelections();
+  try {
+    if (id) await updateDoc(doc(db, 'competitions', id), data); else await addDoc(collection(db, 'competitions'), data);
+    resetForm('competition'); toast('✅ Compétition enregistrée'); loadSelections();
+  } catch (ex) { toast('❌ ' + ex.message, 'error'); }
 });
 
 window.editComp = async (id) => {
@@ -1838,25 +1951,66 @@ window.editComp = async (id) => {
 window.delComp = async (id) => { if(confirm('Supprimer ?')) { await deleteDoc(doc(db, 'competitions', id)); loadSelections(); } };
 
 /* ============================================================
-   TEXTES
+   TEXTES DU SITE — ⭐ CHAMPS ÉTENDUS (toutes les pages)
    ============================================================ */
+const TEXTE_FIELDS = [
+  // Accueil
+  { id: 'txtHeroFr',           key: 'hero' },
+  { id: 'txtBioFr',            key: 'bio' },
+  { id: 'txtIntroCarriereFr',  key: 'introCarriere' },
+  { id: 'txtIntroVideosFr',    key: 'introVideos' },
+  { id: 'txtIntroGalerieFr',   key: 'introGalerie' },
+  // Biographie
+  { id: 'txtQuoteFr',          key: 'quote' },
+  { id: 'txtBioPageIntroFr',   key: 'bioPageIntro' },
+  // Sélections
+  { id: 'txtSelPageIntroFr',   key: 'selPageIntro' },
+  // Statistiques
+  { id: 'txtStatsPageIntroFr', key: 'statsPageIntro' },
+  // Vidéos
+  { id: 'txtVideosPageIntroFr',key: 'videosPageIntro' },
+  // Galerie
+  { id: 'txtGaleriePageIntroFr',key: 'galeriePageIntro' },
+  // Actualités
+  { id: 'txtNewsPageIntroFr',  key: 'newsPageIntro' },
+  // Hors-terrain
+  { id: 'txtHorsPageIntroFr',  key: 'horsPageIntro' },
+  // Contact
+  { id: 'txtContactPageIntroFr',key:'contactPageIntro' },
+  // Chatbot
+  { id: 'txtChatWelcomeFr',    key: 'chatWelcome' },
+  // Footer
+  { id: 'txtFooterFr',         key: 'footer' }
+];
+
 async function loadTextes() {
-  const d = await getDoc(doc(db, 'textes', 'site'));
-  if (d.exists()) {
+  try {
+    const d = await getDoc(doc(db, 'textes', 'site'));
+    if (!d.exists()) return;
     const t = d.data();
-    document.getElementById('txtHeroFr').value = t.heroFr || ''; document.getElementById('txtHeroEn').value = t.heroEn || '';
-    document.getElementById('txtBioFr').value = t.bioFr || ''; document.getElementById('txtBioEn').value = t.bioEn || '';
-    document.getElementById('txtQuoteFr').value = t.quoteFr || ''; document.getElementById('txtQuoteEn').value = t.quoteEn || '';
-  }
+    TEXTE_FIELDS.forEach(f => {
+      const baseId = f.id.replace(/Fr$/, '');
+      const fr = document.getElementById(baseId + 'Fr');
+      const en = document.getElementById(baseId + 'En');
+      if (fr && t[f.key + 'Fr'] !== undefined) fr.value = t[f.key + 'Fr'] || '';
+      if (en && t[f.key + 'En'] !== undefined) en.value = t[f.key + 'En'] || '';
+    });
+  } catch (e) { console.warn('[textes] load:', e); }
 }
 
 window.saveTextes = async () => {
-  await setDoc(doc(db, 'textes', 'site'), {
-    heroFr: document.getElementById('txtHeroFr').value, heroEn: document.getElementById('txtHeroEn').value,
-    bioFr: document.getElementById('txtBioFr').value, bioEn: document.getElementById('txtBioEn').value,
-    quoteFr: document.getElementById('txtQuoteFr').value, quoteEn: document.getElementById('txtQuoteEn').value
-  }, { merge: true });
-  toast('✅ Textes enregistrés');
+  const data = {};
+  TEXTE_FIELDS.forEach(f => {
+    const baseId = f.id.replace(/Fr$/, '');
+    const fr = document.getElementById(baseId + 'Fr');
+    const en = document.getElementById(baseId + 'En');
+    data[f.key + 'Fr'] = fr ? fr.value : '';
+    data[f.key + 'En'] = en ? en.value : '';
+  });
+  try {
+    await setDoc(doc(db, 'textes', 'site'), data, { merge: true });
+    toast('✅ Tous les textes enregistrés');
+  } catch (ex) { toast('❌ ' + ex.message, 'error'); }
 };
 
 /* ============================================================
@@ -1997,7 +2151,7 @@ window.resetForm = (type) => {
   }
 };
 
-console.log('✅ admin.html chargé — version complète et finale');
+console.log('✅ admin.html chargé — version 2026 corrigée (sans auto-init 30 photos, textes étendus, favicon ph25)');
 </script>
 </body>
 </html>
