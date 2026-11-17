@@ -354,8 +354,24 @@ h3{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600}
   <h2 data-fr="En images" data-en="In pictures">En images</h2>
   <p id="txtIntroGalerie" data-fr="Une sélection de ses plus belles photos, entre moments forts en club, rassemblements avec le Bénin et portraits professionnels." data-en="A selection of his best photos, between highlights in the club, gatherings with Benin and professional portraits.">Une sélection de ses plus belles photos, entre moments forts en club, rassemblements avec le Bénin et portraits professionnels.</p>
 </div>
-<div class="gal-grid" id="galerieHome"></div>
-<!-- ⭐ Suppression de « (30 photos) » -->
+<div class="gal-grid" id="galerieHome">
+  <div class="gal-item" data-file="ph25.jpeg">
+    <img src="ph25.jpeg" alt="Dava David Agossa" loading="lazy"/>
+    <div class="gal-overlay"><span class="gal-cat">Portrait</span></div>
+  </div>
+  <div class="gal-item" data-file="ph25a.jpeg">
+    <img src="ph25a.jpeg" alt="Dava David Agossa" loading="lazy"/>
+    <div class="gal-overlay"><span class="gal-cat">Portrait</span></div>
+  </div>
+  <div class="gal-item" data-file="ph25b.jpeg">
+    <img src="ph25b.jpeg" alt="Dava David Agossa" loading="lazy"/>
+    <div class="gal-overlay"><span class="gal-cat">Portrait</span></div>
+  </div>
+  <div class="gal-item" data-file="ph25c.jpeg">
+    <img src="ph25c.jpeg" alt="Dava David Agossa" loading="lazy"/>
+    <div class="gal-overlay"><span class="gal-cat">Portrait</span></div>
+  </div>
+</div>
 <div style="text-align:center;margin-top:2rem"><a href="galerie.html" class="btn-ghost"><span data-fr="Toute la galerie" data-en="Full gallery">Toute la galerie</span> →</a></div>
 </div>
 </section>
@@ -553,22 +569,14 @@ async function loadDynamicData() {
       `).join('');
     }
 
-    // 5. Galerie (6 photos)
-    const snapGal = await getDocs(collection(db, 'galerie'));
-    if (!snapGal.empty) {
-      const galList = document.getElementById('galerieHome');
-      const docs = snapGal.docs.map(d => d.data()).sort((a,b) => (a.numero||999) - (b.numero||999));
-      galList.innerHTML = docs.slice(0, 6).map(p => {
-        const file = p.url || p.fichier;
-        return `<div class="gal-item" data-file="${esc(file)}">
-          <img src="${esc(file)}" alt="${esc(p.alt || 'Dava David Agossa')}" loading="lazy" onerror="this.style.display='none'"/>
-          <div class="gal-overlay">
-            <span class="gal-cat">${esc(p.categorie || 'Photo')}</span>
-          </div>
-        </div>`;
-      }).join('');
-      document.querySelectorAll('.gal-item').forEach(el => { el.addEventListener('click', () => { const file = el.dataset.file; const lb = document.getElementById('lightbox'); document.getElementById('lightboxImg').src = file; lb.classList.add('open'); }); });
-    }
+  // 5. Galerie accueil — 4 photos statiques (ph25.jpeg / a / b / c déjà dans le HTML)
+document.querySelectorAll('#galerieHome .gal-item').forEach(el => {
+  el.addEventListener('click', () => {
+    const lb = document.getElementById('lightbox');
+    document.getElementById('lightboxImg').src = el.dataset.file;
+    lb.classList.add('open');
+  });
+});
 
   } catch(e) { console.warn("Erreur chargement données admin :", e); }
 }
